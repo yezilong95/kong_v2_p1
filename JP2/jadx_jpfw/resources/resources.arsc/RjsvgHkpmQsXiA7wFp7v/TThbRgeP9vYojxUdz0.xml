@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:textAppearance="@AvINgglJhIUfJuK1EHO6/KqbwE8tlAWMQ4vPsGsn"
+    android:textColor="?android:attr/textColorSecondary"
+    android:gravity="start|center_vertical"
+    android:paddingLeft="?ehbV9VoYcpChEdFUN3/Ai747EUGSE7YGyolRJcy"
+    android:paddingRight="?ehbV9VoYcpChEdFUN3/DYgoUX3bp4xKok4pTC"
+    android:layout_width="match_parent"
+    android:layout_height="?ehbV9VoYcpChEdFUN3/uSF0jChx8xarhaJ4DiMs"
+    android:maxLines="1"/>

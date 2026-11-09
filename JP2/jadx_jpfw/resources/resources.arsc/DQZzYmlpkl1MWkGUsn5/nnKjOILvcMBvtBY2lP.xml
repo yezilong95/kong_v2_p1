@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_pressed="true"
+        android:color="?ehbV9VoYcpChEdFUN3/DTGv6Y8vnvCH6eUblbp"
+        android:alpha="@GCdnE0uHTlaBdegBM1Rn/QKrfCp8xvnZMjz42ov"/>
+    <item
+        android:state_selected="true"
+        android:state_pressed="false"
+        android:color="?ehbV9VoYcpChEdFUN3/DTGv6Y8vnvCH6eUblbp"
+        android:alpha="@GCdnE0uHTlaBdegBM1Rn/shNL3BjrUe42OOjgew"/>
+    <item
+        android:state_pressed="false"
+        android:color="?ehbV9VoYcpChEdFUN3/DTGv6Y8vnvCH6eUblbp"
+        android:alpha="@GCdnE0uHTlaBdegBM1Rn/lAVaG1I4x1t8n6eZSPrG"
+        android:state_hovered="true"/>
+</selector>

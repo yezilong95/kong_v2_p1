@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <AvINgglJhIUfJuK1EHO6 name="saoSIqjx5apeFfHVhDP" parent="@AvINgglJhIUfJuK1EHO6/cnc5ez0qUba5QwdaxlAG">
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="NC9pW2nxtD9RX8G0dgNx" parent="@AvINgglJhIUfJuK1EHO6/fDnqiR8S2avTFUZuAFG">
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="cnc5ez0qUba5QwdaxlAG" parent="@AvINgglJhIUfJuK1EHO6/rRcQr8Ci3SHjf04a6qC8">
+        <item>?android:attr/colorError</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="fDnqiR8S2avTFUZuAFG" parent="@AvINgglJhIUfJuK1EHO6/Z16KHpBN0bbdvJdpteuR">
+        <item>?android:attr/colorError</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="ceW0WD8aKWTXXXGpjYm" parent="@AvINgglJhIUfJuK1EHO6/R4k8Pzv3wVFz0hSOcH">
+        <item>true</item>
+        <item>true</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="RWNSkKuaSbQnPAKls6" parent="@AvINgglJhIUfJuK1EHO6/ceW0WD8aKWTXXXGpjYm">
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="B2cZSNkTOAyyptsxXp" parent="@android:style/Widget">
+        <item>?ehbV9VoYcpChEdFUN3/FT2hgSSigNia1ZLvnyOW</item>
+        <item>@O5WObSpYhv5j8bi6SL/KTmlVQKe7FTdRhL1Pk36</item>
+        <item>true</item>
+        <item>true</item>
+    </AvINgglJhIUfJuK1EHO6>
+</resources>

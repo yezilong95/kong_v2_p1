@@ -1,0 +1,258 @@
+:root {
+  --bg: #121214;
+  --bg-soft: #1a1a1e;
+  --white: #ffffff;
+  --muted: rgba(255, 255, 255, 0.55);
+  --dot-empty: #6b6b72;
+  --dot-fill: #ffffff;
+  --avatar-bg: #c9b8e8;
+  --avatar-text: #5b3f8a;
+  --forgot-bg: #3d1f6e;
+  --forgot-bg-hover: #4a2780;
+  --key-active: rgba(255, 255, 255, 0.08);
+  --toast-bg: rgba(0, 0, 0, 0.92);
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+html,
+body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--white);
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.page {
+  min-height: 100%;
+  min-height: 100dvh;
+  max-width: 430px;
+  margin: 0 auto;
+  padding: calc(10px + var(--safe-top)) 20px calc(18px + var(--safe-bottom));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background:
+    radial-gradient(120% 60% at 50% -10%, rgba(90, 50, 140, 0.22), transparent 55%),
+    var(--bg);
+}
+
+.top-bar {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 36px;
+}
+
+.logout {
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  padding: 8px 4px;
+  opacity: 0.92;
+}
+
+.logout:active {
+  opacity: 0.6;
+}
+
+.identity {
+  width: 100%;
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--avatar-bg);
+  color: var(--avatar-text);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.pin-prompt {
+  margin-top: 28px;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.pin-dots {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--dot-empty);
+  transition: background 0.12s ease, transform 0.12s ease;
+}
+
+.dot.is-filled {
+  background: var(--dot-fill);
+  transform: scale(1.1);
+}
+
+.dot.is-shake {
+  animation: shake 0.35s ease;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}
+
+.forgot {
+  margin-top: 28px;
+  min-height: 40px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #4a2780 0%, var(--forgot-bg) 100%);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  box-shadow: 0 4px 16px rgba(61, 31, 110, 0.45);
+}
+
+.forgot:active {
+  background: var(--forgot-bg-hover);
+}
+
+.keypad {
+  margin-top: auto;
+  width: 100%;
+  max-width: 340px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px 8px;
+  padding-top: 36px;
+  padding-bottom: 8px;
+  justify-items: center;
+}
+
+.key {
+  width: 78px;
+  height: 58px;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--white);
+  font-size: 30px;
+  font-weight: 400;
+  display: grid;
+  place-items: center;
+}
+
+.key:active {
+  background: var(--key-active);
+}
+
+.key-bio,
+.key-del {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0;
+}
+
+.key-bio svg,
+.key-del svg {
+  display: block;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(28px + var(--safe-bottom));
+  transform: translateX(-50%) translateY(12px);
+  max-width: calc(100% - 40px);
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--toast-bg);
+  color: var(--white);
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  z-index: 20;
+}
+
+.toast.is-show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (max-height: 700px) {
+  .identity {
+    margin-top: 12px;
+  }
+
+  .avatar {
+    width: 72px;
+    height: 72px;
+    font-size: 24px;
+  }
+
+  .pin-prompt {
+    margin-top: 18px;
+    font-size: 20px;
+  }
+
+  .pin-dots {
+    margin-top: 16px;
+  }
+
+  .forgot {
+    margin-top: 18px;
+  }
+
+  .keypad {
+    padding-top: 20px;
+    gap: 4px;
+  }
+
+  .key {
+    width: 72px;
+    height: 52px;
+    font-size: 28px;
+  }
+}

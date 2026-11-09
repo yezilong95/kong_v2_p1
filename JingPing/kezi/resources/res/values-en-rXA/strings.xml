@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="description">• Fixed known issues\n• Optimized user experience\n• Added new feature module</string>
+    <string name="found_newversion">New version found</string>
+    <string name="new_version">New version:</string>
+    <string name="update">Updating...</string>
+    <string name="update_content">Update content</string>
+    <string name="update_force">This version is a mandatory update, please update before continuing</string>
+    <string name="update_now">Update now</string>
+    <string name="update_size">Update size:</string>
+</resources>

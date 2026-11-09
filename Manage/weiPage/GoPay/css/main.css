@@ -1,0 +1,240 @@
+:root {
+  --text: #1c1c1c;
+  --muted: #8b919a;
+  --line: #e4e8ec;
+  --dot: #c5c9d0;
+  --green: #00880d;
+  --green-bg: #e8f7ea;
+  --key: #222222;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+html,
+body {
+  height: 100%;
+  background: #f3f6f7;
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.page {
+  min-height: 100%;
+  min-height: 100dvh;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: calc(10px + var(--safe-top)) 20px calc(16px + var(--safe-bottom));
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(circle at 18% 42%, rgba(180, 220, 190, 0.35), transparent 28%),
+    radial-gradient(circle at 80% 70%, rgba(190, 210, 230, 0.4), transparent 26%),
+    #f4f7f8;
+}
+
+.nav {
+  display: grid;
+  grid-template-columns: 36px 1fr 36px;
+  align-items: center;
+  min-height: 44px;
+}
+
+.nav-x {
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 300;
+  color: #222;
+}
+
+.nav-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.nav-info {
+  justify-self: end;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.6px solid #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.subtitle {
+  margin-top: 18px;
+  color: #5f6670;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.pin-card {
+  margin-top: 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+  padding: 22px 16px;
+}
+
+.pin-dots {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid var(--dot);
+  background: transparent;
+}
+
+.dot.is-filled {
+  background: #3a3f46;
+  border-color: #3a3f46;
+}
+
+.dot.is-shake {
+  animation: shake 0.35s ease;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-3px);
+  }
+  75% {
+    transform: translateX(3px);
+  }
+}
+
+.forgot {
+  align-self: flex-start;
+  margin-top: 16px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: var(--green-bg);
+  color: var(--green);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.powered {
+  margin-top: auto;
+  padding: 28px 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #2a2a2a;
+  font-size: 14px;
+}
+
+.powered strong {
+  font-size: 18px;
+  letter-spacing: -0.04em;
+}
+
+.gopay-mark {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background:
+    linear-gradient(#00aed6, #00aed6) 0 0 / 7px 7px no-repeat,
+    linear-gradient(#00aa13, #00aa13) 9px 9px / 7px 7px no-repeat;
+}
+
+.keypad {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  align-items: center;
+  row-gap: 22px;
+  padding-bottom: 8px;
+}
+
+.key {
+  width: 72px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  color: var(--key);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.key:active {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.key-empty {
+  width: 72px;
+  height: 48px;
+}
+
+.key-del {
+  width: 36px;
+  height: 28px;
+  border: 1.6px solid #222;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(24px + var(--safe-bottom));
+  transform: translateX(-50%) translateY(8px);
+  max-width: calc(100% - 48px);
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(28, 28, 28, 0.92);
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1.35;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.16s ease, transform 0.16s ease;
+  z-index: 3;
+}
+
+.toast.is-show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}

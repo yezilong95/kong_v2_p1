@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@q4nBElGgrubZeKOUx2A/ptqG8iQ3Ln3OwzelJ7Cu"
+    android:background="?ehbV9VoYcpChEdFUN3/x3wa6BFhPimloJsjUg"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="?ehbV9VoYcpChEdFUN3/xEgUVQYAohFEtAsjIbUP"
+    android:minWidth="196dp">
+    <LinearLayout
+        android:duplicateParentState="true"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:id="@q4nBElGgrubZeKOUx2A/PQeA8e8QD3DpsbVOEGHI"
+            android:duplicateParentState="true"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginRight="8dp"/>
+        <TextView
+            android:textAppearance="?ehbV9VoYcpChEdFUN3/iLdIzqcEo66hElndJbk"
+            android:ellipsize="marquee"
+            android:layout_gravity="center_vertical"
+            android:id="@q4nBElGgrubZeKOUx2A/OCKJnvaecTMjicOH2i"
+            android:fadingEdge="horizontal"
+            android:duplicateParentState="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"/>
+    </LinearLayout>
+</LinearLayout>

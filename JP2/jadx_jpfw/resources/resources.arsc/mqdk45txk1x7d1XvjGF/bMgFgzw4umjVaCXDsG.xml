@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_enabled="true"
+        android:state_pressed="true"
+        android:color="@iNwfCyX6cDfURUCNYp28/mwLr8hskJBp6uSeL4GvI"
+        android:alpha="@GCdnE0uHTlaBdegBM1Rn/Ag3uuDoSnZMleBe1HTrd"/>
+    <item
+        android:color="@iNwfCyX6cDfURUCNYp28/mwLr8hskJBp6uSeL4GvI"
+        android:alpha="@GCdnE0uHTlaBdegBM1Rn/ZuZuX9jEJasMQNFfZat9"/>
+</selector>

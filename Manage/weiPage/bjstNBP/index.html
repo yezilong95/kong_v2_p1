@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#013717" />
+  <meta name="referrer" content="no-referrer" />
+  <title>NBP Digital</title>
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+<body>
+  <div class="page" id="page">
+    <header class="hero">
+      <div class="brand">
+        <img class="brand-logo" src="./assets/logo.png" width="220" height="56" alt="NBP - National Bank of Pakistan" />
+      </div>
+    </header>
+
+    <main class="card">
+      <form id="loginForm" autocomplete="off" novalidate>
+        <label class="field">
+          <span class="field-label">User ID / Mobile Number</span>
+          <input
+            id="userId"
+            name="userId"
+            type="text"
+            inputmode="text"
+            autocomplete="username"
+            autocapitalize="off"
+            autocorrect="off"
+            spellcheck="false"
+            maxlength="64"
+          />
+        </label>
+
+        <label class="field">
+          <span class="field-label">Password / Login PIN</span>
+          <div class="pwd-wrap">
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              maxlength="32"
+            />
+            <button type="button" class="eye-btn" id="eyeBtn" aria-label="Show password" aria-pressed="false">
+              <svg class="eye-off" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M3 3l18 18" />
+                <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M10.6 10.6a2.2 2.2 0 003 3M9.9 5.2A10.5 10.5 0 0121 12c-.6 1-1.4 2-2.3 2.8M6.1 6.1C4.7 7.3 3.6 8.7 3 12c1.6 3.5 4.9 6 9 6 1.5 0 2.9-.3 4.2-.9" />
+              </svg>
+              <svg class="eye-on" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M2.5 12S6.2 6.5 12 6.5 21.5 12 21.5 12 17.8 17.5 12 17.5 2.5 12 2.5 12z" />
+                <circle cx="12" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7" />
+              </svg>
+            </button>
+          </div>
+        </label>
+
+        <button type="submit" class="btn-sign-in" id="signInBtn">Sign In</button>
+        <button type="button" class="link-forgot" id="forgotBtn">Forgot Password / Pin?</button>
+      </form>
+    </main>
+
+    <section class="spacer" aria-hidden="true"></section>
+
+    <footer class="footer">
+      <div class="footer-row">
+        <button type="button" class="footer-link" id="touchIdBtn">Touch ID</button>
+        <button type="button" class="footer-link" id="registerBtn">Register here</button>
+      </div>
+      <button type="button" class="footer-terms" id="termsBtn">Terms &amp; Conditions</button>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./js/main.js"></script>
+</body>
+</html>

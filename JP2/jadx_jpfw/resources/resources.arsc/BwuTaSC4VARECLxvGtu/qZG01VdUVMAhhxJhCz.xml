@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@q4nBElGgrubZeKOUx2A/VdFcLsSaPWmTeIQpn8eQ"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <androidx.constraintlayout.helper.widget.Flow
+        android:orientation="horizontal"
+        android:id="@q4nBElGgrubZeKOUx2A/smAkGZS1AcWK11xtc3V"
+        android:layout_width="0dp"
+        android:layout_height="@GCdnE0uHTlaBdegBM1Rn/nBc43JB74WWsdbqc26gM"
+        app:constraint_referenced_ids="material_clock_display,material_clock_period_toggle"
+        app:flow_horizontalGap="@GCdnE0uHTlaBdegBM1Rn/zZc11CpyQUbhWSXWKz3"
+        app:layout_constraintEnd_toEndOf="0"
+        app:layout_constraintStart_toStartOf="0"
+        app:layout_constraintTop_toTopOf="0"/>
+    <include
+        android:id="@q4nBElGgrubZeKOUx2A/AzJ06pU7d0NC195Q8dg"
+        layout="@Y4ToSmuZPPcACiNLNiOp/AzJ06pU7d0NC195Q8dg"/>
+    <include
+        android:id="@q4nBElGgrubZeKOUx2A/NNkO4i2KesPyi3y2wuVB"
+        layout="@Y4ToSmuZPPcACiNLNiOp/NNkO4i2KesPyi3y2wuVB"/>
+    <com.google.android.material.timepicker.ClockFaceView
+        android:layout_gravity="center"
+        android:id="@q4nBElGgrubZeKOUx2A/vcRLJlj4KQ6tAatyKN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="0"
+        app:layout_constraintStart_toStartOf="0"
+        app:layout_constraintTop_toBottomOf="@q4nBElGgrubZeKOUx2A/smAkGZS1AcWK11xtc3V"/>
+</merge>

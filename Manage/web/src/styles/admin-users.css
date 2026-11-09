@@ -1,0 +1,28 @@
+.admin-users-page {
+  padding: 16px 20px 24px;
+  color: var(--color-text);
+}
+
+.admin-users-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.admin-users-header h2 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  color: var(--color-primary);
+}
+
+.admin-users-header p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+.admin-users-table .ant-table {
+  background: transparent;
+}

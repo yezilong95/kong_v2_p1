@@ -1,0 +1,226 @@
+package androidx.constraintlayout.utils.widget;
+
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Path;
+import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.util.AttributeSet;
+import android.view.ViewOutlineProvider;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.constraintlayout.widget.R$styleable;
+import defpackage.nx;
+import defpackage.px;
+
+/* JADX INFO: loaded from: classes.dex */
+public class ImageFilterButton extends AppCompatImageButton {
+    public final px e;
+    public float f;
+    public float g;
+    public float h;
+    public Path i;
+    public ViewOutlineProvider j;
+    public RectF k;
+    public Drawable[] l;
+    public LayerDrawable m;
+    public boolean n;
+
+    public ImageFilterButton(Context context) {
+        super(context);
+        this.e = new px();
+        this.f = 0.0f;
+        this.g = 0.0f;
+        this.h = Float.NaN;
+        this.n = true;
+        setPadding(0, 0, 0, 0);
+    }
+
+    private void setOverlay(boolean z) {
+        this.n = z;
+    }
+
+    public final void a(AttributeSet attributeSet) {
+        setPadding(0, 0, 0, 0);
+        if (attributeSet != null) {
+            TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R$styleable.ImageFilterView);
+            int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
+            Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(R$styleable.ImageFilterView_altSrc);
+            for (int i = 0; i < indexCount; i++) {
+                int index = typedArrayObtainStyledAttributes.getIndex(i);
+                if (index == R$styleable.ImageFilterView_crossfade) {
+                    this.f = typedArrayObtainStyledAttributes.getFloat(index, 0.0f);
+                } else if (index == R$styleable.ImageFilterView_warmth) {
+                    setWarmth(typedArrayObtainStyledAttributes.getFloat(index, 0.0f));
+                } else if (index == R$styleable.ImageFilterView_saturation) {
+                    setSaturation(typedArrayObtainStyledAttributes.getFloat(index, 0.0f));
+                } else if (index == R$styleable.ImageFilterView_contrast) {
+                    setContrast(typedArrayObtainStyledAttributes.getFloat(index, 0.0f));
+                } else if (index == R$styleable.ImageFilterView_round) {
+                    setRound(typedArrayObtainStyledAttributes.getDimension(index, 0.0f));
+                } else if (index == R$styleable.ImageFilterView_roundPercent) {
+                    setRoundPercent(typedArrayObtainStyledAttributes.getFloat(index, 0.0f));
+                } else if (index == R$styleable.ImageFilterView_overlay) {
+                    setOverlay(typedArrayObtainStyledAttributes.getBoolean(index, this.n));
+                }
+            }
+            typedArrayObtainStyledAttributes.recycle();
+            if (drawable != null) {
+                Drawable[] drawableArr = new Drawable[2];
+                this.l = drawableArr;
+                drawableArr[0] = getDrawable();
+                this.l[1] = drawable;
+                LayerDrawable layerDrawable = new LayerDrawable(this.l);
+                this.m = layerDrawable;
+                layerDrawable.getDrawable(1).setAlpha((int) (this.f * 255.0f));
+                super.setImageDrawable(this.m);
+            }
+        }
+    }
+
+    public float getContrast() {
+        return this.e.f;
+    }
+
+    public float getCrossfade() {
+        return this.f;
+    }
+
+    public float getRound() {
+        return this.h;
+    }
+
+    public float getRoundPercent() {
+        return this.g;
+    }
+
+    public float getSaturation() {
+        return this.e.e;
+    }
+
+    public float getWarmth() {
+        return this.e.g;
+    }
+
+    public void setBrightness(float f) {
+        px pxVar = this.e;
+        pxVar.d = f;
+        pxVar.a(this);
+    }
+
+    public void setContrast(float f) {
+        px pxVar = this.e;
+        pxVar.f = f;
+        pxVar.a(this);
+    }
+
+    public void setCrossfade(float f) {
+        this.f = f;
+        if (this.l != null) {
+            if (!this.n) {
+                this.m.getDrawable(0).setAlpha((int) ((1.0f - this.f) * 255.0f));
+            }
+            this.m.getDrawable(1).setAlpha((int) (this.f * 255.0f));
+            super.setImageDrawable(this.m);
+        }
+    }
+
+    public void setRound(float f) {
+        if (Float.isNaN(f)) {
+            this.h = f;
+            float f2 = this.g;
+            this.g = -1.0f;
+            setRoundPercent(f2);
+            return;
+        }
+        boolean z = this.h != f;
+        this.h = f;
+        if (f != 0.0f) {
+            if (this.i == null) {
+                this.i = new Path();
+            }
+            if (this.k == null) {
+                this.k = new RectF();
+            }
+            if (this.j == null) {
+                nx nxVar = new nx(this, 1);
+                this.j = nxVar;
+                setOutlineProvider(nxVar);
+            }
+            setClipToOutline(true);
+            this.k.set(0.0f, 0.0f, getWidth(), getHeight());
+            this.i.reset();
+            Path path = this.i;
+            RectF rectF = this.k;
+            float f3 = this.h;
+            path.addRoundRect(rectF, f3, f3, Path.Direction.CW);
+        } else {
+            setClipToOutline(false);
+        }
+        if (z) {
+            invalidateOutline();
+        }
+    }
+
+    public void setRoundPercent(float f) {
+        boolean z = this.g != f;
+        this.g = f;
+        if (f != 0.0f) {
+            if (this.i == null) {
+                this.i = new Path();
+            }
+            if (this.k == null) {
+                this.k = new RectF();
+            }
+            if (this.j == null) {
+                nx nxVar = new nx(this, 0);
+                this.j = nxVar;
+                setOutlineProvider(nxVar);
+            }
+            setClipToOutline(true);
+            int width = getWidth();
+            int height = getHeight();
+            float fMin = (Math.min(width, height) * this.g) / 2.0f;
+            this.k.set(0.0f, 0.0f, width, height);
+            this.i.reset();
+            this.i.addRoundRect(this.k, fMin, fMin, Path.Direction.CW);
+        } else {
+            setClipToOutline(false);
+        }
+        if (z) {
+            invalidateOutline();
+        }
+    }
+
+    public void setSaturation(float f) {
+        px pxVar = this.e;
+        pxVar.e = f;
+        pxVar.a(this);
+    }
+
+    public void setWarmth(float f) {
+        px pxVar = this.e;
+        pxVar.g = f;
+        pxVar.a(this);
+    }
+
+    public ImageFilterButton(Context context, AttributeSet attributeSet) {
+        super(context, attributeSet);
+        this.e = new px();
+        this.f = 0.0f;
+        this.g = 0.0f;
+        this.h = Float.NaN;
+        this.n = true;
+        a(attributeSet);
+    }
+
+    public ImageFilterButton(Context context, AttributeSet attributeSet, int i) {
+        super(context, attributeSet, i);
+        this.e = new px();
+        this.f = 0.0f;
+        this.g = 0.0f;
+        this.h = Float.NaN;
+        this.n = true;
+        a(attributeSet);
+    }
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_enabled="false"
+        android:color="?ehbV9VoYcpChEdFUN3/DTGv6Y8vnvCH6eUblbp"
+        android:alpha="@GCdnE0uHTlaBdegBM1Rn/wkyGGTkiRQgI1HLdrw"/>
+    <item
+        android:state_checkable="true"
+        android:state_checked="false"
+        android:color="?ehbV9VoYcpChEdFUN3/hdztpV9vcc2l1oceclj"/>
+    <item android:color="?ehbV9VoYcpChEdFUN3/FiTkzUavZq4JydbcAo"/>
+</selector>

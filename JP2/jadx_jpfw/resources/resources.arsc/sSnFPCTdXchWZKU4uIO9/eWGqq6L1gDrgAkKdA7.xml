@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:ellipsize="marquee"
+    android:gravity="center_vertical"
+    android:id="@android:id/text1"
+    android:paddingLeft="?ehbV9VoYcpChEdFUN3/Ai747EUGSE7YGyolRJcy"
+    android:paddingRight="?ehbV9VoYcpChEdFUN3/DYgoUX3bp4xKok4pTC"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?ehbV9VoYcpChEdFUN3/uSF0jChx8xarhaJ4DiMs"
+    style="?ehbV9VoYcpChEdFUN3/qQpU3AE7888eDBgwRhg"/>

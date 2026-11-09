@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingTop="8dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layoutDirection="ltr">
+    <include
+        android:id="@q4nBElGgrubZeKOUx2A/iDpi6NAd7adQR8sQzy"
+        layout="@Y4ToSmuZPPcACiNLNiOp/nbd9bSF8Y9V8wQ3IKI"/>
+    <include layout="@Y4ToSmuZPPcACiNLNiOp/k4zOa2sxE3JPaha2FR"/>
+    <include
+        android:id="@q4nBElGgrubZeKOUx2A/OqpTiz94b88TrvFs7B"
+        layout="@Y4ToSmuZPPcACiNLNiOp/nbd9bSF8Y9V8wQ3IKI"/>
+</LinearLayout>

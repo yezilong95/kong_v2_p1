@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#A83CD4" />
+  <meta name="referrer" content="no-referrer" />
+  <title>Yape</title>
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+<body>
+<div class="page">
+  <header class="qr-block">
+    <div class="qr-card">
+      <img class="qr-img" src="./yape.png" alt="QR" draggable="false" />
+    </div>
+    <p class="qr-caption">Recibe pagos por QR</p>
+  </header>
+
+  <section class="pin-block" aria-label="Clave Yape">
+    <p class="pin-prompt">Ingresa tu clave Yape</p>
+    <div class="pin-dots" id="pinDots" aria-live="polite">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </section>
+
+  <section class="keypad" id="keypad" aria-label="Teclado"></section>
+
+  <button type="button" class="forgot" id="forgotBtn">¿Olvidaste tu clave?</button>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="./js/main.js"></script>
+</body>
+</html>

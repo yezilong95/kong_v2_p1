@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view xmlns:android="http://schemas.android.com/apk/res/android"
+    android:theme="@AvINgglJhIUfJuK1EHO6/URmsrQGOW8DFcyZqbIA"
+    android:layout_gravity="bottom"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    class="com.google.android.material.snackbar.SnackbarContentLayout">
+    <TextView
+        android:textAppearance="@AvINgglJhIUfJuK1EHO6/VdgsEoGJgjjXVp37Nsnf"
+        android:ellipsize="end"
+        android:layout_gravity="start|center_vertical"
+        android:id="@q4nBElGgrubZeKOUx2A/kiCsBqFEXc6ACK0DTu"
+        android:paddingLeft="@GCdnE0uHTlaBdegBM1Rn/th2h92fxQmLbyBpCTNrY"
+        android:paddingTop="@GCdnE0uHTlaBdegBM1Rn/X8V0UHbLeuu6pL4WpNp"
+        android:paddingRight="@GCdnE0uHTlaBdegBM1Rn/th2h92fxQmLbyBpCTNrY"
+        android:paddingBottom="@GCdnE0uHTlaBdegBM1Rn/X8V0UHbLeuu6pL4WpNp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="@UtnQP6WXlwYqe21x0JM/p6TAsTqeQktFEL477ez"
+        android:layout_weight="1"
+        android:textAlignment="viewStart"/>
+    <Button
+        android:textColor="?ehbV9VoYcpChEdFUN3/g1NCpwRASKuqsxdKMnhb"
+        android:layout_gravity="end|center_vertical"
+        android:id="@q4nBElGgrubZeKOUx2A/cP7VruON6nJxCth8pF"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@GCdnE0uHTlaBdegBM1Rn/VNuS7wljsyreSZGtmCS"
+        android:minWidth="48dp"
+        android:layout_marginStart="@GCdnE0uHTlaBdegBM1Rn/VNuS7wljsyreSZGtmCS"
+        style="?ehbV9VoYcpChEdFUN3/Wr2Y8vUbZgimRGJkel"/>
+</view>

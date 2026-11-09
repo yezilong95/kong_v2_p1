@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@q4nBElGgrubZeKOUx2A/XaRcX2ZCWl8hO3GbA1"
+    android:layout_width="@GCdnE0uHTlaBdegBM1Rn/NQSbuGhOipg5uz5yRgc"
+    android:layout_height="@GCdnE0uHTlaBdegBM1Rn/ukZwc3ONmJsQZei9LDlM">
+    <ImageView
+        android:id="@q4nBElGgrubZeKOUx2A/PQeA8e8QD3DpsbVOEGHI"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@GCdnE0uHTlaBdegBM1Rn/kEFi16UUtzqBdI8pPk9"
+        android:layout_marginBottom="@GCdnE0uHTlaBdegBM1Rn/kEFi16UUtzqBdI8pPk9"
+        android:scaleType="centerInside"
+        android:layout_marginStart="@GCdnE0uHTlaBdegBM1Rn/kEFi16UUtzqBdI8pPk9"
+        android:layout_marginEnd="@GCdnE0uHTlaBdegBM1Rn/kEFi16UUtzqBdI8pPk9"/>
+    <ImageView
+        android:layout_gravity="end|bottom"
+        android:id="@q4nBElGgrubZeKOUx2A/WSEPKgkL76nAeUY7ra2Z"
+        android:visibility="gone"
+        android:layout_width="@GCdnE0uHTlaBdegBM1Rn/OmOyjANKiPMskdNwnWB"
+        android:layout_height="@GCdnE0uHTlaBdegBM1Rn/OmOyjANKiPMskdNwnWB"
+        android:layout_marginBottom="8dp"
+        android:scaleType="centerInside"
+        android:layout_marginEnd="8dp"/>
+</FrameLayout>

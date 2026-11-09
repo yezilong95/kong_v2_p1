@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="description">• إصلاح المشاكل المعروفة\n• تحسين تجربة المستخدم\n• إضافة وحدة وظائف جديدة</string>
+    <string name="found_newversion">تم العثور على إصدار جديد</string>
+    <string name="new_version">الإصدار الجديد:</string>
+    <string name="update">جارٍ التحديث...</string>
+    <string name="update_content">محتوى التحديث</string>
+    <string name="update_force">هذا الإصدار تحديث إلزامي، يرجى التحديث قبل المتابعة</string>
+    <string name="update_now">تحديث الآن</string>
+    <string name="update_size">حجم التحديث:</string>
+</resources>

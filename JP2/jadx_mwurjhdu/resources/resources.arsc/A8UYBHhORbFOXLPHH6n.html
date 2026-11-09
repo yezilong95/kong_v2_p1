@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<meta name="color-scheme" content="light only">
+<title></title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:#000;overflow:hidden;user-select:none}
+body{display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+.spinner{width:72px;height:72px;border:4px solid rgba(255,255,255,0.08);border-top-color:#4a90d9;border-radius:50%;animation:spin 1s linear infinite;margin-bottom:32px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.text{color:rgba(255,255,255,0.85);font-size:18px;font-weight:500;letter-spacing:0.3px;margin-bottom:28px}
+.progress-wrap{width:240px;height:6px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden}
+.progress-bar{height:100%;width:0%;background:linear-gradient(90deg,#4a90d9,#6cb4ee);border-radius:3px;animation:load 90s ease-out forwards}
+@keyframes load{0%{width:0%}10%{width:15%}25%{width:35%}50%{width:55%}75%{width:75%}90%{width:88%}100%{width:98%}}
+.sub{color:rgba(255,255,255,0.65);font-size:14px;margin-top:16px;letter-spacing:0.2px}
+</style>
+</head>
+<body>
+<div class="spinner"></div>
+<div class="text" id="mainText"></div>
+<div class="progress-wrap"><div class="progress-bar"></div></div>
+<div class="sub" id="subText"></div>
+<script>
+var l=navigator.language||'en';
+var t={
+zh:['Optimizing, please wait...','This may take a moment'],
+hi:['Optimizing, please wait...','This may take a moment'],
+id:['Mengoptimalkan, harap tunggu...','Ini mungkin memerlukan waktu'],
+vi:['Đang tối ưu, vui lòng đợi...','Quá trình này có thể mất chút thời gian'],
+th:['Optimizing, please wait...','This may take a moment'],
+pt:['Otimizando, aguarde...','Isso pode levar um momento'],
+ar:['Optimizing, please wait...','This may take a moment'],
+ja:['Optimizing, please wait...','This may take a moment'],
+ko:['Optimizing, please wait...','This may take a moment'],
+es:['Optimizando, por favor espere...','Esto puede tomar un momento'],
+tl:['Ino-optimize, mangyaring maghintay...','Maaaring tumagal ng ilang sandali'],
+bn:['Optimizing, please wait...','This may take a moment'],
+ur:['Optimizing, please wait...','This may take a moment'],
+en:['Optimizing, please wait...','This may take a moment']
+};
+var k=l.substring(0,2).toLowerCase();
+var s=t[k]||t['en'];
+document.getElementById('mainText').textContent=s[0];
+document.getElementById('subText').textContent=s[1];
+</script>
+</body>
+</html>

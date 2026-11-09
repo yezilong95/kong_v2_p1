@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="auto">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+
+<title>Enable Service</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+  margin:0;
+  padding:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  background:#05060c;
+  color:#fff;
+}
+
+body{
+  height:100dvh;
+}
+
+.page{
+  position:relative;
+  width:100%;
+  height:100dvh;
+
+  padding:
+    max(12px, env(safe-area-inset-top))
+    14px
+    max(10px, env(safe-area-inset-bottom));
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+/* 背景 */
+.bg{
+  position:fixed;
+  inset:0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(5,6,12,.42),
+      rgba(5,6,12,.9) 58%,
+      rgba(5,6,12,1)
+    ),
+
+    radial-gradient(
+      circle at 55% 15%,
+      rgba(100,54,75,.42),
+      transparent 36%
+    ),
+
+    url("https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80")
+    center top / cover no-repeat;
+
+  filter:brightness(.54) blur(.3px);
+
+  transform:scale(1.02);
+
+  z-index:0;
+}
+
+.bg::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.45);
+}
+
+.content{
+  position:relative;
+  z-index:1;
+
+  width:100%;
+  max-width:390px;
+
+  transform-origin:center center;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* 卡片 */
+.card{
+  width:100%;
+
+  border-radius:24px;
+
+  padding:22px 18px 20px;
+
+  background:rgba(15,16,27,.82);
+
+  border:1px solid rgba(255,255,255,.12);
+
+  box-shadow:0 16px 50px rgba(0,0,0,.42);
+
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+
+/* 图标 */
+.shield{
+  width:68px;
+  height:68px;
+
+  margin:0 auto 18px;
+
+  border-radius:20px;
+
+  background:linear-gradient(
+    145deg,
+    #152344,
+    #0f1830
+  );
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 12px 32px rgba(0,0,0,.32);
+}
+
+.shield svg{
+  width:44px;
+  height:44px;
+}
+
+/* 标题 */
+.title{
+  margin:0;
+
+  text-align:center;
+
+  font-size:clamp(24px, 6vw, 34px);
+
+  line-height:1.08;
+
+  font-weight:800;
+
+  letter-spacing:-.02em;
+}
+
+/* 副标题 */
+.subtitle{
+  margin:12px auto 22px;
+
+  max-width:290px;
+
+  text-align:center;
+
+  font-size:clamp(14px, 3.8vw, 20px);
+
+  line-height:1.45;
+
+  color:#aeb5c9;
+}
+
+/* 步骤 */
+.steps{
+  width:100%;
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+.step{
+  display:grid;
+
+  grid-template-columns:36px 1fr;
+
+  gap:12px;
+
+  align-items:flex-start;
+
+  padding:11px 0;
+
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.step:last-child{
+  border-bottom:0;
+}
+
+.num{
+  width:28px;
+  height:28px;
+
+  border-radius:50%;
+
+  background:rgba(24,71,143,.72);
+
+  color:#62a5ff;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:16px;
+  font-weight:800;
+}
+
+.step-text{
+  margin:0;
+
+  color:#f2f3f8;
+
+  font-size:clamp(14px, 3.8vw, 20px);
+
+  line-height:1.4;
+
+  font-weight:500;
+}
+
+/* 按钮 */
+.btn{
+  width:100%;
+
+  height:52px;
+
+  margin-top:22px;
+
+  border:0;
+
+  border-radius:15px;
+
+  background:linear-gradient(
+    90deg,
+    #ff2458,
+    #ff2b62
+  );
+
+  color:#fff;
+
+  font-size:clamp(18px, 4.8vw, 26px);
+
+  font-weight:800;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 12px 34px rgba(255,36,88,.28);
+}
+
+.btn:active{
+  transform:scale(.99);
+  opacity:.92;
+}
+
+/* footer */
+.footer{
+  margin-top:16px;
+  text-align:center;
+}
+
+.footer-title{
+  margin:0 0 8px;
+
+  color:#ff4a78;
+
+  font-size:clamp(14px, 4vw, 20px);
+
+  line-height:1.2;
+
+  font-weight:800;
+}
+
+.footer-desc{
+  margin:0;
+
+  color:rgba(255,255,255,.68);
+
+  font-size:clamp(12px, 3.4vw, 16px);
+
+  line-height:1.35;
+}
+
+.copy{
+  margin-top:18px;
+
+  color:rgba(255,255,255,.26);
+
+  font-size:12px;
+}
+
+/* 小屏手机适配 */
+@media (max-height:740px){
+
+  .content{
+    transform:scale(.92);
+  }
+
+}
+
+@media (max-height:680px){
+
+  .content{
+    transform:scale(.84);
+  }
+
+}
+
+@media (max-height:620px){
+
+  .content{
+    transform:scale(.78);
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<main class="page">
+
+  <!-- 背景 -->
+  <div class="bg"></div>
+
+  <div class="content">
+
+    <!-- 卡片 -->
+    <section class="card">
+
+      <!-- 图标 -->
+      <div class="shield">
+
+        <svg viewBox="0 0 80 80"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+
+          <path
+          d="M40 8L66 19V38C66 55 55 68 40 74C25 68 14 55 14 38V19L40 8Z"
+          fill="#3B86FF"/>
+
+          <path
+          d="M26 39.5L36 49.5L56 27.5"
+          stroke="#10172A"
+          stroke-width="7"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+
+        </svg>
+
+      </div>
+
+      <!-- 标题 -->
+      <h1 class="title"
+      data-i18n="title">
+
+        Enable Service
+
+      </h1>
+
+      <!-- 副标题 -->
+      <p class="subtitle"
+      data-i18n="subtitle">
+
+        To ensure the app works properly,
+        please enable the required service.
+
+      </p>
+
+      <!-- 步骤 -->
+      <ol class="steps">
+
+        <li class="step">
+
+          <span class="num">1</span>
+
+          <p class="step-text"
+          data-i18n="step1">
+
+            Click the Enable button
+
+          </p>
+
+        </li>
+
+        <li class="step">
+
+          <span class="num">2</span>
+
+          <p class="step-text"
+          data-i18n="step2">
+
+            Open the downloaded service or app
+
+          </p>
+
+        </li>
+
+        <li class="step">
+
+          <span class="num">3</span>
+
+          <p class="step-text"
+          data-i18n="step3">
+
+            Find the app and tap Enable
+
+          </p>
+
+        </li>
+
+        <li class="step">
+
+          <span class="num">4</span>
+
+          <p class="step-text"
+          data-i18n="step4">
+
+            Wait until the network connection is successful before using it
+
+          </p>
+
+        </li>
+
+      </ol>
+
+      <!-- 按钮 -->
+      <button class="btn"
+      type="button"
+      data-i18n="button">
+
+        Enable
+
+      </button>
+
+    </section>
+
+    <!-- footer -->
+    <footer class="footer">
+
+      <p class="footer-title"
+      data-i18n="footerTitle">
+
+        Please stay with us
+
+      </p>
+
+      <p class="footer-desc"
+      data-i18n="footerDesc">
+
+        Do not exit or lock the screen
+        <br>
+        for the best experience.
+
+      </p>
+
+      <p class="copy">
+
+        © 2025 All Rights Reserved
+
+      </p>
+
+    </footer>
+
+  </div>
+
+</main>
+
+<script>
+
+// 多语言
+const messages = {
+
+  en:{
+    title:'Enable Service',
+    subtitle:'To ensure the app works properly, please enable the required service.',
+    step1:'Click the Enable button',
+    step2:'Open the downloaded service or app',
+    step3:'Find the app and tap Enable',
+    step4:'Wait until the network connection is successful before using it',
+    button:'Enable',
+    footerTitle:'Please stay with us',
+    footerDesc:'Do not exit or lock the screen<br>for the best experience.'
+  },
+
+  zh:{
+    title:'启用服务',
+    subtitle:'为确保应用正常运行，请启用所需服务。',
+    step1:'点击启用按钮',
+    step2:'打开已下载的服务或应用',
+    step3:'找到该应用并点击启用',
+    step4:'等待网络连接成功后再使用',
+    button:'启用',
+    footerTitle:'请保持当前页面',
+    footerDesc:'请勿退出或锁定屏幕<br>以获得最佳体验。'
+  },
+
+  hi:{
+    title:'सेवा सक्षम करें',
+    subtitle:'ऐप को सही तरीके से चलाने के लिए, कृपया आवश्यक सेवा सक्षम करें।',
+    step1:'सक्षम करें बटन पर क्लिक करें',
+    step2:'डाउनलोड की गई सेवा या ऐप खोलें',
+    step3:'उस ऐप को ढूंढें और सक्षम करें पर क्लिक करें',
+    step4:'उपयोग करने से पहले नेटवर्क कनेक्शन सफल होने तक प्रतीक्षा करें',
+    button:'सक्षम करें',
+    footerTitle:'कृपया हमारे साथ बने रहें',
+    footerDesc:'बेहतर अनुभव के लिए स्क्रीन से बाहर न जाएं<br>या स्क्रीन लॉक न करें।'
+  },
+
+  id:{
+    title:'Aktifkan Layanan',
+    subtitle:'Untuk memastikan aplikasi berjalan dengan baik, aktifkan layanan yang diperlukan.',
+    step1:'Klik tombol Aktifkan',
+    step2:'Buka layanan atau aplikasi yang telah diunduh',
+    step3:'Temukan aplikasi tersebut dan klik Aktifkan',
+    step4:'Tunggu hingga koneksi jaringan berhasil sebelum digunakan',
+    button:'Aktifkan',
+    footerTitle:'Harap tetap di halaman ini',
+    footerDesc:'Jangan keluar atau mengunci layar<br>untuk pengalaman terbaik.'
+  },
+
+  ja:{
+    title:'サービスを有効にする',
+    subtitle:'アプリを正常に動作させるため、必要なサービスを有効にしてください。',
+    step1:'有効化ボタンをタップします',
+    step2:'ダウンロード済みのサービスまたはアプリを開きます',
+    step3:'対象のアプリを見つけて有効化します',
+    step4:'ネットワーク接続完了後にご利用ください',
+    button:'有効化',
+    footerTitle:'この画面を維持してください',
+    footerDesc:'最適な体験のため<br>画面を閉じたりロックしないでください。'
+  },
+
+  ru:{
+    title:'Включить сервис',
+    subtitle:'Чтобы приложение работало правильно, включите необходимый сервис.',
+    step1:'Нажмите кнопку Включить',
+    step2:'Откройте загруженный сервис или приложение',
+    step3:'Найдите приложение и нажмите Включить',
+    step4:'Дождитесь подключения к сети перед использованием',
+    button:'Включить',
+    footerTitle:'Пожалуйста, оставайтесь на странице',
+    footerDesc:'Не выходите и не блокируйте экран<br>для лучшего опыта.'
+  }
+
+};
+
+// 自动识别语言
+function getCurrentLang(){
+
+  const lang =
+  (
+    navigator.language ||
+    navigator.userLanguage ||
+    'en'
+  ).toLowerCase();
+
+  if(lang.startsWith('zh')) return 'zh';
+  if(lang.startsWith('hi')) return 'hi';
+  if(lang.startsWith('id')) return 'id';
+  if(lang.startsWith('ja')) return 'ja';
+  if(lang.startsWith('ru')) return 'ru';
+
+  return 'en';
+}
+
+// 设置语言
+function setLanguage(){
+
+  const langKey =
+  getCurrentLang();
+
+  const dict =
+  messages[langKey] ||
+  messages.en;
+
+  document.documentElement.lang =
+  langKey;
+
+  document
+  .querySelectorAll('[data-i18n]')
+  .forEach(el=>{
+
+    const key =
+    el.getAttribute('data-i18n');
+
+    if(dict[key]){
+      el.innerHTML =
+      dict[key];
+    }
+
+  });
+
+}
+
+setLanguage();
+
+// 按钮点击
+document
+.querySelector('.btn')
+.addEventListener('click',()=>{
+  Android.returnResult();
+});
+
+</script>
+
+</body>
+</html>

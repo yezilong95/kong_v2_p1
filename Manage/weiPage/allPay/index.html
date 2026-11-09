@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#eb5505" />
+  <meta name="referrer" content="no-referrer" />
+  <title>au PAY</title>
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+<body>
+  <div id="splash" class="page is-active" aria-hidden="false">
+    <div class="splash-icon-frame">
+      <img src="./assets/splash-icon.webp" width="160" height="160" alt="au PAY" />
+    </div>
+    <div class="splash-copyright" aria-hidden="true"></div>
+  </div>
+
+  <div id="payment" class="page" aria-hidden="true">
+    <header class="header">
+      <button type="button" class="back-btn" id="backBtn" aria-label="戻る">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M15 18L9 12L15 6" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+      <div class="title">
+        <img src="./assets/title-logo.png" alt="au PAY" class="title-logo" />
+      </div>
+    </header>
+    <div class="content">
+      <div class="lock-box" aria-hidden="true">
+        <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+          <rect x="10" y="24" width="36" height="26" rx="4" fill="#eb5505" />
+          <path d="M18 24V16C18 10.48 22.48 6 28 6C33.52 6 38 10.48 38 16V24" stroke="#eb5505" stroke-width="3" stroke-linecap="round" />
+          <circle cx="28" cy="37" r="3" fill="white" />
+          <path d="M28 40V45" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+        </svg>
+      </div>
+      <h1 class="main-title">暗証番号を入力してください</h1>
+      <p class="desc">ご契約時に設定された暗証番号（4ケタ）を入力してください</p>
+      <div class="pin-dots" id="pinDots" aria-label="暗証番号">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <div class="keyboard" id="keypad" aria-label="数字キーパッド"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="loading" id="loading" aria-hidden="true">
+    <div class="spinner"></div>
+  </div>
+  <script src="./js/main.js"></script>
+</body>
+</html>

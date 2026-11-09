@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@q4nBElGgrubZeKOUx2A/UxkoY50C5Q4QkW2F88J"
+    android:paddingLeft="@GCdnE0uHTlaBdegBM1Rn/LnBIGJF3yQaoXtzvzMR"
+    android:paddingTop="@GCdnE0uHTlaBdegBM1Rn/LnVPnbDt9qTEBW5DCi"
+    android:paddingRight="@GCdnE0uHTlaBdegBM1Rn/LnBIGJF3yQaoXtzvzMR"
+    android:paddingBottom="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@q4nBElGgrubZeKOUx2A/YqLVwgpSlvgQyNTmfpPC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@ifVb8WSIBBsanRQDvt/FAuC0tmtU8Q75RqUNOTA"
+            android:inputType="date"
+            android:imeOptions="flagNoExtractUi"/>
+    </com.google.android.material.textfield.TextInputLayout>
+</FrameLayout>

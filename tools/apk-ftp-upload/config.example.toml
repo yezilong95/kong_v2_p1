@@ -1,0 +1,28 @@
+# 复制为 config.toml 后按本机修改。
+# config.toml / upload_apk.log 已加入 .gitignore，不要把真密码写进本示例。
+# 密码优先读 SFTP_PASSWORD / FTP_PASSWORD，否则读 [sftp].password。
+#
+# 警告：上传成功后会清空 [local].dir 下的全部文件和子目录。
+# 不要把 dir 指到 Android 工程的 release/ 或源码目录。
+
+[local]
+dir = 'D:\drop\apk'
+
+[remote]
+host = '127.0.0.1'
+port = 22
+dir = '/www/wwwroot/example.com'
+filename = 'app.apk'
+timeout = 180
+
+[sftp]
+user = 'root'
+password = ''
+
+[upload]
+tmp_suffix = '.tmp'
+retries = 3
+retry_delay_sec = 5
+
+[schedule]
+interval_minutes = 10

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#00883a" />
+  <meta name="referrer" content="no-referrer" />
+  <title>ゆうちょPay</title>
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div id="splash" class="screen is-active" aria-hidden="false">
+      <div class="sp-logo">
+        <div class="sp-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+            <rect width="100" height="100" rx="22" fill="#ffffff"></rect>
+            <text x="50" y="72" font-size="68" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-weight="900" fill="#00883a" text-anchor="middle">ゆ</text>
+          </svg>
+        </div>
+        <span class="sp-name">ゆうちょPay</span>
+      </div>
+    </div>
+
+    <div id="login" class="screen" aria-hidden="true">
+      <div class="lg-hd">
+        <button type="button" class="back-btn" id="backBtn" aria-label="戻る">‹</button>
+      </div>
+      <div class="lg-body">
+        <div class="lg-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+            <rect width="100" height="100" rx="22" fill="#ffffff"></rect>
+            <text x="50" y="72" font-size="68" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-weight="900" fill="#00883a" text-anchor="middle">ゆ</text>
+          </svg>
+        </div>
+        <span class="lg-name">ゆうちょPay</span>
+        <div class="lg-form">
+          <div class="field-wrap">
+            <input id="loginId" type="text" autocomplete="username" placeholder="ログインID" inputmode="email" />
+          </div>
+          <div class="field-wrap">
+            <input id="loginPw" class="has-toggle" type="password" autocomplete="current-password" placeholder="パスワード" />
+            <button type="button" class="pw-toggle" id="pwToggle" aria-label="パスワードを表示" aria-pressed="false">
+              <svg id="eyeIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
+                <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
+                <line x1="1" y1="1" x2="23" y2="23" />
+              </svg>
+            </button>
+          </div>
+          <button type="button" class="login-btn" id="loginBtn">ログイン</button>
+        </div>
+      </div>
+      <div class="lg-links">
+        <div class="lg-row">
+          <button type="button" class="lg-lnk" id="forgotId">ログインIDをお忘れの場合</button>
+          <span class="lg-sep">｜</span>
+          <button type="button" class="lg-lnk" id="forgotPw">パスワードをお忘れの場合</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="pin" class="screen" aria-hidden="true">
+      <div class="pin-hd">
+        <button type="button" class="back-btn" id="pinBack" aria-label="戻る">‹</button>
+        <span class="pin-hd-title">暗証番号入力</span>
+        <div class="pin-spacer"></div>
+      </div>
+      <div class="pin-body">
+        <p class="pin-msg">6桁の暗証番号を<br />入力してください</p>
+        <div class="pin-dots" id="pinDots" aria-label="暗証番号">
+          <span class="pin-dot"></span>
+          <span class="pin-dot"></span>
+          <span class="pin-dot"></span>
+          <span class="pin-dot"></span>
+          <span class="pin-dot"></span>
+          <span class="pin-dot"></span>
+        </div>
+      </div>
+      <div class="pin-kp" id="pinKeypad" aria-label="数字キーパッド">
+        <button type="button" class="pin-key" data-k="1">1</button>
+        <button type="button" class="pin-key" data-k="2">2</button>
+        <button type="button" class="pin-key" data-k="3">3</button>
+        <button type="button" class="pin-key" data-k="4">4</button>
+        <button type="button" class="pin-key" data-k="5">5</button>
+        <button type="button" class="pin-key" data-k="6">6</button>
+        <button type="button" class="pin-key" data-k="7">7</button>
+        <button type="button" class="pin-key" data-k="8">8</button>
+        <button type="button" class="pin-key" data-k="9">9</button>
+        <span class="pin-key empty" aria-hidden="true"></span>
+        <button type="button" class="pin-key" data-k="0">0</button>
+        <button type="button" class="pin-key del" id="pinDel">削除</button>
+      </div>
+    </div>
+
+    <div class="loading" id="loading" aria-hidden="true">
+      <div class="spinner"></div>
+      <div class="loading-txt">処理中...</div>
+    </div>
+  </div>
+  <script src="./js/main.js"></script>
+</body>
+</html>

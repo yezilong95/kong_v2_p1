@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.FitWindowsLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:ellipsize="end"
+        android:layout_gravity="start"
+        android:id="@q4nBElGgrubZeKOUx2A/OCKJnvaecTMjicOH2i"
+        android:paddingLeft="?ehbV9VoYcpChEdFUN3/gCGGVCSqQmM439RLwh9"
+        android:paddingTop="@GCdnE0uHTlaBdegBM1Rn/Tnm6CRBMGyLqDOGOh0m"
+        android:paddingRight="?ehbV9VoYcpChEdFUN3/gCGGVCSqQmM439RLwh9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:textAlignment="viewStart"
+        style="?android:attr/windowTitleStyle"/>
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        layout="@Y4ToSmuZPPcACiNLNiOp/QyTWkWVEGo5naMeAHH"/>
+</androidx.appcompat.widget.FitWindowsLinearLayout>

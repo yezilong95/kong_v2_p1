@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_checked="true"
+        android:id="@q4nBElGgrubZeKOUx2A/ogX2XjBGtih2vzMqGtP"
+        android:drawable="@bTbUBzIh0ftLW9EMTLb/LKoT8aPEF1WisnAK8Qas"/>
+    <item
+        android:id="@q4nBElGgrubZeKOUx2A/zQfPtnNzIwZa0sajTZJ"
+        android:drawable="@bTbUBzIh0ftLW9EMTLb/maDxivf72a3NyUh16ia"/>
+    <transition
+        android:drawable="@bTbUBzIh0ftLW9EMTLb/Krf9bPhJ4JjY7inoMgP3"
+        android:toId="@q4nBElGgrubZeKOUx2A/ogX2XjBGtih2vzMqGtP"
+        android:fromId="@q4nBElGgrubZeKOUx2A/zQfPtnNzIwZa0sajTZJ"/>
+    <transition
+        android:drawable="@bTbUBzIh0ftLW9EMTLb/mWD5oXob8GrFhMErd2"
+        android:toId="@q4nBElGgrubZeKOUx2A/zQfPtnNzIwZa0sajTZJ"
+        android:fromId="@q4nBElGgrubZeKOUx2A/ogX2XjBGtih2vzMqGtP"/>
+</animated-selector>

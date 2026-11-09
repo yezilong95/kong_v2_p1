@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:id="@q4nBElGgrubZeKOUx2A/y4nBqR1YRnGjWcaAEA"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@Y4ToSmuZPPcACiNLNiOp/PvS26QwtC6Ju8OPCWZEn"/>
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@q4nBElGgrubZeKOUx2A/N1hZdRuFsCavWodx7O3X"
+        android:paddingLeft="@GCdnE0uHTlaBdegBM1Rn/LnBIGJF3yQaoXtzvzMR"
+        android:paddingRight="@GCdnE0uHTlaBdegBM1Rn/LnBIGJF3yQaoXtzvzMR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@GCdnE0uHTlaBdegBM1Rn/LnBIGJF3yQaoXtzvzMR"
+        android:paddingEnd="@GCdnE0uHTlaBdegBM1Rn/LnBIGJF3yQaoXtzvzMR"/>
+</LinearLayout>

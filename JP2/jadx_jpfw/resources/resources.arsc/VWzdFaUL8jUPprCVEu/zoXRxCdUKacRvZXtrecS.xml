@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_enabled="false"
+        android:state_checked="false"
+        android:color="?ehbV9VoYcpChEdFUN3/DTGv6Y8vnvCH6eUblbp"
+        android:alpha="@GCdnE0uHTlaBdegBM1Rn/DSAOnVHNW3l3QtYqha"/>
+    <item
+        android:state_enabled="false"
+        android:state_checked="true"
+        android:color="?ehbV9VoYcpChEdFUN3/ESvXdolmyXbb0IvEAy"
+        android:alpha="@GCdnE0uHTlaBdegBM1Rn/YM6bhLj40aDZLj1blPF"/>
+    <item
+        android:state_checked="true"
+        android:state_pressed="true"
+        android:color="?ehbV9VoYcpChEdFUN3/Xh1VjRxIkxguVglANWoM"/>
+    <item
+        android:state_checked="true"
+        android:color="?ehbV9VoYcpChEdFUN3/cUR9OtZZK2J5eXVcMM"/>
+    <item
+        android:state_pressed="true"
+        android:color="?ehbV9VoYcpChEdFUN3/wUnmnu3cNRtKU3AEkgC"/>
+    <item android:color="?ehbV9VoYcpChEdFUN3/P2J0Y51ve2T3Xsqhc1t7"/>
+</selector>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="ic_call_answer">⟨STRING_DECODE_ERROR⟩</drawable>
+    <drawable name="ic_call_answer_low">⟨STRING_DECODE_ERROR⟩</drawable>
+    <drawable name="ic_call_answer_video">⟨STRING_DECODE_ERROR⟩</drawable>
+    <drawable name="ic_call_answer_video_low">⟨STRING_DECODE_ERROR⟩</drawable>
+    <drawable name="ic_call_decline">⟨STRING_DECODE_ERROR⟩</drawable>
+    <drawable name="ic_call_decline_low">⟨STRING_DECODE_ERROR⟩</drawable>
+</resources>

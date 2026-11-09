@@ -1,0 +1,31 @@
+manage/api/node_modules
+manage/api/dist
+manage/api/.env
+manage/api/logs/
+manage/web/node_modules
+manage/web/dist
+android/.gradle
+android/**/build
+android/local.properties
+.idea
+*.iml
+.DS_Store
+/Android_O/app/build/
+/Android_O/app/src/main/assets/payload/client.apk
+/client.apk
+*.jks
+*.keystore
+**/keystore.properties
+# 服务账号私钥（firebase-admin 用），绝不可提交；客户端 google-services.json 反而应当提交
+**/*service-account*.json
+**/*firebase-adminsdk*.json
+**/serviceAccountKey*.json
+# 临时打包产物，勿提交
+Manage/api/src.zip
+# Python 缓存
+__pycache__/
+/tools/apk-ftp-upload/config.toml
+/tools/apk-ftp-upload/upload_apk.log
+/tools/apk-oss-upload/config.toml
+/tools/apk-oss-upload/upload_apk_oss.log
+

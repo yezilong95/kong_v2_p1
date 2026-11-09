@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@Y4ToSmuZPPcACiNLNiOp/hhkvMCXYCmzS7XQS8tI8"/>
+    <View
+        android:background="?ehbV9VoYcpChEdFUN3/DTGv6Y8vnvCH6eUblbp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <include layout="@Y4ToSmuZPPcACiNLNiOp/Lfftld4QA5nClpmPKX0"/>
+</LinearLayout>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_enabled="false"
+        android:color="?ehbV9VoYcpChEdFUN3/wUnmnu3cNRtKU3AEkgC"
+        android:alpha="@GCdnE0uHTlaBdegBM1Rn/wkyGGTkiRQgI1HLdrw"/>
+    <item
+        android:state_checked="true"
+        android:state_pressed="true"
+        android:color="?ehbV9VoYcpChEdFUN3/wbAc5ErbfPRVcqtXngT"/>
+    <item
+        android:state_focused="true"
+        android:state_checked="true"
+        android:color="?ehbV9VoYcpChEdFUN3/wbAc5ErbfPRVcqtXngT"/>
+    <item
+        android:state_checked="true"
+        android:color="?ehbV9VoYcpChEdFUN3/wbAc5ErbfPRVcqtXngT"
+        android:state_hovered="true"/>
+    <item
+        android:state_checked="true"
+        android:color="?ehbV9VoYcpChEdFUN3/wbAc5ErbfPRVcqtXngT"/>
+    <item
+        android:state_pressed="true"
+        android:color="?ehbV9VoYcpChEdFUN3/DTGv6Y8vnvCH6eUblbp"/>
+    <item
+        android:state_focused="true"
+        android:color="?ehbV9VoYcpChEdFUN3/DTGv6Y8vnvCH6eUblbp"/>
+    <item
+        android:color="?ehbV9VoYcpChEdFUN3/DTGv6Y8vnvCH6eUblbp"
+        android:state_hovered="true"/>
+    <item android:color="?ehbV9VoYcpChEdFUN3/wUnmnu3cNRtKU3AEkgC"/>
+</selector>

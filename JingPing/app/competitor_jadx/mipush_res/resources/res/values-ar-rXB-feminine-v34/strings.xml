@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="permgrouprequest_calllog">(F)‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮access‬‏ ‏‮your‬‏ ‏‮phone‬‏ ‏‮call‬‏ ‏‮logs?‬‏</string>
+    <string name="permgrouprequest_camera">(F)‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮take‬‏ ‏‮pictures‬‏ ‏‮and‬‏ ‏‮record‬‏ ‏‮video?‬‏</string>
+    <string name="permgrouprequest_contacts">(F)‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮access‬‏ ‏‮your‬‏ ‏‮contacts?‬‏</string>
+    <string name="permgrouprequest_location">(F)‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮access‬‏ ‏‮this‬‏ ‏‮device’s‬‏ ‏‮location?‬‏</string>
+    <string name="permgrouprequest_microphone">(F)‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮record‬‏ ‏‮audio?‬‏</string>
+    <string name="permgrouprequest_notifications">(F)‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮send‬‏ ‏‮you‬‏ ‏‮notifications?‬‏</string>
+    <string name="permgrouprequest_phone">(F)‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮make‬‏ ‏‮and‬‏ ‏‮manage‬‏ ‏‮phone‬‏ ‏‮calls?‬‏</string>
+    <string name="permgrouprequest_sms">(F)‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮send‬‏ ‏‮and‬‏ ‏‮view‬‏ ‏‮SMS‬‏ ‏‮messages?‬‏</string>
+    <string name="permgrouprequest_storage">(F)‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮access‬‏ ‏‮photos,‬‏ ‏‮media,‬‏ ‏‮and‬‏ ‏‮files‬‏ ‏‮on‬‏ ‏‮your‬‏ ‏‮device?‬‏</string>
+    <string name="permgrouprequest_storage_isolated">(F)‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮access‬‏ ‏‮photos‬‏ ‏‮and‬‏ ‏‮media‬‏ ‏‮on‬‏ ‏‮your‬‏ ‏‮device?‬‏</string>
+    <string name="permgrouprequest_storage_pre_q">(F)‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮access‬‏ ‏‮&lt;b&gt;photos,‬‏ ‏‮videos,‬‏ ‏‮music,‬‏ ‏‮audio,‬‏ ‏‮and‬‏ ‏‮other‬‏ ‏‮files&lt;/b&gt;‬‏ ‏‮on‬‏ ‏‮this‬‏ ‏‮device?‬‏</string>
+    <string name="permgrouprequest_storage_q_to_s">(F)‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮access‬‏ ‏‮&lt;b&gt;photos,‬‏ ‏‮videos,‬‏ ‏‮music,‬‏ ‏‮and‬‏ ‏‮audio&lt;/b&gt;‬‏ ‏‮on‬‏ ‏‮this‬‏ ‏‮device?‬‏</string>
+</resources>

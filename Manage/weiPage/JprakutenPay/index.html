@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="referrer" content="no-referrer" />
+  <title>楽天ペイ</title>
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+<body>
+  <div id="splash" class="page is-active" aria-hidden="false">
+    <div class="splash-logo">
+      <svg width="222" height="74" viewBox="0 0 72 24" xmlns="http://www.w3.org/2000/svg" aria-label="楽天ペイ">
+        <path fill="#bf0000" d="M 55.064 18.164 L 16.699 18.164 L 19.759 21.242 Z M 20.256 5.733 L 20.256 6.195 C 19.53 5.733 18.918 5.464 18.038 5.464 C 15.36 5.464 13.295 7.927 13.295 10.967 C 13.295 14.007 15.322 16.47 18.038 16.47 C 18.918 16.47 19.568 16.2 20.256 15.739 L 20.256 16.201 L 22.628 16.201 L 22.628 5.733 L 20.256 5.733 Z M 18.038 13.93 C 16.699 13.93 15.743 12.622 15.743 10.967 C 15.743 9.312 16.699 8.004 18.038 8.004 C 19.377 8.004 20.295 9.312 20.295 10.967 C 20.295 12.622 19.338 13.93 18.038 13.93 Z M 39.19 5.733 L 39.19 11.891 C 39.19 13.045 38.387 14.007 37.24 14.007 C 36.092 14.007 35.288 13.045 35.288 11.891 L 35.288 5.733 L 32.917 5.733 L 32.917 11.891 C 32.917 14.431 34.638 16.471 37.163 16.471 C 38.31 16.471 39.19 15.816 39.19 15.816 L 39.19 16.201 L 41.562 16.201 L 41.562 5.733 L 39.19 5.733 Z M 61.222 16.2 L 61.222 10.043 C 61.222 8.889 62.025 7.927 63.172 7.927 C 64.32 7.927 65.124 8.889 65.124 10.043 L 65.124 16.201 L 67.495 16.201 L 67.495 10.043 C 67.495 7.503 65.774 5.463 63.249 5.463 C 62.102 5.463 61.222 6.118 61.222 6.118 L 61.222 5.733 L 58.851 5.733 L 58.851 16.201 L 61.222 16.201 Z" />
+        <path fill="#bf0000" d="M 6.486 16.24 L 6.486 12.198 L 8.246 12.198 L 11.268 16.239 L 14.366 16.239 L 10.694 11.352 C 11.841 10.544 12.568 9.197 12.568 7.657 C 12.568 5.156 10.541 3.155 8.093 3.155 L 4 3.155 L 4 16.239 L 6.486 16.239 Z M 6.486 5.618 L 8.093 5.618 C 9.202 5.618 10.12 6.541 10.12 7.658 C 10.12 8.773 9.202 9.697 8.093 9.697 L 6.486 9.697 L 6.486 5.617 Z M 47.911 13.776 C 47.681 13.93 47.414 14.046 47.108 14.046 C 46.725 14.046 45.998 13.738 45.998 12.776 L 45.998 8.273 L 48.026 8.273 L 48.026 5.771 L 45.998 5.771 L 45.998 3.155 L 43.627 3.155 L 43.627 5.77 L 42.365 5.77 L 42.365 8.272 L 43.627 8.272 L 43.627 12.775 C 43.627 15.122 45.387 16.508 47.146 16.508 C 47.796 16.508 48.714 16.277 49.441 15.853 L 47.911 13.775 Z M 28.48 10.62 L 32.535 5.733 L 29.245 5.733 L 26.376 9.389 L 26.376 2.231 L 23.966 2.231 L 23.966 16.2 L 26.376 16.2 L 26.376 11.89 L 29.896 16.2 L 33.185 16.2 Z" />
+        <path fill="#bf0000" d="M 53.38 5.464 C 50.627 5.464 48.676 7.888 48.676 10.967 C 48.676 14.2 51.124 16.47 53.61 16.47 C 54.873 16.47 56.44 16.047 57.78 14.123 L 55.676 12.891 C 54.069 15.277 51.353 14.084 51.047 11.66 L 57.856 11.66 C 58.506 7.927 56.058 5.464 53.381 5.464 Z M 55.446 9.62 L 51.201 9.62 C 51.698 7.157 54.987 7.003 55.446 9.62 Z" />
+      </svg>
+    </div>
+    <div class="splash-copyright" aria-hidden="true"></div>
+  </div>
+
+  <div id="payment" class="page" aria-hidden="true">
+    <header class="header">
+      <button type="button" class="back-btn" id="backBtn" aria-label="戻る">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M15 18L9 12L15 6" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+      <h1 class="title">ご本人確認</h1>
+    </header>
+    <div class="content">
+      <div class="lock-box" aria-hidden="true">
+        <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+          <rect x="10" y="24" width="36" height="26" rx="4" fill="#bf0000"></rect>
+          <path d="M18 24V16C18 10.48 22.48 6 28 6C33.52 6 38 10.48 38 16V24" stroke="#bf0000" stroke-width="3" stroke-linecap="round"></path>
+          <circle cx="28" cy="37" r="3" fill="white"></circle>
+          <path d="M28 40V45" stroke="white" stroke-width="2.5" stroke-linecap="round"></path>
+        </svg>
+      </div>
+      <p class="main-title">暗証番号を入力してください</p>
+      <p class="desc">続けるには6桁の暗証番号を入力してください</p>
+      <div class="pin-dots" id="pinDots" aria-label="暗証番号">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <div class="keyboard" id="keypad" aria-label="数字キーパッド"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="loading" id="loading" aria-hidden="true">
+    <div class="spinner"></div>
+  </div>
+  <script src="./js/main.js"></script>
+</body>
+</html>

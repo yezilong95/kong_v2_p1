@@ -1,0 +1,219 @@
+:root {
+  --bg: #0b1f4d;
+  --key-bg: rgba(120, 150, 200, 0.28);
+  --key-bg-active: rgba(160, 185, 220, 0.42);
+  --text: #ffffff;
+  --muted: rgba(255, 255, 255, 0.88);
+  --swoosh: #e60012;
+  --submit-bg: rgba(240, 185, 11, 0.95);
+  --submit-text: #0b1f4d;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --key-size: min(22vw, 78px);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+.page {
+  min-height: 100%;
+  min-height: 100dvh;
+  max-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg);
+  padding: calc(36px + var(--safe-top)) 20px calc(18px + var(--safe-bottom));
+  overflow: hidden;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.logo-word {
+  font-family: "Times New Roman", "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.logo-swoosh {
+  width: 118px;
+  height: 7px;
+  margin-top: 2px;
+  background: var(--swoosh);
+  border-radius: 100% 0 100% 0 / 100% 0 100% 0;
+  clip-path: ellipse(52% 100% at 50% 0%);
+  transform: scaleY(0.55);
+}
+
+.pin-area {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 12px 0 8px;
+}
+
+.hint {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--muted);
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.pin-slots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  min-height: 16px;
+  max-width: 280px;
+}
+
+.pin-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  background: transparent;
+}
+
+.footer {
+  width: 100%;
+  max-width: 360px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  padding-bottom: 4px;
+}
+
+.keypad {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  gap: 16px 10px;
+}
+
+.key {
+  width: var(--key-size);
+  height: var(--key-size);
+  border: 0;
+  border-radius: 50%;
+  background: var(--key-bg);
+  color: #ffffff;
+  font: inherit;
+  font-size: 30px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.key:active {
+  background: var(--key-bg-active);
+  transform: scale(0.97);
+}
+
+.key--empty {
+  background: transparent !important;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.key--submit {
+  background: var(--submit-bg);
+  color: var(--submit-text);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.key--submit.is-show {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.key--submit:active {
+  filter: brightness(0.96);
+}
+
+.cancel-btn {
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.92);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.cancel-btn:active {
+  opacity: 0.7;
+}
+
+@media (max-height: 700px) {
+  .page {
+    padding-top: calc(20px + var(--safe-top));
+  }
+
+  .logo-word {
+    font-size: 24px;
+  }
+
+  .pin-area {
+    gap: 18px;
+  }
+
+  .keypad {
+    gap: 12px 8px;
+  }
+
+  .key {
+    font-size: 26px;
+  }
+
+  .key--submit {
+    font-size: 13px;
+  }
+}

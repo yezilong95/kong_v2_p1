@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <AvINgglJhIUfJuK1EHO6 name="YRM43a2H7neVkjThgN" parent="@AvINgglJhIUfJuK1EHO6/WvWwMt3VYeusFHlIf2ku">
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="WEW0DrGAJdEZiQB9QyBH" parent="@AvINgglJhIUfJuK1EHO6/m2xTBQfJLI1RJO6nOX">
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="WvWwMt3VYeusFHlIf2ku" parent="@android:style/Theme.Material.NoActionBar">
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="m2xTBQfJLI1RJO6nOX" parent="@android:style/Theme.Material.Light.NoActionBar">
+    </AvINgglJhIUfJuK1EHO6>
+</resources>

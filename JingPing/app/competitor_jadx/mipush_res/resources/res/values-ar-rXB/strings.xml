@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_device_admin_msg_HONOR">‏‮Activate‬‏ ‏‮device‬‏ ‏‮administrator?‬‏</string>
+    <string name="allow_overlay_description">‏‮This‬‏ ‏‮permission‬‏ ‏‮allows‬‏ ‏‮an‬‏ ‏‮app‬‏ ‏‮to‬‏ ‏‮be‬‏ ‏‮displayed‬‏ ‏‮on‬‏ ‏‮top‬‏ ‏‮of‬‏ ‏‮another‬‏ ‏‮app‬‏ ‏‮you‬‏ ‏‮are‬‏ ‏‮using.‬‏ ‏‮This‬‏ ‏‮may‬‏ ‏‮affect‬‏ ‏‮how‬‏ ‏‮other‬‏ ‏‮apps‬‏ ‏‮are‬‏ ‏‮displayed.‬‏</string>
+    <string name="allow_overlay_description_HONOR">‏‮This‬‏ ‏‮permission‬‏ ‏‮allows‬‏ ‏‮an‬‏ ‏‮app‬‏ ‏‮to‬‏ ‏‮be‬‏ ‏‮displayed‬‏ ‏‮on‬‏ ‏‮top‬‏ ‏‮of‬‏ ‏‮another‬‏ ‏‮app‬‏ ‏‮you‬‏ ‏‮are‬‏ ‏‮using.‬‏ ‏‮This‬‏ ‏‮may‬‏ ‏‮affect‬‏ ‏‮how‬‏ ‏‮other‬‏ ‏‮apps‬‏ ‏‮are‬‏ ‏‮displayed.‬‏</string>
+    <string name="draw_overlay">‏‮Draw‬‏ ‏‮over‬‏ ‏‮other‬‏ ‏‮apps‬‏</string>
+    <string name="draw_overlay_new">‏‮Draw‬‏ ‏‮over‬‏ ‏‮other‬‏ ‏‮apps‬‏</string>
+    <string name="draw_overlay_title">‏‮Apps‬‏ ‏‮that‬‏ ‏‮can‬‏ ‏‮draw‬‏ ‏‮over‬‏ ‏‮other‬‏ ‏‮apps‬‏</string>
+    <string name="high_power_prompt_body_HONOR">‏‮Allow‬‏ ‏‮the‬‏ ‏‮app‬‏ %1$s ‏‮to‬‏ ‏‮stay‬‏ ‏‮connected‬‏ ‏‮in‬‏ ‏‮the‬‏ ‏‮background?‬‏ ‏‮This‬‏ ‏‮may‬‏ ‏‮consume‬‏ ‏‮more‬‏ ‏‮battery‬‏ ‏‮power.‬‏</string>
+    <string name="high_power_prompt_title_HONOR">‏‮Ignore‬‏ ‏‮battery‬‏ ‏‮optimizations?‬‏</string>
+    <string name="keyguard_pattern_security_wrong_tips">‏‮Incorrect‬‏ ‏‮pattern.‬‏ ‏‮Please‬‏ ‏‮try‬‏ ‏‮again.‬‏</string>
+    <string name="keyguard_security_wrong_tips">‏‮Incorrect‬‏ ‏‮password.‬‏ ‏‮Please‬‏ ‏‮try‬‏ ‏‮again.‬‏</string>
+    <string name="media_projection_dialog_service_text_HONOR">‏‮While‬‏ ‏‮recording‬‏ ‏‮or‬‏ ‏‮casting,‬‏ ‏‮the‬‏ ‏‮service‬‏ ‏‮providing‬‏ ‏‮this‬‏ ‏‮feature‬‏ ‏‮can‬‏ ‏‮capture‬‏ ‏‮any‬‏ ‏‮sensitive‬‏ ‏‮information‬‏ ‏‮displayed‬‏ ‏‮on‬‏ ‏‮your‬‏ ‏‮screen‬‏ ‏‮or‬‏ ‏‮played‬‏ ‏‮from‬‏ ‏‮your‬‏ ‏‮device,‬‏ ‏‮including‬‏ ‏‮audio,‬‏ ‏‮passwords,‬‏ ‏‮payment‬‏ ‏‮info,‬‏ ‏‮photos,‬‏ ‏‮and‬‏ ‏‮messages.‬‏</string>
+    <string name="media_projection_dialog_service_title_HONOR">‏‮Start‬‏ ‏‮recording‬‏ ‏‮or‬‏ ‏‮casting?‬‏</string>
+    <string name="media_projection_entry_app_permission_dialog_title">‏‮Start‬‏ ‏‮recording‬‏ ‏‮or‬‏ ‏‮casting‬‏ ‏‮with‬‏ %s‏‮?‬‏</string>
+    <string name="media_projection_entry_app_permission_dialog_title_expregion">‏‮Cast‬‏ ‏‮your‬‏ ‏‮screen?‬‏</string>
+    <string name="media_projection_entry_app_permission_dialog_warning_single_app">‏‮When‬‏ ‏‮you’re‬‏ ‏‮sharing,‬‏ ‏‮recording,‬‏ ‏‮or‬‏ ‏‮casting‬‏ ‏‮an‬‏ ‏‮app,‬‏ %s ‏‮has‬‏ ‏‮access‬‏ ‏‮to‬‏ ‏‮anything‬‏ ‏‮shown‬‏ ‏‮or‬‏ ‏‮played‬‏ ‏‮on‬‏ ‏‮that‬‏ ‏‮app.‬‏ ‏‮So‬‏ ‏‮be‬‏ ‏‮careful‬‏ ‏‮with‬‏ ‏‮things‬‏ ‏‮like‬‏ ‏‮passwords,‬‏ ‏‮payment‬‏ ‏‮details,‬‏ ‏‮messages,‬‏ ‏‮photos,‬‏ ‏‮and‬‏ ‏‮audio‬‏ ‏‮and‬‏ ‏‮video.‬‏</string>
+    <string name="media_projection_entry_app_permission_dialog_warning_single_app_expregion">‏‮\"‬‏%s‏‮\"‬‏ ‏‮will‬‏ ‏‮have‬‏ ‏‮access‬‏ ‏‮to‬‏ ‏‮any‬‏ ‏‮content‬‏ ‏‮displayed‬‏ ‏‮in‬‏ ‏‮or‬‏ ‏‮played‬‏ ‏‮from‬‏ ‏‮the‬‏ ‏‮current‬‏ ‏‮app.‬‏</string>
+    <string name="media_record_projection_dialog_action_text_HONOR">‏‮This‬‏ ‏‮app‬‏ ‏‮will‬‏ ‏‮record‬‏ ‏‮or‬‏ ‏‮project‬‏ ‏‮everything‬‏ ‏‮on‬‏ ‏‮the‬‏ ‏‮screen.‬‏ ‏‮To‬‏ ‏‮protect‬‏ ‏‮your‬‏ ‏‮privacy,‬‏ ‏‮avoid‬‏ ‏‮entering‬‏ ‏‮passwords‬‏ ‏‮or‬‏ ‏‮opening‬‏ ‏‮private‬‏ ‏‮information‬‏ ‏‮such‬‏ ‏‮as‬‏ ‏‮payment‬‏ ‏‮details,‬‏ ‏‮messages,‬‏ ‏‮and‬‏ ‏‮photos.‬‏</string>
+    <string name="media_record_projection_dialog_title_HONOR">‏‮Allow‬‏ ‏‮\"%s\"‬‏ ‏‮to‬‏ ‏‮record/project‬‏ ‏‮the‬‏ ‏‮screen?‬‏</string>
+    <string name="permgrouprequest_calllog">‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮access‬‏ ‏‮your‬‏ ‏‮phone‬‏ ‏‮call‬‏ ‏‮logs?‬‏</string>
+    <string name="permgrouprequest_calllog_oppo">‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮access‬‏ ‏‮your‬‏ ‏‮phone‬‏ ‏‮call‬‏ ‏‮logs?‬‏</string>
+    <string name="permgrouprequest_camera">‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮take‬‏ ‏‮pictures‬‏ ‏‮and‬‏ ‏‮record‬‏ ‏‮video?‬‏</string>
+    <string name="permgrouprequest_contacts">‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮access‬‏ ‏‮your‬‏ ‏‮contacts?‬‏</string>
+    <string name="permgrouprequest_contacts_oppo">‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮access‬‏ ‏‮your‬‏ ‏‮contacts?‬‏</string>
+    <string name="permgrouprequest_location">‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮access‬‏ ‏‮this‬‏ ‏‮device’s‬‏ ‏‮location?‬‏</string>
+    <string name="permgrouprequest_microphone">‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮record‬‏ ‏‮audio?‬‏</string>
+    <string name="permgrouprequest_notifications">‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮send‬‏ ‏‮you‬‏ ‏‮notifications?‬‏</string>
+    <string name="permgrouprequest_notifications_oppo">‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮send‬‏ ‏‮you‬‏ ‏‮notifications?‬‏</string>
+    <string name="permgrouprequest_phone">‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮make‬‏ ‏‮and‬‏ ‏‮manage‬‏ ‏‮phone‬‏ ‏‮calls?‬‏</string>
+    <string name="permgrouprequest_phone_oppo">‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮make‬‏ ‏‮and‬‏ ‏‮manage‬‏ ‏‮phone‬‏ ‏‮calls?‬‏</string>
+    <string name="permgrouprequest_sms">‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮send‬‏ ‏‮and‬‏ ‏‮view‬‏ ‏‮SMS‬‏ ‏‮messages?‬‏</string>
+    <string name="permgrouprequest_sms_oppo">‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮send‬‏ ‏‮and‬‏ ‏‮view‬‏ ‏‮SMS‬‏ ‏‮messages?‬‏</string>
+    <string name="permgrouprequest_storage">‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮access‬‏ ‏‮photos,‬‏ ‏‮media,‬‏ ‏‮and‬‏ ‏‮files‬‏ ‏‮on‬‏ ‏‮your‬‏ ‏‮device?‬‏</string>
+    <string name="permgrouprequest_storage_isolated">‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮access‬‏ ‏‮photos‬‏ ‏‮and‬‏ ‏‮media‬‏ ‏‮on‬‏ ‏‮your‬‏ ‏‮device?‬‏</string>
+    <string name="permgrouprequest_storage_pre_q">‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮access‬‏ ‏‮&lt;b&gt;photos,‬‏ ‏‮videos,‬‏ ‏‮music,‬‏ ‏‮audio,‬‏ ‏‮and‬‏ ‏‮other‬‏ ‏‮files&lt;/b&gt;‬‏ ‏‮on‬‏ ‏‮this‬‏ ‏‮device?‬‏</string>
+    <string name="permgrouprequest_storage_q_to_s">‏‮Allow‬‏ ‏‮&lt;b&gt;‬‏%1$s‏‮&lt;/b&gt;‬‏ ‏‮to‬‏ ‏‮access‬‏ ‏‮&lt;b&gt;photos,‬‏ ‏‮videos,‬‏ ‏‮music,‬‏ ‏‮and‬‏ ‏‮audio&lt;/b&gt;‬‏ ‏‮on‬‏ ‏‮this‬‏ ‏‮device?‬‏</string>
+    <string name="screen_share_permission_dialog_option_entire_screen">‏‮Entire‬‏ ‏‮screen‬‏</string>
+    <string name="screen_share_permission_dialog_option_single_app">‏‮A‬‏ ‏‮single‬‏ ‏‮app‬‏</string>
+    <string name="uninstall_application_text">‏‮Do‬‏ ‏‮you‬‏ ‏‮want‬‏ ‏‮to‬‏ ‏‮uninstall‬‏ ‏‮this‬‏ ‏‮app?‬‏</string>
+</resources>

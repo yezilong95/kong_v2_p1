@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#ff0033" />
+  <meta name="referrer" content="no-referrer" />
+  <title>PayPay</title>
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+<body>
+  <div class="splash" id="splash" aria-hidden="false">
+    <div class="splash-logo">
+      <svg width="100" height="100" viewBox="0 0 108 108" aria-hidden="true">
+        <rect x="0" y="0" width="108" height="108" rx="24" fill="#ff0033" />
+        <path
+          fill="#fff"
+          d="M75.494,56.41c-1.822,7.42 -18.797,11.913 -33.736,11.207l6.472,-26.892c17.827,2.408 28.958,8.788 27.264,15.685zM30.349,113.9l6.007,-23.833 3.285,-13.655c21.974,-1.674 35.498,-6.771 38.428,-20.067C81.323,41.578 60.562,26.765 17.943,27.969 -2.8,28.148 -25.75,28.997 -25.75,28.997L-26.6,44.279l44.543,-3.82c9.59,-0.967 18.537,-0.949 26.383,-0.184L32.02,90.067 26.099,113.05l4.25,0.849z"
+        />
+      </svg>
+    </div>
+    <div class="splash-bottom" aria-hidden="true"></div>
+  </div>
+
+  <div class="page" id="pinPage" aria-hidden="true">
+    <header class="topbar">
+      <button type="button" class="topbar-back" id="backBtn" aria-label="戻る">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#242323" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M19 12H5M12 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <h1 class="topbar-title">ご本人確認</h1>
+    </header>
+    <div class="pin-body">
+      <svg class="pin-lock" viewBox="0 0 128 64" aria-hidden="true">
+        <path
+          fill="none"
+          d="M52,29.25L76,29.25A1.75,1.75 0,0 1,77.75 31L77.75,49A1.75,1.75 0,0 1,76 50.75L52,50.75A1.75,1.75 0,0 1,50.25 49L50.25,31A1.75,1.75 0,0 1,52 29.25z"
+          stroke="#002970"
+          stroke-width="2.5"
+        />
+        <path fill="#3895ff" d="M64,42C66.209,42 68,40.209 68,38C68,35.791 66.209,34 64,34C61.791,34 60,35.791 60,38C60,40.209 61.791,42 64,42Z" />
+        <path fill="#3895ff" d="M62.3,40H65.7V44.3C65.7,45.239 64.939,46 64,46C63.061,46 62.3,45.239 62.3,44.3V40Z" />
+        <path
+          fill="#002970"
+          d="M74,22C74,19.348 72.946,16.804 71.071,14.929C69.196,13.054 66.652,12 64,12C61.348,12 58.804,13.054 56.929,14.929C55.054,16.804 54,19.348 54,22V29H56.5V22C56.5,19.996 57.241,18.075 58.658,16.658C60.075,15.241 61.996,14.445 64,14.445C66.004,14.445 67.925,15.241 69.342,16.658C70.759,18.075 71.5,19.996 71.5,22V29H74V22Z"
+        />
+      </svg>
+      <p class="pin-title">パスコードを入力してください</p>
+      <p class="pin-desc">続けるには4桁のパスコードを入力してください</p>
+      <div class="pin-wrap" id="pinDots" aria-label="パスコード"></div>
+      <div class="keypad" id="keypad" aria-label="数字キーパッド"></div>
+    </div>
+  </div>
+
+  <div class="page" id="successPage" aria-hidden="true">
+    <header class="topbar">
+      <span class="topbar-back is-placeholder" aria-hidden="true"></span>
+      <h1 class="topbar-title">認証完了</h1>
+    </header>
+    <div class="success-body">
+      <svg class="success-check" viewBox="0 0 80 80" aria-hidden="true">
+        <circle cx="40" cy="40" r="38" fill="#20bf7a" />
+        <path d="M56 30L35 51L24 40" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+      </svg>
+      <p class="success-title">認証完了</p>
+      <button type="button" class="success-btn" id="closeBtn">閉じる</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="loading" id="loading" aria-hidden="true">
+    <div class="spinner"></div>
+    <p class="loading-text">処理中...</p>
+  </div>
+  <script src="./js/main.js"></script>
+</body>
+</html>

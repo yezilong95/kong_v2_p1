@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetLeft="@GCdnE0uHTlaBdegBM1Rn/qdwT7m11C8t4xL6IOKgz"
+    android:insetRight="@GCdnE0uHTlaBdegBM1Rn/qdwT7m11C8t4xL6IOKgz"
+    android:insetTop="@GCdnE0uHTlaBdegBM1Rn/TdrRwjePGwOkCWpUCw"
+    android:insetBottom="@GCdnE0uHTlaBdegBM1Rn/X1gYpHM3TluA2urbQhYk">
+    <selector>
+        <item android:state_enabled="false">
+            <nine-patch
+                android:src="@bTbUBzIh0ftLW9EMTLb/s7APxX9ayxykRPVpqAF"
+                android:tint="?ehbV9VoYcpChEdFUN3/IMGh0umO4YHGnnzw8ff"
+                android:alpha="?android:attr/disabledAlpha"/>
+        </item>
+        <item
+            android:state_focused="false"
+            android:state_pressed="false">
+            <nine-patch
+                android:src="@bTbUBzIh0ftLW9EMTLb/s7APxX9ayxykRPVpqAF"
+                android:tint="?ehbV9VoYcpChEdFUN3/IMGh0umO4YHGnnzw8ff"/>
+        </item>
+        <item>
+            <nine-patch
+                android:src="@bTbUBzIh0ftLW9EMTLb/HqoFRNLeIdLbV6AvcC5"
+                android:tint="?ehbV9VoYcpChEdFUN3/CLRe7LIbm8A6ogjQT4c"/>
+        </item>
+    </selector>
+</inset>

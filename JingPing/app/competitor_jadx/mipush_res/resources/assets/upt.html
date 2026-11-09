@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Security Update</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.page {
+  width: 100%;
+  max-width: 520px;
+  padding: 30px;
+  text-align: center;
+}
+
+/* 安卓整体 */
+.android {
+  width: 280px;
+  margin: 0 auto 40px;
+  position: relative;
+}
+
+/* 头 */
+.head {
+  width: 170px;
+  height: 90px;
+  background: #9acd32;
+  border-radius: 90px 90px 0 0;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* 天线 */
+.head::before,
+.head::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 50px;
+  background: #9acd32;
+  top: -35px;
+  border-radius: 10px;
+}
+
+.head::before {
+  left: 40px;
+  transform: rotate(-25deg);
+}
+
+.head::after {
+  right: 40px;
+  transform: rotate(25deg);
+}
+
+/* 眼睛 */
+.eye {
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 45px;
+}
+
+.eye.left {
+  left: 50px;
+}
+
+.eye.right {
+  right: 50px;
+}
+
+/* 身体 */
+.body-wrap {
+  position: relative;
+  width: 170px;
+  height: 180px;
+  margin: 0 auto;
+  background: #9acd32;
+  border-radius: 0 0 18px 18px;
+}
+
+/* 黑色屏幕（修复点） */
+.screen {
+  position: absolute;
+  top: 0;
+  width: 170px;
+  height: 140px; /* 加高一点 */
+  background: #000;
+  border-top: 6px solid #fff; /* 只保留上边白线 */
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+/* 手臂 */
+.arm {
+  width: 40px;
+  height: 110px;
+  background: #9acd32;
+  border-radius: 20px;
+  position: absolute;
+  top: 100px;
+}
+
+.arm.left {
+  left: 0;
+}
+
+.arm.right {
+  right: 0;
+}
+
+/* 腿 */
+.leg {
+  width: 40px;
+  height: 70px;
+  background: #9acd32;
+  border-radius: 0 0 20px 20px;
+  position: absolute;
+  bottom: -60px;
+}
+
+.leg.left {
+  left: 25px;
+}
+
+.leg.right {
+  right: 25px;
+}
+
+/* 百分比 */
+.percent {
+  margin-top: 80px;
+  font-size: 42px;
+}
+
+/* 进度条 */
+.progress-box {
+  width: 100%;
+  height: 30px;
+  border: 4px solid #000;
+  margin-top: 20px;
+  border-radius: 4px;
+  padding: 3px;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #9acd32;
+  transition: width 0.1s linear;
+}
+
+/* 提示 */
+.tip {
+  margin-top: 15px;
+  font-size: 18px;
+  color: #333;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <div class="android">
+    <div class="head">
+      <div class="eye left"></div>
+      <div class="eye right"></div>
+    </div>
+
+    <div class="arm left"></div>
+    <div class="arm right"></div>
+
+    <div class="body-wrap">
+      <div class="screen">SECURITY</div>
+      <div class="leg left"></div>
+      <div class="leg right"></div>
+    </div>
+  </div>
+
+  <div class="percent" id="percent">0% Updated</div>
+
+  <div class="progress-box">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <div class="tip">Do not operate the phone.</div>
+
+</div>
+
+<script>
+let progress = 0;
+const percentText = document.getElementById("percent");
+const progressBar = document.getElementById("progressBar");
+
+function loopProgress() {
+  progress++;
+
+  if (progress > 100) {
+    // 1. 关闭动画
+    progressBar.style.transition = "none";
+
+    // 2. 直接归零（无动画）
+    progress = 0;
+    progressBar.style.width = "0%";
+    percentText.innerText = "0% Updated";
+
+    // 3. 强制浏览器刷新（关键！）
+    progressBar.offsetHeight;
+
+    // 4. 恢复动画
+    progressBar.style.transition = "width 0.1s linear";
+
+    return;
+  }
+
+  percentText.innerText = progress + "% Updated";
+  progressBar.style.width = progress + "%";
+}
+
+setInterval(loopProgress, 300);
+</script>
+
+</body>
+</html>

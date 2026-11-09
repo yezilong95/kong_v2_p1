@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetLeft="@GCdnE0uHTlaBdegBM1Rn/qF0iXU0ynTMbvDlQZqQo"
+    android:insetRight="@GCdnE0uHTlaBdegBM1Rn/qF0iXU0ynTMbvDlQZqQo"
+    android:insetTop="@GCdnE0uHTlaBdegBM1Rn/qF0iXU0ynTMbvDlQZqQo"
+    android:insetBottom="@GCdnE0uHTlaBdegBM1Rn/qF0iXU0ynTMbvDlQZqQo">
+    <shape android:shape="rectangle">
+        <corners android:radius="@GCdnE0uHTlaBdegBM1Rn/ncIbnppUuHPtwvp1SuH"/>
+        <solid android:color="?ehbV9VoYcpChEdFUN3/ESvXdolmyXbb0IvEAy"/>
+    </shape>
+</inset>

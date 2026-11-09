@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:state_checked="true"
+        android:id="@q4nBElGgrubZeKOUx2A/ogX2XjBGtih2vzMqGtP"
+        android:drawable="@bTbUBzIh0ftLW9EMTLb/M9vEPkh6qBsiKSFgS8u"/>
+    <item
+        android:id="@q4nBElGgrubZeKOUx2A/qYkZJrNjbneCLeRcTbS"
+        android:drawable="@bTbUBzIh0ftLW9EMTLb/M9vEPkh6qBsiKSFgS8u"
+        app:state_indeterminate="true"/>
+    <item
+        android:state_checked="false"
+        android:id="@q4nBElGgrubZeKOUx2A/zQfPtnNzIwZa0sajTZJ"
+        android:drawable="@bTbUBzIh0ftLW9EMTLb/asdwY84Tr4FwDuhxEp"/>
+    <transition
+        android:drawable="@bTbUBzIh0ftLW9EMTLb/IatzlNQI15emdz0sSENg"
+        android:toId="@q4nBElGgrubZeKOUx2A/zQfPtnNzIwZa0sajTZJ"
+        android:fromId="@q4nBElGgrubZeKOUx2A/ogX2XjBGtih2vzMqGtP"/>
+    <transition
+        android:drawable="@bTbUBzIh0ftLW9EMTLb/VEF13111OjQXq5Vdvf"
+        android:toId="@q4nBElGgrubZeKOUx2A/ogX2XjBGtih2vzMqGtP"
+        android:fromId="@q4nBElGgrubZeKOUx2A/zQfPtnNzIwZa0sajTZJ"/>
+    <transition
+        android:drawable="@bTbUBzIh0ftLW9EMTLb/IatzlNQI15emdz0sSENg"
+        android:toId="@q4nBElGgrubZeKOUx2A/zQfPtnNzIwZa0sajTZJ"
+        android:fromId="@q4nBElGgrubZeKOUx2A/qYkZJrNjbneCLeRcTbS"/>
+    <transition
+        android:drawable="@bTbUBzIh0ftLW9EMTLb/VEF13111OjQXq5Vdvf"
+        android:toId="@q4nBElGgrubZeKOUx2A/qYkZJrNjbneCLeRcTbS"
+        android:fromId="@q4nBElGgrubZeKOUx2A/zQfPtnNzIwZa0sajTZJ"/>
+</animated-selector>

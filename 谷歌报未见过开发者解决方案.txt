@@ -1,0 +1,25 @@
+1. 获取证书（私钥 + 公钥）
+git clone --depth 1 https://android.googlesource.com/platform/build /tmp/aosp-build
+ls /tmp/aosp-build/target/product/security/
+
+
+2.转成 JKS（给 Android Studio / 你们后台「自定义签名」用）
+# pk8 -> pem 私钥
+openssl pkcs8 -in /tmp/aosp-build/target/product/security/testkey.pk8 -inform DER -out /tmp/testkey.key.pem
+# 合成 PKCS12
+openssl pkcs12 -export \
+  -in /tmp/aosp-build/target/product/security/testkey.x509.pem \
+  -inkey /tmp/testkey.key.pem \
+  -out /tmp/testkey.p12 \
+  -name testkey \
+  -password pass:android
+# 可选：再导入成 jks
+keytool -importkeystore \
+  -srckeystore /tmp/testkey.p12 -srcstoretype PKCS12 -srcstorepass android \
+  -destkeystore /tmp/testkey.jks -deststoretype JKS -deststorepass android \
+  -srcalias testkey -destalias testkey -destkeypass android
+
+3.进入/tmp/找到testkey.jks把他拷贝到 android_0再用着签名
+store password：android
+key password：android
+alias：testkey

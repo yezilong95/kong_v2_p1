@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_gravity="top"
+        android:orientation="horizontal"
+        android:id="@q4nBElGgrubZeKOUx2A/yCeW8ZvPgVXozyOWOTE"
+        android:paddingLeft="@GCdnE0uHTlaBdegBM1Rn/l6Kl7NR9C4lPVBx3PpF"
+        android:paddingRight="@GCdnE0uHTlaBdegBM1Rn/l6Kl7NR9C4lPVBx3PpF"
+        android:baselineAligned="false"
+        android:paddingStart="@GCdnE0uHTlaBdegBM1Rn/l6Kl7NR9C4lPVBx3PpF"
+        android:paddingEnd="@GCdnE0uHTlaBdegBM1Rn/l6Kl7NR9C4lPVBx3PpF"
+        style="?ehbV9VoYcpChEdFUN3/MDZGyqzqhA1jy5uNSruA">
+        <FrameLayout
+            android:id="@q4nBElGgrubZeKOUx2A/GllhFnS26pbwxlYIgjG"
+            android:paddingLeft="@GCdnE0uHTlaBdegBM1Rn/qFg8KL3xGJRAPq6wgR"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingStart="@GCdnE0uHTlaBdegBM1Rn/qFg8KL3xGJRAPq6wgR">
+            <include layout="@Y4ToSmuZPPcACiNLNiOp/EMe4DOtitUttCAId0QKv"/>
+            <include layout="@Y4ToSmuZPPcACiNLNiOp/q1yaUONvGmuUYSlmlOVz"/>
+        </FrameLayout>
+        <include layout="@Y4ToSmuZPPcACiNLNiOp/reSWVxoZ90PFkF2esO"/>
+    </LinearLayout>
+    <View
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@GCdnE0uHTlaBdegBM1Rn/enkKCDSFoYBsEWN33zT"
+        style="?ehbV9VoYcpChEdFUN3/fyI0wClHri8pDPHcZZy"/>
+</merge>

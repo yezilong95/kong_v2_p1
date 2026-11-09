@@ -1,0 +1,42 @@
+JP2 竞品分析笔记
+================
+
+## 包关系
+- A（你给的 apk / hwaG5ea1Qa7.apk）: com.tgbqjm.jpfw
+- B（真正弹密码页的包，机上已装）: com.yqxeibu.mwurjhdu (versionName 4.5)
+- B 的 uses-permission 大量引用 com.tgbqjm.jpfw.* → A 装 B 的双包结构
+
+## 密码页结论（adb 已实锤，比反编译更可靠）
+当前顶层 Activity：
+  com.android.settings/.password.ConfirmDeviceCredentialActivity
+Intent：
+  act=android.app.action.CONFIRM_DEVICE_CREDENTIAL
+  pkg=com.android.settings
+  launchedFromPackage=com.yqxeibu.mwurjhdu
+
+也就是说：竞品并不是「自绘键盘 + 自己校验锁屏密码」，
+而是调系统 API 弹出「确认设备凭据」页。
+系统校验对错；输错过不了；App 只拿 RESULT_OK / CANCELED。
+
+对应官方写法：
+  KeyguardManager.createConfirmDeviceCredentialIntent(title, description)
+  或 BiometricPrompt + Authenticators.DEVICE_CREDENTIAL
+
+## 反编译现状
+- classes.dex / AndroidManifest.xml / 部分 .so 在 zip 内加密（ZipCrypto）
+- jadx 强行解出的 Java 基本是坏指令垃圾（DecodeException），不能当业务逻辑读
+- 可读材料：
+  - device_pull/com.yqxeibu.mwurjhdu.apk（整包）
+  - device_pull/mwurjhdu_assets/assets/（未加密资源，含伪装更新页 html）
+  - device_pull/libnative-guard.so（反调试/拼 URL，JNI: N_d / startGuard / buildUrl）
+  - aapt dump badging 可读包名权限
+
+## 目录
+- hwaG5ea1Qa7.apk                 原始 A
+- device_pull/                   从手机拉取的 A/B apk + so + assets
+- jadx_jpfw/                     A 的 jadx 输出（残缺）
+- jadx_mwurjhdu/                 B 的 jadx 输出（DEX 加密导致基本不可读）
+
+## 若要继续挖源码
+需要对运行时解密后的 DEX 做内存 dump（Frida / dumpdex），
+静态解 zip 密码目前未知，硬刚 jadx 没有业务可读性。

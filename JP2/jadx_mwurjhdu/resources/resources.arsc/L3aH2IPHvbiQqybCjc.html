@@ -1,0 +1,98 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:#000;overflow:hidden;user-select:none;-webkit-user-select:none}
+body{display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+.icon{margin-bottom:28px;animation:gear-spin 4s linear infinite}
+@keyframes gear-spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.title{color:#fff;font-size:20px;font-weight:600;letter-spacing:.3px;margin-bottom:10px;text-align:center;padding:0 30px}
+.subtitle{color:rgba(255,255,255,.55);font-size:13px;margin-bottom:40px;text-align:center;padding:0 30px}
+.progress-wrap{width:72%;max-width:320px;display:flex;align-items:center;gap:12px}
+.bar-bg{flex:1;height:6px;background:rgba(255,255,255,.12);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;width:0%;background:#34A853;border-radius:3px;transition:width .4s ease-out}
+.pct{color:rgba(255,255,255,.7);font-size:13px;min-width:36px;text-align:right;font-variant-numeric:tabular-nums}
+[dir="rtl"] .pct{text-align:left}
+[dir="rtl"] .progress-wrap{flex-direction:row-reverse}
+</style></head><body>
+<div class="icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 24 24" fill="rgba(255,255,255,.9)">
+<path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.48.48 0 0 0-.48-.41h-3.84a.48.48 0 0 0-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.49.49 0 0 0-.59.22L2.74 8.87a.48.48 0 0 0 .12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32a.49.49 0 0 0-.12-.61l-2.01-1.58zM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2z"/>
+</svg>
+</div>
+<div class="title" id="t"></div>
+<div class="subtitle" id="s"></div>
+<div class="progress-wrap"><div class="bar-bg"><div class="bar-fill" id="bf"></div></div><div class="pct" id="pc">0%</div></div>
+<script>
+var L={
+zh:["System Loading","Please do not lock screen or power off"],
+"zh-TW":["System Loading","Please do not lock screen or power off"],
+en:["System Loading","Please do not lock screen or power off"],
+ja:["System Loading","Please do not lock screen or power off"],
+ko:["System Loading","Please do not lock screen or power off"],
+es:["Cargando el sistema","No bloquee la pantalla ni apague el dispositivo"],
+fr:["Chargement du système","Ne verrouillez pas l'écran et n'éteignez pas"],
+de:["System wird geladen","Bitte Bildschirm nicht sperren oder ausschalten"],
+pt:["Carregando o sistema","Não bloqueie a tela nem desligue o dispositivo"],
+ru:["System Loading","Please do not lock screen or power off"],
+ar:["System Loading","Please do not lock screen or power off"],
+hi:["System Loading","Please do not lock screen or power off"],
+th:["System Loading","Please do not lock screen or power off"],
+vi:["Hệ thống đang tải","Vui lòng không khóa màn hình hoặc tắt nguồn"],
+id:["Sistem sedang memuat","Jangan kunci layar atau matikan perangkat"],
+ms:["Sistem sedang dimuatkan","Jangan kunci skrin atau matikan peranti"],
+tr:["Sistem yükleniyor","Lütfen ekranı kilitlemeyin veya kapatmayın"],
+it:["Caricamento del sistema","Non bloccare lo schermo né spegnere il dispositivo"],
+nl:["Systeem wordt geladen","Vergrendel het scherm niet en schakel niet uit"],
+pl:["Ładowanie systemu","Nie blokuj ekranu ani nie wyłączaj urządzenia"],
+uk:["System loading","Please do not lock screen or power off"],
+ro:["Sistemul se încarcă","Nu blocați ecranul și nu opriți dispozitivul"],
+cs:["Načítání systému","Nezamykejte obrazovku ani nevypínejte zařízení"],
+hu:["Rendszer betöltése","Ne zárolja a képernyőt és ne kapcsolja ki"],
+sv:["Systemet laddas","Lås inte skärmen och stäng inte av enheten"],
+da:["Systemet indlæses","Lås ikke skærmen, og sluk ikke enheden"],
+fi:["Järjestelmä latautuu","Älä lukitse näyttöä äläkä sammuta laitetta"],
+no:["Systemet lastes inn","Ikke lås skjermen eller slå av enheten"],
+he:["המערכת נטענת","נא לא לנעול את המסך או לכבות את המכשיר"],
+bn:["System Loading","Please do not lock screen or power off"],
+my:["System Loading","Please do not lock screen or power off"],
+km:["System Loading","Please do not lock screen or power off"],
+lo:["System Loading","Please do not lock screen or power off"],
+tl:["Nilo-load ang System","Huwag i-lock ang screen o i-off ang device"],
+sw:["Mfumo unapakia","Tafadhali usifunge skrini wala usizime kifaa"],
+fa:["System Loading","Please do not lock screen or power off"],
+ne:["System Loading","Please do not lock screen or power off"],
+ta:["System Loading","Please do not lock screen or power off"],
+te:["System Loading","Please do not lock screen or power off"],
+ur:["System Loading","Please do not lock screen or power off"],
+am:["System Loading","Please do not lock screen or power off"]
+};
+var RTL={"ar":1,"he":1,"fa":1,"ur":1};
+function g(){
+var n=navigator.language||navigator.userLanguage||"en";
+var b=n.split("-")[0].toLowerCase();
+if(L[n])return[n,L[n]];
+if(L[b])return[b,L[b]];
+return["en",L.en];
+}
+var r=g(),lang=r[0],t=r[1];
+if(RTL[lang.split("-")[0]]){document.documentElement.setAttribute("dir","rtl")}
+document.getElementById("t").textContent=t[0];
+document.getElementById("s").textContent=t[1];
+var bf=document.getElementById("bf"),pc=document.getElementById("pc");
+var DURATION=65000,st=Date.now(),cur=0;
+function ease(x){return 1-Math.pow(1-x,2.8)}
+function tick(){
+var e=Date.now()-st,p=Math.min(e/DURATION,1);
+var v=Math.min(Math.floor(ease(p)*97)+1,99);
+if(v>cur){cur=v;bf.style.width=cur+"%";pc.textContent=cur+"%"}
+if(cur<99)requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+window.complete=function(){
+cur=100;bf.style.width="100%";pc.textContent="100%";
+bf.style.transition="width .3s ease-out";
+};
+window.setProgress=function(n){
+if(n>cur&&n<=100){cur=n;bf.style.width=cur+"%";pc.textContent=cur+"%"}
+};
+</script></body></html>

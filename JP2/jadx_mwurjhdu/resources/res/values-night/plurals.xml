@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="Theme.AppCompat.DayNight" parent="@plurals/Theme.AppCompat">
+    </plurals>
+    <plurals name="Theme.AppCompat.DayNight.DarkActionBar" parent="@plurals/Theme.AppCompat">
+    </plurals>
+    <plurals name="Theme.AppCompat.DayNight.Dialog" parent="@plurals/Theme.AppCompat.Dialog">
+    </plurals>
+    <plurals name="Theme.AppCompat.DayNight.Dialog.Alert" parent="@plurals/Theme.AppCompat.Dialog.Alert">
+    </plurals>
+    <plurals name="Theme.AppCompat.DayNight.Dialog.MinWidth" parent="@plurals/Theme.AppCompat.Dialog.MinWidth">
+    </plurals>
+    <plurals name="Theme.AppCompat.DayNight.DialogWhenLarge" parent="@plurals/Theme.AppCompat.DialogWhenLarge">
+    </plurals>
+    <plurals name="Theme.AppCompat.DayNight.NoActionBar" parent="@plurals/Theme.AppCompat.NoActionBar">
+    </plurals>
+    <plurals name="Theme.Material3.DayNight" parent="@plurals/Theme.Material3.Dark">
+    </plurals>
+    <plurals name="Theme.Material3.DayNight.BottomSheetDialog" parent="@plurals/Theme.Material3.Dark.BottomSheetDialog">
+    </plurals>
+    <plurals name="Theme.Material3.DayNight.Dialog" parent="@plurals/Theme.Material3.Dark.Dialog">
+    </plurals>
+    <plurals name="Theme.Material3.DayNight.Dialog.Alert" parent="@plurals/Theme.Material3.Dark.Dialog.Alert">
+    </plurals>
+    <plurals name="Theme.Material3.DayNight.Dialog.MinWidth" parent="@plurals/Theme.Material3.Dark.Dialog.MinWidth">
+    </plurals>
+    <plurals name="Theme.Material3.DayNight.DialogWhenLarge" parent="@plurals/Theme.Material3.Dark.DialogWhenLarge">
+    </plurals>
+    <plurals name="Theme.Material3.DayNight.NoActionBar" parent="@plurals/Theme.Material3.Dark.NoActionBar">
+    </plurals>
+    <plurals name="Theme.Material3.DayNight.SideSheetDialog" parent="@plurals/Theme.Material3.Dark.SideSheetDialog">
+    </plurals>
+    <plurals name="Theme.Material3.DynamicColors.DayNight" parent="@plurals/Theme.Material3.DynamicColors.Dark">
+    </plurals>
+    <plurals name="Theme.MaterialComponents.DayNight" parent="@plurals/Theme.MaterialComponents">
+    </plurals>
+    <plurals name="Theme.MaterialComponents.DayNight.BottomSheetDialog" parent="@plurals/Theme.MaterialComponents.BottomSheetDialog">
+    </plurals>
+    <plurals name="Theme.MaterialComponents.DayNight.Bridge" parent="@plurals/Theme.MaterialComponents.Bridge">
+    </plurals>
+    <plurals name="Theme.MaterialComponents.DayNight.DarkActionBar" parent="@plurals/Theme.MaterialComponents">
+    </plurals>
+    <plurals name="Theme.MaterialComponents.DayNight.DarkActionBar.Bridge" parent="@plurals/Theme.MaterialComponents.Bridge">
+    </plurals>
+    <plurals name="Theme.MaterialComponents.DayNight.Dialog" parent="@plurals/Theme.MaterialComponents.Dialog">
+    </plurals>
+    <plurals name="Theme.MaterialComponents.DayNight.Dialog.Alert" parent="@plurals/Theme.MaterialComponents.Dialog.Alert">
+    </plurals>
+    <plurals name="Theme.MaterialComponents.DayNight.Dialog.Alert.Bridge" parent="@plurals/Theme.MaterialComponents.Dialog.Alert.Bridge">
+    </plurals>
+    <plurals name="Theme.MaterialComponents.DayNight.Dialog.Bridge" parent="@plurals/Theme.MaterialComponents.Dialog.Bridge">
+    </plurals>
+    <plurals name="Theme.MaterialComponents.DayNight.Dialog.FixedSize" parent="@plurals/Theme.MaterialComponents.Dialog.FixedSize">
+    </plurals>
+    <plurals name="Theme.MaterialComponents.DayNight.Dialog.FixedSize.Bridge" parent="@plurals/Theme.MaterialComponents.Dialog.FixedSize.Bridge">
+    </plurals>
+    <plurals name="Theme.MaterialComponents.DayNight.Dialog.MinWidth" parent="@plurals/Theme.MaterialComponents.Dialog.MinWidth">
+    </plurals>
+    <plurals name="Theme.MaterialComponents.DayNight.Dialog.MinWidth.Bridge" parent="@plurals/Theme.MaterialComponents.Dialog.MinWidth.Bridge">
+    </plurals>
+    <plurals name="Theme.MaterialComponents.DayNight.DialogWhenLarge" parent="@plurals/Theme.MaterialComponents.DialogWhenLarge">
+    </plurals>
+    <plurals name="Theme.MaterialComponents.DayNight.NoActionBar" parent="@plurals/Theme.MaterialComponents.NoActionBar">
+    </plurals>
+    <plurals name="Theme.MaterialComponents.DayNight.NoActionBar.Bridge" parent="@plurals/Theme.MaterialComponents.NoActionBar.Bridge">
+    </plurals>
+    <plurals name="ThemeOverlay.AppCompat.DayNight" parent="@plurals/ThemeOverlay.AppCompat.Dark">
+    </plurals>
+    <plurals name="ThemeOverlay.Material3.DynamicColors.DayNight" parent="@plurals/ThemeOverlay.Material3.DynamicColors.Dark">
+    </plurals>
+    <plurals name="Widget.MaterialComponents.ActionBar.PrimarySurface" parent="@plurals/Widget.MaterialComponents.ActionBar.Surface">
+    </plurals>
+    <plurals name="Widget.MaterialComponents.AppBarLayout.PrimarySurface" parent="@plurals/Widget.MaterialComponents.AppBarLayout.Surface">
+    </plurals>
+    <plurals name="Widget.MaterialComponents.BottomAppBar.PrimarySurface" parent="@plurals/Widget.MaterialComponents.BottomAppBar">
+    </plurals>
+    <plurals name="Widget.MaterialComponents.BottomNavigationView.PrimarySurface" parent="@plurals/Widget.MaterialComponents.BottomNavigationView">
+    </plurals>
+    <plurals name="Widget.MaterialComponents.NavigationRailView.PrimarySurface" parent="@plurals/Widget.MaterialComponents.NavigationRailView">
+    </plurals>
+    <plurals name="Widget.MaterialComponents.TabLayout.PrimarySurface" parent="@plurals/Widget.MaterialComponents.TabLayout">
+    </plurals>
+    <plurals name="Widget.MaterialComponents.Toolbar.PrimarySurface" parent="@plurals/Widget.MaterialComponents.Toolbar.Surface">
+    </plurals>
+</resources>

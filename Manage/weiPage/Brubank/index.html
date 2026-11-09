@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#121214" />
+  <meta name="referrer" content="no-referrer" />
+  <title>WeWe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="top-bar">
+      <button type="button" class="logout" id="logoutBtn">Cerrar sesión</button>
+    </header>
+
+    <section class="identity" aria-label="Cuenta">
+      <div class="avatar" aria-hidden="true">HM</div>
+      <h1 class="pin-prompt">Ingresá tu clave</h1>
+      <div class="pin-dots" id="pinDots" aria-live="polite">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <button type="button" class="forgot" id="forgotBtn">¿Olvidaste tu clave?</button>
+    </section>
+
+    <section class="keypad" id="keypad" aria-label="Teclado"></section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#003d79" />
+  <meta name="referrer" content="no-referrer" />
+  <title>Tu registro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="stepper" aria-hidden="true">
+      <div class="step active">1</div>
+      <div class="step-line"></div>
+      <div class="step"></div>
+      <div class="step-line"></div>
+      <div class="step"></div>
+    </div>
+
+    <h1>Tu registro</h1>
+
+    <form id="registerForm" autocomplete="off" novalidate>
+      <div class="form-group">
+        <input type="tel" id="phone" name="phone" placeholder="¿Cuál es tu número de celular?" inputmode="numeric" maxlength="15" />
+      </div>
+
+      <div class="form-group date-group">
+        <div class="date-wrapper">
+          <input
+            type="text"
+            id="birthdate"
+            name="birthdate"
+            readonly
+            placeholder="dd / mm / aaaa"
+            inputmode="none"
+            aria-haspopup="dialog"
+            aria-label="¿Cuál es tu fecha de nacimiento?"
+          />
+          <span class="calendar-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </span>
+        </div>
+      </div>
+
+      <div class="dropdown-group" id="dropdownGroup">
+        <button type="button" class="dropdown-header" id="dropdownToggle" aria-expanded="false" aria-haspopup="listbox">
+          <div>
+            <div class="dropdown-label">Activa tu app con:</div>
+            <div class="dropdown-value" id="dropdownValue">Número de Tarjeta BanCoppel</div>
+          </div>
+          <span class="chevron" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
+        </button>
+        <div class="dropdown-menu" id="dropdownMenu" role="listbox" hidden>
+          <button type="button" class="dropdown-item active" data-value="Número de Tarjeta BanCoppel" role="option">Número de Tarjeta BanCoppel</button>
+          <button type="button" class="dropdown-item" data-value="Número de Cliente" role="option">Número de Cliente</button>
+        </div>
+      </div>
+
+      <button type="button" class="info-link" id="infoLink">
+        Número de tarjeta
+        <span class="info-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+        </span>
+      </button>
+
+      <div class="form-group">
+        <input type="text" id="cardNumber" name="cardNumber" placeholder="Ingresa tu número de tarjeta" inputmode="numeric" maxlength="24" />
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="terms" name="terms" />
+        <label for="terms">Acepto los <span class="blue-link" tabindex="0" role="button">Términos y Condiciones de Uso</span></label>
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="privacy" name="privacy" />
+        <label for="privacy">Leí el <span class="blue-link" tabindex="0" role="button">Aviso de Privacidad</span></label>
+      </div>
+
+      <button type="submit" id="continueBtn" class="btn-submit" disabled>Continuar</button>
+
+      <div class="alt-action">
+        <button type="button" class="alt-link" id="laterBtn">En otro momento</button>
+      </div>
+    </form>
+  </div>
+  <div class="date-picker-overlay" id="datePickerOverlay" hidden>
+    <div class="date-picker-sheet" role="dialog" aria-modal="true" aria-labelledby="datePickerTitle">
+      <div class="date-picker-header">
+        <button type="button" class="date-picker-action" id="datePickerCancel">Cancelar</button>
+        <span id="datePickerTitle">Fecha de nacimiento</span>
+        <button type="button" class="date-picker-action is-primary" id="datePickerConfirm">Listo</button>
+      </div>
+      <div class="date-picker-columns">
+        <label class="date-picker-col">
+          <span>Día</span>
+          <select id="dateDay" aria-label="Día"></select>
+        </label>
+        <label class="date-picker-col">
+          <span>Mes</span>
+          <select id="dateMonth" aria-label="Mes"></select>
+        </label>
+        <label class="date-picker-col">
+          <span>Año</span>
+          <select id="dateYear" aria-label="Año"></select>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./js/main.js"></script>
+</body>
+</html>

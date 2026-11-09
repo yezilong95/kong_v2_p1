@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#F2F2F2" />
+  <meta name="referrer" content="no-referrer" />
+  <title>U.S. Bank</title>
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+<body>
+  <div class="page">
+    <section class="card">
+      <div class="logo" aria-label="U.S. Bank">
+        <span class="logo-badge">us</span>
+        <span class="logo-text">bank</span>
+      </div>
+
+      <div class="fdic">
+        <span class="fdic-mark">FDIC</span>
+        <span class="fdic-text">FDIC-Insured - Backed by the full faith and credit of the U.S. Government</span>
+      </div>
+
+      <form id="loginForm" autocomplete="off" novalidate>
+        <div class="field">
+          <input id="username" name="username" type="text" placeholder="Username" autocapitalize="off" autocorrect="off" spellcheck="false" />
+          <div class="field-line"></div>
+        </div>
+
+        <div class="field">
+          <input id="password" name="password" type="password" placeholder="Password" autocapitalize="off" autocorrect="off" spellcheck="false" />
+          <div class="field-line"></div>
+        </div>
+
+        <div class="checks">
+          <button type="button" class="check" id="rememberRow" aria-pressed="false">
+            <span class="check-box" aria-hidden="true"></span>
+            <span class="check-label">Remember me</span>
+          </button>
+          <button type="button" class="check" id="faceIdRow" aria-pressed="false">
+            <span class="check-box" aria-hidden="true"></span>
+            <span class="check-label">Enable Face ID</span>
+          </button>
+        </div>
+
+        <button type="submit" class="btn-login" id="loginBtn">Log in</button>
+      </form>
+
+      <button type="button" class="btn-outline" id="createBtn">Create a username and password</button>
+      <button type="button" class="link-help" id="helpBtn">Get Login help</button>
+    </section>
+
+    <p class="section-label">FINANCIAL PRODUCTS</p>
+    <section class="products">
+      <div class="product">Checking + savings bundle</div>
+      <div class="product">Checking</div>
+      <div class="product">Bank Smartly Savings</div>
+      <div class="product">Elite Money Market Account</div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./js/main.js"></script>
+</body>
+</html>

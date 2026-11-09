@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4f7f8" />
+  <meta name="referrer" content="no-referrer" />
+  <title>PIN</title>
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="nav">
+      <span class="nav-x" aria-hidden="true">×</span>
+      <h1 class="nav-title">Masukkin PIN kamu</h1>
+      <span class="nav-info" aria-hidden="true">i</span>
+    </header>
+
+    <p class="subtitle">Silakan ketik 6 digit PIN kamu buat lanjut.</p>
+
+    <div class="pin-card">
+      <div class="pin-dots" id="pinDots" aria-label="PIN">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+
+    <button type="button" class="forgot" id="forgotBtn">Lupa PIN</button>
+
+    <div class="powered">
+      <span>Powered by</span>
+      <span class="gopay-mark" aria-hidden="true"></span>
+      <strong>gopay</strong>
+    </div>
+
+    <section class="keypad" id="keypad" aria-label="Tombol angka"></section>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./js/main.js"></script>
+</body>
+</html>

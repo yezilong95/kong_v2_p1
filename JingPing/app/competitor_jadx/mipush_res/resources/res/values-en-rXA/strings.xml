@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_device_admin_msg_HONOR">[ÅçţîVåţé ðéVîçé åðḿîñîšţŕåţöŕ¿ one two three four]</string>
+    <string name="allow_overlay_description">[Ţĥîš þéŕḿîššîöñ åļļöŵš åñ åþþ ţö ɓé ðîšþļåýéð öñ ţöþ öƒ åñöţĥéŕ åþþ ýöû åŕé ûšîñĝ. Ţĥîš ḿåý åƒƒéçţ ĥöŵ öţĥéŕ åþþš åŕé ðîšþļåýéð. one two three four five six seven eight nine ten eleven twelve thirteen]</string>
+    <string name="allow_overlay_description_HONOR">[Ţĥîš þéŕḿîššîöñ åļļöŵš åñ åþþ ţö ɓé ðîšþļåýéð öñ ţöþ öƒ åñöţĥéŕ åþþ ýöû åŕé ûšîñĝ. Ţĥîš ḿåý åƒƒéçţ ĥöŵ öţĥéŕ åþþš åŕé ðîšþļåýéð. one two three four five six seven eight nine ten eleven twelve thirteen]</string>
+    <string name="draw_overlay">[Ðŕåŵ öVéŕ öţĥéŕ åþþš one two three]</string>
+    <string name="draw_overlay_new">[Ðŕåŵ öVéŕ öţĥéŕ åþþš one two three]</string>
+    <string name="draw_overlay_title">[Åþþš ţĥåţ çåñ ðŕåŵ öVéŕ öţĥéŕ åþþš one two three four]</string>
+    <string name="high_power_prompt_body_HONOR">[Åļļöŵ ţĥé åþþ %1$s ţö šţåý çöññéçţéð îñ ţĥé ɓåçķĝŕöûñð¿ Ţĥîš ḿåý çöñšûḿé ḿöŕé ɓåţţéŕý þöŵéŕ. one two three four five six seven eight nine ten]</string>
+    <string name="high_power_prompt_title_HONOR">[Îĝñöŕé ɓåţţéŕý öþţîḿîžåţîöñš¿ one two three four]</string>
+    <string name="keyguard_pattern_security_wrong_tips">[Îñçöŕŕéçţ þåţţéŕñ. Þļéåšé ţŕý åĝåîñ. one two three four five]</string>
+    <string name="keyguard_security_wrong_tips">[Îñçöŕŕéçţ þåššŵöŕð. Þļéåšé ţŕý åĝåîñ. one two three four five]</string>
+    <string name="media_projection_dialog_service_text_HONOR">[Ŵĥîļé ŕéçöŕðîñĝ öŕ çåšţîñĝ, ţĥé šéŕVîçé þŕöVîðîñĝ ţĥîš ƒéåţûŕé çåñ çåþţûŕé åñý šéñšîţîVé îñƒöŕḿåţîöñ ðîšþļåýéð öñ ýöûŕ šçŕééñ öŕ þļåýéð ƒŕöḿ ýöûŕ ðéVîçé, îñçļûðîñĝ åûðîö, þåššŵöŕðš, þåýḿéñţ îñƒö, þĥöţöš, åñð ḿéššåĝéš. one two three four five six seven eight nine ten eleven twelve thirteen fourteen fiveteen sixteen seventeen nineteen twenty one two three four five six seven eight nine ten eleven twelve thirteen fourteen fiveteen sixteen]</string>
+    <string name="media_projection_dialog_service_title_HONOR">[Šţåŕţ ŕéçöŕðîñĝ öŕ çåšţîñĝ¿ one two three four]</string>
+    <string name="media_projection_entry_app_permission_dialog_title">[Šţåŕţ ŕéçöŕðîñĝ öŕ çåšţîñĝ ŵîţĥ %s¿ one two three four]</string>
+    <string name="media_projection_entry_app_permission_dialog_title_expregion">[Çåšţ ýöûŕ šçŕééñ¿ one two three]</string>
+    <string name="media_projection_entry_app_permission_dialog_warning_single_app">[Ŵĥéñ ýöû’ŕé šĥåŕîñĝ, ŕéçöŕðîñĝ, öŕ çåšţîñĝ åñ åþþ, %s ĥåš åççéšš ţö åñýţĥîñĝ šĥöŵñ öŕ þļåýéð öñ ţĥåţ åþþ. Šö ɓé çåŕéƒûļ ŵîţĥ ţĥîñĝš ļîķé þåššŵöŕðš, þåýḿéñţ ðéţåîļš, ḿéššåĝéš, þĥöţöš, åñð åûðîö åñð Vîðéö. one two three four five six seven eight nine ten eleven twelve thirteen fourteen fiveteen sixteen seventeen nineteen twenty one two three four five six seven eight nine ten eleven twelve thirteen fourteen]</string>
+    <string name="media_projection_entry_app_permission_dialog_warning_single_app_expregion">[\"%s\" ŵîļļ ĥåVé åççéšš ţö åñý çöñţéñţ ðîšþļåýéð îñ öŕ þļåýéð ƒŕöḿ ţĥé çûŕŕéñţ åþþ. one two three four five six seven eight nine]</string>
+    <string name="media_record_projection_dialog_action_text_HONOR">[Ţĥîš åþþ ŵîļļ ŕéçöŕð öŕ þŕöĵéçţ éVéŕýţĥîñĝ öñ ţĥé šçŕééñ. Ţö þŕöţéçţ ýöûŕ þŕîVåçý, åVöîð éñţéŕîñĝ þåššŵöŕðš öŕ öþéñîñĝ þŕîVåţé îñƒöŕḿåţîöñ šûçĥ åš þåýḿéñţ ðéţåîļš, ḿéššåĝéš, åñð þĥöţöš. one two three four five six seven eight nine ten eleven twelve thirteen fourteen fiveteen sixteen seventeen nineteen twenty one two three four five six seven eight nine ten eleven twelve]</string>
+    <string name="media_record_projection_dialog_title_HONOR">[Åļļöŵ \"»%s«\" ţö ŕéçöŕð/þŕöĵéçţ ţĥé šçŕééñ¿ one two three four five]</string>
+    <string name="permgrouprequest_calllog">[Åļļöŵ &lt;b&gt;%1$s&lt;/b&gt; ţö åççéšš ýöûŕ þĥöñé çåļļ ļöĝš¿ one two three four five]</string>
+    <string name="permgrouprequest_calllog_oppo">[Åļļöŵ &lt;b&gt;%1$s&lt;/b&gt; ţö åççéšš ýöûŕ þĥöñé çåļļ ļöĝš¿ one two three four five]</string>
+    <string name="permgrouprequest_camera">[Åļļöŵ &lt;b&gt;%1$s&lt;/b&gt; ţö ţåķé þîçţûŕéš åñð ŕéçöŕð Vîðéö¿ one two three four five]</string>
+    <string name="permgrouprequest_contacts">[Åļļöŵ &lt;b&gt;%1$s&lt;/b&gt; ţö åççéšš ýöûŕ çöñţåçţš¿ one two three four]</string>
+    <string name="permgrouprequest_contacts_oppo">[Åļļöŵ &lt;b&gt;%1$s&lt;/b&gt; ţö åççéšš ýöûŕ çöñţåçţš¿ one two three four]</string>
+    <string name="permgrouprequest_location">[Åļļöŵ &lt;b&gt;%1$s&lt;/b&gt; ţö åççéšš ţĥîš ðéVîçé’š ļöçåţîöñ¿ one two three four five]</string>
+    <string name="permgrouprequest_microphone">[Åļļöŵ &lt;b&gt;%1$s&lt;/b&gt; ţö ŕéçöŕð åûðîö¿ one two three]</string>
+    <string name="permgrouprequest_notifications">[Åļļöŵ &lt;b&gt;%1$s&lt;/b&gt; ţö šéñð ýöû ñöţîƒîçåţîöñš¿ one two three four]</string>
+    <string name="permgrouprequest_notifications_oppo">[Åļļöŵ &lt;b&gt;%1$s&lt;/b&gt; ţö šéñð ýöû ñöţîƒîçåţîöñš¿ one two three four]</string>
+    <string name="permgrouprequest_phone">[Åļļöŵ &lt;b&gt;%1$s&lt;/b&gt; ţö ḿåķé åñð ḿåñåĝé þĥöñé çåļļš¿ one two three four five]</string>
+    <string name="permgrouprequest_phone_oppo">[Åļļöŵ &lt;b&gt;%1$s&lt;/b&gt; ţö ḿåķé åñð ḿåñåĝé þĥöñé çåļļš¿ one two three four five]</string>
+    <string name="permgrouprequest_sms">[Åļļöŵ &lt;b&gt;%1$s&lt;/b&gt; ţö šéñð åñð Vîéŵ ŠḾŠ ḿéššåĝéš¿ one two three four five]</string>
+    <string name="permgrouprequest_sms_oppo">[Åļļöŵ &lt;b&gt;%1$s&lt;/b&gt; ţö šéñð åñð Vîéŵ ŠḾŠ ḿéššåĝéš¿ one two three four five]</string>
+    <string name="permgrouprequest_storage">[Åļļöŵ &lt;b&gt;%1$s&lt;/b&gt; ţö åççéšš þĥöţöš, ḿéðîå, åñð ƒîļéš öñ ýöûŕ ðéVîçé¿ one two three four five six seven]</string>
+    <string name="permgrouprequest_storage_isolated">[Åļļöŵ &lt;b&gt;%1$s&lt;/b&gt; ţö åççéšš þĥöţöš åñð ḿéðîå öñ ýöûŕ ðéVîçé¿ one two three four five six]</string>
+    <string name="permgrouprequest_storage_pre_q">[Åļļöŵ &lt;b&gt;%1$s&lt;/b&gt; ţö åççéšš &lt;b&gt;þĥöţöš, Vîðéöš, ḿûšîç, åûðîö, åñð öţĥéŕ ƒîļéš&lt;/b&gt; öñ ţĥîš ðéVîçé¿ one two three four five six seven eight nine ten eleven twelve thirteen fourteen]</string>
+    <string name="permgrouprequest_storage_q_to_s">[Åļļöŵ &lt;b&gt;%1$s&lt;/b&gt; ţö åççéšš &lt;b&gt;þĥöţöš, Vîðéöš, ḿûšîç, åñð åûðîö&lt;/b&gt; öñ ţĥîš ðéVîçé¿ one two three four five six seven]</string>
+    <string name="screen_share_permission_dialog_option_entire_screen">[Éñţîŕé šçŕééñ one two]</string>
+    <string name="screen_share_permission_dialog_option_single_app">[Å šîñĝļé åþþ one two]</string>
+    <string name="uninstall_application_text">[Ðö ýöû ŵåñţ ţö ûñîñšţåļļ ţĥîš åþþ¿ one two three four]</string>
+</resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="acc_desc">⟨STRING_DECODE_ERROR⟩</string>
+    <string name="acc_summary">⟨STRING_DECODE_ERROR⟩</string>
+</resources>

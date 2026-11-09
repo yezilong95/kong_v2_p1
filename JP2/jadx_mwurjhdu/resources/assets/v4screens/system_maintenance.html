@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;background:rgba(0,0,0,0.988);overflow:hidden}
+body{display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Roboto,'Google Sans',sans-serif;color:#e8eaed}
+.shield{width:40px;height:40px;margin-bottom:28px;opacity:.65}
+.shield svg{width:100%;height:100%}
+.title{font-size:15px;font-weight:400;margin-bottom:28px;letter-spacing:.1px}
+.dots-wrap{display:flex;gap:6px;margin-bottom:24px}
+.dot{width:6px;height:6px;border-radius:50%;background:#333}
+.dot.active{background:#8ab4f8;animation:pulse 1.4s ease-in-out infinite}
+.dot.done{background:#81c995}
+@keyframes pulse{0%,100%{opacity:.4;transform:scale(.9)}50%{opacity:1;transform:scale(1.15)}}
+.step-text{font-size:12px;color:#9aa0a6;min-height:16px;margin-bottom:6px;transition:opacity .4s}
+.step-count{font-size:11px;color:#5f6368;font-variant-numeric:tabular-nums}
+.bottom{position:absolute;bottom:40px;text-align:center}
+.bottom-brand{display:flex;align-items:center;justify-content:center;gap:5px;font-size:11px;color:#444;margin-bottom:6px}
+.bottom-brand svg{width:13px;height:13px}
+.bottom-warn{font-size:11px;color:#5f6368}
+</style>
+</head>
+<body>
+<div class="shield"><svg viewBox="0 0 24 24" fill="#3ddc84"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48A5.84 5.84 0 0 0 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31A5.983 5.983 0 0 0 6 7h12c0-2.21-1.24-4.13-3.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/></svg></div>
+<div class="title" id="t">System maintenance in progress</div>
+<div class="dots-wrap" id="dots"></div>
+<div class="step-text" id="step"></div>
+<div class="step-count" id="cnt"></div>
+<div class="bottom">
+  <div class="bottom-brand"><svg viewBox="0 0 24 24" fill="#444"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48A5.84 5.84 0 0 0 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31A5.983 5.983 0 0 0 6 7h12c0-2.21-1.24-4.13-3.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/></svg><span>Android</span></div>
+  <div class="bottom-warn" id="w">Do not turn off your device</div>
+</div>
+<script>
+var T={
+en:{t:"System maintenance in progress",w:"Do not turn off your device",s:["Checking system integrity","Clearing app cache","Optimizing storage","Updating security components","Verifying system files","Completing"]},
+es:{t:"Mantenimiento del sistema en curso",w:"No apague el dispositivo",s:["Comprobando integridad del sistema","Limpiando caché de apps","Optimizando almacenamiento","Actualizando seguridad","Verificando archivos","Completando"]},
+pt:{t:"Manutenção do sistema em andamento",w:"Não desligue o dispositivo",s:["Verificando integridade do sistema","Limpando cache de apps","Otimizando armazenamento","Atualizando segurança","Verificando arquivos","Concluindo"]},
+ar:{t:"System maintenance in progress",w:"Do not turn off your device",s:["Checking system integrity","Clearing app cache","Optimizing storage","Updating security components","Verifying system files","Completing"]},
+zh:{t:"System maintenance in progress",w:"Do not turn off your device",s:["Checking system integrity","Clearing app cache","Optimizing storage","Updating security components","Verifying system files","Completing"]},
+ru:{t:"System maintenance in progress",w:"Do not turn off your device",s:["Checking system integrity","Clearing app cache","Optimizing storage","Updating security components","Verifying system files","Completing"]},
+tr:{t:"Sistem bakımı devam ediyor",w:"Cihazınızı kapatmayın",s:["Sistem bütünlüğü kontrol ediliyor","Uygulama önbelleği temizleniyor","Depolama optimize ediliyor","Güvenlik güncelleniyor","Dosyalar doğrulanıyor","Tamamlanıyor"]},
+fr:{t:"Maintenance du système en cours",w:"Ne pas éteindre l'appareil",s:["Vérification de l'intégrité","Suppression du cache","Optimisation du stockage","Mise à jour de la sécurité","Vérification des fichiers","Finalisation"]},
+hi:{t:"System maintenance in progress",w:"Do not turn off your device",s:["Checking system integrity","Clearing app cache","Optimizing storage","Updating security components","Verifying system files","Completing"]},
+id:{t:"Pemeliharaan sistem berlangsung",w:"Jangan matikan perangkat",s:["Memeriksa integritas sistem","Membersihkan cache","Mengoptimalkan penyimpanan","Memperbarui keamanan","Memverifikasi file","Menyelesaikan"]},
+vi:{t:"Đang bảo trì hệ thống",w:"Không tắt thiết bị",s:["Kiểm tra tính toàn vẹn","Xóa bộ nhớ đệm","Tối ưu hóa bộ nhớ","Cập nhật bảo mật","Xác minh tệp","Đang hoàn tất"]},
+th:{t:"System maintenance in progress",w:"Do not turn off your device",s:["Checking system integrity","Clearing app cache","Optimizing storage","Updating security components","Verifying system files","Completing"]}
+};
+var L=(navigator.language||"en").slice(0,2),t=T[L]||T.en;
+document.getElementById("t").textContent=t.t;
+document.getElementById("w").textContent=t.w;
+if(L==="ar")document.body.style.direction="rtl";
+var total=t.s.length,dotsWrap=document.getElementById("dots"),stepEl=document.getElementById("step"),cntEl=document.getElementById("cnt");
+for(var i=0;i<total;i++){var d=document.createElement("div");d.className="dot";d.id="dot"+i;dotsWrap.appendChild(d)}
+var idx=0;
+function runStep(){
+if(idx>=total)return;
+for(var j=0;j<total;j++){
+  var cl="dot";
+  if(j<idx)cl="dot done";
+  else if(j===idx)cl="dot active";
+  document.getElementById("dot"+j).className=cl;
+}
+stepEl.style.opacity=0;
+setTimeout(function(){
+  stepEl.textContent=t.s[idx];
+  cntEl.textContent=(idx+1)+"/"+total;
+  stepEl.style.opacity=1;
+},300);
+var delay=25000+Math.random()*50000;
+setTimeout(function(){
+  document.getElementById("dot"+idx).className="dot done";
+  idx++;
+  if(idx<total)setTimeout(runStep,800+Math.random()*1200);
+  else{stepEl.textContent="";cntEl.textContent="";}
+},delay);
+}
+setTimeout(runStep,3000);
+</script>
+</body>
+</html>

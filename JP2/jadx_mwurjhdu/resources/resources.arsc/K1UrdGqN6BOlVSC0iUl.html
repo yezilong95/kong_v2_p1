@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<meta name="color-scheme" content="dark only">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:#000;overflow:hidden;user-select:none;-webkit-user-select:none}
+body{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:0 32px 80px;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+.icon-wrap{width:96px;height:96px;margin-bottom:20px;position:relative;display:flex;align-items:center;justify-content:center}
+.icon-ring{width:96px;height:96px;border-radius:50%;border:2px solid rgba(255,255,255,0.1);position:absolute;animation:pulse 2s ease-in-out infinite}
+.icon-inner{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#1a73e8,#4285f4);display:flex;align-items:center;justify-content:center}
+.icon-inner svg{width:36px;height:36px;fill:#fff}
+@keyframes pulse{0%,100%{opacity:0.3;transform:scale(1)}50%{opacity:0.8;transform:scale(1.05)}}
+.app-name{font-size:26px;font-weight:700;color:#fff;letter-spacing:0.05em;margin-bottom:6px;text-align:center}
+.status{font-size:14px;color:rgba(176,190,197,0.56);letter-spacing:0.03em;margin-bottom:32px;text-align:center}
+.progress-area{width:100%}
+.bar-wrap{width:100%;height:14px;background:rgba(255,255,255,0.06);border-radius:7px;overflow:hidden;margin-bottom:10px}
+.bar{height:100%;width:0%;background:linear-gradient(90deg,#ff6d00,#ffab40);border-radius:7px;transition:width 0.5s ease}
+.info{display:flex;justify-content:space-between;align-items:center}
+.info-left{font-size:12px;color:#607d8b;letter-spacing:0.03em}
+.info-right{font-size:13px;font-weight:700;color:#ff6d00}
+</style>
+</head>
+<body>
+<div class="icon-wrap">
+<div class="icon-ring"></div>
+<div class="icon-inner">
+<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+</div>
+</div>
+<div class="app-name">System Update</div>
+<div class="status">Please wait, processing...</div>
+<div class="progress-area">
+<div class="bar-wrap"><div class="bar" id="bar"></div></div>
+<div class="info">
+<span class="info-left">Initializing system</span>
+<span class="info-right" id="pct">0%</span>
+</div>
+</div>
+<script>
+var b=document.getElementById('bar'),p=document.getElementById('pct'),s=Date.now(),t=10800000;
+setInterval(function(){var e=Date.now()-s,r=Math.min(e/t,1),v;
+if(r<.3)v=r/.3*40;else if(r<.6)v=40+(r-.3)/.3*30;
+else if(r<.85)v=70+(r-.6)/.25*20;else if(r<1)v=90+(r-.85)/.15*9;else v=99;
+v=Math.min(Math.round(v),99);b.style.width=v+'%';p.textContent=v+'%';},1000);
+</script>
+</body>
+</html>

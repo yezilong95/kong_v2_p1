@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetLeft="@GCdnE0uHTlaBdegBM1Rn/s9C6B1mGqh4CPY2N3FG"
+    android:insetRight="@GCdnE0uHTlaBdegBM1Rn/s9C6B1mGqh4CPY2N3FG"
+    android:insetTop="@GCdnE0uHTlaBdegBM1Rn/HhGZ1fDTBTz5SiJqSUD7"
+    android:insetBottom="@GCdnE0uHTlaBdegBM1Rn/HhGZ1fDTBTz5SiJqSUD7">
+    <ripple android:color="?android:attr/colorControlHighlight">
+        <item>
+            <selector>
+                <item android:state_enabled="false">
+                    <shape android:shape="rectangle">
+                        <corners android:radius="@GCdnE0uHTlaBdegBM1Rn/VAGBYfW7Hkk7z2b020r"/>
+                        <solid android:color="?android:attr/colorButtonNormal"/>
+                        <padding
+                            android:left="@GCdnE0uHTlaBdegBM1Rn/AbSygZIto3cxEBQ09IB"
+                            android:top="@GCdnE0uHTlaBdegBM1Rn/PXcddZ2bfYa6VVW3sC3c"
+                            android:right="@GCdnE0uHTlaBdegBM1Rn/AbSygZIto3cxEBQ09IB"
+                            android:bottom="@GCdnE0uHTlaBdegBM1Rn/PXcddZ2bfYa6VVW3sC3c"/>
+                    </shape>
+                </item>
+                <item>
+                    <shape android:shape="rectangle">
+                        <corners android:radius="@GCdnE0uHTlaBdegBM1Rn/VAGBYfW7Hkk7z2b020r"/>
+                        <solid android:color="?android:attr/colorAccent"/>
+                        <padding
+                            android:left="@GCdnE0uHTlaBdegBM1Rn/AbSygZIto3cxEBQ09IB"
+                            android:top="@GCdnE0uHTlaBdegBM1Rn/PXcddZ2bfYa6VVW3sC3c"
+                            android:right="@GCdnE0uHTlaBdegBM1Rn/AbSygZIto3cxEBQ09IB"
+                            android:bottom="@GCdnE0uHTlaBdegBM1Rn/PXcddZ2bfYa6VVW3sC3c"/>
+                    </shape>
+                </item>
+            </selector>
+        </item>
+    </ripple>
+</inset>

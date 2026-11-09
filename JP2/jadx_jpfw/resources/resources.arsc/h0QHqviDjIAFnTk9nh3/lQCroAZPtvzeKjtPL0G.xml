@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:id="@q4nBElGgrubZeKOUx2A/ThwFdbPW7i09oUpwlRgJ"
+    android:paddingTop="@GCdnE0uHTlaBdegBM1Rn/df1DSm5D3GZBq9R0ahZi"
+    android:paddingBottom="@GCdnE0uHTlaBdegBM1Rn/SIiiZG5ZS46CgEBCLOZ"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <com.google.android.material.button.MaterialButton
+            android:gravity="start|center_vertical"
+            android:layout_gravity="start"
+            android:id="@q4nBElGgrubZeKOUx2A/T31idSqR2kiJCEPYHpBK"
+            android:layout_width="wrap_content"
+            android:layout_height="@GCdnE0uHTlaBdegBM1Rn/mid9PRL294HerGRsFEp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:icon="@bTbUBzIh0ftLW9EMTLb/Zopu1CDmqb8ZwirSrA"
+            app:iconGravity="0x4"
+            app:iconPadding="4dp"
+            style="?ehbV9VoYcpChEdFUN3/SA4h8KpJnsc4YIt5qDz1"/>
+    </FrameLayout>
+    <com.google.android.material.button.MaterialButton
+        android:gravity="center"
+        android:id="@q4nBElGgrubZeKOUx2A/pd6FZ66TOhOwbzfWrD"
+        android:layout_width="@GCdnE0uHTlaBdegBM1Rn/MfEtvoTZmyw5d1ewZn"
+        android:layout_height="@GCdnE0uHTlaBdegBM1Rn/mid9PRL294HerGRsFEp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:contentDescription="@ifVb8WSIBBsanRQDvt/FuIDd7nTrLoNNtwBPJ"
+        app:icon="@bTbUBzIh0ftLW9EMTLb/Yvt2mg7bvFmMceeBE3"
+        style="?ehbV9VoYcpChEdFUN3/HcnsSdTp9XQMxHiczvfv"/>
+    <com.google.android.material.button.MaterialButton
+        android:gravity="center"
+        android:id="@q4nBElGgrubZeKOUx2A/mJMHoREQaXsQvdyO4q2"
+        android:layout_width="@GCdnE0uHTlaBdegBM1Rn/MfEtvoTZmyw5d1ewZn"
+        android:layout_height="@GCdnE0uHTlaBdegBM1Rn/mid9PRL294HerGRsFEp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:contentDescription="@ifVb8WSIBBsanRQDvt/uzyoaC4EnOhCSvb7t3i"
+        app:icon="@bTbUBzIh0ftLW9EMTLb/AaVFccRQdgz57hHzMq"
+        style="?ehbV9VoYcpChEdFUN3/HcnsSdTp9XQMxHiczvfv"/>
+</LinearLayout>

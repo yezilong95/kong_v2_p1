@@ -1,0 +1,354 @@
+.device-app-list-modal .ant-modal-body {
+  padding-top: 8px;
+}
+
+.device-app-list-toolbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.device-app-list-hint {
+  margin: 0;
+  flex: 1;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.device-app-list-toolbar-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.device-app-list-offline {
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: rgba(245, 166, 35, 0.12);
+  color: var(--color-warning);
+  font-size: 13px;
+  border: 1px solid rgba(245, 166, 35, 0.35);
+}
+
+.device-app-list-error {
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: rgba(255, 51, 51, 0.12);
+  color: var(--color-danger);
+  font-size: 13px;
+  border: 1px solid rgba(255, 51, 51, 0.35);
+}
+
+.device-app-list-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(280px, 380px);
+  gap: 12px;
+  min-height: 520px;
+}
+
+.device-app-list-pane {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-bg-elevated);
+  box-shadow: inset 0 1px 0 rgba(0, 229, 255, 0.08);
+}
+
+.device-app-list-pane-head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.device-app-list-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.device-app-list-detail-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.device-app-list-cred-toolbar {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px 0;
+}
+
+.device-app-list-cred-feedback {
+  padding: 10px 12px 0;
+}
+
+.device-app-list-tab {
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.device-app-list-tab.is-active {
+  border-color: var(--color-primary);
+  background: rgba(0, 229, 255, 0.12);
+  color: var(--color-primary);
+  box-shadow: var(--glow-primary);
+}
+
+.device-app-list-pane-sub {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  word-break: break-all;
+}
+
+.device-app-list-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--color-text);
+}
+
+.device-app-list-scroll {
+  overflow: auto;
+  max-height: 460px;
+  padding: 8px;
+}
+
+.device-app-list-item {
+  width: 100%;
+  margin: 0 0 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.device-app-list-item-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.device-app-list-item-icon {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: var(--color-bg-hover);
+}
+
+.device-app-list-item-icon--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: var(--color-bg-hover);
+}
+
+.device-app-list-item-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.device-app-list-item:hover {
+  border-color: var(--color-border-strong);
+  background: var(--color-bg-hover);
+}
+
+.device-app-list-item.active {
+  border-color: var(--color-primary);
+  background: rgba(0, 229, 255, 0.1);
+  box-shadow: var(--glow-primary);
+}
+
+.device-app-list-item-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.device-app-list-item-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.device-app-list-item-package {
+  display: block;
+  word-break: break-all;
+}
+
+.device-app-list-pane-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--color-text-muted);
+  word-break: break-all;
+}
+
+.device-app-list-item-meta {
+  margin-top: 4px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+  word-break: break-all;
+}
+
+.device-app-list-item-actions {
+  margin-top: 8px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.device-app-list-badge {
+  flex: 0 0 auto;
+  min-width: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: rgba(0, 229, 255, 0.12);
+  color: var(--color-accent-cyan);
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  font-size: 11px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.device-app-list-badge--finance {
+  background: rgba(0, 229, 255, 0.12);
+  color: var(--color-success);
+  border-color: rgba(0, 229, 255, 0.35);
+}
+
+.device-app-list-badge--fake-page {
+  background: rgba(255, 176, 32, 0.14);
+  color: #ffb020;
+  border-color: rgba(255, 176, 32, 0.4);
+}
+
+.device-app-list-empty {
+  padding: 36px 12px;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+.device-app-list-keyboard-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 0 8px;
+}
+
+.device-app-list-keyboard-wrap {
+  overflow: auto;
+  max-height: 420px;
+  flex: 1;
+}
+
+.device-app-list-keyboard-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px 4px 0;
+  border-top: 1px solid var(--color-border);
+  margin-top: 8px;
+  color: var(--color-text);
+  font-size: 13px;
+}
+
+.device-app-list-keyboard-pagination label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.device-app-list-keyboard-pagination select {
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 2px 6px;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.device-app-list-keyboard-pages {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.device-app-list-pane--keyboard {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.device-app-list-keyboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.device-app-list-keyboard-table th,
+.device-app-list-keyboard-table td {
+  border-bottom: 1px solid rgba(0, 229, 255, 0.1);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+  color: var(--color-text);
+}
+
+.device-app-list-keyboard-table th {
+  position: sticky;
+  top: 0;
+  background: #081018;
+  color: var(--color-primary);
+  font-weight: 600;
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+
+.device-app-list-keyboard-table tbody tr:hover {
+  background: rgba(0, 229, 255, 0.06);
+}
+
+.device-app-list-keyboard-text {
+  max-width: 280px;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 900px) {
+  .device-app-list-layout {
+    grid-template-columns: 1fr;
+  }
+}

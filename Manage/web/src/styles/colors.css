@@ -1,0 +1,51 @@
+:root {
+  /* 表面 — 与登录页一致：深蓝底 + 青色 HUD */
+  --color-bg: #040a12;
+  --color-bg-elevated: #0a1420;
+  --color-bg-hover: #122030;
+  --color-border: rgba(0, 229, 255, 0.22);
+  --color-border-strong: rgba(0, 229, 255, 0.4);
+  --color-text: #d7f7ff;
+  --color-text-muted: #6a9aab;
+  --color-text-primary: #d7f7ff;
+  --color-text-secondary: #6a9aab;
+
+  /* 霓虹 */
+  --color-primary: #00e5ff;
+  --color-primary-hover: #33ecff;
+  --color-accent: #00e5ff;
+  --color-accent-cyan: #00e5ff;
+  --color-success: #22c55e;
+  --color-danger: #ff3333;
+  --color-warning: #f5a623;
+  --color-online: #22c55e;
+  --color-offline: #4a5c6a;
+
+  /* 语义 */
+  --color-keyboard: #c084fc;
+  --color-command: #ffe066;
+  --color-sms: #00e5ff;
+
+  /* 光影 */
+  --glow-primary: 0 0 8px rgba(0, 229, 255, 0.55), 0 0 24px rgba(0, 229, 255, 0.25);
+  --glow-cyan: 0 0 8px rgba(0, 229, 255, 0.5), 0 0 20px rgba(0, 229, 255, 0.2);
+  --glow-danger: 0 0 8px rgba(255, 51, 51, 0.55);
+  --surface-glass: rgba(0, 229, 255, 0.04);
+  --light-spot:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(0, 80, 120, 0.28), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 90% 0%, rgba(0, 229, 255, 0.12), transparent 50%);
+  --scan-line-sweep: 3.5s;
+  --scan-line-gap: 10s;
+  /* 扫一遍 + 间隔 = 完整一轮 */
+  --scan-line-duration: calc(var(--scan-line-sweep) + var(--scan-line-gap));
+  --hud-corner-color: #00e5ff;
+  --hud-corner-size: 22px;
+  --hud-corner-thickness: 1px;
+  --hud-corner-inset: 10px;
+
+  --font-mono: "Fira Code", ui-monospace, Menlo, Monaco, Consolas, monospace;
+  --font-sans: "Fira Sans", system-ui, -apple-system, sans-serif;
+
+  --screen-pane-width: 300px;
+  --screen-ops-width: 220px;
+}

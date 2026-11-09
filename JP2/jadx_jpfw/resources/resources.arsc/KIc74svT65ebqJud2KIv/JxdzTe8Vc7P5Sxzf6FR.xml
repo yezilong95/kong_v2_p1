@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:state_enabled="true"
+        app:state_liftable="true"
+        app:state_lifted="false">
+        <objectAnimator
+            android:duration="@UtnQP6WXlwYqe21x0JM/PsZDsQZwAdc7AiIfdyqW"
+            android:valueTo="@GCdnE0uHTlaBdegBM1Rn/SLTpYzCs1jlHwxQcbahd"
+            android:valueType="floatType"
+            android:propertyName="elevation"/>
+    </item>
+    <item android:state_enabled="true">
+        <objectAnimator
+            android:duration="@UtnQP6WXlwYqe21x0JM/PsZDsQZwAdc7AiIfdyqW"
+            android:valueTo="@GCdnE0uHTlaBdegBM1Rn/tVQQSu1JMCdK8PkWBSby"
+            android:valueType="floatType"
+            android:propertyName="elevation"/>
+    </item>
+    <item>
+        <objectAnimator
+            android:duration="0"
+            android:valueTo="@GCdnE0uHTlaBdegBM1Rn/SLTpYzCs1jlHwxQcbahd"
+            android:valueType="floatType"
+            android:propertyName="elevation"/>
+    </item>
+</selector>

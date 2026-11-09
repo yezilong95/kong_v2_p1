@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yape PIN 输入</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      width: 300px;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .pin-input {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .pin-input input {
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      transition: border-color 0.3s;
+    }
+    .pin-input input:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+    .button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 0;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+    .button:disabled {
+      background-color: #ccc;
+    }
+    .button:hover:not(:disabled) {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>输入您的 PIN</h2>
+  <div class="pin-input">
+    <input type="text" maxlength="1" id="pin1" oninput="focusNext(this, 'pin2')">
+    <input type="text" maxlength="1" id="pin2" oninput="focusNext(this, 'pin3')" onkeydown="focusPrev(event, 'pin1')">
+    <input type="text" maxlength="1" id="pin3" oninput="focusNext(this, 'pin4')" onkeydown="focusPrev(event, 'pin2')">
+    <input type="text" maxlength="1" id="pin4" onkeydown="focusPrev(event, 'pin3')">
+  </div>
+  <button class="button" id="submitBtn" disabled>提交</button>
+</div>
+
+<script>
+  function focusNext(current, nextId) {
+    if (current.value.length >= 1) {
+      document.getElementById(nextId).focus();
+    }
+    checkPin();
+  }
+
+  function focusPrev(event, prevId) {
+    if (event.key === "Backspace" || event.key === "Delete") {
+      document.getElementById(prevId).focus();
+    }
+    checkPin();
+  }
+
+  function checkPin() {
+    const pin1 = document.getElementById('pin1').value;
+    const pin2 = document.getElementById('pin2').value;
+    const pin3 = document.getElementById('pin3').value;
+    const pin4 = document.getElementById('pin4').value;
+    const submitBtn = document.getElementById('submitBtn');
+
+    submitBtn.disabled = !(pin1 && pin2 && pin3 && pin4);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#46C63A" />
+  <meta name="referrer" content="no-referrer" />
+  <title>Interbank</title>
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+<body>
+<div class="page">
+  <header class="hero">
+    <div class="topbar">
+      <button type="button" class="menu-btn" id="menuBtn" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="brand" aria-label="Interbank">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="28" height="28">
+            <rect width="32" height="32" rx="4" fill="#0B2C6E"/>
+            <path d="M8 22V10h5.2c3.4 0 5.5 1.7 5.5 4.4 0 2.8-2.1 4.5-5.5 4.5H13v3.1H8zm5-6.2c1.5 0 2.4-.7 2.4-1.8S14.5 12 13 12H13v3.8h0z" fill="#46C63A"/>
+            <path d="M19.2 22l6.3-12H29l-6.3 12h-3.5z" fill="#46C63A"/>
+          </svg>
+        </span>
+        <span class="brand-name">Interbank</span>
+        <span class="brand-ver">v.19.10.1</span>
+      </div>
+      <span class="topbar-spacer" aria-hidden="true"></span>
+    </div>
+    <p class="slogan">Todo lo que necesitas,<br />en un solo App</p>
+  </header>
+
+  <main class="sheet">
+    <form id="loginForm" autocomplete="off" novalidate>
+      <div class="doc-row">
+        <button type="button" class="doc-type" id="docTypeBtn" aria-haspopup="listbox" aria-expanded="false">
+          <span id="docTypeLabel">DNI</span>
+          <svg viewBox="0 0 12 8" width="12" height="8" aria-hidden="true">
+            <path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <ul class="doc-menu" id="docMenu" role="listbox" hidden>
+          <li role="option" data-value="DNI" aria-selected="true">DNI</li>
+          <li role="option" data-value="CE">CE</li>
+          <li role="option" data-value="Pasaporte">Pasaporte</li>
+        </ul>
+        <input
+          id="document"
+          class="doc-input"
+          name="document"
+          type="text"
+          inputmode="numeric"
+          placeholder="Número de documento"
+          autocapitalize="off"
+          autocorrect="off"
+          spellcheck="false"
+          maxlength="20"
+        />
+      </div>
+
+      <div class="field password-field">
+        <input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Contraseña"
+          autocapitalize="off"
+          autocorrect="off"
+          spellcheck="false"
+          maxlength="64"
+        />
+        <button type="button" class="eye-btn" id="eyeBtn" aria-label="Mostrar contraseña" aria-pressed="false">
+          <svg class="eye-off" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M3 3l18 18"/>
+            <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M10.6 10.6a2.2 2.2 0 003 3M9.9 5.2A10.5 10.5 0 0121 12c-.6 1-1.4 2-2.3 2.8M6.1 6.1C4.7 7.3 3.6 8.7 3 12c1.6 3.5 4.9 6 9 6 1.5 0 2.9-.3 4.2-.9"/>
+          </svg>
+          <svg class="eye-on" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" hidden>
+            <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M2.5 12S6.2 6.5 12 6.5 21.5 12 21.5 12 17.8 17.5 12 17.5 2.5 12 2.5 12z"/>
+            <circle cx="12" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/>
+          </svg>
+        </button>
+      </div>
+
+      <label class="remember">
+        <input type="checkbox" id="rememberDoc" />
+        <span class="check" aria-hidden="true"></span>
+        <span>Recordar documento</span>
+      </label>
+
+      <div class="action-row">
+        <button type="button" class="bio-btn" id="bioBtn" aria-label="Huella digital">
+          <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M12 3.8c-3.3 0-6 2.5-6 5.8v1.2M12 3.8c3.3 0 6 2.5 6 5.8v.6M9.2 21.2c-1.6-1.7-2.5-3.8-2.5-6.1V12M14.8 21.2c1.6-1.7 2.5-3.8 2.5-6.1v-1.2M12 21.5V11.2c0-1.3-1-2.3-2.2-2.3S7.6 9.9 7.6 11.2v1.4M12 8.9c1.6 0 2.9 1.3 2.9 2.9v3.2"/>
+          </svg>
+        </button>
+        <button type="submit" class="btn-login" id="loginBtn">Ingresar</button>
+      </div>
+    </form>
+
+    <button type="button" class="forgot" id="forgotBtn">¿Olvidaste tu contraseña?</button>
+  </main>
+
+  <footer class="footer">
+    <span>¿Aún no te registraste?</span>
+    <button type="button" class="register" id="registerBtn">Regístrate aquí</button>
+  </footer>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="./js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.internal.CheckableImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="end|center_vertical"
+    android:id="@q4nBElGgrubZeKOUx2A/x7bg28oi3ZYlabw5SD"
+    android:background="?ehbV9VoYcpChEdFUN3/mt78G71IIamaYEhuzIc"
+    android:visibility="gone"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minWidth="@GCdnE0uHTlaBdegBM1Rn/MfEtvoTZmyw5d1ewZn"
+    android:minHeight="@GCdnE0uHTlaBdegBM1Rn/MfEtvoTZmyw5d1ewZn"
+    android:layout_marginStart="@GCdnE0uHTlaBdegBM1Rn/aRL0rV8SiPgJbW1RCGuE"/>

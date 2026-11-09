@@ -1,0 +1,266 @@
+:root {
+  --rakuten-red: #bf0000;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  background: #fff;
+  overflow: hidden;
+}
+
+.page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  background: #fff;
+}
+
+.page.is-active {
+  display: block;
+}
+
+#splash.is-active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: var(--safe-top);
+  padding-bottom: var(--safe-bottom);
+}
+
+.splash-logo {
+  width: 222px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.splash-logo svg {
+  width: 222px;
+  height: auto;
+  max-height: 74px;
+}
+
+.splash-copyright {
+  position: absolute;
+  bottom: calc(40px + var(--safe-bottom));
+  left: 0;
+  right: 0;
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+#payment.is-active {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  height: calc(56px + var(--safe-top));
+  padding-top: var(--safe-top);
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  padding-right: 16px;
+  background: #fff;
+  position: relative;
+  flex-shrink: 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.header .back-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: absolute;
+  left: 8px;
+  top: calc(50% + var(--safe-top) / 2);
+  transform: translateY(-50%);
+  border: 0;
+  background: none;
+}
+
+.header .title {
+  width: 100%;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 600;
+  color: #333;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: var(--safe-bottom);
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.lock-box {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.desc {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 32px;
+  text-align: center;
+  padding: 0 16px;
+}
+
+.pin-dots {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 48px;
+  justify-content: center;
+}
+
+.pin-dots .dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--rakuten-red);
+  background: #fff;
+  transition: background 0.15s;
+}
+
+.pin-dots .dot.is-filled {
+  background: var(--rakuten-red);
+}
+
+.keyboard {
+  width: 100%;
+  max-width: 280px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px 16px;
+  padding: 0 12px 16px;
+}
+
+.keyboard .key {
+  height: 52px;
+  border-radius: 50%;
+  background: #f6f6f6;
+  border: 1px solid #d8d8d8;
+  font-size: 24px;
+  font-weight: 400;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s;
+}
+
+.keyboard .key:active {
+  background: #f0f0f0;
+  transform: scale(0.96);
+}
+
+.keyboard .key-empty {
+  background: transparent;
+  border: none;
+  cursor: default;
+  pointer-events: none;
+}
+
+.keyboard .key-func {
+  background: transparent;
+  border: none;
+}
+
+.keyboard .key-func:active {
+  background: #f0f0f0;
+  border: none;
+}
+
+.toast {
+  position: fixed;
+  bottom: calc(8px + var(--safe-bottom));
+  left: 8px;
+  right: 8px;
+  background: #323232;
+  color: #fff;
+  padding: 14px 16px;
+  font-size: 14px;
+  border-radius: 0;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s;
+  z-index: 100;
+  text-align: center;
+}
+
+.toast.is-show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+}
+
+.loading.is-show {
+  display: flex;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: var(--rakuten-red);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

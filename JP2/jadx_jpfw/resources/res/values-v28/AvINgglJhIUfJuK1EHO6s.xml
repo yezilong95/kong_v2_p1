@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <AvINgglJhIUfJuK1EHO6 name="saoSIqjx5apeFfHVhDP" parent="@AvINgglJhIUfJuK1EHO6/l1pls577ERWFcwQmzu7">
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="NC9pW2nxtD9RX8G0dgNx" parent="@AvINgglJhIUfJuK1EHO6/s8OrvHblnImtdoVkxe">
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="anD4dTY3mnRuSCLLOdJm" parent="@AvINgglJhIUfJuK1EHO6/fjpkr5TpKtpZQO3h04R">
+        <item>@GCdnE0uHTlaBdegBM1Rn/Rm2NmddBjz0fNoS07wQ</item>
+        <item>@AvINgglJhIUfJuK1EHO6/It6z8aoCa88HJM94O0</item>
+        <item>@null</item>
+        <item>@AvINgglJhIUfJuK1EHO6/PQrztnmfICRMNdhUQw</item>
+        <item>@AvINgglJhIUfJuK1EHO6/QG5tuBwjCA2fGtd7Jlul</item>
+        <item>@AvINgglJhIUfJuK1EHO6/QG5tuBwjCA2fGtd7Jlul</item>
+        <item>@AvINgglJhIUfJuK1EHO6/tmXTARA1vOHmGG9cxDYz</item>
+        <item>@AvINgglJhIUfJuK1EHO6/QG5tuBwjCA2fGtd7Jlul</item>
+        <item>@AvINgglJhIUfJuK1EHO6/mPp38TyJacWHrC9OWE</item>
+        <item>@UtnQP6WXlwYqe21x0JM/bjrqcMvVwI1t3qy3R9e</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="l1pls577ERWFcwQmzu7" parent="@AvINgglJhIUfJuK1EHO6/cnc5ez0qUba5QwdaxlAG">
+        <item>?android:attr/dialogCornerRadius</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="s8OrvHblnImtdoVkxe" parent="@AvINgglJhIUfJuK1EHO6/fDnqiR8S2avTFUZuAFG">
+        <item>?android:attr/dialogCornerRadius</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="lw2YDg2tWx1rH4wUXdZ" parent="@AvINgglJhIUfJuK1EHO6/KqbwE8tlAWMQ4vPsGsn">
+        <item>16sp</item>
+        <item>false</item>
+        <item>@ifVb8WSIBBsanRQDvt/mBBObe1Rh5xjK8MzYS3n</item>
+        <item>0.0312</item>
+        <item>24sp</item>
+        <item>@ifVb8WSIBBsanRQDvt/mBBObe1Rh5xjK8MzYS3n</item>
+        <item>24sp</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="oBCcQz1dmDYWgdbcfpnD" parent="@AvINgglJhIUfJuK1EHO6/bSxFrnlYtFwHGzbKBEU">
+        <item>14sp</item>
+        <item>false</item>
+        <item>@ifVb8WSIBBsanRQDvt/mBBObe1Rh5xjK8MzYS3n</item>
+        <item>0.0179</item>
+        <item>20sp</item>
+        <item>@ifVb8WSIBBsanRQDvt/mBBObe1Rh5xjK8MzYS3n</item>
+        <item>20sp</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="pzqNb7endY6WsBujF0" parent="@AvINgglJhIUfJuK1EHO6/rXYQEgq5bb85zsAL7u">
+        <item>12sp</item>
+        <item>false</item>
+        <item>@ifVb8WSIBBsanRQDvt/mBBObe1Rh5xjK8MzYS3n</item>
+        <item>0.0333</item>
+        <item>16sp</item>
+        <item>@ifVb8WSIBBsanRQDvt/mBBObe1Rh5xjK8MzYS3n</item>
+        <item>16sp</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="FsNOmtPwQV0dF5GEt9gd" parent="@AvINgglJhIUfJuK1EHO6/JqmBV6LdDuHvplIbW1">
+        <item>57sp</item>
+        <item>false</item>
+        <item>@ifVb8WSIBBsanRQDvt/qCIvkDQDlg1VLruia81y</item>
+        <item>-0.0044</item>
+        <item>64sp</item>
+        <item>@ifVb8WSIBBsanRQDvt/qCIvkDQDlg1VLruia81y</item>
+        <item>64sp</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="cQlfSByM1exdEl0Pd6HV" parent="@AvINgglJhIUfJuK1EHO6/GEVWtag7x9A4tNhlbuIC">
+        <item>45sp</item>
+        <item>false</item>
+        <item>@ifVb8WSIBBsanRQDvt/qCIvkDQDlg1VLruia81y</item>
+        <item>0</item>
+        <item>52sp</item>
+        <item>@ifVb8WSIBBsanRQDvt/qCIvkDQDlg1VLruia81y</item>
+        <item>52sp</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="gsQJhe1F7B7ewY2jD8Pe" parent="@AvINgglJhIUfJuK1EHO6/YaV7lCy5LdPuAGZgaLpv">
+        <item>36sp</item>
+        <item>false</item>
+        <item>@ifVb8WSIBBsanRQDvt/qCIvkDQDlg1VLruia81y</item>
+        <item>0</item>
+        <item>44sp</item>
+        <item>@ifVb8WSIBBsanRQDvt/qCIvkDQDlg1VLruia81y</item>
+        <item>44sp</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="rbHSgyuamvospHyYlwl" parent="@AvINgglJhIUfJuK1EHO6/YaV7lCy5LdPuAGZgaLpv">
+        <item>32sp</item>
+        <item>false</item>
+        <item>@ifVb8WSIBBsanRQDvt/qCIvkDQDlg1VLruia81y</item>
+        <item>0</item>
+        <item>40sp</item>
+        <item>@ifVb8WSIBBsanRQDvt/qCIvkDQDlg1VLruia81y</item>
+        <item>40sp</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="dNYwhowoBAvlYR5oGRG" parent="@AvINgglJhIUfJuK1EHO6/TRLCNpr6NYvCxvXOhCK9">
+        <item>28sp</item>
+        <item>false</item>
+        <item>@ifVb8WSIBBsanRQDvt/qCIvkDQDlg1VLruia81y</item>
+        <item>0</item>
+        <item>36sp</item>
+        <item>@ifVb8WSIBBsanRQDvt/qCIvkDQDlg1VLruia81y</item>
+        <item>36sp</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="IMr6vAF4QXOrnuxWbS3" parent="@AvINgglJhIUfJuK1EHO6/GzRoDNLaR33VCPG9CaW">
+        <item>24sp</item>
+        <item>false</item>
+        <item>@ifVb8WSIBBsanRQDvt/qCIvkDQDlg1VLruia81y</item>
+        <item>0</item>
+        <item>32sp</item>
+        <item>@ifVb8WSIBBsanRQDvt/qCIvkDQDlg1VLruia81y</item>
+        <item>32sp</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="KBKdVkEpxrvimkWjIN" parent="@AvINgglJhIUfJuK1EHO6/bSxFrnlYtFwHGzbKBEU">
+        <item>14sp</item>
+        <item>false</item>
+        <item>@ifVb8WSIBBsanRQDvt/HwFZTjHY2eqokI0PKvS</item>
+        <item>0.0071</item>
+        <item>20sp</item>
+        <item>@ifVb8WSIBBsanRQDvt/HwFZTjHY2eqokI0PKvS</item>
+        <item>20sp</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="NTfZajROR49y0vvNEIlx" parent="@AvINgglJhIUfJuK1EHO6/rXYQEgq5bb85zsAL7u">
+        <item>12sp</item>
+        <item>false</item>
+        <item>@ifVb8WSIBBsanRQDvt/HwFZTjHY2eqokI0PKvS</item>
+        <item>0.0417</item>
+        <item>16sp</item>
+        <item>@ifVb8WSIBBsanRQDvt/HwFZTjHY2eqokI0PKvS</item>
+        <item>16sp</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="jGSi6NZjZphIjhFIlJF" parent="@AvINgglJhIUfJuK1EHO6/rXYQEgq5bb85zsAL7u">
+        <item>11sp</item>
+        <item>false</item>
+        <item>@ifVb8WSIBBsanRQDvt/HwFZTjHY2eqokI0PKvS</item>
+        <item>0.0455</item>
+        <item>16sp</item>
+        <item>@ifVb8WSIBBsanRQDvt/HwFZTjHY2eqokI0PKvS</item>
+        <item>16sp</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="lIJpmstgPivPk5nmlc" parent="@AvINgglJhIUfJuK1EHO6/GzRoDNLaR33VCPG9CaW">
+        <item>22sp</item>
+        <item>false</item>
+        <item>@ifVb8WSIBBsanRQDvt/qCIvkDQDlg1VLruia81y</item>
+        <item>0</item>
+        <item>28sp</item>
+        <item>@ifVb8WSIBBsanRQDvt/qCIvkDQDlg1VLruia81y</item>
+        <item>28sp</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="Fw5qGbNhuxPTiBc4gH" parent="@AvINgglJhIUfJuK1EHO6/v8nNwkxBAxneo5n45X">
+        <item>16sp</item>
+        <item>false</item>
+        <item>@ifVb8WSIBBsanRQDvt/HwFZTjHY2eqokI0PKvS</item>
+        <item>0.0094</item>
+        <item>24sp</item>
+        <item>@ifVb8WSIBBsanRQDvt/HwFZTjHY2eqokI0PKvS</item>
+        <item>24sp</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="IyA0nVc8h3i8sfYsv9" parent="@AvINgglJhIUfJuK1EHO6/v8nNwkxBAxneo5n45X">
+        <item>14sp</item>
+        <item>false</item>
+        <item>@ifVb8WSIBBsanRQDvt/HwFZTjHY2eqokI0PKvS</item>
+        <item>0.0071</item>
+        <item>20sp</item>
+        <item>@ifVb8WSIBBsanRQDvt/HwFZTjHY2eqokI0PKvS</item>
+        <item>20sp</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="IJbnRCGbYO42MTfJ7U" parent="@AvINgglJhIUfJuK1EHO6/xmbvb3bmq1ndghdXhoh">
+        <item>?ehbV9VoYcpChEdFUN3/ESvXdolmyXbb0IvEAy</item>
+        <item>@O5WObSpYhv5j8bi6SL/DzabktsLvJUOgBM2fUQ</item>
+        <item>@android:color/transparent</item>
+        <item>@android:color/transparent</item>
+        <item>true</item>
+        <item>?ehbV9VoYcpChEdFUN3/VWh0KuPCzRENY1f4yzq</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="N73YA0gq74x9ldQBpik" parent="@AvINgglJhIUfJuK1EHO6/HI04slpK6KXIo1O9l3xt">
+        <item>@android:color/transparent</item>
+        <item>@android:color/transparent</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="wpiPdoLPDLNOBZDgx3" parent="@android:style/Widget">
+        <item>@AvINgglJhIUfJuK1EHO6/B6rCpfyFmHA81xq3GJh</item>
+        <item>@GCdnE0uHTlaBdegBM1Rn/A2iBAgLADXSWk5mqii1</item>
+        <item>@GCdnE0uHTlaBdegBM1Rn/zno3125K8AbpBg9iT3n</item>
+        <item>@android:color/transparent</item>
+        <item>@android:color/transparent</item>
+        <item>?ehbV9VoYcpChEdFUN3/E9VrZxJqrnGhl5HlYMn</item>
+        <item>true</item>
+        <item>true</item>
+        <item>@GCdnE0uHTlaBdegBM1Rn/mEFTqoEX3MriJs5QbDEv</item>
+        <item>true</item>
+        <item>false</item>
+        <item>@AvINgglJhIUfJuK1EHO6/uWj3wKllTcjxj4nSon1Q</item>
+        <item>@GCdnE0uHTlaBdegBM1Rn/A2iBAgLADXSWk5mqii1</item>
+        <item>?ehbV9VoYcpChEdFUN3/XKJxnjvVNOpkvJT6Bt</item>
+        <item>@AvINgglJhIUfJuK1EHO6/nxiM35lY6iQviZzvabe2</item>
+    </AvINgglJhIUfJuK1EHO6>
+    <AvINgglJhIUfJuK1EHO6 name="MaFHyNsujK9lHGGtqTO" parent="@AvINgglJhIUfJuK1EHO6/yxzUsykONZ3vgrtELco">
+        <item>@android:color/transparent</item>
+        <item>@android:color/transparent</item>
+        <item>0dp</item>
+        <item>?ehbV9VoYcpChEdFUN3/UYUmMAGx2gwuZ3vB2HYU</item>
+        <item>?ehbV9VoYcpChEdFUN3/oQgqeVVvGzfe1XNCyAV</item>
+    </AvINgglJhIUfJuK1EHO6>
+</resources>

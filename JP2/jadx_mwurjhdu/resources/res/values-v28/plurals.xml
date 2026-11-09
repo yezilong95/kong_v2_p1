@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="Base.Theme.AppCompat" parent="@plurals/Base.V28.Theme.AppCompat">
+    </plurals>
+    <plurals name="Base.Theme.AppCompat.Light" parent="@plurals/Base.V28.Theme.AppCompat.Light">
+    </plurals>
+    <plurals name="Base.V14.ThemeOverlay.MaterialComponents.MaterialAlertDialog" parent="@plurals/ThemeOverlay.AppCompat.Dialog.Alert">
+        <item>0.32</item>
+        <item>@plurals/Widget.MaterialComponents.CheckedTextView</item>
+        <item>@null</item>
+        <item>@plurals/MaterialAlertDialog.MaterialComponents</item>
+        <item>@plurals/Widget.MaterialComponents.Button.TextButton.Dialog</item>
+        <item>@plurals/Widget.MaterialComponents.Button.TextButton.Dialog</item>
+        <item>@plurals/Widget.MaterialComponents.Button.TextButton.Dialog.Flush</item>
+        <item>@plurals/Widget.MaterialComponents.Button.TextButton.Dialog</item>
+        <item>@plurals/MaterialAlertDialog.MaterialComponents.Body.Text</item>
+        <item>@integer/mtrl_view_invisible</item>
+    </plurals>
+    <plurals name="Base.V28.Theme.AppCompat" parent="@plurals/Base.V26.Theme.AppCompat">
+        <item>?android:attr/dialogCornerRadius</item>
+    </plurals>
+    <plurals name="Base.V28.Theme.AppCompat.Light" parent="@plurals/Base.V26.Theme.AppCompat.Light">
+        <item>?android:attr/dialogCornerRadius</item>
+    </plurals>
+    <plurals name="TextAppearance.M3.Sys.Typescale.BodyLarge" parent="@plurals/TextAppearance.AppCompat.Body2">
+        <item>16sp</item>
+        <item>false</item>
+        <item>@string/m3_ref_typeface_plain_regular</item>
+        <item>0.0312</item>
+        <item>24sp</item>
+        <item>@string/m3_ref_typeface_plain_regular</item>
+        <item>24sp</item>
+    </plurals>
+    <plurals name="TextAppearance.M3.Sys.Typescale.BodyMedium" parent="@plurals/TextAppearance.AppCompat.Body1">
+        <item>14sp</item>
+        <item>false</item>
+        <item>@string/m3_ref_typeface_plain_regular</item>
+        <item>0.0179</item>
+        <item>20sp</item>
+        <item>@string/m3_ref_typeface_plain_regular</item>
+        <item>20sp</item>
+    </plurals>
+    <plurals name="TextAppearance.M3.Sys.Typescale.BodySmall" parent="@plurals/TextAppearance.AppCompat.Caption">
+        <item>12sp</item>
+        <item>false</item>
+        <item>@string/m3_ref_typeface_plain_regular</item>
+        <item>0.0333</item>
+        <item>16sp</item>
+        <item>@string/m3_ref_typeface_plain_regular</item>
+        <item>16sp</item>
+    </plurals>
+    <plurals name="TextAppearance.M3.Sys.Typescale.DisplayLarge" parent="@plurals/TextAppearance.AppCompat.Display3">
+        <item>57sp</item>
+        <item>false</item>
+        <item>@string/m3_ref_typeface_brand_regular</item>
+        <item>-0.0044</item>
+        <item>64sp</item>
+        <item>@string/m3_ref_typeface_brand_regular</item>
+        <item>64sp</item>
+    </plurals>
+    <plurals name="TextAppearance.M3.Sys.Typescale.DisplayMedium" parent="@plurals/TextAppearance.AppCompat.Display2">
+        <item>45sp</item>
+        <item>false</item>
+        <item>@string/m3_ref_typeface_brand_regular</item>
+        <item>0</item>
+        <item>52sp</item>
+        <item>@string/m3_ref_typeface_brand_regular</item>
+        <item>52sp</item>
+    </plurals>
+    <plurals name="TextAppearance.M3.Sys.Typescale.DisplaySmall" parent="@plurals/TextAppearance.AppCompat.Display1">
+        <item>36sp</item>
+        <item>false</item>
+        <item>@string/m3_ref_typeface_brand_regular</item>
+        <item>0</item>
+        <item>44sp</item>
+        <item>@string/m3_ref_typeface_brand_regular</item>
+        <item>44sp</item>
+    </plurals>
+    <plurals name="TextAppearance.M3.Sys.Typescale.HeadlineLarge" parent="@plurals/TextAppearance.AppCompat.Display1">
+        <item>32sp</item>
+        <item>false</item>
+        <item>@string/m3_ref_typeface_brand_regular</item>
+        <item>0</item>
+        <item>40sp</item>
+        <item>@string/m3_ref_typeface_brand_regular</item>
+        <item>40sp</item>
+    </plurals>
+    <plurals name="TextAppearance.M3.Sys.Typescale.HeadlineMedium" parent="@plurals/TextAppearance.AppCompat.Headline">
+        <item>28sp</item>
+        <item>false</item>
+        <item>@string/m3_ref_typeface_brand_regular</item>
+        <item>0</item>
+        <item>36sp</item>
+        <item>@string/m3_ref_typeface_brand_regular</item>
+        <item>36sp</item>
+    </plurals>
+    <plurals name="TextAppearance.M3.Sys.Typescale.HeadlineSmall" parent="@plurals/TextAppearance.AppCompat.Title">
+        <item>24sp</item>
+        <item>false</item>
+        <item>@string/m3_ref_typeface_brand_regular</item>
+        <item>0</item>
+        <item>32sp</item>
+        <item>@string/m3_ref_typeface_brand_regular</item>
+        <item>32sp</item>
+    </plurals>
+    <plurals name="TextAppearance.M3.Sys.Typescale.LabelLarge" parent="@plurals/TextAppearance.AppCompat.Body1">
+        <item>14sp</item>
+        <item>false</item>
+        <item>@string/m3_ref_typeface_plain_medium</item>
+        <item>0.0071</item>
+        <item>20sp</item>
+        <item>@string/m3_ref_typeface_plain_medium</item>
+        <item>20sp</item>
+    </plurals>
+    <plurals name="TextAppearance.M3.Sys.Typescale.LabelMedium" parent="@plurals/TextAppearance.AppCompat.Caption">
+        <item>12sp</item>
+        <item>false</item>
+        <item>@string/m3_ref_typeface_plain_medium</item>
+        <item>0.0417</item>
+        <item>16sp</item>
+        <item>@string/m3_ref_typeface_plain_medium</item>
+        <item>16sp</item>
+    </plurals>
+    <plurals name="TextAppearance.M3.Sys.Typescale.LabelSmall" parent="@plurals/TextAppearance.AppCompat.Caption">
+        <item>11sp</item>
+        <item>false</item>
+        <item>@string/m3_ref_typeface_plain_medium</item>
+        <item>0.0455</item>
+        <item>16sp</item>
+        <item>@string/m3_ref_typeface_plain_medium</item>
+        <item>16sp</item>
+    </plurals>
+    <plurals name="TextAppearance.M3.Sys.Typescale.TitleLarge" parent="@plurals/TextAppearance.AppCompat.Title">
+        <item>22sp</item>
+        <item>false</item>
+        <item>@string/m3_ref_typeface_brand_regular</item>
+        <item>0</item>
+        <item>28sp</item>
+        <item>@string/m3_ref_typeface_brand_regular</item>
+        <item>28sp</item>
+    </plurals>
+    <plurals name="TextAppearance.M3.Sys.Typescale.TitleMedium" parent="@plurals/TextAppearance.AppCompat.Subhead">
+        <item>16sp</item>
+        <item>false</item>
+        <item>@string/m3_ref_typeface_plain_medium</item>
+        <item>0.0094</item>
+        <item>24sp</item>
+        <item>@string/m3_ref_typeface_plain_medium</item>
+        <item>24sp</item>
+    </plurals>
+    <plurals name="TextAppearance.M3.Sys.Typescale.TitleSmall" parent="@plurals/TextAppearance.AppCompat.Subhead">
+        <item>14sp</item>
+        <item>false</item>
+        <item>@string/m3_ref_typeface_plain_medium</item>
+        <item>0.0071</item>
+        <item>20sp</item>
+        <item>@string/m3_ref_typeface_plain_medium</item>
+        <item>20sp</item>
+    </plurals>
+    <plurals name="Widget.Material3.AppBarLayout" parent="@plurals/Widget.MaterialComponents.AppBarLayout.Surface">
+        <item>?style/colorSurface</item>
+        <item>@animator/m3_appbar_state_list_animator</item>
+        <item>@android:color/transparent</item>
+        <item>@android:color/transparent</item>
+        <item>true</item>
+        <item>?style/colorSurfaceContainer</item>
+    </plurals>
+    <plurals name="Widget.Material3.BottomNavigationView" parent="@plurals/Base.Widget.Material3.BottomNavigationView">
+        <item>@android:color/transparent</item>
+        <item>@android:color/transparent</item>
+    </plurals>
+    <plurals name="Widget.Material3.SearchBar" parent="@android:style/Widget">
+        <item>@plurals/TextAppearance.Material3.SearchBar</item>
+        <item>@dimen/m3_searchbar_height</item>
+        <item>@dimen/m3_searchbar_padding_start</item>
+        <item>@android:color/transparent</item>
+        <item>@android:color/transparent</item>
+        <item>?style/colorSurfaceContainerHigh</item>
+        <item>true</item>
+        <item>true</item>
+        <item>@dimen/m3_searchbar_elevation</item>
+        <item>true</item>
+        <item>false</item>
+        <item>@plurals/ThemeOverlay.Material3.Search</item>
+        <item>@dimen/m3_searchbar_height</item>
+        <item>?style/shapeAppearanceMediumComponent</item>
+        <item>@plurals/ShapeAppearanceOverlay.Material3.SearchBar</item>
+    </plurals>
+    <plurals name="Widget.Material3.Toolbar" parent="@plurals/Widget.AppCompat.Toolbar">
+        <item>@android:color/transparent</item>
+        <item>@android:color/transparent</item>
+        <item>0dp</item>
+        <item>?style/textAppearanceTitleMedium</item>
+        <item>?style/textAppearanceTitleLarge</item>
+    </plurals>
+</resources>

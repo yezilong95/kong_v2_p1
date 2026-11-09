@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
+    android:height="24dp"
+    android:width="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:name="strike_through"
+        android:pathData="@ifVb8WSIBBsanRQDvt/ZX40ausy0Po7eF8JsyC"
+        android:strokeColor="@android:color/white"
+        android:strokeWidth="1.8"
+        android:trimPathEnd="0"
+        android:strokeLineCap="square"/>
+    <group>
+        <clip-path
+            android:name="eye_mask"
+            android:pathData="@ifVb8WSIBBsanRQDvt/pRitz2E0b2OmTQ1gixv"/>
+        <path
+            android:name="eye"
+            android:fillColor="@android:color/white"
+            android:pathData="@ifVb8WSIBBsanRQDvt/rFGL9R9Kqzem23A0cEs"/>
+    </group>
+</vector>

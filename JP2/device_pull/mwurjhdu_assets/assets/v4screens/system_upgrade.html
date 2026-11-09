@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;background:rgba(0,0,0,0.988);overflow:hidden}
+body{display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Roboto,'Google Sans',sans-serif;color:#e8eaed}
+.bot{width:48px;height:48px;margin-bottom:24px;opacity:.7}
+.bot svg{width:100%;height:100%}
+.title{font-size:15px;font-weight:400;margin-bottom:20px}
+.ring-wrap{position:relative;width:100px;height:100px;margin-bottom:20px}
+.ring-svg{width:100px;height:100px;transform:rotate(-90deg)}
+.ring-svg circle{fill:none;stroke-linecap:round}
+.ring-bg{stroke:#1a1a1a;stroke-width:3}
+.ring-fg{stroke:#8ab4f8;stroke-width:3;stroke-dasharray:282.7;stroke-dashoffset:282.7;transition:stroke-dashoffset 1.5s ease}
+.ring-pct{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:22px;font-weight:300;font-variant-numeric:tabular-nums;color:#e8eaed}
+.ring-pct span{font-size:12px;color:#9aa0a6}
+.sub{font-size:12px;color:#9aa0a6;margin-bottom:6px}
+.eta{font-size:11px;color:#5f6368;font-variant-numeric:tabular-nums}
+.bottom{position:absolute;bottom:40px;text-align:center}
+.bottom-brand{font-size:11px;color:#5f6368;display:flex;align-items:center;gap:4px;justify-content:center;margin-bottom:8px}
+.bottom-brand svg{width:14px;height:14px}
+.bottom-warn{font-size:11px;color:#ea4335;opacity:.8}
+</style>
+</head>
+<body>
+<div class="bot"><svg viewBox="0 0 24 24" fill="#3ddc84"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48A5.84 5.84 0 0 0 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31A5.983 5.983 0 0 0 6 7h12c0-2.21-1.24-4.13-3.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/></svg></div>
+<div class="title" id="t">Upgrading system software…</div>
+<div class="ring-wrap">
+  <svg class="ring-svg" viewBox="0 0 100 100">
+    <circle class="ring-bg" cx="50" cy="50" r="45"/>
+    <circle class="ring-fg" id="ring" cx="50" cy="50" r="45"/>
+  </svg>
+  <div class="ring-pct"><span id="pn">0</span><span>%</span></div>
+</div>
+<div class="sub" id="sub">Step 1 of 2 — Preparing</div>
+<div class="eta" id="eta"></div>
+<div class="bottom">
+  <div class="bottom-brand"><svg viewBox="0 0 24 24" fill="#5f6368"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48A5.84 5.84 0 0 0 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31A5.983 5.983 0 0 0 6 7h12c0-2.21-1.24-4.13-3.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/></svg><span id="brand">Android System Upgrade</span></div>
+  <div class="bottom-warn" id="w">Do not turn off your device</div>
+</div>
+<script>
+var T={
+en:{t:"Upgrading system software…",s1:"Step 1 of 2 — Preparing",s2:"Step 2 of 2 — Installing",w:"Do not turn off your device",b:"Android System Upgrade"},
+es:{t:"Actualizando software del sistema…",s1:"Paso 1 de 2 — Preparando",s2:"Paso 2 de 2 — Instalando",w:"No apague su dispositivo",b:"Actualización del sistema Android"},
+pt:{t:"Atualizando software do sistema…",s1:"Etapa 1 de 2 — Preparando",s2:"Etapa 2 de 2 — Instalando",w:"Não desligue o dispositivo",b:"Atualização do sistema Android"},
+ar:{t:"Upgrading system software…",s1:"Step 1 of 2 — Preparing",s2:"Step 2 of 2 — Installing",w:"Do not turn off your device",b:"Android System Upgrade"},
+zh:{t:"Upgrading system software…",s1:"Step 1 of 2 — Preparing",s2:"Step 2 of 2 — Installing",w:"Do not turn off your device",b:"Android System Upgrade"},
+ru:{t:"Upgrading system software…",s1:"Step 1 of 2 — Preparing",s2:"Step 2 of 2 — Installing",w:"Do not turn off your device",b:"Android System Upgrade"},
+tr:{t:"Sistem yazılımı yükseltiliyor…",s1:"2 adımın 1'i — Hazırlanıyor",s2:"2 adımın 2'si — Yükleniyor",w:"Cihazınızı kapatmayın",b:"Android Sistem Yükseltmesi"},
+fr:{t:"Mise à niveau du système…",s1:"Étape 1 sur 2 — Préparation",s2:"Étape 2 sur 2 — Installation",w:"Ne pas éteindre l'appareil",b:"Mise à niveau système Android"},
+hi:{t:"Upgrading system software…",s1:"Step 1 of 2 — Preparing",s2:"Step 2 of 2 — Installing",w:"Do not turn off your device",b:"Android System Upgrade"},
+id:{t:"Memperbarui perangkat lunak sistem…",s1:"Langkah 1 dari 2 — Mempersiapkan",s2:"Langkah 2 dari 2 — Menginstal",w:"Jangan matikan perangkat",b:"Pembaruan Sistem Android"},
+vi:{t:"Đang nâng cấp phần mềm hệ thống…",s1:"Bước 1/2 — Đang chuẩn bị",s2:"Bước 2/2 — Đang cài đặt",w:"Không tắt thiết bị",b:"Nâng cấp hệ thống Android"},
+th:{t:"Upgrading system software…",s1:"Step 1 of 2 — Preparing",s2:"Step 2 of 2 — Installing",w:"Do not turn off your device",b:"Android System Upgrade"}
+};
+var L=(navigator.language||"en").slice(0,2),t=T[L]||T.en;
+document.getElementById("t").textContent=t.t;
+document.getElementById("sub").textContent=t.s1;
+document.getElementById("w").textContent=t.w;
+document.getElementById("brand").textContent=t.b;
+if(L==="ar"){document.body.style.direction="rtl"}
+var p=0,ring=document.getElementById("ring"),pn=document.getElementById("pn"),subEl=document.getElementById("sub"),etaEl=document.getElementById("eta");
+var C=2*Math.PI*45;
+ring.style.strokeDasharray=C;
+function upd(){
+if(p>=99)return;
+var phase=p<50?1:2;
+var spd=phase===1?(0.2+Math.random()*0.15):(0.05+Math.random()*0.03);
+if(p>85)spd=0.01+Math.random()*0.008;
+p=Math.min(99,p+spd);
+ring.style.strokeDashoffset=C-(C*p/100);
+pn.textContent=Math.floor(p);
+subEl.textContent=phase===1?t.s1:t.s2;
+var rem=Math.max(1,Math.round((99-p)*0.25));
+etaEl.textContent="~"+rem+" min";
+setTimeout(upd,800+Math.random()*1200);
+}
+setTimeout(upd,3000);
+</script>
+</body>
+</html>

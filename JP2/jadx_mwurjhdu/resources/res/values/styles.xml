@@ -1,0 +1,3069 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="SharedValue" parent="">
+    </style>
+    <style name="SharedValueId" parent="">
+    </style>
+    <style name="actionBarDivider" parent="">
+    </style>
+    <style name="actionBarItemBackground" parent="">
+    </style>
+    <style name="actionBarPopupTheme" parent="">
+    </style>
+    <style name="actionBarSize" parent="">
+        <item name="wrap_content">0</item>
+    </style>
+    <style name="actionBarSplitStyle" parent="">
+    </style>
+    <style name="actionBarStyle" parent="">
+    </style>
+    <style name="actionBarTabBarStyle" parent="">
+    </style>
+    <style name="actionBarTabStyle" parent="">
+    </style>
+    <style name="actionBarTabTextStyle" parent="">
+    </style>
+    <style name="actionBarTheme" parent="">
+    </style>
+    <style name="actionBarWidgetTheme" parent="">
+    </style>
+    <style name="actionButtonStyle" parent="">
+    </style>
+    <style name="actionDropDownStyle" parent="">
+    </style>
+    <style name="actionLayout" parent="">
+    </style>
+    <style name="actionMenuTextAppearance" parent="">
+    </style>
+    <style name="actionMenuTextColor" parent="">
+    </style>
+    <style name="actionModeBackground" parent="">
+    </style>
+    <style name="actionModeCloseButtonStyle" parent="">
+    </style>
+    <style name="actionModeCloseContentDescription" parent="">
+    </style>
+    <style name="actionModeCloseDrawable" parent="">
+    </style>
+    <style name="actionModeCopyDrawable" parent="">
+    </style>
+    <style name="actionModeCutDrawable" parent="">
+    </style>
+    <style name="actionModeFindDrawable" parent="">
+    </style>
+    <style name="actionModePasteDrawable" parent="">
+    </style>
+    <style name="actionModePopupWindowStyle" parent="">
+    </style>
+    <style name="actionModeSelectAllDrawable" parent="">
+    </style>
+    <style name="actionModeShareDrawable" parent="">
+    </style>
+    <style name="actionModeSplitBackground" parent="">
+    </style>
+    <style name="actionModeStyle" parent="">
+    </style>
+    <style name="actionModeTheme" parent="">
+    </style>
+    <style name="actionModeWebSearchDrawable" parent="">
+    </style>
+    <style name="actionOverflowButtonStyle" parent="">
+    </style>
+    <style name="actionOverflowMenuStyle" parent="">
+    </style>
+    <style name="actionProviderClass" parent="">
+    </style>
+    <style name="actionTextColorAlpha" parent="">
+    </style>
+    <style name="actionViewClass" parent="">
+    </style>
+    <style name="activeIndicatorLabelPadding" parent="">
+    </style>
+    <style name="activityChooserViewStyle" parent="">
+    </style>
+    <style name="addElevationShadow" parent="">
+    </style>
+    <style name="alertDialogButtonGroupStyle" parent="">
+    </style>
+    <style name="alertDialogCenterButtons" parent="">
+    </style>
+    <style name="alertDialogStyle" parent="">
+    </style>
+    <style name="alertDialogTheme" parent="">
+    </style>
+    <style name="allowStacking" parent="">
+    </style>
+    <style name="alpha" parent="">
+    </style>
+    <style name="alphabeticModifiers" parent="">
+        <item name="ALT">0x2</item>
+        <item name="CTRL">0x1000</item>
+        <item name="FUNCTION">0x8</item>
+        <item name="META">0x10000</item>
+        <item name="SHIFT">0x1</item>
+        <item name="SYM">0x4</item>
+    </style>
+    <style name="altSrc" parent="">
+    </style>
+    <style name="animateCircleAngleTo" parent="">
+        <item name="antiClockwise">3</item>
+        <item name="bestChoice">0</item>
+        <item name="clockwise">2</item>
+        <item name="closest">1</item>
+        <item name="constraint">4</item>
+    </style>
+    <style name="animateMenuItems" parent="">
+    </style>
+    <style name="animateNavigationIcon" parent="">
+    </style>
+    <style name="animateRelativeTo" parent="">
+    </style>
+    <style name="animationMode" parent="">
+        <item name="fade">1</item>
+        <item name="slide">0</item>
+    </style>
+    <style name="appBarLayoutStyle" parent="">
+    </style>
+    <style name="applyMotionScene" parent="">
+    </style>
+    <style name="arcMode" parent="">
+        <item name="flip">2</item>
+        <item name="startHorizontal">1</item>
+        <item name="startVertical">0</item>
+    </style>
+    <style name="arrowHeadLength" parent="">
+    </style>
+    <style name="arrowShaftLength" parent="">
+    </style>
+    <style name="attributeName" parent="">
+    </style>
+    <style name="autoAdjustToWithinGrandparentBounds" parent="">
+    </style>
+    <style name="autoCompleteMode" parent="">
+        <item name="continuousVelocity">0</item>
+        <item name="spring">1</item>
+    </style>
+    <style name="autoCompleteTextViewStyle" parent="">
+    </style>
+    <style name="autoShowKeyboard" parent="">
+    </style>
+    <style name="autoSizeMaxTextSize" parent="">
+    </style>
+    <style name="autoSizeMinTextSize" parent="">
+    </style>
+    <style name="autoSizePresetSizes" parent="">
+    </style>
+    <style name="autoSizeStepGranularity" parent="">
+    </style>
+    <style name="autoSizeTextType" parent="">
+        <item name="none">0</item>
+        <item name="uniform">1</item>
+    </style>
+    <style name="autoTransition" parent="">
+        <item name="animateToEnd">4</item>
+        <item name="animateToStart">3</item>
+        <item name="jumpToEnd">2</item>
+        <item name="jumpToStart">1</item>
+        <item name="none">0</item>
+    </style>
+    <style name="backHandlingEnabled" parent="">
+    </style>
+    <style name="background" parent="">
+    </style>
+    <style name="backgroundColor" parent="">
+    </style>
+    <style name="backgroundInsetBottom" parent="">
+    </style>
+    <style name="backgroundInsetEnd" parent="">
+    </style>
+    <style name="backgroundInsetStart" parent="">
+    </style>
+    <style name="backgroundInsetTop" parent="">
+    </style>
+    <style name="backgroundOverlayColorAlpha" parent="">
+    </style>
+    <style name="backgroundSplit" parent="">
+    </style>
+    <style name="backgroundStacked" parent="">
+    </style>
+    <style name="backgroundTint" parent="">
+    </style>
+    <style name="backgroundTintMode" parent="">
+        <item name="add">16</item>
+        <item name="multiply">14</item>
+        <item name="screen">15</item>
+        <item name="src_atop">9</item>
+        <item name="src_in">5</item>
+        <item name="src_over">3</item>
+    </style>
+    <style name="badgeGravity" parent="">
+        <item name="BOTTOM_END">8388693</item>
+        <item name="BOTTOM_START">8388691</item>
+        <item name="TOP_END">8388661</item>
+        <item name="TOP_START">8388659</item>
+    </style>
+    <style name="badgeHeight" parent="">
+    </style>
+    <style name="badgeRadius" parent="">
+    </style>
+    <style name="badgeShapeAppearance" parent="">
+    </style>
+    <style name="badgeShapeAppearanceOverlay" parent="">
+    </style>
+    <style name="badgeStyle" parent="">
+    </style>
+    <style name="badgeText" parent="">
+    </style>
+    <style name="badgeTextAppearance" parent="">
+    </style>
+    <style name="badgeTextColor" parent="">
+    </style>
+    <style name="badgeVerticalPadding" parent="">
+    </style>
+    <style name="badgeWidePadding" parent="">
+    </style>
+    <style name="badgeWidth" parent="">
+    </style>
+    <style name="badgeWithTextHeight" parent="">
+    </style>
+    <style name="badgeWithTextRadius" parent="">
+    </style>
+    <style name="badgeWithTextShapeAppearance" parent="">
+    </style>
+    <style name="badgeWithTextShapeAppearanceOverlay" parent="">
+    </style>
+    <style name="badgeWithTextWidth" parent="">
+    </style>
+    <style name="barLength" parent="">
+    </style>
+    <style name="barrierAllowsGoneWidgets" parent="">
+    </style>
+    <style name="barrierDirection" parent="">
+        <item name="bottom">3</item>
+        <item name="end">6</item>
+        <item name="left">0</item>
+        <item name="right">1</item>
+        <item name="start">5</item>
+        <item name="top">2</item>
+    </style>
+    <style name="barrierMargin" parent="">
+    </style>
+    <style name="behavior_autoHide" parent="">
+    </style>
+    <style name="behavior_autoShrink" parent="">
+    </style>
+    <style name="behavior_draggable" parent="">
+    </style>
+    <style name="behavior_expandedOffset" parent="">
+    </style>
+    <style name="behavior_fitToContents" parent="">
+    </style>
+    <style name="behavior_halfExpandedRatio" parent="">
+    </style>
+    <style name="behavior_hideable" parent="">
+    </style>
+    <style name="behavior_overlapTop" parent="">
+    </style>
+    <style name="behavior_peekHeight" parent="">
+        <item name="auto">-1</item>
+    </style>
+    <style name="behavior_saveFlags" parent="">
+        <item name="all">0xffffffff</item>
+        <item name="fitToContents">0x2</item>
+        <item name="hideable">0x4</item>
+        <item name="none">0x0</item>
+        <item name="peekHeight">0x1</item>
+        <item name="skipCollapsed">0x8</item>
+    </style>
+    <style name="behavior_significantVelocityThreshold" parent="">
+    </style>
+    <style name="behavior_skipCollapsed" parent="">
+    </style>
+    <style name="blendSrc" parent="">
+    </style>
+    <style name="borderRound" parent="">
+    </style>
+    <style name="borderRoundPercent" parent="">
+    </style>
+    <style name="borderWidth" parent="">
+    </style>
+    <style name="borderlessButtonStyle" parent="">
+    </style>
+    <style name="bottomAppBarStyle" parent="">
+    </style>
+    <style name="bottomInsetScrimEnabled" parent="">
+    </style>
+    <style name="bottomNavigationStyle" parent="">
+    </style>
+    <style name="bottomSheetDialogTheme" parent="">
+    </style>
+    <style name="bottomSheetDragHandleStyle" parent="">
+    </style>
+    <style name="bottomSheetStyle" parent="">
+    </style>
+    <style name="boxBackgroundColor" parent="">
+    </style>
+    <style name="boxBackgroundMode" parent="">
+        <item name="filled">1</item>
+        <item name="none">0</item>
+        <item name="outline">2</item>
+    </style>
+    <style name="boxCollapsedPaddingTop" parent="">
+    </style>
+    <style name="boxCornerRadiusBottomEnd" parent="">
+    </style>
+    <style name="boxCornerRadiusBottomStart" parent="">
+    </style>
+    <style name="boxCornerRadiusTopEnd" parent="">
+    </style>
+    <style name="boxCornerRadiusTopStart" parent="">
+    </style>
+    <style name="boxStrokeColor" parent="">
+    </style>
+    <style name="boxStrokeErrorColor" parent="">
+    </style>
+    <style name="boxStrokeWidth" parent="">
+    </style>
+    <style name="boxStrokeWidthFocused" parent="">
+    </style>
+    <style name="brightness" parent="">
+    </style>
+    <style name="buttonBarButtonStyle" parent="">
+    </style>
+    <style name="buttonBarNegativeButtonStyle" parent="">
+    </style>
+    <style name="buttonBarNeutralButtonStyle" parent="">
+    </style>
+    <style name="buttonBarPositiveButtonStyle" parent="">
+    </style>
+    <style name="buttonBarStyle" parent="">
+    </style>
+    <style name="buttonCompat" parent="">
+    </style>
+    <style name="buttonGravity" parent="">
+        <item name="bottom">0x50</item>
+        <item name="center_vertical">0x10</item>
+        <item name="top">0x30</item>
+    </style>
+    <style name="buttonIcon" parent="">
+    </style>
+    <style name="buttonIconDimen" parent="">
+    </style>
+    <style name="buttonIconTint" parent="">
+    </style>
+    <style name="buttonIconTintMode" parent="">
+        <item name="add">16</item>
+        <item name="multiply">14</item>
+        <item name="screen">15</item>
+        <item name="src_atop">9</item>
+        <item name="src_in">5</item>
+        <item name="src_over">3</item>
+    </style>
+    <style name="buttonPanelSideLayout" parent="">
+    </style>
+    <style name="buttonSize" parent="">
+        <item name="icon_only">2</item>
+        <item name="standard">0</item>
+        <item name="wide">1</item>
+    </style>
+    <style name="buttonStyle" parent="">
+    </style>
+    <style name="buttonStyleSmall" parent="">
+    </style>
+    <style name="buttonTint" parent="">
+    </style>
+    <style name="buttonTintMode" parent="">
+        <item name="add">16</item>
+        <item name="multiply">14</item>
+        <item name="screen">15</item>
+        <item name="src_atop">9</item>
+        <item name="src_in">5</item>
+        <item name="src_over">3</item>
+    </style>
+    <style name="cardBackgroundColor" parent="">
+    </style>
+    <style name="cardCornerRadius" parent="">
+    </style>
+    <style name="cardElevation" parent="">
+    </style>
+    <style name="cardForegroundColor" parent="">
+    </style>
+    <style name="cardMaxElevation" parent="">
+    </style>
+    <style name="cardPreventCornerOverlap" parent="">
+    </style>
+    <style name="cardUseCompatPadding" parent="">
+    </style>
+    <style name="cardViewStyle" parent="">
+    </style>
+    <style name="carousel_alignment" parent="">
+        <item name="center">1</item>
+        <item name="start">0</item>
+    </style>
+    <style name="carousel_backwardTransition" parent="">
+    </style>
+    <style name="carousel_emptyViewsBehavior" parent="">
+        <item name="gone">8</item>
+        <item name="invisible">4</item>
+    </style>
+    <style name="carousel_firstView" parent="">
+    </style>
+    <style name="carousel_forwardTransition" parent="">
+    </style>
+    <style name="carousel_infinite" parent="">
+    </style>
+    <style name="carousel_nextState" parent="">
+    </style>
+    <style name="carousel_previousState" parent="">
+    </style>
+    <style name="carousel_touchUpMode" parent="">
+        <item name="carryVelocity">2</item>
+        <item name="immediateStop">1</item>
+    </style>
+    <style name="carousel_touchUp_dampeningFactor" parent="">
+    </style>
+    <style name="carousel_touchUp_velocityThreshold" parent="">
+    </style>
+    <style name="centerIfNoTextEnabled" parent="">
+    </style>
+    <style name="chainUseRtl" parent="">
+    </style>
+    <style name="checkMarkCompat" parent="">
+    </style>
+    <style name="checkMarkTint" parent="">
+    </style>
+    <style name="checkMarkTintMode" parent="">
+        <item name="add">16</item>
+        <item name="multiply">14</item>
+        <item name="screen">15</item>
+        <item name="src_atop">9</item>
+        <item name="src_in">5</item>
+        <item name="src_over">3</item>
+    </style>
+    <style name="checkboxStyle" parent="">
+    </style>
+    <style name="checkedButton" parent="">
+    </style>
+    <style name="checkedChip" parent="">
+    </style>
+    <style name="checkedIcon" parent="">
+    </style>
+    <style name="checkedIconEnabled" parent="">
+    </style>
+    <style name="checkedIconGravity" parent="">
+        <item name="BOTTOM_END">8388693</item>
+        <item name="BOTTOM_START">8388691</item>
+        <item name="TOP_END">8388661</item>
+        <item name="TOP_START">8388659</item>
+    </style>
+    <style name="checkedIconMargin" parent="">
+    </style>
+    <style name="checkedIconSize" parent="">
+    </style>
+    <style name="checkedIconTint" parent="">
+    </style>
+    <style name="checkedIconVisible" parent="">
+    </style>
+    <style name="checkedState" parent="">
+        <item name="checked">1</item>
+        <item name="indeterminate">2</item>
+        <item name="unchecked">0</item>
+    </style>
+    <style name="checkedTextViewStyle" parent="">
+    </style>
+    <style name="chipBackgroundColor" parent="">
+    </style>
+    <style name="chipCornerRadius" parent="">
+    </style>
+    <style name="chipEndPadding" parent="">
+    </style>
+    <style name="chipGroupStyle" parent="">
+    </style>
+    <style name="chipIcon" parent="">
+    </style>
+    <style name="chipIconEnabled" parent="">
+    </style>
+    <style name="chipIconSize" parent="">
+    </style>
+    <style name="chipIconTint" parent="">
+    </style>
+    <style name="chipIconVisible" parent="">
+    </style>
+    <style name="chipMinHeight" parent="">
+    </style>
+    <style name="chipMinTouchTargetSize" parent="">
+    </style>
+    <style name="chipSpacing" parent="">
+    </style>
+    <style name="chipSpacingHorizontal" parent="">
+    </style>
+    <style name="chipSpacingVertical" parent="">
+    </style>
+    <style name="chipStandaloneStyle" parent="">
+    </style>
+    <style name="chipStartPadding" parent="">
+    </style>
+    <style name="chipStrokeColor" parent="">
+    </style>
+    <style name="chipStrokeWidth" parent="">
+    </style>
+    <style name="chipStyle" parent="">
+    </style>
+    <style name="chipSurfaceColor" parent="">
+    </style>
+    <style name="circleCrop" parent="">
+    </style>
+    <style name="circleRadius" parent="">
+    </style>
+    <style name="circularProgressIndicatorStyle" parent="">
+    </style>
+    <style name="circularflow_angles" parent="">
+    </style>
+    <style name="circularflow_defaultAngle" parent="">
+    </style>
+    <style name="circularflow_defaultRadius" parent="">
+    </style>
+    <style name="circularflow_radiusInDP" parent="">
+    </style>
+    <style name="circularflow_viewCenter" parent="">
+    </style>
+    <style name="clearsTag" parent="">
+    </style>
+    <style name="clickAction" parent="">
+        <item name="jumpToEnd">0x100</item>
+        <item name="jumpToStart">0x1000</item>
+        <item name="toggle">0x11</item>
+        <item name="transitionToEnd">0x1</item>
+        <item name="transitionToStart">0x10</item>
+    </style>
+    <style name="clockFaceBackgroundColor" parent="">
+    </style>
+    <style name="clockHandColor" parent="">
+    </style>
+    <style name="clockIcon" parent="">
+    </style>
+    <style name="clockNumberTextColor" parent="">
+    </style>
+    <style name="closeIcon" parent="">
+    </style>
+    <style name="closeIconEnabled" parent="">
+    </style>
+    <style name="closeIconEndPadding" parent="">
+    </style>
+    <style name="closeIconSize" parent="">
+    </style>
+    <style name="closeIconStartPadding" parent="">
+    </style>
+    <style name="closeIconTint" parent="">
+    </style>
+    <style name="closeIconVisible" parent="">
+    </style>
+    <style name="closeItemLayout" parent="">
+    </style>
+    <style name="collapseContentDescription" parent="">
+    </style>
+    <style name="collapseIcon" parent="">
+    </style>
+    <style name="collapsedSize" parent="">
+    </style>
+    <style name="collapsedTitleGravity" parent="">
+        <item name="bottom">0x50</item>
+        <item name="center">0x11</item>
+        <item name="center_horizontal">0x1</item>
+        <item name="center_vertical">0x10</item>
+        <item name="end">0x800005</item>
+        <item name="fill_vertical">0x70</item>
+        <item name="left">0x3</item>
+        <item name="right">0x5</item>
+        <item name="start">0x800003</item>
+        <item name="top">0x30</item>
+    </style>
+    <style name="collapsedTitleTextAppearance" parent="">
+    </style>
+    <style name="collapsedTitleTextColor" parent="">
+    </style>
+    <style name="collapsingToolbarLayoutLargeSize" parent="">
+    </style>
+    <style name="collapsingToolbarLayoutLargeStyle" parent="">
+    </style>
+    <style name="collapsingToolbarLayoutMediumSize" parent="">
+    </style>
+    <style name="collapsingToolbarLayoutMediumStyle" parent="">
+    </style>
+    <style name="collapsingToolbarLayoutStyle" parent="">
+    </style>
+    <style name="color" parent="">
+    </style>
+    <style name="colorAccent" parent="">
+    </style>
+    <style name="colorBackgroundFloating" parent="">
+    </style>
+    <style name="colorButtonNormal" parent="">
+    </style>
+    <style name="colorContainer" parent="">
+    </style>
+    <style name="colorControlActivated" parent="">
+    </style>
+    <style name="colorControlHighlight" parent="">
+    </style>
+    <style name="colorControlNormal" parent="">
+    </style>
+    <style name="colorError" parent="">
+    </style>
+    <style name="colorErrorContainer" parent="">
+    </style>
+    <style name="colorOnBackground" parent="">
+    </style>
+    <style name="colorOnContainer" parent="">
+    </style>
+    <style name="colorOnContainerUnchecked" parent="">
+    </style>
+    <style name="colorOnError" parent="">
+    </style>
+    <style name="colorOnErrorContainer" parent="">
+    </style>
+    <style name="colorOnPrimary" parent="">
+    </style>
+    <style name="colorOnPrimaryContainer" parent="">
+    </style>
+    <style name="colorOnPrimaryFixed" parent="">
+    </style>
+    <style name="colorOnPrimaryFixedVariant" parent="">
+    </style>
+    <style name="colorOnPrimarySurface" parent="">
+    </style>
+    <style name="colorOnSecondary" parent="">
+    </style>
+    <style name="colorOnSecondaryContainer" parent="">
+    </style>
+    <style name="colorOnSecondaryFixed" parent="">
+    </style>
+    <style name="colorOnSecondaryFixedVariant" parent="">
+    </style>
+    <style name="colorOnSurface" parent="">
+    </style>
+    <style name="colorOnSurfaceInverse" parent="">
+    </style>
+    <style name="colorOnSurfaceVariant" parent="">
+    </style>
+    <style name="colorOnTertiary" parent="">
+    </style>
+    <style name="colorOnTertiaryContainer" parent="">
+    </style>
+    <style name="colorOnTertiaryFixed" parent="">
+    </style>
+    <style name="colorOnTertiaryFixedVariant" parent="">
+    </style>
+    <style name="colorOutline" parent="">
+    </style>
+    <style name="colorOutlineVariant" parent="">
+    </style>
+    <style name="colorPrimary" parent="">
+    </style>
+    <style name="colorPrimaryContainer" parent="">
+    </style>
+    <style name="colorPrimaryDark" parent="">
+    </style>
+    <style name="colorPrimaryFixed" parent="">
+    </style>
+    <style name="colorPrimaryFixedDim" parent="">
+    </style>
+    <style name="colorPrimaryInverse" parent="">
+    </style>
+    <style name="colorPrimarySurface" parent="">
+    </style>
+    <style name="colorPrimaryVariant" parent="">
+    </style>
+    <style name="colorScheme" parent="">
+        <item name="auto">2</item>
+        <item name="dark">0</item>
+        <item name="light">1</item>
+    </style>
+    <style name="colorSecondary" parent="">
+    </style>
+    <style name="colorSecondaryContainer" parent="">
+    </style>
+    <style name="colorSecondaryFixed" parent="">
+    </style>
+    <style name="colorSecondaryFixedDim" parent="">
+    </style>
+    <style name="colorSecondaryVariant" parent="">
+    </style>
+    <style name="colorSurface" parent="">
+    </style>
+    <style name="colorSurfaceBright" parent="">
+    </style>
+    <style name="colorSurfaceContainer" parent="">
+    </style>
+    <style name="colorSurfaceContainerHigh" parent="">
+    </style>
+    <style name="colorSurfaceContainerHighest" parent="">
+    </style>
+    <style name="colorSurfaceContainerLow" parent="">
+    </style>
+    <style name="colorSurfaceContainerLowest" parent="">
+    </style>
+    <style name="colorSurfaceDim" parent="">
+    </style>
+    <style name="colorSurfaceInverse" parent="">
+    </style>
+    <style name="colorSurfaceVariant" parent="">
+    </style>
+    <style name="colorSwitchThumbNormal" parent="">
+    </style>
+    <style name="colorTertiary" parent="">
+    </style>
+    <style name="colorTertiaryContainer" parent="">
+    </style>
+    <style name="colorTertiaryFixed" parent="">
+    </style>
+    <style name="colorTertiaryFixedDim" parent="">
+    </style>
+    <style name="commitIcon" parent="">
+    </style>
+    <style name="compatShadowEnabled" parent="">
+    </style>
+    <style name="constraintRotate" parent="">
+        <item name="left">2</item>
+        <item name="none">0</item>
+        <item name="right">1</item>
+        <item name="x_left">4</item>
+        <item name="x_right">3</item>
+    </style>
+    <style name="constraintSet" parent="">
+    </style>
+    <style name="constraintSetEnd" parent="">
+    </style>
+    <style name="constraintSetStart" parent="">
+    </style>
+    <style name="constraint_referenced_ids" parent="">
+    </style>
+    <style name="constraint_referenced_tags" parent="">
+    </style>
+    <style name="constraints" parent="">
+    </style>
+    <style name="content" parent="">
+    </style>
+    <style name="contentDescription" parent="">
+    </style>
+    <style name="contentInsetEnd" parent="">
+    </style>
+    <style name="contentInsetEndWithActions" parent="">
+    </style>
+    <style name="contentInsetLeft" parent="">
+    </style>
+    <style name="contentInsetRight" parent="">
+    </style>
+    <style name="contentInsetStart" parent="">
+    </style>
+    <style name="contentInsetStartWithNavigation" parent="">
+    </style>
+    <style name="contentPadding" parent="">
+    </style>
+    <style name="contentPaddingBottom" parent="">
+    </style>
+    <style name="contentPaddingEnd" parent="">
+    </style>
+    <style name="contentPaddingLeft" parent="">
+    </style>
+    <style name="contentPaddingRight" parent="">
+    </style>
+    <style name="contentPaddingStart" parent="">
+    </style>
+    <style name="contentPaddingTop" parent="">
+    </style>
+    <style name="contentScrim" parent="">
+    </style>
+    <style name="contrast" parent="">
+    </style>
+    <style name="controlBackground" parent="">
+    </style>
+    <style name="coordinatorLayoutStyle" parent="">
+    </style>
+    <style name="coplanarSiblingViewId" parent="">
+    </style>
+    <style name="cornerFamily" parent="">
+        <item name="cut">1</item>
+        <item name="rounded">0</item>
+    </style>
+    <style name="cornerFamilyBottomLeft" parent="">
+        <item name="cut">1</item>
+        <item name="rounded">0</item>
+    </style>
+    <style name="cornerFamilyBottomRight" parent="">
+        <item name="cut">1</item>
+        <item name="rounded">0</item>
+    </style>
+    <style name="cornerFamilyTopLeft" parent="">
+        <item name="cut">1</item>
+        <item name="rounded">0</item>
+    </style>
+    <style name="cornerFamilyTopRight" parent="">
+        <item name="cut">1</item>
+        <item name="rounded">0</item>
+    </style>
+    <style name="cornerRadius" parent="">
+    </style>
+    <style name="cornerSize" parent="">
+    </style>
+    <style name="cornerSizeBottomLeft" parent="">
+    </style>
+    <style name="cornerSizeBottomRight" parent="">
+    </style>
+    <style name="cornerSizeTopLeft" parent="">
+    </style>
+    <style name="cornerSizeTopRight" parent="">
+    </style>
+    <style name="counterEnabled" parent="">
+    </style>
+    <style name="counterMaxLength" parent="">
+    </style>
+    <style name="counterOverflowTextAppearance" parent="">
+    </style>
+    <style name="counterOverflowTextColor" parent="">
+    </style>
+    <style name="counterTextAppearance" parent="">
+    </style>
+    <style name="counterTextColor" parent="">
+    </style>
+    <style name="crossfade" parent="">
+    </style>
+    <style name="currentState" parent="">
+    </style>
+    <style name="cursorColor" parent="">
+    </style>
+    <style name="cursorErrorColor" parent="">
+    </style>
+    <style name="curveFit" parent="">
+        <item name="linear">1</item>
+        <item name="spline">0</item>
+    </style>
+    <style name="customBoolean" parent="">
+    </style>
+    <style name="customColorDrawableValue" parent="">
+    </style>
+    <style name="customColorValue" parent="">
+    </style>
+    <style name="customDimension" parent="">
+    </style>
+    <style name="customFloatValue" parent="">
+    </style>
+    <style name="customIntegerValue" parent="">
+    </style>
+    <style name="customNavigationLayout" parent="">
+    </style>
+    <style name="customPixelDimension" parent="">
+    </style>
+    <style name="customReference" parent="">
+    </style>
+    <style name="customStringValue" parent="">
+    </style>
+    <style name="dayInvalidStyle" parent="">
+    </style>
+    <style name="daySelectedStyle" parent="">
+    </style>
+    <style name="dayStyle" parent="">
+    </style>
+    <style name="dayTodayStyle" parent="">
+    </style>
+    <style name="defaultDuration" parent="">
+    </style>
+    <style name="defaultMarginsEnabled" parent="">
+    </style>
+    <style name="defaultQueryHint" parent="">
+    </style>
+    <style name="defaultScrollFlagsEnabled" parent="">
+    </style>
+    <style name="defaultState" parent="">
+    </style>
+    <style name="deltaPolarAngle" parent="">
+    </style>
+    <style name="deltaPolarRadius" parent="">
+    </style>
+    <style name="deriveConstraintsFrom" parent="">
+    </style>
+    <style name="dialogCornerRadius" parent="">
+    </style>
+    <style name="dialogPreferredPadding" parent="">
+    </style>
+    <style name="dialogTheme" parent="">
+    </style>
+    <style name="displayOptions" parent="">
+        <item name="disableHome">0x20</item>
+        <item name="homeAsUp">0x4</item>
+        <item name="none">0x0</item>
+        <item name="showCustom">0x10</item>
+        <item name="showHome">0x2</item>
+        <item name="showTitle">0x8</item>
+        <item name="useLogo">0x1</item>
+    </style>
+    <style name="divider" parent="">
+    </style>
+    <style name="dividerColor" parent="">
+    </style>
+    <style name="dividerHorizontal" parent="">
+    </style>
+    <style name="dividerInsetEnd" parent="">
+    </style>
+    <style name="dividerInsetStart" parent="">
+    </style>
+    <style name="dividerPadding" parent="">
+    </style>
+    <style name="dividerThickness" parent="">
+    </style>
+    <style name="dividerVertical" parent="">
+    </style>
+    <style name="dragDirection" parent="">
+        <item name="dragAnticlockwise">7</item>
+        <item name="dragClockwise">6</item>
+        <item name="dragDown">1</item>
+        <item name="dragEnd">5</item>
+        <item name="dragLeft">2</item>
+        <item name="dragRight">3</item>
+        <item name="dragStart">4</item>
+        <item name="dragUp">0</item>
+    </style>
+    <style name="dragScale" parent="">
+    </style>
+    <style name="dragThreshold" parent="">
+    </style>
+    <style name="drawPath" parent="">
+        <item name="asConfigured">4</item>
+        <item name="deltaRelative">3</item>
+        <item name="none">0</item>
+        <item name="path">1</item>
+        <item name="pathRelative">2</item>
+        <item name="rectangles">5</item>
+    </style>
+    <style name="drawableBottomCompat" parent="">
+    </style>
+    <style name="drawableEndCompat" parent="">
+    </style>
+    <style name="drawableLeftCompat" parent="">
+    </style>
+    <style name="drawableRightCompat" parent="">
+    </style>
+    <style name="drawableSize" parent="">
+    </style>
+    <style name="drawableStartCompat" parent="">
+    </style>
+    <style name="drawableTint" parent="">
+    </style>
+    <style name="drawableTintMode" parent="">
+        <item name="add">16</item>
+        <item name="multiply">14</item>
+        <item name="screen">15</item>
+        <item name="src_atop">9</item>
+        <item name="src_in">5</item>
+        <item name="src_over">3</item>
+    </style>
+    <style name="drawableTopCompat" parent="">
+    </style>
+    <style name="drawerArrowStyle" parent="">
+    </style>
+    <style name="drawerLayoutCornerSize" parent="">
+    </style>
+    <style name="drawerLayoutStyle" parent="">
+    </style>
+    <style name="dropDownBackgroundTint" parent="">
+    </style>
+    <style name="dropDownListViewStyle" parent="">
+    </style>
+    <style name="dropdownListPreferredItemHeight" parent="">
+    </style>
+    <style name="duration" parent="">
+    </style>
+    <style name="dynamicColorThemeOverlay" parent="">
+    </style>
+    <style name="editTextBackground" parent="">
+    </style>
+    <style name="editTextColor" parent="">
+    </style>
+    <style name="editTextStyle" parent="">
+    </style>
+    <style name="elevation" parent="">
+    </style>
+    <style name="elevationOverlayAccentColor" parent="">
+    </style>
+    <style name="elevationOverlayColor" parent="">
+    </style>
+    <style name="elevationOverlayEnabled" parent="">
+    </style>
+    <style name="emojiCompatEnabled" parent="">
+    </style>
+    <style name="enableEdgeToEdge" parent="">
+    </style>
+    <style name="endIconCheckable" parent="">
+    </style>
+    <style name="endIconContentDescription" parent="">
+    </style>
+    <style name="endIconDrawable" parent="">
+    </style>
+    <style name="endIconMinSize" parent="">
+    </style>
+    <style name="endIconMode" parent="">
+        <item name="clear_text">2</item>
+        <item name="custom">-1</item>
+        <item name="dropdown_menu">3</item>
+        <item name="none">0</item>
+        <item name="password_toggle">1</item>
+    </style>
+    <style name="endIconScaleType" parent="">
+        <item name="center">4</item>
+        <item name="centerCrop">5</item>
+        <item name="centerInside">6</item>
+        <item name="fitCenter">2</item>
+        <item name="fitEnd">3</item>
+        <item name="fitStart">1</item>
+        <item name="fitXY">0</item>
+    </style>
+    <style name="endIconTint" parent="">
+    </style>
+    <style name="endIconTintMode" parent="">
+        <item name="multiply">14</item>
+        <item name="screen">15</item>
+        <item name="src_atop">9</item>
+        <item name="src_in">5</item>
+        <item name="src_over">3</item>
+    </style>
+    <style name="enforceMaterialTheme" parent="">
+    </style>
+    <style name="enforceTextAppearance" parent="">
+    </style>
+    <style name="ensureMinTouchTargetSize" parent="">
+    </style>
+    <style name="errorAccessibilityLabel" parent="">
+    </style>
+    <style name="errorAccessibilityLiveRegion" parent="">
+    </style>
+    <style name="errorContentDescription" parent="">
+    </style>
+    <style name="errorEnabled" parent="">
+    </style>
+    <style name="errorIconDrawable" parent="">
+    </style>
+    <style name="errorIconTint" parent="">
+    </style>
+    <style name="errorIconTintMode" parent="">
+        <item name="multiply">14</item>
+        <item name="screen">15</item>
+        <item name="src_atop">9</item>
+        <item name="src_in">5</item>
+        <item name="src_over">3</item>
+    </style>
+    <style name="errorShown" parent="">
+    </style>
+    <style name="errorTextAppearance" parent="">
+    </style>
+    <style name="errorTextColor" parent="">
+    </style>
+    <style name="expandActivityOverflowButtonDrawable" parent="">
+    </style>
+    <style name="expanded" parent="">
+    </style>
+    <style name="expandedHintEnabled" parent="">
+    </style>
+    <style name="expandedTitleGravity" parent="">
+        <item name="bottom">0x50</item>
+        <item name="center">0x11</item>
+        <item name="center_horizontal">0x1</item>
+        <item name="center_vertical">0x10</item>
+        <item name="end">0x800005</item>
+        <item name="fill_vertical">0x70</item>
+        <item name="left">0x3</item>
+        <item name="right">0x5</item>
+        <item name="start">0x800003</item>
+        <item name="top">0x30</item>
+    </style>
+    <style name="expandedTitleMargin" parent="">
+    </style>
+    <style name="expandedTitleMarginBottom" parent="">
+    </style>
+    <style name="expandedTitleMarginEnd" parent="">
+    </style>
+    <style name="expandedTitleMarginStart" parent="">
+    </style>
+    <style name="expandedTitleMarginTop" parent="">
+    </style>
+    <style name="expandedTitleTextAppearance" parent="">
+    </style>
+    <style name="expandedTitleTextColor" parent="">
+    </style>
+    <style name="extendMotionSpec" parent="">
+    </style>
+    <style name="extendStrategy" parent="">
+        <item name="auto">0</item>
+        <item name="match_parent">2</item>
+        <item name="wrap_content">1</item>
+    </style>
+    <style name="extendedFloatingActionButtonPrimaryStyle" parent="">
+    </style>
+    <style name="extendedFloatingActionButtonSecondaryStyle" parent="">
+    </style>
+    <style name="extendedFloatingActionButtonStyle" parent="">
+    </style>
+    <style name="extendedFloatingActionButtonSurfaceStyle" parent="">
+    </style>
+    <style name="extendedFloatingActionButtonTertiaryStyle" parent="">
+    </style>
+    <style name="extraMultilineHeightEnabled" parent="">
+    </style>
+    <style name="fabAlignmentMode" parent="">
+        <item name="center">0</item>
+        <item name="end">1</item>
+    </style>
+    <style name="fabAlignmentModeEndMargin" parent="">
+    </style>
+    <style name="fabAnchorMode" parent="">
+        <item name="cradle">1</item>
+        <item name="embed">0</item>
+    </style>
+    <style name="fabAnimationMode" parent="">
+        <item name="scale">0</item>
+        <item name="slide">1</item>
+    </style>
+    <style name="fabCradleMargin" parent="">
+    </style>
+    <style name="fabCradleRoundedCornerRadius" parent="">
+    </style>
+    <style name="fabCradleVerticalOffset" parent="">
+    </style>
+    <style name="fabCustomSize" parent="">
+    </style>
+    <style name="fabSize" parent="">
+        <item name="auto">-1</item>
+        <item name="mini">1</item>
+        <item name="normal">0</item>
+    </style>
+    <style name="fastScrollEnabled" parent="">
+    </style>
+    <style name="fastScrollHorizontalThumbDrawable" parent="">
+    </style>
+    <style name="fastScrollHorizontalTrackDrawable" parent="">
+    </style>
+    <style name="fastScrollVerticalThumbDrawable" parent="">
+    </style>
+    <style name="fastScrollVerticalTrackDrawable" parent="">
+    </style>
+    <style name="firstBaselineToTopHeight" parent="">
+    </style>
+    <style name="floatingActionButtonLargePrimaryStyle" parent="">
+    </style>
+    <style name="floatingActionButtonLargeSecondaryStyle" parent="">
+    </style>
+    <style name="floatingActionButtonLargeStyle" parent="">
+    </style>
+    <style name="floatingActionButtonLargeSurfaceStyle" parent="">
+    </style>
+    <style name="floatingActionButtonLargeTertiaryStyle" parent="">
+    </style>
+    <style name="floatingActionButtonPrimaryStyle" parent="">
+    </style>
+    <style name="floatingActionButtonSecondaryStyle" parent="">
+    </style>
+    <style name="floatingActionButtonSmallPrimaryStyle" parent="">
+    </style>
+    <style name="floatingActionButtonSmallSecondaryStyle" parent="">
+    </style>
+    <style name="floatingActionButtonSmallStyle" parent="">
+    </style>
+    <style name="floatingActionButtonSmallSurfaceStyle" parent="">
+    </style>
+    <style name="floatingActionButtonSmallTertiaryStyle" parent="">
+    </style>
+    <style name="floatingActionButtonStyle" parent="">
+    </style>
+    <style name="floatingActionButtonSurfaceStyle" parent="">
+    </style>
+    <style name="floatingActionButtonTertiaryStyle" parent="">
+    </style>
+    <style name="flow_firstHorizontalBias" parent="">
+    </style>
+    <style name="flow_firstHorizontalStyle" parent="">
+        <item name="packed">2</item>
+        <item name="spread">0</item>
+        <item name="spread_inside">1</item>
+    </style>
+    <style name="flow_firstVerticalBias" parent="">
+    </style>
+    <style name="flow_firstVerticalStyle" parent="">
+        <item name="packed">2</item>
+        <item name="spread">0</item>
+        <item name="spread_inside">1</item>
+    </style>
+    <style name="flow_horizontalAlign" parent="">
+        <item name="center">2</item>
+        <item name="end">1</item>
+        <item name="start">0</item>
+    </style>
+    <style name="flow_horizontalBias" parent="">
+    </style>
+    <style name="flow_horizontalGap" parent="">
+    </style>
+    <style name="flow_horizontalStyle" parent="">
+        <item name="packed">2</item>
+        <item name="spread">0</item>
+        <item name="spread_inside">1</item>
+    </style>
+    <style name="flow_lastHorizontalBias" parent="">
+    </style>
+    <style name="flow_lastHorizontalStyle" parent="">
+        <item name="packed">2</item>
+        <item name="spread">0</item>
+        <item name="spread_inside">1</item>
+    </style>
+    <style name="flow_lastVerticalBias" parent="">
+    </style>
+    <style name="flow_lastVerticalStyle" parent="">
+        <item name="packed">2</item>
+        <item name="spread">0</item>
+        <item name="spread_inside">1</item>
+    </style>
+    <style name="flow_maxElementsWrap" parent="">
+    </style>
+    <style name="flow_padding" parent="">
+    </style>
+    <style name="flow_verticalAlign" parent="">
+        <item name="baseline">3</item>
+        <item name="bottom">1</item>
+        <item name="center">2</item>
+        <item name="top">0</item>
+    </style>
+    <style name="flow_verticalBias" parent="">
+    </style>
+    <style name="flow_verticalGap" parent="">
+    </style>
+    <style name="flow_verticalStyle" parent="">
+        <item name="packed">2</item>
+        <item name="spread">0</item>
+        <item name="spread_inside">1</item>
+    </style>
+    <style name="flow_wrapMode" parent="">
+        <item name="aligned">2</item>
+        <item name="chain">1</item>
+        <item name="chain2">3</item>
+        <item name="none">0</item>
+    </style>
+    <style name="font" parent="">
+    </style>
+    <style name="fontFamily" parent="">
+    </style>
+    <style name="fontProviderAuthority" parent="">
+    </style>
+    <style name="fontProviderCerts" parent="">
+    </style>
+    <style name="fontProviderFetchStrategy" parent="">
+        <item name="async">1</item>
+        <item name="blocking">0</item>
+    </style>
+    <style name="fontProviderFetchTimeout" parent="">
+        <item name="forever">-1</item>
+    </style>
+    <style name="fontProviderPackage" parent="">
+    </style>
+    <style name="fontProviderQuery" parent="">
+    </style>
+    <style name="fontProviderSystemFontFamily" parent="">
+    </style>
+    <style name="fontStyle" parent="">
+        <item name="italic">1</item>
+        <item name="normal">0</item>
+    </style>
+    <style name="fontVariationSettings" parent="">
+    </style>
+    <style name="fontWeight" parent="">
+    </style>
+    <style name="forceApplySystemWindowInsetTop" parent="">
+    </style>
+    <style name="forceDefaultNavigationOnClickListener" parent="">
+    </style>
+    <style name="foregroundInsidePadding" parent="">
+    </style>
+    <style name="framePosition" parent="">
+    </style>
+    <style name="gapBetweenBars" parent="">
+    </style>
+    <style name="gestureInsetBottomIgnored" parent="">
+    </style>
+    <style name="goIcon" parent="">
+    </style>
+    <style name="guidelineUseRtl" parent="">
+    </style>
+    <style name="haloColor" parent="">
+    </style>
+    <style name="haloRadius" parent="">
+    </style>
+    <style name="headerLayout" parent="">
+    </style>
+    <style name="height" parent="">
+    </style>
+    <style name="helperText" parent="">
+    </style>
+    <style name="helperTextEnabled" parent="">
+    </style>
+    <style name="helperTextTextAppearance" parent="">
+    </style>
+    <style name="helperTextTextColor" parent="">
+    </style>
+    <style name="hideAnimationBehavior" parent="">
+        <item name="inward">2</item>
+        <item name="none">0</item>
+        <item name="outward">1</item>
+    </style>
+    <style name="hideMotionSpec" parent="">
+    </style>
+    <style name="hideNavigationIcon" parent="">
+    </style>
+    <style name="hideOnContentScroll" parent="">
+    </style>
+    <style name="hideOnScroll" parent="">
+    </style>
+    <style name="hintAnimationEnabled" parent="">
+    </style>
+    <style name="hintEnabled" parent="">
+    </style>
+    <style name="hintTextAppearance" parent="">
+    </style>
+    <style name="hintTextColor" parent="">
+    </style>
+    <style name="homeAsUpIndicator" parent="">
+    </style>
+    <style name="homeLayout" parent="">
+    </style>
+    <style name="horizontalOffset" parent="">
+    </style>
+    <style name="horizontalOffsetWithText" parent="">
+    </style>
+    <style name="hoveredFocusedTranslationZ" parent="">
+    </style>
+    <style name="icon" parent="">
+    </style>
+    <style name="iconEndPadding" parent="">
+    </style>
+    <style name="iconGravity" parent="">
+        <item name="end">0x3</item>
+        <item name="start">0x1</item>
+        <item name="textEnd">0x4</item>
+        <item name="textStart">0x2</item>
+        <item name="textTop">0x20</item>
+        <item name="top">0x10</item>
+    </style>
+    <style name="iconPadding" parent="">
+    </style>
+    <style name="iconSize" parent="">
+    </style>
+    <style name="iconStartPadding" parent="">
+    </style>
+    <style name="iconTint" parent="">
+    </style>
+    <style name="iconTintMode" parent="">
+        <item name="add">16</item>
+        <item name="multiply">14</item>
+        <item name="screen">15</item>
+        <item name="src_atop">9</item>
+        <item name="src_in">5</item>
+        <item name="src_over">3</item>
+    </style>
+    <style name="iconifiedByDefault" parent="">
+    </style>
+    <style name="ifTagNotSet" parent="">
+    </style>
+    <style name="ifTagSet" parent="">
+    </style>
+    <style name="imageAspectRatio" parent="">
+    </style>
+    <style name="imageAspectRatioAdjust" parent="">
+        <item name="adjust_height">2</item>
+        <item name="adjust_width">1</item>
+        <item name="none">0</item>
+    </style>
+    <style name="imageButtonStyle" parent="">
+    </style>
+    <style name="imagePanX" parent="">
+    </style>
+    <style name="imagePanY" parent="">
+    </style>
+    <style name="imageRotate" parent="">
+    </style>
+    <style name="imageZoom" parent="">
+    </style>
+    <style name="indeterminateAnimationType" parent="">
+        <item name="contiguous">0</item>
+        <item name="disjoint">1</item>
+    </style>
+    <style name="indeterminateProgressStyle" parent="">
+    </style>
+    <style name="indicatorColor" parent="">
+    </style>
+    <style name="indicatorDirectionCircular" parent="">
+        <item name="clockwise">0</item>
+        <item name="counterclockwise">1</item>
+    </style>
+    <style name="indicatorDirectionLinear" parent="">
+        <item name="endToStart">3</item>
+        <item name="leftToRight">0</item>
+        <item name="rightToLeft">1</item>
+        <item name="startToEnd">2</item>
+    </style>
+    <style name="indicatorInset" parent="">
+    </style>
+    <style name="indicatorSize" parent="">
+    </style>
+    <style name="initialActivityCount" parent="">
+    </style>
+    <style name="insetForeground" parent="">
+    </style>
+    <style name="isLightTheme" parent="">
+    </style>
+    <style name="isMaterial3DynamicColorApplied" parent="">
+    </style>
+    <style name="isMaterial3Theme" parent="">
+    </style>
+    <style name="isMaterialTheme" parent="">
+    </style>
+    <style name="itemActiveIndicatorStyle" parent="">
+    </style>
+    <style name="itemBackground" parent="">
+    </style>
+    <style name="itemFillColor" parent="">
+    </style>
+    <style name="itemHorizontalPadding" parent="">
+    </style>
+    <style name="itemHorizontalTranslationEnabled" parent="">
+    </style>
+    <style name="itemIconPadding" parent="">
+    </style>
+    <style name="itemIconSize" parent="">
+    </style>
+    <style name="itemIconTint" parent="">
+    </style>
+    <style name="itemMaxLines" parent="">
+        <item name="?0x1000001">1</item>
+    </style>
+    <style name="itemMinHeight" parent="">
+    </style>
+    <style name="itemPadding" parent="">
+    </style>
+    <style name="itemPaddingBottom" parent="">
+    </style>
+    <style name="itemPaddingTop" parent="">
+    </style>
+    <style name="itemRippleColor" parent="">
+    </style>
+    <style name="itemShapeAppearance" parent="">
+    </style>
+    <style name="itemShapeAppearanceOverlay" parent="">
+    </style>
+    <style name="itemShapeFillColor" parent="">
+    </style>
+    <style name="itemShapeInsetBottom" parent="">
+    </style>
+    <style name="itemShapeInsetEnd" parent="">
+    </style>
+    <style name="itemShapeInsetStart" parent="">
+    </style>
+    <style name="itemShapeInsetTop" parent="">
+    </style>
+    <style name="itemSpacing" parent="">
+    </style>
+    <style name="itemStrokeColor" parent="">
+    </style>
+    <style name="itemStrokeWidth" parent="">
+    </style>
+    <style name="itemTextAppearance" parent="">
+    </style>
+    <style name="itemTextAppearanceActive" parent="">
+    </style>
+    <style name="itemTextAppearanceActiveBoldEnabled" parent="">
+    </style>
+    <style name="itemTextAppearanceInactive" parent="">
+    </style>
+    <style name="itemTextColor" parent="">
+    </style>
+    <style name="itemVerticalPadding" parent="">
+    </style>
+    <style name="keyPositionType" parent="">
+        <item name="deltaRelative">0</item>
+        <item name="parentRelative">2</item>
+        <item name="pathRelative">1</item>
+    </style>
+    <style name="keyboardIcon" parent="">
+    </style>
+    <style name="keylines" parent="">
+    </style>
+    <style name="lStar" parent="">
+    </style>
+    <style name="labelBehavior" parent="">
+        <item name="floating">0</item>
+        <item name="gone">2</item>
+        <item name="visible">3</item>
+        <item name="withinBounds">1</item>
+    </style>
+    <style name="labelStyle" parent="">
+    </style>
+    <style name="labelVisibilityMode" parent="">
+        <item name="auto">-1</item>
+        <item name="labeled">1</item>
+        <item name="selected">0</item>
+        <item name="unlabeled">2</item>
+    </style>
+    <style name="largeFontVerticalOffsetAdjustment" parent="">
+    </style>
+    <style name="lastBaselineToBottomHeight" parent="">
+    </style>
+    <style name="lastItemDecorated" parent="">
+    </style>
+    <style name="layout" parent="">
+    </style>
+    <style name="layoutDescription" parent="">
+    </style>
+    <style name="layoutDuringTransition" parent="">
+        <item name="callMeasure">2</item>
+        <item name="honorRequest">1</item>
+        <item name="ignoreRequest">0</item>
+    </style>
+    <style name="layoutManager" parent="">
+    </style>
+    <style name="layout_anchor" parent="">
+    </style>
+    <style name="layout_anchorGravity" parent="">
+        <item name="bottom">0x50</item>
+        <item name="center">0x11</item>
+        <item name="center_horizontal">0x1</item>
+        <item name="center_vertical">0x10</item>
+        <item name="clip_horizontal">0x8</item>
+        <item name="clip_vertical">0x80</item>
+        <item name="end">0x800005</item>
+        <item name="fill">0x77</item>
+        <item name="fill_horizontal">0x7</item>
+        <item name="fill_vertical">0x70</item>
+        <item name="left">0x3</item>
+        <item name="right">0x5</item>
+        <item name="start">0x800003</item>
+        <item name="top">0x30</item>
+    </style>
+    <style name="layout_behavior" parent="">
+    </style>
+    <style name="layout_collapseMode" parent="">
+        <item name="none">0</item>
+        <item name="parallax">2</item>
+        <item name="pin">1</item>
+    </style>
+    <style name="layout_collapseParallaxMultiplier" parent="">
+    </style>
+    <style name="layout_constrainedHeight" parent="">
+    </style>
+    <style name="layout_constrainedWidth" parent="">
+    </style>
+    <style name="layout_constraintBaseline_creator" parent="">
+    </style>
+    <style name="layout_constraintBaseline_toBaselineOf" parent="">
+        <item name="parent">0</item>
+    </style>
+    <style name="layout_constraintBaseline_toBottomOf" parent="">
+        <item name="parent">0</item>
+    </style>
+    <style name="layout_constraintBaseline_toTopOf" parent="">
+        <item name="parent">0</item>
+    </style>
+    <style name="layout_constraintBottom_creator" parent="">
+    </style>
+    <style name="layout_constraintBottom_toBottomOf" parent="">
+        <item name="parent">0</item>
+    </style>
+    <style name="layout_constraintBottom_toTopOf" parent="">
+        <item name="parent">0</item>
+    </style>
+    <style name="layout_constraintCircle" parent="">
+    </style>
+    <style name="layout_constraintCircleAngle" parent="">
+    </style>
+    <style name="layout_constraintCircleRadius" parent="">
+    </style>
+    <style name="layout_constraintDimensionRatio" parent="">
+    </style>
+    <style name="layout_constraintEnd_toEndOf" parent="">
+        <item name="parent">0</item>
+    </style>
+    <style name="layout_constraintEnd_toStartOf" parent="">
+        <item name="parent">0</item>
+    </style>
+    <style name="layout_constraintGuide_begin" parent="">
+    </style>
+    <style name="layout_constraintGuide_end" parent="">
+    </style>
+    <style name="layout_constraintGuide_percent" parent="">
+    </style>
+    <style name="layout_constraintHeight" parent="">
+        <item name="match_constraint">-3</item>
+        <item name="match_parent">-1</item>
+        <item name="wrap_content">-2</item>
+        <item name="wrap_content_constrained">-4</item>
+    </style>
+    <style name="layout_constraintHeight_default" parent="">
+        <item name="percent">2</item>
+        <item name="spread">0</item>
+        <item name="wrap">1</item>
+    </style>
+    <style name="layout_constraintHeight_max" parent="">
+        <item name="wrap">-2</item>
+    </style>
+    <style name="layout_constraintHeight_min" parent="">
+        <item name="wrap">-2</item>
+    </style>
+    <style name="layout_constraintHeight_percent" parent="">
+    </style>
+    <style name="layout_constraintHorizontal_bias" parent="">
+    </style>
+    <style name="layout_constraintHorizontal_chainStyle" parent="">
+        <item name="packed">2</item>
+        <item name="spread">0</item>
+        <item name="spread_inside">1</item>
+    </style>
+    <style name="layout_constraintHorizontal_weight" parent="">
+    </style>
+    <style name="layout_constraintLeft_creator" parent="">
+    </style>
+    <style name="layout_constraintLeft_toLeftOf" parent="">
+        <item name="parent">0</item>
+    </style>
+    <style name="layout_constraintLeft_toRightOf" parent="">
+        <item name="parent">0</item>
+    </style>
+    <style name="layout_constraintRight_creator" parent="">
+    </style>
+    <style name="layout_constraintRight_toLeftOf" parent="">
+        <item name="parent">0</item>
+    </style>
+    <style name="layout_constraintRight_toRightOf" parent="">
+        <item name="parent">0</item>
+    </style>
+    <style name="layout_constraintStart_toEndOf" parent="">
+        <item name="parent">0</item>
+    </style>
+    <style name="layout_constraintStart_toStartOf" parent="">
+        <item name="parent">0</item>
+    </style>
+    <style name="layout_constraintTag" parent="">
+    </style>
+    <style name="layout_constraintTop_creator" parent="">
+    </style>
+    <style name="layout_constraintTop_toBottomOf" parent="">
+        <item name="parent">0</item>
+    </style>
+    <style name="layout_constraintTop_toTopOf" parent="">
+        <item name="parent">0</item>
+    </style>
+    <style name="layout_constraintVertical_bias" parent="">
+    </style>
+    <style name="layout_constraintVertical_chainStyle" parent="">
+        <item name="packed">2</item>
+        <item name="spread">0</item>
+        <item name="spread_inside">1</item>
+    </style>
+    <style name="layout_constraintVertical_weight" parent="">
+    </style>
+    <style name="layout_constraintWidth" parent="">
+        <item name="match_constraint">-3</item>
+        <item name="match_parent">-1</item>
+        <item name="wrap_content">-2</item>
+        <item name="wrap_content_constrained">-4</item>
+    </style>
+    <style name="layout_constraintWidth_default" parent="">
+        <item name="percent">2</item>
+        <item name="spread">0</item>
+        <item name="wrap">1</item>
+    </style>
+    <style name="layout_constraintWidth_max" parent="">
+        <item name="wrap">-2</item>
+    </style>
+    <style name="layout_constraintWidth_min" parent="">
+        <item name="wrap">-2</item>
+    </style>
+    <style name="layout_constraintWidth_percent" parent="">
+    </style>
+    <style name="layout_dodgeInsetEdges" parent="">
+        <item name="all">0x77</item>
+        <item name="bottom">0x50</item>
+        <item name="end">0x800005</item>
+        <item name="left">0x3</item>
+        <item name="none">0x0</item>
+        <item name="right">0x5</item>
+        <item name="start">0x800003</item>
+        <item name="top">0x30</item>
+    </style>
+    <style name="layout_editor_absoluteX" parent="">
+    </style>
+    <style name="layout_editor_absoluteY" parent="">
+    </style>
+    <style name="layout_goneMarginBaseline" parent="">
+    </style>
+    <style name="layout_goneMarginBottom" parent="">
+    </style>
+    <style name="layout_goneMarginEnd" parent="">
+    </style>
+    <style name="layout_goneMarginLeft" parent="">
+    </style>
+    <style name="layout_goneMarginRight" parent="">
+    </style>
+    <style name="layout_goneMarginStart" parent="">
+    </style>
+    <style name="layout_goneMarginTop" parent="">
+    </style>
+    <style name="layout_insetEdge" parent="">
+        <item name="bottom">80</item>
+        <item name="end">8388613</item>
+        <item name="left">3</item>
+        <item name="none">0</item>
+        <item name="right">5</item>
+        <item name="start">8388611</item>
+        <item name="top">48</item>
+    </style>
+    <style name="layout_keyline" parent="">
+    </style>
+    <style name="layout_marginBaseline" parent="">
+    </style>
+    <style name="layout_optimizationLevel" parent="">
+        <item name="barrier">0x2</item>
+        <item name="cache_measures">0x100</item>
+        <item name="chains">0x4</item>
+        <item name="dependency_ordering">0x200</item>
+        <item name="dimensions">0x8</item>
+        <item name="direct">0x1</item>
+        <item name="graph">0x40</item>
+        <item name="graph_wrap">0x80</item>
+        <item name="grouping">0x400</item>
+        <item name="groups">0x20</item>
+        <item name="legacy">0x0</item>
+        <item name="none">0x0</item>
+        <item name="ratio">0x10</item>
+        <item name="standard">0x101</item>
+    </style>
+    <style name="layout_scrollEffect" parent="">
+        <item name="compress">1</item>
+        <item name="none">0</item>
+    </style>
+    <style name="layout_scrollFlags" parent="">
+        <item name="enterAlways">0x4</item>
+        <item name="enterAlwaysCollapsed">0x8</item>
+        <item name="exitUntilCollapsed">0x2</item>
+        <item name="noScroll">0x0</item>
+        <item name="scroll">0x1</item>
+        <item name="snap">0x10</item>
+        <item name="snapMargins">0x20</item>
+    </style>
+    <style name="layout_scrollInterpolator" parent="">
+    </style>
+    <style name="layout_wrapBehaviorInParent" parent="">
+        <item name="horizontal_only">1</item>
+        <item name="included">0</item>
+        <item name="skipped">3</item>
+        <item name="vertical_only">2</item>
+    </style>
+    <style name="liftOnScroll" parent="">
+    </style>
+    <style name="liftOnScrollColor" parent="">
+    </style>
+    <style name="liftOnScrollTargetViewId" parent="">
+    </style>
+    <style name="limitBoundsTo" parent="">
+    </style>
+    <style name="lineHeight" parent="">
+    </style>
+    <style name="lineSpacing" parent="">
+    </style>
+    <style name="linearProgressIndicatorStyle" parent="">
+    </style>
+    <style name="listChoiceBackgroundIndicator" parent="">
+    </style>
+    <style name="listChoiceIndicatorMultipleAnimated" parent="">
+    </style>
+    <style name="listChoiceIndicatorSingleAnimated" parent="">
+    </style>
+    <style name="listDividerAlertDialog" parent="">
+    </style>
+    <style name="listItemLayout" parent="">
+    </style>
+    <style name="listLayout" parent="">
+    </style>
+    <style name="listMenuViewStyle" parent="">
+    </style>
+    <style name="listPopupWindowStyle" parent="">
+    </style>
+    <style name="listPreferredItemHeight" parent="">
+    </style>
+    <style name="listPreferredItemHeightLarge" parent="">
+    </style>
+    <style name="listPreferredItemHeightSmall" parent="">
+    </style>
+    <style name="listPreferredItemPaddingEnd" parent="">
+    </style>
+    <style name="listPreferredItemPaddingLeft" parent="">
+    </style>
+    <style name="listPreferredItemPaddingRight" parent="">
+    </style>
+    <style name="listPreferredItemPaddingStart" parent="">
+    </style>
+    <style name="logo" parent="">
+    </style>
+    <style name="logoAdjustViewBounds" parent="">
+    </style>
+    <style name="logoDescription" parent="">
+    </style>
+    <style name="logoScaleType" parent="">
+        <item name="center">5</item>
+        <item name="centerCrop">6</item>
+        <item name="centerInside">7</item>
+        <item name="fitCenter">3</item>
+        <item name="fitEnd">4</item>
+        <item name="fitStart">2</item>
+        <item name="fitXY">1</item>
+        <item name="matrix">0</item>
+    </style>
+    <style name="marginHorizontal" parent="">
+    </style>
+    <style name="marginLeftSystemWindowInsets" parent="">
+    </style>
+    <style name="marginRightSystemWindowInsets" parent="">
+    </style>
+    <style name="marginTopSystemWindowInsets" parent="">
+    </style>
+    <style name="materialAlertDialogBodyTextStyle" parent="">
+    </style>
+    <style name="materialAlertDialogButtonSpacerVisibility" parent="">
+    </style>
+    <style name="materialAlertDialogTheme" parent="">
+    </style>
+    <style name="materialAlertDialogTitleIconStyle" parent="">
+    </style>
+    <style name="materialAlertDialogTitlePanelStyle" parent="">
+    </style>
+    <style name="materialAlertDialogTitleTextStyle" parent="">
+    </style>
+    <style name="materialButtonOutlinedStyle" parent="">
+    </style>
+    <style name="materialButtonStyle" parent="">
+    </style>
+    <style name="materialButtonToggleGroupStyle" parent="">
+    </style>
+    <style name="materialCalendarDay" parent="">
+    </style>
+    <style name="materialCalendarDayOfWeekLabel" parent="">
+    </style>
+    <style name="materialCalendarFullscreenTheme" parent="">
+    </style>
+    <style name="materialCalendarHeaderCancelButton" parent="">
+    </style>
+    <style name="materialCalendarHeaderConfirmButton" parent="">
+    </style>
+    <style name="materialCalendarHeaderDivider" parent="">
+    </style>
+    <style name="materialCalendarHeaderLayout" parent="">
+    </style>
+    <style name="materialCalendarHeaderSelection" parent="">
+    </style>
+    <style name="materialCalendarHeaderTitle" parent="">
+    </style>
+    <style name="materialCalendarHeaderToggleButton" parent="">
+    </style>
+    <style name="materialCalendarMonth" parent="">
+    </style>
+    <style name="materialCalendarMonthNavigationButton" parent="">
+    </style>
+    <style name="materialCalendarStyle" parent="">
+    </style>
+    <style name="materialCalendarTheme" parent="">
+    </style>
+    <style name="materialCalendarYearNavigationButton" parent="">
+    </style>
+    <style name="materialCardViewElevatedStyle" parent="">
+    </style>
+    <style name="materialCardViewFilledStyle" parent="">
+    </style>
+    <style name="materialCardViewOutlinedStyle" parent="">
+    </style>
+    <style name="materialCardViewStyle" parent="">
+    </style>
+    <style name="materialCircleRadius" parent="">
+    </style>
+    <style name="materialClockStyle" parent="">
+    </style>
+    <style name="materialDisplayDividerStyle" parent="">
+    </style>
+    <style name="materialDividerHeavyStyle" parent="">
+    </style>
+    <style name="materialDividerStyle" parent="">
+    </style>
+    <style name="materialIconButtonFilledStyle" parent="">
+    </style>
+    <style name="materialIconButtonFilledTonalStyle" parent="">
+    </style>
+    <style name="materialIconButtonOutlinedStyle" parent="">
+    </style>
+    <style name="materialIconButtonStyle" parent="">
+    </style>
+    <style name="materialSearchBarStyle" parent="">
+    </style>
+    <style name="materialSearchViewPrefixStyle" parent="">
+    </style>
+    <style name="materialSearchViewStyle" parent="">
+    </style>
+    <style name="materialSearchViewToolbarHeight" parent="">
+    </style>
+    <style name="materialSearchViewToolbarStyle" parent="">
+    </style>
+    <style name="materialSwitchStyle" parent="">
+    </style>
+    <style name="materialThemeOverlay" parent="">
+    </style>
+    <style name="materialTimePickerStyle" parent="">
+    </style>
+    <style name="materialTimePickerTheme" parent="">
+    </style>
+    <style name="materialTimePickerTitleStyle" parent="">
+    </style>
+    <style name="maxAcceleration" parent="">
+    </style>
+    <style name="maxActionInlineWidth" parent="">
+    </style>
+    <style name="maxButtonHeight" parent="">
+    </style>
+    <style name="maxCharacterCount" parent="">
+    </style>
+    <style name="maxHeight" parent="">
+    </style>
+    <style name="maxImageSize" parent="">
+    </style>
+    <style name="maxLines" parent="">
+    </style>
+    <style name="maxNumber" parent="">
+    </style>
+    <style name="maxVelocity" parent="">
+    </style>
+    <style name="maxWidth" parent="">
+    </style>
+    <style name="measureWithLargestChild" parent="">
+    </style>
+    <style name="menu" parent="">
+    </style>
+    <style name="menuAlignmentMode" parent="">
+        <item name="auto">0</item>
+        <item name="start">1</item>
+    </style>
+    <style name="menuGravity" parent="">
+        <item name="bottom">81</item>
+        <item name="center">17</item>
+        <item name="top">49</item>
+    </style>
+    <style name="methodName" parent="">
+    </style>
+    <style name="minHeight" parent="">
+    </style>
+    <style name="minHideDelay" parent="">
+    </style>
+    <style name="minSeparation" parent="">
+    </style>
+    <style name="minTouchTargetSize" parent="">
+    </style>
+    <style name="minWidth" parent="">
+    </style>
+    <style name="mock_diagonalsColor" parent="">
+    </style>
+    <style name="mock_label" parent="">
+    </style>
+    <style name="mock_labelBackgroundColor" parent="">
+    </style>
+    <style name="mock_labelColor" parent="">
+    </style>
+    <style name="mock_showDiagonals" parent="">
+    </style>
+    <style name="mock_showLabel" parent="">
+    </style>
+    <style name="motionDebug" parent="">
+        <item name="NO_DEBUG">0</item>
+        <item name="SHOW_ALL">3</item>
+        <item name="SHOW_PATH">2</item>
+        <item name="SHOW_PROGRESS">1</item>
+    </style>
+    <style name="motionDurationExtraLong1" parent="">
+    </style>
+    <style name="motionDurationExtraLong2" parent="">
+    </style>
+    <style name="motionDurationExtraLong3" parent="">
+    </style>
+    <style name="motionDurationExtraLong4" parent="">
+    </style>
+    <style name="motionDurationLong1" parent="">
+    </style>
+    <style name="motionDurationLong2" parent="">
+    </style>
+    <style name="motionDurationLong3" parent="">
+    </style>
+    <style name="motionDurationLong4" parent="">
+    </style>
+    <style name="motionDurationMedium1" parent="">
+    </style>
+    <style name="motionDurationMedium2" parent="">
+    </style>
+    <style name="motionDurationMedium3" parent="">
+    </style>
+    <style name="motionDurationMedium4" parent="">
+    </style>
+    <style name="motionDurationShort1" parent="">
+    </style>
+    <style name="motionDurationShort2" parent="">
+    </style>
+    <style name="motionDurationShort3" parent="">
+    </style>
+    <style name="motionDurationShort4" parent="">
+    </style>
+    <style name="motionEasingAccelerated" parent="">
+    </style>
+    <style name="motionEasingDecelerated" parent="">
+    </style>
+    <style name="motionEasingEmphasized" parent="">
+    </style>
+    <style name="motionEasingEmphasizedAccelerateInterpolator" parent="">
+    </style>
+    <style name="motionEasingEmphasizedDecelerateInterpolator" parent="">
+    </style>
+    <style name="motionEasingEmphasizedInterpolator" parent="">
+    </style>
+    <style name="motionEasingLinear" parent="">
+    </style>
+    <style name="motionEasingLinearInterpolator" parent="">
+    </style>
+    <style name="motionEasingStandard" parent="">
+    </style>
+    <style name="motionEasingStandardAccelerateInterpolator" parent="">
+    </style>
+    <style name="motionEasingStandardDecelerateInterpolator" parent="">
+    </style>
+    <style name="motionEasingStandardInterpolator" parent="">
+    </style>
+    <style name="motionEffect_alpha" parent="">
+    </style>
+    <style name="motionEffect_end" parent="">
+    </style>
+    <style name="motionEffect_move" parent="">
+        <item name="auto">-1</item>
+        <item name="east">2</item>
+        <item name="north">0</item>
+        <item name="south">1</item>
+        <item name="west">3</item>
+    </style>
+    <style name="motionEffect_start" parent="">
+    </style>
+    <style name="motionEffect_strict" parent="">
+    </style>
+    <style name="motionEffect_translationX" parent="">
+    </style>
+    <style name="motionEffect_translationY" parent="">
+    </style>
+    <style name="motionEffect_viewTransition" parent="">
+    </style>
+    <style name="motionInterpolator" parent="">
+        <item name="anticipate">6</item>
+        <item name="bounce">4</item>
+        <item name="easeIn">1</item>
+        <item name="easeInOut">0</item>
+        <item name="easeOut">2</item>
+        <item name="linear">3</item>
+        <item name="overshoot">5</item>
+    </style>
+    <style name="motionPath" parent="">
+        <item name="arc">1</item>
+        <item name="linear">0</item>
+    </style>
+    <style name="motionPathRotate" parent="">
+    </style>
+    <style name="motionProgress" parent="">
+    </style>
+    <style name="motionStagger" parent="">
+    </style>
+    <style name="motionTarget" parent="">
+    </style>
+    <style name="motion_postLayoutCollision" parent="">
+    </style>
+    <style name="motion_triggerOnCollision" parent="">
+    </style>
+    <style name="moveWhenScrollAtTop" parent="">
+    </style>
+    <style name="multiChoiceItemLayout" parent="">
+    </style>
+    <style name="navigationContentDescription" parent="">
+    </style>
+    <style name="navigationIcon" parent="">
+    </style>
+    <style name="navigationIconTint" parent="">
+    </style>
+    <style name="navigationMode" parent="">
+        <item name="listMode">1</item>
+        <item name="normal">0</item>
+        <item name="tabMode">2</item>
+    </style>
+    <style name="navigationRailStyle" parent="">
+    </style>
+    <style name="navigationViewStyle" parent="">
+    </style>
+    <style name="nestedScrollFlags" parent="">
+        <item name="disablePostScroll">0x1</item>
+        <item name="disableScroll">0x2</item>
+        <item name="none">0x0</item>
+        <item name="supportScrollUp">0x4</item>
+    </style>
+    <style name="nestedScrollViewStyle" parent="">
+    </style>
+    <style name="nestedScrollable" parent="">
+    </style>
+    <style name="number" parent="">
+    </style>
+    <style name="numericModifiers" parent="">
+        <item name="ALT">0x2</item>
+        <item name="CTRL">0x1000</item>
+        <item name="FUNCTION">0x8</item>
+        <item name="META">0x10000</item>
+        <item name="SHIFT">0x1</item>
+        <item name="SYM">0x4</item>
+    </style>
+    <style name="offsetAlignmentMode" parent="">
+        <item name="edge">0</item>
+        <item name="legacy">1</item>
+    </style>
+    <style name="onCross" parent="">
+    </style>
+    <style name="onHide" parent="">
+    </style>
+    <style name="onNegativeCross" parent="">
+    </style>
+    <style name="onPositiveCross" parent="">
+    </style>
+    <style name="onShow" parent="">
+    </style>
+    <style name="onStateTransition" parent="">
+        <item name="actionDown">1</item>
+        <item name="actionDownUp">3</item>
+        <item name="actionUp">2</item>
+        <item name="sharedValueSet">4</item>
+        <item name="sharedValueUnset">5</item>
+    </style>
+    <style name="onTouchUp" parent="">
+        <item name="autoComplete">0</item>
+        <item name="autoCompleteToEnd">2</item>
+        <item name="autoCompleteToStart">1</item>
+        <item name="decelerate">4</item>
+        <item name="decelerateAndComplete">5</item>
+        <item name="neverCompleteToEnd">7</item>
+        <item name="neverCompleteToStart">6</item>
+        <item name="stop">3</item>
+    </style>
+    <style name="overlapAnchor" parent="">
+    </style>
+    <style name="overlay" parent="">
+    </style>
+    <style name="paddingBottomNoButtons" parent="">
+    </style>
+    <style name="paddingBottomSystemWindowInsets" parent="">
+    </style>
+    <style name="paddingEnd" parent="">
+    </style>
+    <style name="paddingLeftSystemWindowInsets" parent="">
+    </style>
+    <style name="paddingRightSystemWindowInsets" parent="">
+    </style>
+    <style name="paddingStart" parent="">
+    </style>
+    <style name="paddingStartSystemWindowInsets" parent="">
+    </style>
+    <style name="paddingTopNoTitle" parent="">
+    </style>
+    <style name="paddingTopSystemWindowInsets" parent="">
+    </style>
+    <style name="panelBackground" parent="">
+    </style>
+    <style name="panelMenuListTheme" parent="">
+    </style>
+    <style name="panelMenuListWidth" parent="">
+    </style>
+    <style name="passwordToggleContentDescription" parent="">
+    </style>
+    <style name="passwordToggleDrawable" parent="">
+    </style>
+    <style name="passwordToggleEnabled" parent="">
+    </style>
+    <style name="passwordToggleTint" parent="">
+    </style>
+    <style name="passwordToggleTintMode" parent="">
+        <item name="multiply">14</item>
+        <item name="screen">15</item>
+        <item name="src_atop">9</item>
+        <item name="src_in">5</item>
+        <item name="src_over">3</item>
+    </style>
+    <style name="pathMotionArc" parent="">
+        <item name="flip">3</item>
+        <item name="none">0</item>
+        <item name="startHorizontal">2</item>
+        <item name="startVertical">1</item>
+    </style>
+    <style name="path_percent" parent="">
+    </style>
+    <style name="percentHeight" parent="">
+    </style>
+    <style name="percentWidth" parent="">
+    </style>
+    <style name="percentX" parent="">
+    </style>
+    <style name="percentY" parent="">
+    </style>
+    <style name="perpendicularPath_percent" parent="">
+    </style>
+    <style name="pivotAnchor" parent="">
+        <item name="parent">0</item>
+    </style>
+    <style name="placeholderText" parent="">
+    </style>
+    <style name="placeholderTextAppearance" parent="">
+    </style>
+    <style name="placeholderTextColor" parent="">
+    </style>
+    <style name="placeholder_emptyVisibility" parent="">
+        <item name="gone">8</item>
+        <item name="invisible">4</item>
+        <item name="visible">0</item>
+    </style>
+    <style name="polarRelativeTo" parent="">
+    </style>
+    <style name="popupMenuBackground" parent="">
+    </style>
+    <style name="popupMenuStyle" parent="">
+    </style>
+    <style name="popupTheme" parent="">
+    </style>
+    <style name="popupWindowStyle" parent="">
+    </style>
+    <style name="prefixText" parent="">
+    </style>
+    <style name="prefixTextAppearance" parent="">
+    </style>
+    <style name="prefixTextColor" parent="">
+    </style>
+    <style name="preserveIconSpacing" parent="">
+    </style>
+    <style name="pressedTranslationZ" parent="">
+    </style>
+    <style name="progressBarPadding" parent="">
+    </style>
+    <style name="progressBarStyle" parent="">
+    </style>
+    <style name="quantizeMotionInterpolator" parent="">
+        <item name="bounce">4</item>
+        <item name="easeIn">1</item>
+        <item name="easeInOut">0</item>
+        <item name="easeOut">2</item>
+        <item name="linear">3</item>
+        <item name="overshoot">5</item>
+    </style>
+    <style name="quantizeMotionPhase" parent="">
+    </style>
+    <style name="quantizeMotionSteps" parent="">
+    </style>
+    <style name="queryBackground" parent="">
+    </style>
+    <style name="queryHint" parent="">
+    </style>
+    <style name="queryPatterns" parent="">
+    </style>
+    <style name="radioButtonStyle" parent="">
+    </style>
+    <style name="rangeFillColor" parent="">
+    </style>
+    <style name="ratingBarStyle" parent="">
+    </style>
+    <style name="ratingBarStyleIndicator" parent="">
+    </style>
+    <style name="ratingBarStyleSmall" parent="">
+    </style>
+    <style name="reactiveGuide_animateChange" parent="">
+    </style>
+    <style name="reactiveGuide_applyToAllConstraintSets" parent="">
+    </style>
+    <style name="reactiveGuide_applyToConstraintSet" parent="">
+    </style>
+    <style name="reactiveGuide_valueId" parent="">
+    </style>
+    <style name="recyclerViewStyle" parent="">
+    </style>
+    <style name="region_heightLessThan" parent="">
+    </style>
+    <style name="region_heightMoreThan" parent="">
+    </style>
+    <style name="region_widthLessThan" parent="">
+    </style>
+    <style name="region_widthMoreThan" parent="">
+    </style>
+    <style name="removeEmbeddedFabElevation" parent="">
+    </style>
+    <style name="reverseLayout" parent="">
+    </style>
+    <style name="rippleColor" parent="">
+    </style>
+    <style name="rotationCenterId" parent="">
+    </style>
+    <style name="round" parent="">
+    </style>
+    <style name="roundPercent" parent="">
+    </style>
+    <style name="saturation" parent="">
+    </style>
+    <style name="scaleFromTextSize" parent="">
+    </style>
+    <style name="scopeUris" parent="">
+    </style>
+    <style name="scrimAnimationDuration" parent="">
+    </style>
+    <style name="scrimBackground" parent="">
+    </style>
+    <style name="scrimVisibleHeightTrigger" parent="">
+    </style>
+    <style name="searchHintIcon" parent="">
+    </style>
+    <style name="searchIcon" parent="">
+    </style>
+    <style name="searchPrefixText" parent="">
+    </style>
+    <style name="searchViewStyle" parent="">
+    </style>
+    <style name="seekBarStyle" parent="">
+    </style>
+    <style name="selectableItemBackground" parent="">
+    </style>
+    <style name="selectableItemBackgroundBorderless" parent="">
+    </style>
+    <style name="selectionRequired" parent="">
+    </style>
+    <style name="selectorSize" parent="">
+    </style>
+    <style name="setsTag" parent="">
+    </style>
+    <style name="shapeAppearance" parent="">
+    </style>
+    <style name="shapeAppearanceCornerExtraLarge" parent="">
+    </style>
+    <style name="shapeAppearanceCornerExtraSmall" parent="">
+    </style>
+    <style name="shapeAppearanceCornerLarge" parent="">
+    </style>
+    <style name="shapeAppearanceCornerMedium" parent="">
+    </style>
+    <style name="shapeAppearanceCornerSmall" parent="">
+    </style>
+    <style name="shapeAppearanceLargeComponent" parent="">
+    </style>
+    <style name="shapeAppearanceMediumComponent" parent="">
+    </style>
+    <style name="shapeAppearanceOverlay" parent="">
+    </style>
+    <style name="shapeAppearanceSmallComponent" parent="">
+    </style>
+    <style name="shapeCornerFamily" parent="">
+        <item name="cut">1</item>
+        <item name="rounded">0</item>
+    </style>
+    <style name="shortcutMatchRequired" parent="">
+    </style>
+    <style name="shouldRemoveExpandedCorners" parent="">
+    </style>
+    <style name="showAnimationBehavior" parent="">
+        <item name="inward">2</item>
+        <item name="none">0</item>
+        <item name="outward">1</item>
+    </style>
+    <style name="showAsAction" parent="">
+        <item name="always">0x2</item>
+        <item name="collapseActionView">0x8</item>
+        <item name="ifRoom">0x1</item>
+        <item name="never">0x0</item>
+        <item name="withText">0x4</item>
+    </style>
+    <style name="showDelay" parent="">
+    </style>
+    <style name="showDividers" parent="">
+        <item name="beginning">0x1</item>
+        <item name="end">0x4</item>
+        <item name="middle">0x2</item>
+        <item name="none">0x0</item>
+    </style>
+    <style name="showMotionSpec" parent="">
+    </style>
+    <style name="showPaths" parent="">
+    </style>
+    <style name="showText" parent="">
+    </style>
+    <style name="showTitle" parent="">
+    </style>
+    <style name="shrinkMotionSpec" parent="">
+    </style>
+    <style name="sideSheetDialogTheme" parent="">
+    </style>
+    <style name="sideSheetModalStyle" parent="">
+    </style>
+    <style name="simpleItemLayout" parent="">
+    </style>
+    <style name="simpleItemSelectedColor" parent="">
+    </style>
+    <style name="simpleItemSelectedRippleColor" parent="">
+    </style>
+    <style name="simpleItems" parent="">
+    </style>
+    <style name="singleChoiceItemLayout" parent="">
+    </style>
+    <style name="singleLine" parent="">
+    </style>
+    <style name="singleSelection" parent="">
+    </style>
+    <style name="sizePercent" parent="">
+    </style>
+    <style name="sliderStyle" parent="">
+    </style>
+    <style name="snackbarButtonStyle" parent="">
+    </style>
+    <style name="snackbarStyle" parent="">
+    </style>
+    <style name="snackbarTextViewStyle" parent="">
+    </style>
+    <style name="spanCount" parent="">
+    </style>
+    <style name="spinBars" parent="">
+    </style>
+    <style name="spinnerDropDownItemStyle" parent="">
+    </style>
+    <style name="spinnerStyle" parent="">
+    </style>
+    <style name="splitTrack" parent="">
+    </style>
+    <style name="springBoundary" parent="">
+        <item name="bounceBoth">0x3</item>
+        <item name="bounceEnd">0x2</item>
+        <item name="bounceStart">0x1</item>
+        <item name="overshoot">0x0</item>
+    </style>
+    <style name="springDamping" parent="">
+    </style>
+    <style name="springMass" parent="">
+    </style>
+    <style name="springStiffness" parent="">
+    </style>
+    <style name="springStopThreshold" parent="">
+    </style>
+    <style name="srcCompat" parent="">
+    </style>
+    <style name="stackFromEnd" parent="">
+    </style>
+    <style name="staggered" parent="">
+    </style>
+    <style name="startIconCheckable" parent="">
+    </style>
+    <style name="startIconContentDescription" parent="">
+    </style>
+    <style name="startIconDrawable" parent="">
+    </style>
+    <style name="startIconMinSize" parent="">
+    </style>
+    <style name="startIconScaleType" parent="">
+        <item name="center">4</item>
+        <item name="centerCrop">5</item>
+        <item name="centerInside">6</item>
+        <item name="fitCenter">2</item>
+        <item name="fitEnd">3</item>
+        <item name="fitStart">1</item>
+        <item name="fitXY">0</item>
+    </style>
+    <style name="startIconTint" parent="">
+    </style>
+    <style name="startIconTintMode" parent="">
+        <item name="multiply">14</item>
+        <item name="screen">15</item>
+        <item name="src_atop">9</item>
+        <item name="src_in">5</item>
+        <item name="src_over">3</item>
+    </style>
+    <style name="state_above_anchor" parent="">
+    </style>
+    <style name="state_collapsed" parent="">
+    </style>
+    <style name="state_collapsible" parent="">
+    </style>
+    <style name="state_dragged" parent="">
+    </style>
+    <style name="state_error" parent="">
+    </style>
+    <style name="state_indeterminate" parent="">
+    </style>
+    <style name="state_liftable" parent="">
+    </style>
+    <style name="state_lifted" parent="">
+    </style>
+    <style name="state_with_icon" parent="">
+    </style>
+    <style name="statusBarBackground" parent="">
+    </style>
+    <style name="statusBarForeground" parent="">
+    </style>
+    <style name="statusBarScrim" parent="">
+    </style>
+    <style name="strokeColor" parent="">
+    </style>
+    <style name="strokeWidth" parent="">
+    </style>
+    <style name="subMenuArrow" parent="">
+    </style>
+    <style name="subheaderColor" parent="">
+    </style>
+    <style name="subheaderInsetEnd" parent="">
+    </style>
+    <style name="subheaderInsetStart" parent="">
+    </style>
+    <style name="subheaderTextAppearance" parent="">
+    </style>
+    <style name="submitBackground" parent="">
+    </style>
+    <style name="subtitle" parent="">
+    </style>
+    <style name="subtitleCentered" parent="">
+    </style>
+    <style name="subtitleTextAppearance" parent="">
+    </style>
+    <style name="subtitleTextColor" parent="">
+    </style>
+    <style name="subtitleTextStyle" parent="">
+    </style>
+    <style name="suffixText" parent="">
+    </style>
+    <style name="suffixTextAppearance" parent="">
+    </style>
+    <style name="suffixTextColor" parent="">
+    </style>
+    <style name="suggestionRowLayout" parent="">
+    </style>
+    <style name="switchMinWidth" parent="">
+    </style>
+    <style name="switchPadding" parent="">
+    </style>
+    <style name="switchStyle" parent="">
+    </style>
+    <style name="switchTextAppearance" parent="">
+    </style>
+    <style name="tabBackground" parent="">
+    </style>
+    <style name="tabContentStart" parent="">
+    </style>
+    <style name="tabGravity" parent="">
+        <item name="center">1</item>
+        <item name="fill">0</item>
+        <item name="start">2</item>
+    </style>
+    <style name="tabIconTint" parent="">
+    </style>
+    <style name="tabIconTintMode" parent="">
+        <item name="add">16</item>
+        <item name="multiply">14</item>
+        <item name="screen">15</item>
+        <item name="src_atop">9</item>
+        <item name="src_in">5</item>
+        <item name="src_over">3</item>
+    </style>
+    <style name="tabIndicator" parent="">
+    </style>
+    <style name="tabIndicatorAnimationDuration" parent="">
+    </style>
+    <style name="tabIndicatorAnimationMode" parent="">
+        <item name="elastic">1</item>
+        <item name="fade">2</item>
+        <item name="linear">0</item>
+    </style>
+    <style name="tabIndicatorColor" parent="">
+    </style>
+    <style name="tabIndicatorFullWidth" parent="">
+    </style>
+    <style name="tabIndicatorGravity" parent="">
+        <item name="bottom">0</item>
+        <item name="center">1</item>
+        <item name="stretch">3</item>
+        <item name="top">2</item>
+    </style>
+    <style name="tabIndicatorHeight" parent="">
+    </style>
+    <style name="tabInlineLabel" parent="">
+    </style>
+    <style name="tabMaxWidth" parent="">
+    </style>
+    <style name="tabMinWidth" parent="">
+    </style>
+    <style name="tabMode" parent="">
+        <item name="auto">2</item>
+        <item name="fixed">1</item>
+        <item name="scrollable">0</item>
+    </style>
+    <style name="tabPadding" parent="">
+    </style>
+    <style name="tabPaddingBottom" parent="">
+    </style>
+    <style name="tabPaddingEnd" parent="">
+    </style>
+    <style name="tabPaddingStart" parent="">
+    </style>
+    <style name="tabPaddingTop" parent="">
+    </style>
+    <style name="tabRippleColor" parent="">
+    </style>
+    <style name="tabSecondaryStyle" parent="">
+    </style>
+    <style name="tabSelectedTextAppearance" parent="">
+    </style>
+    <style name="tabSelectedTextColor" parent="">
+    </style>
+    <style name="tabStyle" parent="">
+    </style>
+    <style name="tabTextAppearance" parent="">
+    </style>
+    <style name="tabTextColor" parent="">
+    </style>
+    <style name="tabUnboundedRipple" parent="">
+    </style>
+    <style name="targetId" parent="">
+    </style>
+    <style name="telltales_tailColor" parent="">
+    </style>
+    <style name="telltales_tailScale" parent="">
+    </style>
+    <style name="telltales_velocityMode" parent="">
+        <item name="layout">0</item>
+        <item name="postLayout">1</item>
+        <item name="staticLayout">3</item>
+        <item name="staticPostLayout">2</item>
+    </style>
+    <style name="textAllCaps" parent="">
+    </style>
+    <style name="textAppearanceBody1" parent="">
+    </style>
+    <style name="textAppearanceBody2" parent="">
+    </style>
+    <style name="textAppearanceBodyLarge" parent="">
+    </style>
+    <style name="textAppearanceBodyMedium" parent="">
+    </style>
+    <style name="textAppearanceBodySmall" parent="">
+    </style>
+    <style name="textAppearanceButton" parent="">
+    </style>
+    <style name="textAppearanceCaption" parent="">
+    </style>
+    <style name="textAppearanceDisplayLarge" parent="">
+    </style>
+    <style name="textAppearanceDisplayMedium" parent="">
+    </style>
+    <style name="textAppearanceDisplaySmall" parent="">
+    </style>
+    <style name="textAppearanceHeadline1" parent="">
+    </style>
+    <style name="textAppearanceHeadline2" parent="">
+    </style>
+    <style name="textAppearanceHeadline3" parent="">
+    </style>
+    <style name="textAppearanceHeadline4" parent="">
+    </style>
+    <style name="textAppearanceHeadline5" parent="">
+    </style>
+    <style name="textAppearanceHeadline6" parent="">
+    </style>
+    <style name="textAppearanceHeadlineLarge" parent="">
+    </style>
+    <style name="textAppearanceHeadlineMedium" parent="">
+    </style>
+    <style name="textAppearanceHeadlineSmall" parent="">
+    </style>
+    <style name="textAppearanceLabelLarge" parent="">
+    </style>
+    <style name="textAppearanceLabelMedium" parent="">
+    </style>
+    <style name="textAppearanceLabelSmall" parent="">
+    </style>
+    <style name="textAppearanceLargePopupMenu" parent="">
+    </style>
+    <style name="textAppearanceLineHeightEnabled" parent="">
+    </style>
+    <style name="textAppearanceListItem" parent="">
+    </style>
+    <style name="textAppearanceListItemSecondary" parent="">
+    </style>
+    <style name="textAppearanceListItemSmall" parent="">
+    </style>
+    <style name="textAppearanceOverline" parent="">
+    </style>
+    <style name="textAppearancePopupMenuHeader" parent="">
+    </style>
+    <style name="textAppearanceSearchResultSubtitle" parent="">
+    </style>
+    <style name="textAppearanceSearchResultTitle" parent="">
+    </style>
+    <style name="textAppearanceSmallPopupMenu" parent="">
+    </style>
+    <style name="textAppearanceSubtitle1" parent="">
+    </style>
+    <style name="textAppearanceSubtitle2" parent="">
+    </style>
+    <style name="textAppearanceTitleLarge" parent="">
+    </style>
+    <style name="textAppearanceTitleMedium" parent="">
+    </style>
+    <style name="textAppearanceTitleSmall" parent="">
+    </style>
+    <style name="textBackground" parent="">
+    </style>
+    <style name="textBackgroundPanX" parent="">
+    </style>
+    <style name="textBackgroundPanY" parent="">
+    </style>
+    <style name="textBackgroundRotate" parent="">
+    </style>
+    <style name="textBackgroundZoom" parent="">
+    </style>
+    <style name="textColorAlertDialogListItem" parent="">
+    </style>
+    <style name="textColorSearchUrl" parent="">
+    </style>
+    <style name="textEndPadding" parent="">
+    </style>
+    <style name="textFillColor" parent="">
+    </style>
+    <style name="textInputFilledDenseStyle" parent="">
+    </style>
+    <style name="textInputFilledExposedDropdownMenuStyle" parent="">
+    </style>
+    <style name="textInputFilledStyle" parent="">
+    </style>
+    <style name="textInputLayoutFocusedRectEnabled" parent="">
+    </style>
+    <style name="textInputOutlinedDenseStyle" parent="">
+    </style>
+    <style name="textInputOutlinedExposedDropdownMenuStyle" parent="">
+    </style>
+    <style name="textInputOutlinedStyle" parent="">
+    </style>
+    <style name="textInputStyle" parent="">
+    </style>
+    <style name="textLocale" parent="">
+    </style>
+    <style name="textOutlineColor" parent="">
+    </style>
+    <style name="textOutlineThickness" parent="">
+    </style>
+    <style name="textPanX" parent="">
+    </style>
+    <style name="textPanY" parent="">
+    </style>
+    <style name="textStartPadding" parent="">
+    </style>
+    <style name="textureBlurFactor" parent="">
+    </style>
+    <style name="textureEffect" parent="">
+        <item name="frost">1</item>
+        <item name="none">0</item>
+    </style>
+    <style name="textureHeight" parent="">
+    </style>
+    <style name="textureWidth" parent="">
+    </style>
+    <style name="theme" parent="">
+    </style>
+    <style name="thickness" parent="">
+    </style>
+    <style name="thumbColor" parent="">
+    </style>
+    <style name="thumbElevation" parent="">
+    </style>
+    <style name="thumbIcon" parent="">
+    </style>
+    <style name="thumbIconSize" parent="">
+    </style>
+    <style name="thumbIconTint" parent="">
+    </style>
+    <style name="thumbIconTintMode" parent="">
+        <item name="add">16</item>
+        <item name="multiply">14</item>
+        <item name="screen">15</item>
+        <item name="src_atop">9</item>
+        <item name="src_in">5</item>
+        <item name="src_over">3</item>
+    </style>
+    <style name="thumbRadius" parent="">
+    </style>
+    <style name="thumbStrokeColor" parent="">
+    </style>
+    <style name="thumbStrokeWidth" parent="">
+    </style>
+    <style name="thumbTextPadding" parent="">
+    </style>
+    <style name="thumbTint" parent="">
+    </style>
+    <style name="thumbTintMode" parent="">
+        <item name="add">16</item>
+        <item name="multiply">14</item>
+        <item name="screen">15</item>
+        <item name="src_atop">9</item>
+        <item name="src_in">5</item>
+        <item name="src_over">3</item>
+    </style>
+    <style name="tickColor" parent="">
+    </style>
+    <style name="tickColorActive" parent="">
+    </style>
+    <style name="tickColorInactive" parent="">
+    </style>
+    <style name="tickMark" parent="">
+    </style>
+    <style name="tickMarkTint" parent="">
+    </style>
+    <style name="tickMarkTintMode" parent="">
+        <item name="add">16</item>
+        <item name="multiply">14</item>
+        <item name="screen">15</item>
+        <item name="src_atop">9</item>
+        <item name="src_in">5</item>
+        <item name="src_over">3</item>
+    </style>
+    <style name="tickRadiusActive" parent="">
+    </style>
+    <style name="tickRadiusInactive" parent="">
+    </style>
+    <style name="tickVisible" parent="">
+    </style>
+    <style name="tint" parent="">
+    </style>
+    <style name="tintMode" parent="">
+        <item name="add">16</item>
+        <item name="multiply">14</item>
+        <item name="screen">15</item>
+        <item name="src_atop">9</item>
+        <item name="src_in">5</item>
+        <item name="src_over">3</item>
+    </style>
+    <style name="tintNavigationIcon" parent="">
+    </style>
+    <style name="title" parent="">
+    </style>
+    <style name="titleCentered" parent="">
+    </style>
+    <style name="titleCollapseMode" parent="">
+        <item name="fade">1</item>
+        <item name="scale">0</item>
+    </style>
+    <style name="titleEnabled" parent="">
+    </style>
+    <style name="titleMargin" parent="">
+    </style>
+    <style name="titleMarginBottom" parent="">
+    </style>
+    <style name="titleMarginEnd" parent="">
+    </style>
+    <style name="titleMarginStart" parent="">
+    </style>
+    <style name="titleMarginTop" parent="">
+    </style>
+    <style name="titleMargins" parent="">
+    </style>
+    <style name="titlePositionInterpolator" parent="">
+    </style>
+    <style name="titleTextAppearance" parent="">
+    </style>
+    <style name="titleTextColor" parent="">
+    </style>
+    <style name="titleTextEllipsize" parent="">
+        <item name="end">2</item>
+        <item name="marquee">3</item>
+        <item name="middle">1</item>
+        <item name="start">0</item>
+    </style>
+    <style name="titleTextStyle" parent="">
+    </style>
+    <style name="toggleCheckedStateOnClick" parent="">
+    </style>
+    <style name="toolbarId" parent="">
+    </style>
+    <style name="toolbarNavigationButtonStyle" parent="">
+    </style>
+    <style name="toolbarStyle" parent="">
+    </style>
+    <style name="toolbarSurfaceStyle" parent="">
+    </style>
+    <style name="tooltipForegroundColor" parent="">
+    </style>
+    <style name="tooltipFrameBackground" parent="">
+    </style>
+    <style name="tooltipStyle" parent="">
+    </style>
+    <style name="tooltipText" parent="">
+    </style>
+    <style name="topInsetScrimEnabled" parent="">
+    </style>
+    <style name="touchAnchorId" parent="">
+    </style>
+    <style name="touchAnchorSide" parent="">
+        <item name="bottom">3</item>
+        <item name="end">6</item>
+        <item name="left">1</item>
+        <item name="middle">4</item>
+        <item name="right">2</item>
+        <item name="start">5</item>
+        <item name="top">0</item>
+    </style>
+    <style name="touchRegionId" parent="">
+    </style>
+    <style name="track" parent="">
+    </style>
+    <style name="trackColor" parent="">
+    </style>
+    <style name="trackColorActive" parent="">
+    </style>
+    <style name="trackColorInactive" parent="">
+    </style>
+    <style name="trackCornerRadius" parent="">
+    </style>
+    <style name="trackDecoration" parent="">
+    </style>
+    <style name="trackDecorationTint" parent="">
+    </style>
+    <style name="trackDecorationTintMode" parent="">
+        <item name="add">16</item>
+        <item name="multiply">14</item>
+        <item name="screen">15</item>
+        <item name="src_atop">9</item>
+        <item name="src_in">5</item>
+        <item name="src_over">3</item>
+    </style>
+    <style name="trackHeight" parent="">
+    </style>
+    <style name="trackThickness" parent="">
+    </style>
+    <style name="trackTint" parent="">
+    </style>
+    <style name="trackTintMode" parent="">
+        <item name="add">16</item>
+        <item name="multiply">14</item>
+        <item name="screen">15</item>
+        <item name="src_atop">9</item>
+        <item name="src_in">5</item>
+        <item name="src_over">3</item>
+    </style>
+    <style name="transformPivotTarget" parent="">
+    </style>
+    <style name="transitionDisable" parent="">
+    </style>
+    <style name="transitionEasing" parent="">
+        <item name="accelerate">1</item>
+        <item name="decelerate">2</item>
+        <item name="linear">3</item>
+        <item name="standard">0</item>
+    </style>
+    <style name="transitionFlags" parent="">
+        <item name="beginOnFirstDraw">0x1</item>
+        <item name="disableIntraAutoTransition">0x2</item>
+        <item name="none">0x0</item>
+        <item name="onInterceptTouchReturnSwipe">0x4</item>
+    </style>
+    <style name="transitionPathRotate" parent="">
+    </style>
+    <style name="transitionShapeAppearance" parent="">
+    </style>
+    <style name="triggerId" parent="">
+    </style>
+    <style name="triggerReceiver" parent="">
+    </style>
+    <style name="triggerSlack" parent="">
+    </style>
+    <style name="ttcIndex" parent="">
+    </style>
+    <style name="upDuration" parent="">
+    </style>
+    <style name="useCompatPadding" parent="">
+    </style>
+    <style name="useDrawerArrowDrawable" parent="">
+    </style>
+    <style name="useMaterialThemeColors" parent="">
+    </style>
+    <style name="values" parent="">
+    </style>
+    <style name="verticalOffset" parent="">
+    </style>
+    <style name="verticalOffsetWithText" parent="">
+    </style>
+    <style name="viewInflaterClass" parent="">
+    </style>
+    <style name="viewTransitionMode" parent="">
+        <item name="allStates">1</item>
+        <item name="currentState">0</item>
+        <item name="noState">2</item>
+    </style>
+    <style name="viewTransitionOnCross" parent="">
+    </style>
+    <style name="viewTransitionOnNegativeCross" parent="">
+    </style>
+    <style name="viewTransitionOnPositiveCross" parent="">
+    </style>
+    <style name="visibilityMode" parent="">
+        <item name="ignore">1</item>
+        <item name="normal">0</item>
+    </style>
+    <style name="voiceIcon" parent="">
+    </style>
+    <style name="warmth" parent="">
+    </style>
+    <style name="waveDecay" parent="">
+    </style>
+    <style name="waveOffset" parent="">
+    </style>
+    <style name="wavePeriod" parent="">
+    </style>
+    <style name="wavePhase" parent="">
+    </style>
+    <style name="waveShape" parent="">
+        <item name="bounce">6</item>
+        <item name="cos">5</item>
+        <item name="reverseSawtooth">4</item>
+        <item name="sawtooth">3</item>
+        <item name="sin">0</item>
+        <item name="square">1</item>
+        <item name="triangle">2</item>
+    </style>
+    <style name="waveVariesBy" parent="">
+        <item name="path">1</item>
+        <item name="position">0</item>
+    </style>
+    <style name="windowActionBar" parent="">
+    </style>
+    <style name="windowActionBarOverlay" parent="">
+    </style>
+    <style name="windowActionModeOverlay" parent="">
+    </style>
+    <style name="windowFixedHeightMajor" parent="">
+    </style>
+    <style name="windowFixedHeightMinor" parent="">
+    </style>
+    <style name="windowFixedWidthMajor" parent="">
+    </style>
+    <style name="windowFixedWidthMinor" parent="">
+    </style>
+    <style name="windowMinWidthMajor" parent="">
+    </style>
+    <style name="windowMinWidthMinor" parent="">
+    </style>
+    <style name="windowNoTitle" parent="">
+    </style>
+    <style name="yearSelectedStyle" parent="">
+    </style>
+    <style name="yearStyle" parent="">
+    </style>
+    <style name="yearTodayStyle" parent="">
+    </style>
+</resources>

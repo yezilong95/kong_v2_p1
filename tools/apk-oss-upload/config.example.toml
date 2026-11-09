@@ -1,0 +1,27 @@
+# 复制为 config.toml 后按本机修改。
+# config.toml / upload_apk_oss.log 已加入 .gitignore，不要把真密钥写进本示例。
+# AK/SK 优先读 OSS_ACCESS_KEY_ID / OSS_ACCESS_KEY_SECRET，否则读 [oss]。
+#
+# 警告：上传成功后会清空 [local].dir 下的全部文件和子目录。
+# 不要把 dir 指到 Android 工程的 release/ 或源码目录。
+# 不要和 SFTP 脚本指向同一个投放目录，否则谁先成功谁清空。
+
+[local]
+dir = 'D:\drop\apk-oss'
+
+[oss]
+endpoint = 'https://oss-cn-hongkong.aliyuncs.com'
+bucket = 'your-bucket'
+prefix = ''
+filename = 'app.apk'
+access_key_id = ''
+access_key_secret = ''
+timeout = 180
+
+[upload]
+tmp_suffix = '.tmp'
+retries = 3
+retry_delay_sec = 5
+
+[schedule]
+interval_minutes = 10

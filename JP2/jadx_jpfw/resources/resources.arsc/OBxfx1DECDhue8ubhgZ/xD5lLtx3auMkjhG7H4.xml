@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckedTextView
+        android:textAppearance="@AvINgglJhIUfJuK1EHO6/KqbwE8tlAWMQ4vPsGsn"
+        android:gravity="start|center_vertical"
+        android:id="@q4nBElGgrubZeKOUx2A/t4vyltgCPqirAWR5FLS4"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:maxLines="1"
+        android:drawablePadding="@GCdnE0uHTlaBdegBM1Rn/S9pInnlSFar9A4QWR7e"
+        android:layout_weight="1"/>
+    <ViewStub
+        android:id="@q4nBElGgrubZeKOUx2A/UnGk7vNt7Tf0qkGeAM5"
+        android:layout="@Y4ToSmuZPPcACiNLNiOp/HhOqcChqzKTHCQYbnXO"
+        android:inflatedId="@q4nBElGgrubZeKOUx2A/HhOqcChqzKTHCQYbnXO"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+</merge>

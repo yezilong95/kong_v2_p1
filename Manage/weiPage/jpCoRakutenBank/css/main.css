@@ -1,0 +1,387 @@
+:root {
+  --rakuten-red: #bf0000;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: "Hiragino Sans", "Noto Sans JP", "Segoe UI", sans-serif;
+  background: var(--rakuten-red);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+.app {
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.app.is-done {
+  animation: fadeOut 0.5s ease forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+.status-bar {
+  height: var(--safe-top);
+  background: var(--rakuten-red);
+  flex-shrink: 0;
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--rakuten-red);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.nav-back,
+.nav-help {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  border: 0;
+  background: none;
+}
+
+.nav-back {
+  opacity: 0.92;
+}
+
+.nav-back svg {
+  width: 22px;
+  height: 22px;
+}
+
+.nav-title {
+  flex: 1;
+  text-align: center;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 0 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.2px;
+}
+
+.nav-help {
+  font-size: 18px;
+  opacity: 0.85;
+}
+
+.top {
+  background: linear-gradient(165deg, var(--rakuten-red) 0%, var(--rakuten-red) 100%);
+  padding: 8px 24px 32px;
+  text-align: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.top::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.tagline {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.3px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.logo-slot,
+.logo-stack {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  min-height: 72px;
+  margin: 0 auto 14px;
+}
+
+.brand-mark {
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 10px;
+}
+
+.brand-svg {
+  max-width: 200px;
+  height: 44px;
+  margin-top: 4px;
+}
+
+.pin-label {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.4;
+  padding: 0 6px;
+}
+
+.pin-label .sub {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.88;
+  margin-top: 8px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.brand-wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 24px;
+  background: #fff;
+  border-radius: 24px 24px 0 0;
+}
+
+.pin-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 28px 20px 12px;
+  background: #fff;
+  min-height: 0;
+}
+
+.banner {
+  width: 100%;
+  max-width: 340px;
+  background: #fff8f0;
+  color: #5c4033;
+  font-size: 13px;
+  line-height: 1.55;
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-bottom: 22px;
+  border-left: 3px solid var(--rakuten-red);
+  text-align: left;
+}
+
+.pin-dots {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 280px;
+}
+
+.pin-dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid #c7c7cc;
+  background: transparent;
+  transition: all 0.15s ease;
+}
+
+.pin-dot.is-filled {
+  background: var(--rakuten-red);
+  border-color: var(--rakuten-red);
+  transform: scale(1.1);
+}
+
+.pin-dot.is-error {
+  border-color: #ff3b30;
+  background: #ff3b30;
+  animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px);
+  }
+  75% {
+    transform: translateX(6px);
+  }
+}
+
+.error-msg {
+  color: #ff3b30;
+  font-size: 14px;
+  font-weight: 600;
+  min-height: 22px;
+  text-align: center;
+  padding: 0 12px;
+}
+
+.attempt-counter {
+  font-size: 13px;
+  color: #999;
+  margin-top: 4px;
+  display: none;
+}
+
+.attempt-counter.is-show {
+  display: block;
+}
+
+.loader {
+  display: none;
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--rakuten-red);
+  font-weight: 600;
+}
+
+.loader.is-active {
+  display: block;
+}
+
+.bio-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  color: var(--rakuten-red);
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.92;
+}
+
+.bio-row svg {
+  width: 22px;
+  height: 22px;
+}
+
+.forgot-link {
+  margin-top: 14px;
+  color: var(--rakuten-red);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  opacity: 0.88;
+}
+
+.secure-note {
+  margin-top: auto;
+  padding-top: 16px;
+  font-size: 11px;
+  color: #aeaeb2;
+  text-align: center;
+  width: 100%;
+}
+
+.bank-footer {
+  font-size: 10px;
+  color: #aeaeb2;
+  text-align: center;
+  padding: 6px 16px 0;
+  opacity: 0.9;
+  letter-spacing: 0.25px;
+}
+
+.keypad {
+  background: #d1d3d9;
+  padding: 8px 12px calc(8px + var(--safe-bottom));
+  flex-shrink: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.key {
+  height: 52px;
+  border: none;
+  border-radius: 12px;
+  background: #fff;
+  color: #000;
+  font-size: 28px;
+  font-weight: 400;
+  cursor: pointer;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+  transition: transform 0.08s, opacity 0.1s;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.key:active {
+  transform: scale(0.96);
+  opacity: 0.82;
+}
+
+.key-empty {
+  background: transparent !important;
+  box-shadow: none !important;
+  pointer-events: none;
+}
+
+.key-backspace {
+  font-size: 18px;
+  color: var(--rakuten-red);
+}
+
+.key-backspace svg {
+  width: 28px;
+  height: 28px;
+}

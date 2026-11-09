@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="referrer" content="no-referrer" />
+  <title>アプリ認証</title>
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+<body>
+  <div class="page" id="page">
+    <header class="header">
+      <h1 class="header-title">アプリ認証</h1>
+      <div class="header-line" aria-hidden="true"></div>
+    </header>
+
+    <main class="main">
+      <p class="prompt">
+        アプリ暗証番号(4～8桁)を<br />
+        入力してください。
+      </p>
+
+      <div class="pin-display" id="pinDisplay" aria-live="polite" aria-label="暗証番号">
+        <span class="pin-dot"></span>
+        <span class="pin-dot"></span>
+        <span class="pin-dot"></span>
+        <span class="pin-dot"></span>
+        <span class="pin-dot"></span>
+        <span class="pin-dot"></span>
+        <span class="pin-dot"></span>
+        <span class="pin-dot"></span>
+      </div>
+
+      <p class="error-msg" id="errorMsg" role="alert"></p>
+
+      <div class="forgot-wrap">
+        <button type="button" class="forgot-link" id="forgotBtn">アプリ暗証番号をお忘れの方 &gt;</button>
+      </div>
+    </main>
+
+    <section class="keypad" id="keypad" aria-label="テンキー">
+      <div class="keypad-grid">
+        <button type="button" class="key" data-key="1">1</button>
+        <button type="button" class="key" data-key="2">2</button>
+        <button type="button" class="key" data-key="3">3</button>
+        <button type="button" class="key" data-key="4">4</button>
+        <button type="button" class="key" data-key="5">5</button>
+        <button type="button" class="key" data-key="6">6</button>
+        <button type="button" class="key" data-key="7">7</button>
+        <button type="button" class="key" data-key="8">8</button>
+        <button type="button" class="key" data-key="9">9</button>
+        <span class="key key-empty" aria-hidden="true"></span>
+        <button type="button" class="key" data-key="0">0</button>
+        <button type="button" class="key key-del" data-key="del" aria-label="削除">
+          <svg viewBox="0 0 48 40" width="34" height="28" aria-hidden="true">
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linejoin="round"
+              d="M16 6H42a4 4 0 0 1 4 4v20a4 4 0 0 1-4 4H16L6 26 16 6z"
+            />
+            <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M22 15l8 8M30 15l-8 8" />
+          </svg>
+        </button>
+      </div>
+    </section>
+  </div>
+  <script src="./js/main.js"></script>
+</body>
+</html>

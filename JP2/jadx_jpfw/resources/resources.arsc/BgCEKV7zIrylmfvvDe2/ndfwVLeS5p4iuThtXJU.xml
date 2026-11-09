@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:state_checked="true"
+        android:id="@q4nBElGgrubZeKOUx2A/ogX2XjBGtih2vzMqGtP"
+        android:drawable="@bTbUBzIh0ftLW9EMTLb/IkRE94juUIuAvCbR0h"/>
+    <item
+        android:id="@q4nBElGgrubZeKOUx2A/qYkZJrNjbneCLeRcTbS"
+        android:drawable="@bTbUBzIh0ftLW9EMTLb/gzjuClzn4u4mwCkJbJ"
+        app:state_indeterminate="true"/>
+    <item
+        android:state_checked="false"
+        android:id="@q4nBElGgrubZeKOUx2A/zQfPtnNzIwZa0sajTZJ"
+        android:drawable="@android:color/transparent"/>
+    <transition
+        android:drawable="@bTbUBzIh0ftLW9EMTLb/EMawsUXjQS8Sk2LwaH50"
+        android:toId="@q4nBElGgrubZeKOUx2A/zQfPtnNzIwZa0sajTZJ"
+        android:fromId="@q4nBElGgrubZeKOUx2A/ogX2XjBGtih2vzMqGtP"/>
+    <transition
+        android:drawable="@bTbUBzIh0ftLW9EMTLb/dQBxecI7wffOhl7BDq"
+        android:toId="@q4nBElGgrubZeKOUx2A/ogX2XjBGtih2vzMqGtP"
+        android:fromId="@q4nBElGgrubZeKOUx2A/zQfPtnNzIwZa0sajTZJ"/>
+    <transition
+        android:drawable="@bTbUBzIh0ftLW9EMTLb/TJE1sToCl7le5adbF4hX"
+        android:toId="@q4nBElGgrubZeKOUx2A/zQfPtnNzIwZa0sajTZJ"
+        android:fromId="@q4nBElGgrubZeKOUx2A/qYkZJrNjbneCLeRcTbS"/>
+    <transition
+        android:drawable="@bTbUBzIh0ftLW9EMTLb/ygkNs0bilryober1A6k"
+        android:toId="@q4nBElGgrubZeKOUx2A/qYkZJrNjbneCLeRcTbS"
+        android:fromId="@q4nBElGgrubZeKOUx2A/zQfPtnNzIwZa0sajTZJ"/>
+    <transition
+        android:drawable="@bTbUBzIh0ftLW9EMTLb/f6UjppBjhyWrpYvvR0"
+        android:toId="@q4nBElGgrubZeKOUx2A/ogX2XjBGtih2vzMqGtP"
+        android:fromId="@q4nBElGgrubZeKOUx2A/qYkZJrNjbneCLeRcTbS"/>
+    <transition
+        android:drawable="@bTbUBzIh0ftLW9EMTLb/knjrRmmlCV96vRtS5w"
+        android:toId="@q4nBElGgrubZeKOUx2A/qYkZJrNjbneCLeRcTbS"
+        android:fromId="@q4nBElGgrubZeKOUx2A/ogX2XjBGtih2vzMqGtP"/>
+</animated-selector>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.datepicker.MaterialCalendarGridView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center"
+    android:id="@q4nBElGgrubZeKOUx2A/Px94FcCwc2T7T1xaOkIG"
+    android:addStatesFromChildren="false"
+    android:descendantFocusability="afterDescendants"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:listSelector="@android:color/transparent"
+    android:horizontalSpacing="@GCdnE0uHTlaBdegBM1Rn/S9VY2TKHKgeQQVqMxv5j"
+    android:verticalSpacing="@GCdnE0uHTlaBdegBM1Rn/BaWhz0SE9Usg0C3a7o"
+    android:defaultFocusHighlightEnabled="false"/>

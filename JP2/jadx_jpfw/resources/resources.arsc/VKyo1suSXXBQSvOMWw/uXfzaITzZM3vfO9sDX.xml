@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.internal.NavigationMenuItemView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingLeft="?ehbV9VoYcpChEdFUN3/Ai747EUGSE7YGyolRJcy"
+    android:paddingRight="?ehbV9VoYcpChEdFUN3/DYgoUX3bp4xKok4pTC"
+    android:focusable="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?ehbV9VoYcpChEdFUN3/x3wa6BFhPimloJsjUg"
+    android:minHeight="?ehbV9VoYcpChEdFUN3/uSF0jChx8xarhaJ4DiMs"
+    android:defaultFocusHighlightEnabled="false"/>

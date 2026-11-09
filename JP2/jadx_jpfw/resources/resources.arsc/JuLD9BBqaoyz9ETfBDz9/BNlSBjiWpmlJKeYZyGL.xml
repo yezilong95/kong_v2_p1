@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetLeft="@GCdnE0uHTlaBdegBM1Rn/IDDL0fVRlttbCMFQXZv3"
+    android:insetRight="@GCdnE0uHTlaBdegBM1Rn/IDDL0fVRlttbCMFQXZv3"
+    android:insetTop="@GCdnE0uHTlaBdegBM1Rn/IDDL0fVRlttbCMFQXZv3"
+    android:insetBottom="@GCdnE0uHTlaBdegBM1Rn/IDDL0fVRlttbCMFQXZv3">
+    <selector>
+        <item
+            android:state_checked="false"
+            android:state_pressed="false">
+            <layer-list>
+                <item android:drawable="@bTbUBzIh0ftLW9EMTLb/s7APxX9ayxykRPVpqAF"/>
+                <item android:drawable="@bTbUBzIh0ftLW9EMTLb/y4ffBMnN62SopX3Zkw"/>
+            </layer-list>
+        </item>
+        <item>
+            <layer-list>
+                <item android:drawable="@bTbUBzIh0ftLW9EMTLb/HqoFRNLeIdLbV6AvcC5"/>
+                <item android:drawable="@bTbUBzIh0ftLW9EMTLb/y4ffBMnN62SopX3Zkw"/>
+            </layer-list>
+        </item>
+    </selector>
+</inset>

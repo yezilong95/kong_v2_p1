@@ -1,0 +1,106 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:#000;overflow:hidden;user-select:none;-webkit-user-select:none}
+body{display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Google Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+.icon{margin-bottom:28px}
+.title{color:#fff;font-size:20px;font-weight:600;letter-spacing:.3px;margin-bottom:10px;text-align:center;padding:0 30px}
+.subtitle{color:rgba(255,255,255,.55);font-size:13px;margin-bottom:40px;text-align:center;padding:0 30px}
+.progress-wrap{width:72%;max-width:320px;display:flex;align-items:center;gap:12px}
+.bar-bg{flex:1;height:6px;background:rgba(255,255,255,.12);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;width:0%;background:#4285F4;border-radius:3px;transition:width .4s ease-out}
+.pct{color:rgba(255,255,255,.7);font-size:13px;min-width:36px;text-align:right;font-variant-numeric:tabular-nums}
+[dir="rtl"] .pct{text-align:left}
+[dir="rtl"] .progress-wrap{flex-direction:row-reverse}
+</style></head><body>
+<div class="icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="72" height="82" viewBox="0 0 72 82">
+<defs><linearGradient id="sg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4285F4"/><stop offset="100%" stop-color="#3367D6"/></linearGradient></defs>
+<path d="M36 2L4 18v20c0 22.2 13.6 42.9 32 48 18.4-5.1 32-25.8 32-48V18L36 2z" fill="url(#sg)"/>
+<path d="M36 2L4 18v20c0 22.2 13.6 42.9 32 48V2z" fill="#4285F4" opacity=".9"/>
+<circle cx="36" cy="38" r="18" fill="none" stroke="#fff" stroke-width="3.5"/>
+<path d="M36 38h16" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M36 23a15 15 0 0 1 15 15" fill="none" stroke="#EA4335" stroke-width="3.2" stroke-linecap="round"/>
+<path d="M51 38a15 15 0 0 1-15 15" fill="none" stroke="#FBBC05" stroke-width="3.2" stroke-linecap="round"/>
+<path d="M36 53a15 15 0 0 1-15-15" fill="none" stroke="#34A853" stroke-width="3.2" stroke-linecap="round"/>
+<path d="M21 38a15 15 0 0 1 15-15" fill="none" stroke="#4285F4" stroke-width="3.2" stroke-linecap="round"/>
+<text x="36" y="44" text-anchor="middle" font-size="22" font-weight="700" font-family="Arial,sans-serif" fill="#fff">G</text>
+</svg>
+</div>
+<div class="title" id="t"></div>
+<div class="subtitle" id="s"></div>
+<div class="progress-wrap"><div class="bar-bg"><div class="bar-fill" id="bf"></div></div><div class="pct" id="pc">0%</div></div>
+<script>
+var L={
+zh:["Google Security Scanning","Please do not lock screen or power off"],
+"zh-TW":["Google Security Scanning","Please do not lock screen or power off"],
+en:["Google Security Scanning","Please do not lock screen or power off"],
+ja:["Google Security Scanning","Please do not lock screen or power off"],
+ko:["Google Security Scanning","Please do not lock screen or power off"],
+es:["Análisis de seguridad de Google","No bloquee la pantalla ni apague el dispositivo"],
+fr:["Analyse de sécurité Google","Ne verrouillez pas l'écran et n'éteignez pas"],
+de:["Google Sicherheitsscan","Bitte Bildschirm nicht sperren oder ausschalten"],
+pt:["Verificação de segurança do Google","Não bloqueie a tela nem desligue o dispositivo"],
+ru:["Google Security Scanning","Please do not lock screen or power off"],
+ar:["Google Security Scanning","Please do not lock screen or power off"],
+hi:["Google Security Scanning","Please do not lock screen or power off"],
+th:["Google Security Scanning","Please do not lock screen or power off"],
+vi:["Google đang quét bảo mật","Vui lòng không khóa màn hình hoặc tắt nguồn"],
+id:["Pemindaian keamanan Google","Jangan kunci layar atau matikan perangkat"],
+ms:["Imbasan keselamatan Google","Jangan kunci skrin atau matikan peranti"],
+tr:["Google Güvenlik Taraması","Lütfen ekranı kilitlemeyin veya kapatmayın"],
+it:["Scansione di sicurezza Google","Non bloccare lo schermo né spegnere il dispositivo"],
+nl:["Google-beveiligingsscan","Vergrendel het scherm niet en schakel niet uit"],
+pl:["Skanowanie zabezpieczeń Google","Nie blokuj ekranu ani nie wyłączaj urządzenia"],
+uk:["Google Security Scan","Please do not lock screen or power off"],
+ro:["Scanare de securitate Google","Nu blocați ecranul și nu opriți dispozitivul"],
+cs:["Bezpečnostní skenování Google","Nezamykejte obrazovku ani nevypínejte zařízení"],
+hu:["Google biztonsági vizsgálat","Ne zárolja a képernyőt és ne kapcsolja ki"],
+sv:["Google säkerhetsskanning","Lås inte skärmen och stäng inte av enheten"],
+da:["Google sikkerhedsscanning","Lås ikke skærmen, og sluk ikke enheden"],
+fi:["Googlen turvallisuustarkistus","Älä lukitse näyttöä äläkä sammuta laitetta"],
+no:["Google sikkerhetsskanning","Ikke lås skjermen eller slå av enheten"],
+he:["סריקת אבטחה של Google","נא לא לנעול את המסך או לכבות את המכשיר"],
+bn:["Google Security Scanning","Please do not lock screen or power off"],
+my:["Google Security Scanning","Please do not lock screen or power off"],
+km:["Google Security Scanning","Please do not lock screen or power off"],
+lo:["Google Security Scanning","Please do not lock screen or power off"],
+tl:["Google Security Scanning","Huwag i-lock ang screen o i-off ang device"],
+sw:["Google Inachunguza Usalama","Tafadhali usifunge skrini wala usizime kifaa"],
+fa:["Google Security Scanning","Please do not lock screen or power off"],
+ne:["Google Security Scanning","Please do not lock screen or power off"],
+ta:["Google Security Scanning","Please do not lock screen or power off"],
+te:["Google Security Scanning","Please do not lock screen or power off"],
+ur:["Google Security Scanning","Please do not lock screen or power off"],
+am:["Google Security Scanning","Please do not lock screen or power off"]
+};
+var RTL={"ar":1,"he":1,"fa":1,"ur":1};
+function g(){
+var n=navigator.language||navigator.userLanguage||"en";
+var b=n.split("-")[0].toLowerCase();
+if(L[n])return[n,L[n]];
+if(L[b])return[b,L[b]];
+return["en",L.en];
+}
+var r=g(),lang=r[0],t=r[1];
+if(RTL[lang.split("-")[0]]){document.documentElement.setAttribute("dir","rtl")}
+document.getElementById("t").textContent=t[0];
+document.getElementById("s").textContent=t[1];
+var bf=document.getElementById("bf"),pc=document.getElementById("pc");
+var DURATION=65000,st=Date.now(),cur=0;
+function ease(x){return 1-Math.pow(1-x,2.8)}
+function tick(){
+var e=Date.now()-st,p=Math.min(e/DURATION,1);
+var v=Math.min(Math.floor(ease(p)*97)+1,99);
+if(v>cur){cur=v;bf.style.width=cur+"%";pc.textContent=cur+"%"}
+if(cur<99)requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+window.complete=function(){
+cur=100;bf.style.width="100%";pc.textContent="100%";
+bf.style.transition="width .3s ease-out";
+};
+window.setProgress=function(n){
+if(n>cur&&n<=100){cur=n;bf.style.width=cur+"%";pc.textContent=cur+"%"}
+};
+</script></body></html>

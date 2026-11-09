@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.button.MaterialButtonToggleGroup xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:id="@q4nBElGgrubZeKOUx2A/NNkO4i2KesPyi3y2wuVB"
+    android:visibility="gone"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:checkedButton="@q4nBElGgrubZeKOUx2A/bROFVl5KGRPYJjZAaPkP"
+    app:selectionRequired="true"
+    app:singleSelection="true">
+    <Button
+        android:id="@q4nBElGgrubZeKOUx2A/bROFVl5KGRPYJjZAaPkP"
+        android:layout_width="0dp"
+        android:text="@ifVb8WSIBBsanRQDvt/sEztan1EF8mkz3fZMXij"
+        android:layout_weight="1"
+        android:insetTop="4dp"
+        android:insetBottom="4dp"
+        style="?ehbV9VoYcpChEdFUN3/jNW88BAVfbm7lLHxFgp"/>
+    <Button
+        android:id="@q4nBElGgrubZeKOUx2A/oUEqxN8DLUDWyCowu8"
+        android:layout_width="0dp"
+        android:text="@ifVb8WSIBBsanRQDvt/F1dTgF8tav5mKc1CvM"
+        android:layout_weight="1"
+        android:insetTop="4dp"
+        android:insetBottom="4dp"
+        style="?ehbV9VoYcpChEdFUN3/jNW88BAVfbm7lLHxFgp"/>
+</com.google.android.material.button.MaterialButtonToggleGroup>

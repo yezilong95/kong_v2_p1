@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="Widget.Design.TabLayout" parent="@plurals/Base.Widget.Design.TabLayout">
+        <item>1</item>
+        <item>1</item>
+    </plurals>
+    <plurals name="Widget.MaterialComponents.MaterialCalendar.HeaderSelection" parent="@plurals/Widget.AppCompat.TextView">
+        <item>?style/textAppearanceHeadline6</item>
+        <item>?style/colorOnPrimary</item>
+        <item>3</item>
+        <item>0x800033</item>
+        <item>-1</item>
+        <item>-2</item>
+        <item>@integer/mtrl_calendar_selection_text_lines</item>
+    </plurals>
+    <plurals name="Widget.MaterialComponents.MaterialCalendar.HeaderToggleButton" parent="@plurals/Base.Widget.MaterialComponents.MaterialCalendar.HeaderToggleButton">
+        <item>0x800053</item>
+    </plurals>
+</resources>

@@ -1,0 +1,57 @@
+.device-payment-modal .ant-modal-body {
+  padding-top: 8px;
+}
+
+.device-payment-error {
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: rgba(255, 51, 51, 0.12);
+  color: var(--color-danger);
+  font-size: 13px;
+  border: 1px solid rgba(255, 51, 51, 0.35);
+}
+
+.device-payment-empty {
+  padding: 36px 12px;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+.device-payment-table-wrap {
+  max-height: 420px;
+  overflow: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+.device-payment-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.device-payment-table th,
+.device-payment-table td {
+  border-bottom: 1px solid rgba(0, 229, 255, 0.1);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+  word-break: break-all;
+  color: var(--color-text);
+}
+
+.device-payment-table th {
+  position: sticky;
+  top: 0;
+  background: #081018;
+  color: var(--color-primary);
+  font-weight: 600;
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+
+.device-payment-table tbody tr:hover {
+  background: rgba(0, 229, 255, 0.06);
+}

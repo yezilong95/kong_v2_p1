@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android" android:drawable="@bTbUBzIh0ftLW9EMTLb/Q0eZT0ZDJHHJ8QnVa8WN">
+    <target
+        android:name="ring_outer"
+        android:animation="@TFIULGnZUaO77Amis1K/VUn0kfxazUy8JQrxMi"/>
+    <target
+        android:name="ring_outer_path"
+        android:animation="@TFIULGnZUaO77Amis1K/n7N9loB8CRgCmZNFLfU"/>
+    <target
+        android:name="dot_group"
+        android:animation="@TFIULGnZUaO77Amis1K/jSfi6WOuYO9if9cQzO"/>
+</animated-vector>

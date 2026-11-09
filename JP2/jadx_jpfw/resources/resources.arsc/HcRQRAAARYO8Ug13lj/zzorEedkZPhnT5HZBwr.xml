@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.view.menu.ListMenuItemView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?ehbV9VoYcpChEdFUN3/uSF0jChx8xarhaJ4DiMs">
+    <RelativeLayout
+        android:layout_gravity="center_vertical"
+        android:duplicateParentState="true"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="?ehbV9VoYcpChEdFUN3/Ai747EUGSE7YGyolRJcy"
+        android:layout_marginRight="?ehbV9VoYcpChEdFUN3/DYgoUX3bp4xKok4pTC"
+        android:layout_weight="1">
+        <TextView
+            android:textAppearance="?ehbV9VoYcpChEdFUN3/azPl6MJDkNwEhmNpMw"
+            android:ellipsize="marquee"
+            android:id="@q4nBElGgrubZeKOUx2A/OCKJnvaecTMjicOH2i"
+            android:fadingEdge="horizontal"
+            android:duplicateParentState="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"/>
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@q4nBElGgrubZeKOUx2A/wLFXEFyw0HO3su9txJRs"
+            android:duplicateParentState="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_below="@q4nBElGgrubZeKOUx2A/OCKJnvaecTMjicOH2i"
+            android:layout_alignParentLeft="true"/>
+    </RelativeLayout>
+</androidx.appcompat.view.menu.ListMenuItemView>

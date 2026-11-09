@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:enabled="false"
+    android:orientation="horizontal"
+    android:id="@q4nBElGgrubZeKOUx2A/cePuO2PdHqWoQTYFHb"
+    android:background="@null"
+    android:layout_width="0dp"
+    android:layout_height="48dp"
+    android:layout_weight="1"
+    android:paddingStart="4dp"
+    style="@AvINgglJhIUfJuK1EHO6/W7Hr5lltqr5iUujX2gS">
+    <ImageView
+        android:enabled="false"
+        android:layout_gravity="start|center_vertical"
+        android:id="@q4nBElGgrubZeKOUx2A/ImyRBpK7vqhIQ3AeL4Y"
+        android:layout_width="@GCdnE0uHTlaBdegBM1Rn/PhOuXWuIRzfDufA4c3"
+        android:layout_height="@GCdnE0uHTlaBdegBM1Rn/PhOuXWuIRzfDufA4c3"
+        android:scaleType="centerInside"
+        android:alpha="0.5"/>
+    <TextView
+        android:enabled="false"
+        android:ellipsize="end"
+        android:layout_gravity="start|center_vertical"
+        android:id="@q4nBElGgrubZeKOUx2A/oZ77ZAi2m666W3mgAlJq"
+        android:clickable="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:alpha="0.5"
+        android:paddingStart="4dp"
+        style="@AvINgglJhIUfJuK1EHO6/LwKqXKNX4vle7pNofDn"/>
+</LinearLayout>

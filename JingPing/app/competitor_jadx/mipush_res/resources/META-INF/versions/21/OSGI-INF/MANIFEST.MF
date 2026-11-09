@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Import-Package: java.io;resolution:=optional,java.lang;resolution:=opt
+ ional,java.lang.invoke;resolution:=optional,java.lang.ref;resolution:
+ =optional,java.lang.reflect;resolution:=optional,java.math;resolution
+ :=optional,java.net;resolution:=optional,java.nio;resolution:=optiona
+ l,java.nio.channels;resolution:=optional,java.security;resolution:=op
+ tional,java.security.cert;resolution:=optional,java.security.interfac
+ es;resolution:=optional,java.security.spec;resolution:=optional,java.
+ text;resolution:=optional,java.util;resolution:=optional,java.util.co
+ ncurrent;resolution:=optional,java.util.concurrent.atomic;resolution:
+ =optional,java.util.jar;resolution:=optional,java.util.logging;resolu
+ tion:=optional,javax.crypto;resolution:=optional,javax.crypto.interfa
+ ces;resolution:=optional,javax.crypto.spec;resolution:=optional,javax
+ .naming;resolution:=optional,javax.naming.directory;resolution:=optio
+ nal,javax.security.auth;resolution:=optional,javax.security.auth.call
+ back;resolution:=optional,javax.security.auth.x500;resolution:=option
+ al
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=21))"
+

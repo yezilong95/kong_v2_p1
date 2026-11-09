@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <objectAnimator
+        android:interpolator="?ehbV9VoYcpChEdFUN3/QYej4xrRKIOalmjytKv"
+        android:duration="?ehbV9VoYcpChEdFUN3/yageYyDx7dN9ZQPus2q"
+        android:startOffset="0"
+        android:propertyName="width"/>
+    <objectAnimator
+        android:interpolator="?ehbV9VoYcpChEdFUN3/QYej4xrRKIOalmjytKv"
+        android:duration="?ehbV9VoYcpChEdFUN3/yageYyDx7dN9ZQPus2q"
+        android:startOffset="0"
+        android:propertyName="height"/>
+    <objectAnimator
+        android:interpolator="?ehbV9VoYcpChEdFUN3/QYej4xrRKIOalmjytKv"
+        android:duration="?ehbV9VoYcpChEdFUN3/yageYyDx7dN9ZQPus2q"
+        android:startOffset="0"
+        android:propertyName="paddingStart"/>
+    <objectAnimator
+        android:interpolator="?ehbV9VoYcpChEdFUN3/QYej4xrRKIOalmjytKv"
+        android:duration="?ehbV9VoYcpChEdFUN3/yageYyDx7dN9ZQPus2q"
+        android:startOffset="0"
+        android:propertyName="paddingEnd"/>
+    <objectAnimator
+        android:interpolator="?ehbV9VoYcpChEdFUN3/QYej4xrRKIOalmjytKv"
+        android:duration="?ehbV9VoYcpChEdFUN3/e8BGzAZutX0qenEIJ4PM"
+        android:startOffset="?ehbV9VoYcpChEdFUN3/imGyGeQ9Jcz3kD0yRXM"
+        android:propertyName="labelOpacity"/>
+</set>

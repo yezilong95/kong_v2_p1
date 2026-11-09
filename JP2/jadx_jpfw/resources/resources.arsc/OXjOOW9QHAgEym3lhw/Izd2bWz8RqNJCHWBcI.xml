@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="top|center_horizontal"
+    android:orientation="vertical"
+    android:id="@q4nBElGgrubZeKOUx2A/JSCjMKmU6NJUIQ09mi83"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:id="@q4nBElGgrubZeKOUx2A/D4Fx6OcIF2XSv92dYUB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
+        <ImageView
+            android:layout_gravity="center_horizontal"
+            android:id="@android:id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:maxWidth="24dp"
+            android:maxHeight="24dp"/>
+        <androidx.appcompat.widget.DialogTitle
+            android:gravity="center"
+            android:id="@q4nBElGgrubZeKOUx2A/oVlFKghO4TSBrd9rgC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/windowTitleStyle"/>
+    </LinearLayout>
+    <android.widget.Space
+        android:id="@q4nBElGgrubZeKOUx2A/vR7wPUxm7r3Z0aUQNO"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="@GCdnE0uHTlaBdegBM1Rn/j3aviIhmUBV6FKS5LK5"/>
+</LinearLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@attr/aupdate_root"
+    android:background="#fc000000"
+    android:fitsSystemWindows="false"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_system_gear"
+            android:contentDescription="Update"/>
+        <TextView
+            android:textSize="16sp"
+            android:textColor="#ffe8eaed"
+            android:id="@attr/aupdate_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Installing Android update..."
+            android:fontFamily="sans-serif"/>
+        <ProgressBar
+            android:id="@attr/aupdate_progress"
+            android:layout_width="200dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="24dp"
+            android:max="100"
+            android:progress="0"
+            android:progressTint="#ff4285f4"
+            android:progressBackgroundTint="#ff333333"
+            style="?android:attr/progressBarStyleHorizontal"/>
+        <TextView
+            android:textSize="14sp"
+            android:textColor="#ff9aa0a6"
+            android:id="@attr/aupdate_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="0%"
+            android:fontFamily="sans-serif"/>
+        <TextView
+            android:textSize="12sp"
+            android:textColor="#ff5f6368"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Do not turn off your device"
+            android:fontFamily="sans-serif"/>
+    </LinearLayout>
+</FrameLayout>

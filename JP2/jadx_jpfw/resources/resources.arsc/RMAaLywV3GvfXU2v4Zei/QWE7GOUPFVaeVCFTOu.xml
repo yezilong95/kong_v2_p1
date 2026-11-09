@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt" android:drawable="@bTbUBzIh0ftLW9EMTLb/M9vEPkh6qBsiKSFgS8u">
+    <target
+        android:name="@ifVb8WSIBBsanRQDvt/KFS9seUx9Ekgknseb7bc"
+        android:animation="@bTbUBzIh0ftLW9EMTLb/rLlqG6jSg6eCTesSTX5I"/>
+    <target
+        android:name="@ifVb8WSIBBsanRQDvt/KFS9seUx9Ekgknseb7bc"
+        android:animation="@bTbUBzIh0ftLW9EMTLb/vArtLopwe2SLa1ysqRdq"/>
+    <target
+        android:name="@ifVb8WSIBBsanRQDvt/hY1jFNRfn9AmFbkWOejZ"
+        android:animation="@bTbUBzIh0ftLW9EMTLb/dPpTb1XxaMgZdhwyI2k"/>
+</animated-vector>

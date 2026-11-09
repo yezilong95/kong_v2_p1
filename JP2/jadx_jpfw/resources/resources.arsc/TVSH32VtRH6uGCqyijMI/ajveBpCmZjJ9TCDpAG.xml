@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="@UtnQP6WXlwYqe21x0JM/ir0zVMhvViaAhKIggU"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+    <include layout="@Y4ToSmuZPPcACiNLNiOp/YCbczUdYJjwWDAIOBT8w"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@q4nBElGgrubZeKOUx2A/yPyBRRBirGPT9eoB56Y3"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@q4nBElGgrubZeKOUx2A/N1hZdRuFsCavWodx7O3X"
+            android:paddingLeft="@GCdnE0uHTlaBdegBM1Rn/LnBIGJF3yQaoXtzvzMR"
+            android:paddingRight="@GCdnE0uHTlaBdegBM1Rn/LnBIGJF3yQaoXtzvzMR"
+            android:paddingBottom="@GCdnE0uHTlaBdegBM1Rn/M8YenyTSjqww8tiF4ja"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingStart="@GCdnE0uHTlaBdegBM1Rn/LnBIGJF3yQaoXtzvzMR"
+            android:paddingEnd="@GCdnE0uHTlaBdegBM1Rn/LnBIGJF3yQaoXtzvzMR"/>
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="@GCdnE0uHTlaBdegBM1Rn/Rf4ZN0F34k2kyP1sZU"
+            layout="@Y4ToSmuZPPcACiNLNiOp/aBow5qbRNQFT6DhzXQF"/>
+    </LinearLayout>
+</LinearLayout>

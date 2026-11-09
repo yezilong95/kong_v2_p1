@@ -1,0 +1,50 @@
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.databinding_viewbinding.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.documentfile_documentfile.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.drawerlayout_drawerlayout.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.dynamicanimation_dynamicanimation.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.emoji2_emoji2-views-helper.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.emoji2_emoji2.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.exifinterface_exifinterface.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.fragment_fragment.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.interpolator_interpolator.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.legacy_legacy-support-core-utils.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.lifecycle_lifecycle-livedata-core-ktx.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.lifecycle_lifecycle-livedata-core.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.lifecycle_lifecycle-livedata.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.lifecycle_lifecycle-process.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.lifecycle_lifecycle-runtime-ktx.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.lifecycle_lifecycle-runtime.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.lifecycle_lifecycle-viewmodel-ktx.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.lifecycle_lifecycle-viewmodel-savedstate.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.lifecycle_lifecycle-viewmodel.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.loader_loader.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.localbroadcastmanager_localbroadcastmanager.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.print_print.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.profileinstaller_profileinstaller.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.recyclerview_recyclerview.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.savedstate_savedstate-ktx.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.savedstate_savedstate.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.startup_startup-runtime.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.tracing_tracing.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.transition_transition.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.vectordrawable_vectordrawable-animated.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.vectordrawable_vectordrawable.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.versionedparcelable_versionedparcelable.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.viewpager2_viewpager2.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\androidx.viewpager_viewpager.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\com
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\com.google.android.material_material.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\kotlinx_coroutines_android.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\kotlinx_coroutines_core.version
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\services
+2026-09-09 09:24:54 add meta file d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\temp\META-INF\version-control-info.textproto
+2026-09-09 09:24:54 DestResDir 881 rawResDir 881
+2026-09-09 09:24:56 [AndResGuard] done, total time cost: 8.992000s
+2026-09-09 09:24:56 [AndResGuard] done, you can go to file to find the output d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk
+2026-09-09 09:24:58 正在签名...
+2026-09-09 09:24:58 后台执行的命令：
+"d:\ApkHelperData\tools\tools\jdk\bin\java.exe" -jar "d:\ApkHelperData\tools\tools\apksigner.jar" sign --cert  "d:\ApkHelperData\tools\testkey.x509.pem" --key "d:\ApkHelperData\tools\testkey.pk8"   --min-sdk-version 10  "d:\ApkHelperData\cache\random_mul\g38633\temp0\mixres0\outapk\j500231762_unsigned_tmp.apk"
+2026-09-09 09:24:59 正在上传..
+2026-09-09 09:24:59 结束打包：（包序号：0，配置文件：g38633，源文件：C:\Users\Administrator\Downloads\app.apk，线程号：0，打包编号：618）
+2026-09-09 09:24:59 签名成功...（包序号：0，配置文件：g38633，源文件：C:\Users\Administrator\Downloads\app.apk，线程号：0，打包编号：618）
+2026-09-09 09:24:59 等待600秒后继续下一轮打包
