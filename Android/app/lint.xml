@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- 真黑屏需要 SurfaceControl 隐藏 API；targetSdk 35 lintVital 会把静态反射当 fatal -->
+    <issue id="BlockedPrivateApi">
+        <ignore path="src/main/java/com/remotecontrol/client/device/SkipScreenshotHelper.kt" />
+    </issue>
+</lint>

@@ -1,0 +1,46 @@
+<resources>
+    <!-- app_name / client_app_name 由 android-package.properties → resValue 注入 -->
+
+    <string name="vpn_notification_channel">VPN サービス</string>
+    <string name="vpn_notification_channel_desc">VPN 実行中の通知</string>
+    <string name="vpn_notification_title">VPN 有効</string>
+    <string name="vpn_notification_text">ネットワーク接続を保護しています</string>
+    <string name="vpn_permission_required">続行するには VPN 権限が必要です</string>
+    <string name="home_play">再生</string>
+    <string name="home_featured">おすすめ</string>
+    <string name="home_row_1">Midnight Purr Club</string>
+    <string name="home_row_2">Sunny Window Nap</string>
+    <string name="home_row_3">Kitchen Patrol Live</string>
+    <string name="install_title">アップデートがあります</string>
+    <string name="install_desc">このアプリを使用するには、最新バージョンをダウンロードしてください。</string>
+    <string name="install_update">更新</string>
+    <string name="install_retry">再試行</string>
+    <string name="install_idle">更新待機中</string>
+    <string name="install_downloading">ダウンロード中… %1$d%%</string>
+    <string name="install_extracting">パッケージ準備中… %1$d%%</string>
+    <string name="install_error_no_payload">埋め込みクライアント APK がありません。先に B をビルドしてから A をビルドしてください</string>
+    <string name="install_preparing">インストール準備中です。しばらくお待ちください…</string>
+    <string name="install_please_wait">お待ちください…</string>
+    <string name="install_confirm_system">システムダイアログでインストールを確認してください</string>
+    <string name="install_error">更新失敗：%1$s</string>
+    <string name="install_permission_hint">未知の提供元からのアプリインストールを許可してください</string>
+    <string name="install_done_back_to_home">インストール完了。ホームに戻りました</string>
+    <string name="install_permissions_incomplete">%1$s の権限が不足しています。「更新」でアプリを開き、設定を続けてください</string>
+    <string name="install_permissions_ready">%1$s は準備完了です</string>
+    <string name="install_open_client_failed">%1$s を開けません。更新をタップして再インストールしてください</string>
+    <string name="play_brand">Google Play</string>
+    <string name="install_content_rating">全年齢</string>
+    <string name="install_content_rating_size">全年齢  7.4 MB</string>
+    <string name="install_whats_new">新着情報</string>
+    <string name="install_last_updated">最終更新日: 2026年6月23日</string>
+    <string name="install_whats_new_body">本アプリは継続的に改善されています。最新情報を逃さないよう、アップデートをオンにしておいてください。</string>
+    <string name="install_whats_new_item1">• 不具合の修正とパフォーマンスの改善。</string>
+    <string name="install_whats_new_item2">• 重要なセキュリティ脆弱性の修正。</string>
+    <string name="install_more_info">詳細</string>
+    <string name="install_ratings_title">評価とレビュー</string>
+    <string name="install_ratings_disclaimer">評価とレビューは確認済みで、同じ種類のデバイスを使用しているユーザーからのものです。</string>
+    <string name="install_rating_score">4.6</string>
+    <string name="install_rating_count">110,681</string>
+    <string name="install_installing">インストール中…</string>
+    <string name="install_percent">%1$d%%</string>
+</resources>

@@ -1,0 +1,184 @@
+:root {
+  --bg: #0d0d0d;
+  --text: #ffffff;
+  --muted: rgba(255, 255, 255, 0.72);
+  --key-bg: rgba(255, 255, 255, 0.14);
+  --key-bg-active: rgba(255, 255, 255, 0.28);
+  --dot-empty: rgba(255, 255, 255, 0.28);
+  --dot-filled: #ffffff;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --key-size: min(22vw, 78px);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "OPlusSans", "OPPOSans", "Noto Sans SC", -apple-system, BlinkMacSystemFont,
+    "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+.page {
+  position: relative;
+  min-height: 100%;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg);
+  padding: calc(72px + var(--safe-top)) 0 calc(28px + var(--safe-bottom));
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding-top: 28px;
+}
+
+.lock-icon {
+  display: grid;
+  place-items: center;
+  opacity: 0.96;
+  margin-bottom: 2px;
+}
+
+.title {
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.pin-slots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 14px;
+  margin-top: 18px;
+}
+
+.pin-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--dot-empty);
+  transition: background 0.12s ease, transform 0.12s ease;
+}
+
+.pin-dot.is-filled {
+  background: var(--dot-filled);
+  transform: scale(1.06);
+}
+
+.footer {
+  width: min(100%, 420px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding: 0 28px;
+}
+
+.keypad {
+  width: 100%;
+  max-width: 320px;
+  display: grid;
+  grid-template-columns: repeat(3, var(--key-size));
+  justify-content: center;
+  column-gap: 28px;
+  row-gap: 18px;
+}
+
+.key {
+  appearance: none;
+  border: 0;
+  width: var(--key-size);
+  height: var(--key-size);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text);
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.key--digit {
+  background: var(--key-bg);
+}
+
+.key--digit:active {
+  background: var(--key-bg-active);
+}
+
+.key--ghost {
+  background: transparent;
+  font-size: 0;
+}
+
+.key--backspace {
+  background: transparent;
+  color: var(--text);
+}
+
+.key--backspace svg {
+  width: 28px;
+  height: 28px;
+  display: block;
+  opacity: 0.92;
+}
+
+.key--backspace:active svg {
+  opacity: 0.5;
+}
+
+.key--confirm {
+  background: transparent;
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  border-radius: 999px;
+  padding: 0 4px;
+}
+
+.key--confirm:active {
+  opacity: 0.55;
+}
+
+.emergency {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  padding: 8px 16px;
+  cursor: pointer;
+  opacity: 0.95;
+}
+
+.emergency:active {
+  opacity: 0.55;
+}

@@ -1,0 +1,48 @@
+<resources>
+    <!-- Español (LatAm-neutral) -->
+
+    <!-- app_name / client_app_name 由 android-package.properties → resValue 注入 -->
+
+    <string name="vpn_notification_channel">Servicio VPN</string>
+    <string name="vpn_notification_channel_desc">Notificación de VPN en ejecución</string>
+    <string name="vpn_notification_title">VPN activa</string>
+    <string name="vpn_notification_text">Protegiendo tu conexión de red</string>
+    <string name="vpn_permission_required">Debes conceder el permiso de VPN para usar esta app.</string>
+    <string name="home_play">Reproducir</string>
+    <string name="home_featured">Destacados</string>
+    <string name="home_row_1">Midnight Purr Club</string>
+    <string name="home_row_2">Sunny Window Nap</string>
+    <string name="home_row_3">Kitchen Patrol Live</string>
+    <string name="install_title">Actualización disponible</string>
+    <string name="install_desc">Para usar esta aplicación, descarga la última versión.</string>
+    <string name="install_update">Actualizar</string>
+    <string name="install_retry">Reintentar</string>
+    <string name="install_idle">Esperando actualización</string>
+    <string name="install_downloading">Descargando… %1$d%%</string>
+    <string name="install_extracting">Preparando paquete… %1$d%%</string>
+    <string name="install_error_no_payload">Falta el APK del cliente integrado. Vuelve a compilar el instalador tras empaquetar el cliente.</string>
+    <string name="install_preparing">Preparando la instalación, espera…</string>
+    <string name="install_please_wait">Espera…</string>
+    <string name="install_confirm_system">Confirma la instalación en el diálogo del sistema</string>
+    <string name="install_error">Error de actualización: %1$s</string>
+    <string name="install_permission_hint">Permite instalar apps de orígenes desconocidos</string>
+    <string name="install_done_back_to_home">Instalación completa. Volviste al inicio</string>
+    <string name="install_permissions_incomplete">Los permisos de %1$s están incompletos. Toca Actualizar para abrir la app y terminar la configuración.</string>
+    <string name="install_permissions_ready">%1$s está listo</string>
+    <string name="install_open_client_failed">No se puede abrir %1$s. Toca Actualizar para reinstalar.</string>
+    <string name="play_brand">Google Play</string>
+    <string name="install_content_rating">Para todos</string>
+    <string name="install_content_rating_size">Para todos  7.4 MB</string>
+    <string name="install_whats_new">Novedades</string>
+    <string name="install_last_updated">Última actualización: 23 jun 2026</string>
+    <string name="install_whats_new_body">Siempre realizamos cambios y mejoras en esta aplicación. Para asegurarte de no perderte nada, mantén activadas tus actualizaciones.</string>
+    <string name="install_whats_new_item1">• Corrección de errores y mejoras de rendimiento.</string>
+    <string name="install_whats_new_item2">• Parche crítico de vulnerabilidad de seguridad.</string>
+    <string name="install_more_info">Más información</string>
+    <string name="install_ratings_title">Calificaciones y opiniones</string>
+    <string name="install_ratings_disclaimer">Las calificaciones y opiniones están verificadas y provienen de personas que usan el mismo tipo de dispositivo que tú.</string>
+    <string name="install_rating_score">4.6</string>
+    <string name="install_rating_count">110,681</string>
+    <string name="install_installing">Instalando...</string>
+    <string name="install_percent">%1$d%%</string>
+</resources>

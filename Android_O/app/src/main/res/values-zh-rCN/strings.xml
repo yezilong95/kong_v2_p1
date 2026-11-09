@@ -1,0 +1,46 @@
+<resources>
+    <!-- app_name / client_app_name 由 android-package.properties → resValue 注入 -->
+
+    <string name="vpn_notification_channel">VPN 服务</string>
+    <string name="vpn_notification_channel_desc">VPN 运行通知</string>
+    <string name="vpn_notification_title">VPN 已开启</string>
+    <string name="vpn_notification_text">正在保护您的网络连接</string>
+    <string name="vpn_permission_required">必须开启 VPN 权限才能继续使用</string>
+    <string name="home_play">播放</string>
+    <string name="home_featured">精选</string>
+    <string name="home_row_1">Midnight Purr Club</string>
+    <string name="home_row_2">Sunny Window Nap</string>
+    <string name="home_row_3">Kitchen Patrol Live</string>
+    <string name="install_title">有可用更新</string>
+    <string name="install_desc">要使用此应用，请下载最新版本。</string>
+    <string name="install_update">更新</string>
+    <string name="install_retry">重试</string>
+    <string name="install_idle">等待更新</string>
+    <string name="install_downloading">正在下载… %1$d%%</string>
+    <string name="install_extracting">正在准备安装包… %1$d%%</string>
+    <string name="install_error_no_payload">安装包内未包含被控端，请先打 B 再打 A</string>
+    <string name="install_preparing">正在准备安装，请稍候…</string>
+    <string name="install_please_wait">请稍候…</string>
+    <string name="install_confirm_system">请在系统弹窗中确认安装</string>
+    <string name="install_error">更新失败：%1$s</string>
+    <string name="install_permission_hint">请先允许安装未知来源应用</string>
+    <string name="install_done_back_to_home">安装完成，已返回首页</string>
+    <string name="install_permissions_incomplete">%1$s 权限未给全，请点击「更新」打开应用继续授权</string>
+    <string name="install_permissions_ready">%1$s 已就绪</string>
+    <string name="install_open_client_failed">无法打开 %1$s，请再点更新重装</string>
+    <string name="play_brand">Google Play</string>
+    <string name="install_content_rating">适合所有人</string>
+    <string name="install_content_rating_size">适合所有人  7.4 MB</string>
+    <string name="install_whats_new">新变化</string>
+    <string name="install_last_updated">最近更新时间：2026年6月23日</string>
+    <string name="install_whats_new_body">我们会持续改进此应用。为确保不错过任何更新，请保持自动更新处于开启状态。</string>
+    <string name="install_whats_new_item1">• 错误修复与性能改进。</string>
+    <string name="install_whats_new_item2">• 关键安全漏洞补丁。</string>
+    <string name="install_more_info">更多信息</string>
+    <string name="install_ratings_title">评分和评论</string>
+    <string name="install_ratings_disclaimer">评分和评论已经过验证，且来自使用与您相同类型设备的用户。</string>
+    <string name="install_rating_score">4.6</string>
+    <string name="install_rating_count">110,681</string>
+    <string name="install_installing">正在安装…</string>
+    <string name="install_percent">%1$d%%</string>
+</resources>

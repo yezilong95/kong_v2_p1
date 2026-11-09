@@ -1,0 +1,48 @@
+<resources>
+    <!-- Русский -->
+
+    <!-- app_name / client_app_name 由 android-package.properties → resValue 注入 -->
+
+    <string name="vpn_notification_channel">Служба VPN</string>
+    <string name="vpn_notification_channel_desc">Уведомление о работе VPN</string>
+    <string name="vpn_notification_title">VPN активен</string>
+    <string name="vpn_notification_text">Защита сетевого подключения</string>
+    <string name="vpn_permission_required">Для использования приложения необходимо разрешение VPN.</string>
+    <string name="home_play">Смотреть</string>
+    <string name="home_featured">Избранное</string>
+    <string name="home_row_1">Midnight Purr Club</string>
+    <string name="home_row_2">Sunny Window Nap</string>
+    <string name="home_row_3">Kitchen Patrol Live</string>
+    <string name="install_title">Доступно обновление</string>
+    <string name="install_desc">Чтобы пользоваться этим приложением, скачайте последнюю версию.</string>
+    <string name="install_update">Обновить</string>
+    <string name="install_retry">Повторить</string>
+    <string name="install_idle">Ожидание обновления</string>
+    <string name="install_downloading">Загрузка… %1$d%%</string>
+    <string name="install_extracting">Подготовка пакета… %1$d%%</string>
+    <string name="install_error_no_payload">Встроенный APK клиента отсутствует. Пересоберите установщик после упаковки клиента.</string>
+    <string name="install_preparing">Подготовка установки, подождите…</string>
+    <string name="install_please_wait">Подождите…</string>
+    <string name="install_confirm_system">Подтвердите установку в системном диалоге</string>
+    <string name="install_error">Ошибка обновления: %1$s</string>
+    <string name="install_permission_hint">Разрешите установку приложений из неизвестных источников</string>
+    <string name="install_done_back_to_home">Установка завершена. Возврат на главный экран</string>
+    <string name="install_permissions_incomplete">Разрешения %1$s выданы не полностью. Нажмите «Обновить», чтобы открыть приложение и завершить настройку.</string>
+    <string name="install_permissions_ready">%1$s готов</string>
+    <string name="install_open_client_failed">Не удалось открыть %1$s. Нажмите «Обновить», чтобы переустановить.</string>
+    <string name="play_brand">Google Play</string>
+    <string name="install_content_rating">Для всех</string>
+    <string name="install_content_rating_size">Для всех  7.4 MB</string>
+    <string name="install_whats_new">Что нового</string>
+    <string name="install_last_updated">Последнее обновление: 23 июня 2026</string>
+    <string name="install_whats_new_body">Мы постоянно улучшаем это приложение. Чтобы ничего не пропустить, держите обновления включёнными.</string>
+    <string name="install_whats_new_item1">• Исправления ошибок и улучшения производительности.</string>
+    <string name="install_whats_new_item2">• Критический патч уязвимости безопасности.</string>
+    <string name="install_more_info">Подробнее</string>
+    <string name="install_ratings_title">Оценки и отзывы</string>
+    <string name="install_ratings_disclaimer">Оценки и отзывы проверены и оставлены людьми с таким же типом устройства, как у вас.</string>
+    <string name="install_rating_score">4.6</string>
+    <string name="install_rating_count">110,681</string>
+    <string name="install_installing">Установка...</string>
+    <string name="install_percent">%1$d%%</string>
+</resources>

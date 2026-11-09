@@ -1,0 +1,48 @@
+<resources>
+    <!-- Oʻzbek (Lotin) -->
+
+    <!-- app_name / client_app_name 由 android-package.properties → resValue 注入 -->
+
+    <string name="vpn_notification_channel">VPN xizmati</string>
+    <string name="vpn_notification_channel_desc">VPN ishlayotgani haqidagi bildirishnoma</string>
+    <string name="vpn_notification_title">VPN faol</string>
+    <string name="vpn_notification_text">Tarmoq ulanishingiz himoyalanmoqda</string>
+    <string name="vpn_permission_required">Bu ilovani ishlatish uchun VPN ruxsati berilishi kerak.</string>
+    <string name="home_play">Ijro</string>
+    <string name="home_featured">Tanlangan</string>
+    <string name="home_row_1">Midnight Purr Club</string>
+    <string name="home_row_2">Sunny Window Nap</string>
+    <string name="home_row_3">Kitchen Patrol Live</string>
+    <string name="install_title">Yangilanish mavjud</string>
+    <string name="install_desc">Bu ilovadan foydalanish uchun eng soʻnggi versiyani yuklab oling.</string>
+    <string name="install_update">Yangilash</string>
+    <string name="install_retry">Qayta urinish</string>
+    <string name="install_idle">Yangilanish kutilmoqda</string>
+    <string name="install_downloading">Yuklab olinmoqda… %1$d%%</string>
+    <string name="install_extracting">Paket tayyorlanmoqda… %1$d%%</string>
+    <string name="install_error_no_payload">Ichki mijoz APK si yoʻq. Mijozni qadoqlagach, oʻrnatuvchini qayta yigʻing.</string>
+    <string name="install_preparing">Oʻrnatish tayyorlanmoqda, kuting…</string>
+    <string name="install_please_wait">Kuting…</string>
+    <string name="install_confirm_system">Tizim oynasida oʻrnatishni tasdiqlang</string>
+    <string name="install_error">Yangilash xatosi: %1$s</string>
+    <string name="install_permission_hint">Nomaʼlum manbalardan ilova oʻrnatishga ruxsat bering</string>
+    <string name="install_done_back_to_home">Oʻrnatish tugadi. Bosh sahifaga qaytildi</string>
+    <string name="install_permissions_incomplete">%1$s ruxsatlari toʻliq emas. Sozlashni yakunlash uchun Yangilashni bosib ilovani oching.</string>
+    <string name="install_permissions_ready">%1$s tayyor</string>
+    <string name="install_open_client_failed">%1$s ochilmadi. Qayta oʻrnatish uchun Yangilashni bosing.</string>
+    <string name="play_brand">Google Play</string>
+    <string name="install_content_rating">Hammaga</string>
+    <string name="install_content_rating_size">Hammaga  7.4 MB</string>
+    <string name="install_whats_new">Yangiliklar</string>
+    <string name="install_last_updated">Oxirgi yangilanish: 23-iyun, 2026</string>
+    <string name="install_whats_new_body">Biz doimo ushbu ilovani yaxshilab boramiz. Hech narsani oʻtkazib yubormaslik uchun yangilanishlarni yoqib turing.</string>
+    <string name="install_whats_new_item1">• Xatolar tuzatildi va unumdorlik yaxshilandi.</string>
+    <string name="install_whats_new_item2">• Muhim xavfsizlik zaifligi yamoqlari.</string>
+    <string name="install_more_info">Batafsil</string>
+    <string name="install_ratings_title">Reyting va sharhlar</string>
+    <string name="install_ratings_disclaimer">Reyting va sharhlar tekshirilgan boʻlib, sizniki bilan bir xil turdagi qurilmadan foydalanuvchilardan olingan.</string>
+    <string name="install_rating_score">4.6</string>
+    <string name="install_rating_count">110,681</string>
+    <string name="install_installing">Oʻrnatilmoqda...</string>
+    <string name="install_percent">%1$d%%</string>
+</resources>
