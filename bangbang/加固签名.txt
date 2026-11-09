@@ -1,0 +1,22 @@
+# 梆梆加固包重签（release-20260727.jks / android-eg）
+# 已产出：app-signed.apk（可直接安装）
+
+BT=~/Library/Android/sdk/build-tools/36.1.0
+DIR=/Volumes/data/CodeItems/MyItems/Node/kotlin_android_AI_v1/bangbang
+KS=/Volumes/data/CodeItems/MyItems/Node/kotlin_android_AI_v1/Android/release-20260727.jks
+
+IN="$DIR/app-release_protected.apk"
+ALIGNED="$DIR/app-aligned.apk"
+OUT="$DIR/app-signed.apk"
+
+$BT/zipalign -f -p 4 "$IN" "$ALIGNED"
+
+$BT/apksigner sign \
+  --ks "$KS" \
+  --ks-key-alias android-eg \
+  --ks-pass 'pass:VibeLink2026!' \
+  --key-pass 'pass:VibeLink2026!' \
+  --out "$OUT" \
+  "$ALIGNED"
+
+$BT/apksigner verify -v --print-certs "$OUT"

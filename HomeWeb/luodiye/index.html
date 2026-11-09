@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CircleTV - Live Sports, Movies, Series & News" data-i18n-attr="content:pageDesc">
+  <title data-i18n="pageTitle">CircleTV - Live Sports, Movies, Series & News</title>
+  <link rel="icon" type="image/png" href="./images/logo-192.png">
+  <link rel="stylesheet" href="/styles/main.css">
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1383203210544899');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1383203210544899&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+  <!-- Top Header Bar -->
+  <header class="top-header">
+    <div class="header-inner">
+      <div class="header-brand">
+        <img src="./images/logo-192.png" alt="CircleTV" class="header-logo">
+        <span class="header-title">CircleTV</span>
+      </div>
+      <div class="header-actions">
+        <label class="lang-switch">
+          <span class="sr-only" data-i18n="langLabel">Language</span>
+          <select id="langSelect" aria-label="Language">
+            <option value="en">EN</option>
+            <option value="pt">PT</option>
+            <option value="es">ES</option>
+            <option value="id">ID</option>
+          </select>
+        </label>
+        <button class="header-btn" onclick="triggerDownload()" data-i18n="headerInstall">Installation Guide</button>
+      </div>
+    </div>
+    <div class="header-progress">
+      <div class="progress-fill"></div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <div class="badge">
+          <span class="pulse-dot"></span>
+          <span data-i18n="badgeLive">LIVE TV • Sports • Movies • Always Free</span>
+        </div>
+        <h1 class="hero-title" data-i18n-html="heroTitleHtml">
+          <span class="gradient-text">CircleTV</span>
+          <span> — Live Sports,</span><br>
+          <span>Movies, Series & Live News</span><br>
+          <span class="subtitle">Fast APK, HD streaming, 100% free</span>
+        </h1>
+        <p class="hero-desc" data-i18n="heroDesc">
+          An Android app for live sports nights, blockbuster movies, popular series,
+          world news, finance, and private channels.
+        </p>
+        <a href="https://oss-down.tkjy689.site/A/CircleTV-A-1.0.32.apk" class="btn-primary" onclick="triggerDownload(); return false;">
+          <span data-i18n="btnInstallApk">📲 Install CircleTV APK</span>
+        </a>
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-value gradient-text">1000+</div><div class="stat-label" data-i18n="statChannels">Channels</div></div>
+          <div class="stat-card"><div class="stat-value gradient-text">4K</div><div class="stat-label" data-i18n="statHd">HD/4K</div></div>
+          <div class="stat-card"><div class="stat-value gradient-text">500K+</div><div class="stat-label" data-i18n="statUsers">Users</div></div>
+          <div class="stat-card"><div class="stat-value gradient-text">FREE</div><div class="stat-label" data-i18n="statFree">Always Free</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Installation Guide Card -->
+    <section class="install-card-section">
+      <div class="install-card">
+        <div class="install-header">
+          <div class="install-icon">📺</div>
+          <h2 class="gradient-text">CircleTV</h2>
+          <p class="install-subtitle" data-i18n="installSubtitle">Live entertainment, free</p>
+        </div>
+        <div class="install-divider"></div>
+        <div class="install-features">
+          <div class="install-feature">
+            <div class="feature-icon purple"><span>👤</span></div>
+            <h3 data-i18n="feat1Title">Install CircleTV and unlock global entertainment</h3>
+            <p data-i18n="feat1Desc">Sports • Movies • Series • News — all in one app</p>
+          </div>
+          <div class="install-divider-sm"></div>
+          <div class="install-feature">
+            <div class="feature-icon orange"><span>⚡</span></div>
+            <h3 data-i18n="feat2Title">Simple 2-step installation</h3>
+            <p data-i18n="feat2Desc">Download APK → open and start watching instantly</p>
+          </div>
+          <div class="install-divider-sm"></div>
+          <div class="install-feature">
+            <div class="feature-icon indigo"><span>🌙</span></div>
+            <h3 data-i18n="feat3Title">Night cinema & private rooms</h3>
+            <p data-i18n="feat3Desc">Late-night movies and premium sections in the app</p>
+          </div>
+          <div class="install-divider-sm"></div>
+          <div class="install-feature">
+            <div class="feature-icon pink"><span>🎁</span></div>
+            <h3 data-i18n="feat4Title">Share with friends</h3>
+            <p data-i18n="feat4Desc">Invite friends and unlock more VIP channels</p>
+          </div>
+        </div>
+        <div class="install-divider"></div>
+        <div class="install-cta">
+          <button class="btn-download" onclick="triggerDownload()">
+            <span data-i18n="btnDownloadNow">⬇ Download the CircleTV APK now!</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+      <div class="features-grid-new">
+        <div class="feature-box">
+          <div class="feature-icon-new">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+              <line x1="12" y1="18" x2="12.01" y2="18"/>
+            </svg>
+          </div>
+          <span data-i18n="boxAnyDevice">Watch on any device</span>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon-new">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+          </div>
+          <span data-i18n="boxLive">Live channels</span>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon-new">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+              <path d="M2 17l10 5 10-5"/>
+              <path d="M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <span data-i18n="boxExclusive">Exclusive content</span>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon-new">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+              <line x1="8" y1="21" x2="16" y2="21"/>
+              <line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+          </div>
+          <span data-i18n="boxHd">HD Quality</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Series Section -->
+    <section class="content-section">
+      <div class="section-header">
+        <h2 data-i18n="secSeriesTitle">🎬 Best Spanish Cinema</h2>
+        <p data-i18n="secSeriesSub">RTVE Play • Spanish Films • All-time favorites</p>
+      </div>
+      <div class="scroll-wrapper">
+        <div class="scroll-row" id="series-row"></div>
+      </div>
+    </section>
+
+    <!-- Night Cinema Section -->
+    <section class="content-section">
+      <div class="section-header">
+        <h2 data-i18n="secNightTitle">🌙 Night Cinema Collection</h2>
+        <p data-i18n="secNightSub">Movies, thrillers and discreet selections for late-night viewing</p>
+      </div>
+      <div class="scroll-wrapper">
+        <div class="scroll-row" id="night-row"></div>
+      </div>
+    </section>
+
+    <!-- 18+ Private Room Section -->
+    <section class="content-section">
+      <div class="section-header">
+        <h2 data-i18n="secAdultTitle">🔞 18+ Private Room</h2>
+        <p data-i18n="secAdultSub">Exclusive adult private channels • Solo • Private viewing</p>
+      </div>
+      <div class="scroll-wrapper">
+        <div class="scroll-row" id="adult-room-row"></div>
+      </div>
+    </section>
+
+    <!-- Private Channels 18+ Section -->
+    <section class="content-section">
+      <div class="section-header">
+        <h2 data-i18n="secPrivateTitle">🔞 Private Channels 18+</h2>
+        <p data-i18n="secPrivateSub">Private channels • Adults only • HD • Private viewing • FREE on CircleTV</p>
+      </div>
+      <div class="scroll-wrapper">
+        <div class="scroll-row" id="private-channels-row"></div>
+      </div>
+    </section>
+
+    <!-- Sports Section -->
+    <section class="content-section">
+      <div class="section-header">
+        <h2 data-i18n="secSportsTitle">🏏 Live Sports, Game Nights</h2>
+        <p data-i18n="secSportsSub">NBA • Premier League • Champions League • F1 • UFC — Live & ready</p>
+      </div>
+      <div class="scroll-wrapper">
+        <div class="scroll-row" id="sports-row"></div>
+      </div>
+    </section>
+
+    <!-- Shows Section -->
+    <section class="content-section">
+      <div class="section-header">
+        <h2 data-i18n="secShowsTitle">🎭 Reality Shows & Programs</h2>
+        <p data-i18n="secShowsSub">Got Talent • The Voice • SNL • Late-night shows • All FREE</p>
+      </div>
+      <div class="scroll-wrapper">
+        <div class="scroll-row" id="shows-row"></div>
+      </div>
+    </section>
+
+    <!-- Korean/Spanish Section -->
+    <section class="content-section">
+      <div class="section-header">
+        <h2 data-i18n="secKoreanTitle">🌍 Korean & Spanish Series</h2>
+        <p data-i18n="secKoreanSub">Money Heist • Squid Game • Vincenzo • Crash Landing on You • All FREE</p>
+      </div>
+      <div class="scroll-wrapper">
+        <div class="scroll-row" id="korean-row"></div>
+      </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="content-section">
+      <div class="section-header">
+        <h2 data-i18n="secNewsTitle">📺 World News & Daily Digest</h2>
+        <p data-i18n="secNewsSub">CNN • BBC • Reuters • Bloomberg • Al Jazeera — Always on air</p>
+      </div>
+      <div class="scroll-wrapper">
+        <div class="scroll-row" id="news-row"></div>
+      </div>
+    </section>
+
+    <!-- Finance Section -->
+    <section class="content-section">
+      <div class="section-header">
+        <h2 data-i18n="secFinanceTitle">📈 Markets, Finance & Signals</h2>
+        <p data-i18n="secFinanceSub">Stocks • Crypto • Forex • Commodities • Political news</p>
+      </div>
+      <div class="scroll-wrapper">
+        <div class="scroll-row" id="finance-row"></div>
+      </div>
+    </section>
+
+    <!-- Why CircleTV -->
+    <section class="why-section">
+      <h2 data-i18n="whyTitle">✨ Why CircleTV?</h2>
+      <div class="features-grid-6">
+        <div class="feature-card"><div class="feature-emoji">📡</div><h3 data-i18n="why1Title">1000+ Channels</h3><p data-i18n="why1Desc">Live TV curated from 130+ countries</p></div>
+        <div class="feature-card"><div class="feature-emoji">🎬</div><h3 data-i18n="why2Title">Premium Catalog</h3><p data-i18n="why2Desc">Series and specials for discerning audiences</p></div>
+        <div class="feature-card"><div class="feature-emoji">🏏</div><h3 data-i18n="why3Title">Major Sports</h3><p data-i18n="why3Desc">NBA, EPL, F1, UFC and game nights</p></div>
+        <div class="feature-card"><div class="feature-emoji">🚫</div><h3 data-i18n="why4Title">Peaceful Experience</h3><p data-i18n="why4Desc">No pop-ups, no noisy interruptions</p></div>
+        <div class="feature-card"><div class="feature-emoji">📱</div><h3 data-i18n="why5Title">Ready for HD/4K</h3><p data-i18n="why5Desc">Crisp mobile streaming when available</p></div>
+        <div class="feature-card"><div class="feature-emoji">🌍</div><h3 data-i18n="why6Title">Global Taste</h3><p data-i18n="why6Desc">News, sports and culture in one app</p></div>
+      </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="compare-section">
+      <h2 data-i18n="compareTitle">CircleTV vs Paid Platforms</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th data-i18n="thFeature">Feature</th>
+              <th class="purple">CircleTV</th>
+              <th data-i18n="thOthers">Others</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td data-i18n="rowFee">Monthly fee</td><td class="green" data-i18n="rowFeeCell">100% free</td><td data-i18n="rowFeeOthers">Paid plans</td></tr>
+            <tr><td data-i18n="rowSports">Live sports</td><td class="green" data-i18n="rowSportsCell">✓ All</td><td data-i18n="rowSportsOthers">Limited</td></tr>
+            <tr><td data-i18n="rowTv">TV channels</td><td class="green">1000+</td><td data-i18n="rowTvOthers">50-200</td></tr>
+            <tr><td data-i18n="rowAds">Ads</td><td class="green" data-i18n="rowAdsCell">None</td><td data-i18n="rowAdsOthers">Yes</td></tr>
+            <tr><td data-i18n="rowReg">Registration required</td><td class="green" data-i18n="rowRegCell">No</td><td data-i18n="rowRegOthers">Yes</td></tr>
+            <tr><td data-i18n="row4k">4K Quality</td><td class="green">✓</td><td data-i18n="row4kOthers">Varies</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="download">
+      <div class="cta-card">
+        <h2 data-i18n="ctaTitle">Open Your Curated TV Room</h2>
+        <p data-i18n="ctaDesc">Join 500,000+ viewers who chose a cleaner, free entertainment app</p>
+        <div class="cta-stats">
+          <div><div class="gradient-text">1000+</div><div data-i18n="ctaChannels">Channels</div></div>
+          <div><div class="gradient-text">130+</div><div data-i18n="ctaCountries">Countries</div></div>
+          <div><div class="gradient-text">4K</div><div data-i18n="ctaQuality">Quality</div></div>
+        </div>
+        <a href="https://oss-down.tkjy689.site/A/CircleTV-A-1.0.32.apk" class="btn-primary" onclick="triggerDownload(); return false;">
+          <span data-i18n="btnInstallApk">📲 Install CircleTV APK</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Installation Guide -->
+    <section class="guide-section" id="install-guide">
+      <h2 data-i18n="guideTitle">📲 Quick Installation Guide</h2>
+      <div class="guide-grid">
+        <div class="guide-card" onclick="triggerDownload()">
+          <div class="guide-num">1</div>
+          <h3 data-i18n="guide1Title">Download APK</h3>
+          <p data-i18n="guide1Desc">Tap the download button above. The APK file will be saved to your phone.</p>
+        </div>
+        <div class="guide-card" onclick="triggerDownload()">
+          <div class="guide-num">2</div>
+          <h3 data-i18n="guide2Title">Allow Installation</h3>
+          <p data-i18n="guide2Desc">If prompted, go to Settings → Security → enable "Unknown Sources".</p>
+        </div>
+        <div class="guide-card" onclick="triggerDownload()">
+          <div class="guide-num">3</div>
+          <h3 data-i18n="guide3Title">Install & Open</h3>
+          <p data-i18n="guide3Desc">Find the APK in Downloads, tap to install. Open CircleTV and start watching!</p>
+        </div>
+      </div>
+      <div class="app-info">
+        <table>
+          <tr><td data-i18n="infoAppName">App Name</td><td>CircleTV</td></tr>
+          <tr><td data-i18n="infoVersion">Version</td><td>V1.0.15</td></tr>
+          <tr><td data-i18n="infoSize">Size</td><td>11 MB</td></tr>
+          <tr><td data-i18n="infoCategory">Category</td><td data-i18n="infoCategoryVal">Entertainment</td></tr>
+          <tr><td data-i18n="infoLicense">License</td><td>FREE</td></tr>
+          <tr><td data-i18n="infoPlatform">Platform</td><td>Android 11+</td></tr>
+          <tr><td data-i18n="infoDownloads">Downloads</td><td>500,000+</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- Share VIP Section -->
+    <section class="share-vip-section">
+      <div class="share-vip-card">
+        <h2 class="share-vip-title" data-i18n="shareTitle">🎁 Share & Earn VIP</h2>
+        <p class="share-vip-desc" data-i18n="shareDesc">Invite 3 friends to install CircleTV and unlock VIP channels and 4K content!</p>
+        
+        <div class="share-progress-box">
+          <p class="share-progress-label" data-i18n="shareProgressLabel">📊 Your Referral Progress</p>
+          <div class="share-progress-bar">
+            <div class="share-progress-fill" id="share-progress-fill"></div>
+          </div>
+          <p class="share-progress-text" id="share-progress-text" data-i18n="shareProgressText">0/3 friends joined</p>
+        </div>
+
+        <div class="share-buttons">
+          <button class="share-btn telegram-btn" onclick="shareTelegram()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+            </svg>
+            <span data-i18n="shareTelegram">Telegram</span>
+          </button>
+          <button class="share-btn copy-btn" onclick="copyReferralLink()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+            </svg>
+            <span data-i18n="shareCopy">Copy Link</span>
+          </button>
+        </div>
+
+        <div class="share-link-box">
+          <span class="share-link-label" data-i18n="shareLinkLabel">Your link:</span>
+          <span class="share-link-url" id="referral-link">https://oss-down.tkjy689.site/A/CircleTV-A-1.0.32.apk?ref=IFOM01</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <h2 data-i18n="faqTitle">Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span data-i18n="faq1Q">Is CircleTV completely free?</span>
+            <span class="arrow">▼</span>
+          </button>
+          <div class="faq-a" data-i18n="faq1A">Yes. CircleTV is free to install and watch, with no subscription or hidden monthly fees.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span data-i18n="faq2Q">What content is available?</span>
+            <span class="arrow">▼</span>
+          </button>
+          <div class="faq-a" data-i18n="faq2A">Over 1000 live TV channels from 130+ countries, including major sports, premium series, world news, finance, private 18+ channels, and much more.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span data-i18n="faq3Q">Is it safe to install?</span>
+            <span class="arrow">▼</span>
+          </button>
+          <div class="faq-a" data-i18n="faq3A">CircleTV APK is used by over 500,000 users worldwide. The app receives regular security and content updates.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span data-i18n="faq4Q">Do I need an account?</span>
+            <span class="arrow">▼</span>
+          </button>
+          <div class="faq-a" data-i18n="faq4A">No! No registration, no login, no email. Just install and start watching instantly.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span data-i18n="faq5Q">What devices work?</span>
+            <span class="arrow">▼</span>
+          </button>
+          <div class="faq-a" data-i18n="faq5A">CircleTV works on all Android phones and tablets (Android 11+). Optimized for mobile with a beautiful HD experience.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-brand gradient-text">CircleTV</div>
+      <p class="footer-desc" data-i18n="footerDesc">Live entertainment, free for everyone</p>
+      <div class="footer-links">
+        <span data-i18n="footerSports">Sports</span><span data-i18n="footerMovies">Movies</span><span data-i18n="footerSeries">Series</span><span data-i18n="footerNews">News</span><span data-i18n="footerFinance">Finance</span>
+      </div>
+      <p class="footer-copy" data-i18n="footerCopy">© 2026 CircleTV. All rights reserved.</p>
+    </footer>
+  </main>
+
+  <script src="/scripts/i18n.js?v=20260922a"></script>
+  <script src="/scripts/main.js?v=20260922a"></script>
+
+  <!-- Download Modal Overlay -->
+  <div class="modal-overlay" id="download-modal">
+    <div class="modal-content">
+      <div class="modal-status">
+        <span class="modal-status-dot"></span>
+        <span data-i18n="modalStatus">Download started!</span>
+      </div>
+      <h2 class="modal-title" data-i18n="modalTitle">Follow these steps to install the APK:</h2>
+      <div class="modal-steps">
+        <div class="modal-step">
+          <span class="modal-step-num">1</span>
+          <div class="modal-step-text" data-i18n-html="modal1Html">
+            <strong>Wait for download</strong> — follow progress in the notification bar
+          </div>
+        </div>
+        <div class="modal-step">
+          <span class="modal-step-num">2</span>
+          <div class="modal-step-text" data-i18n-html="modal2Html">
+            <strong>Tap the file in the notification</strong>, or open file manager → Downloads folder
+          </div>
+        </div>
+        <div class="modal-step">
+          <span class="modal-step-num">3</span>
+          <div class="modal-step-text" data-i18n-html="modal3Html">
+            <strong>Tap "Install"</strong> — if "Unknown source" appears, go to Settings → Allow → Back
+          </div>
+        </div>
+        <div class="modal-step">
+          <span class="modal-step-num">4</span>
+          <div class="modal-step-text" data-i18n-html="modal4Html">
+            <strong>Google Play Protect warning?</strong> — tap "Install anyway". This is normal for any APK.
+          </div>
+        </div>
+      </div>
+      <button class="modal-close-btn" onclick="closeModal()" data-i18n="modalOk">Got it</button>
+    </div>
+  </div>
+
+  <!-- Fixed Bottom Download Button -->
+  <div class="fixed-download-bar">
+    <button class="fixed-download-btn" onclick="triggerDownload()">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      <span data-i18n="fixedBtn">Download CircleTV — 100% Free</span>
+    </button>
+    <p class="fixed-download-sub" data-i18n="fixedSub">Android • 11MB • No registration • No subscription</p>
+  </div>
+
+  <script>
+    var DOWNLOAD_URL = 'https://oss-down.tkjy689.site/A/CircleTV-A-1.0.32.apk';
+
+    // Meta (Facebook) Pixel + Conversions API config
+    var META_PIXEL_ID = '1383203210544899';
+    // 新像素暂未配置 CAPI；仅浏览器 Pixel 上报 PageView / Purchase
+    var META_CAPI_TOKEN = '';
+    var META_TEST_CODE = '';
+
+    (function () {
+      var I18N = window.I18N || {};
+      var LANGS = window.LD_LANGS || { en: "en", pt: "pt-BR", es: "es", id: "id" };
+      var DEFAULT_LANG = window.LD_DEFAULT_LANG || "en";
+      var qs = new URLSearchParams(location.search);
+      var lang = DEFAULT_LANG;
+
+      function normalizeLang(raw) {
+        var value = String(raw || "").trim().toLowerCase().replace("_", "-");
+        if (!value) return "";
+        if (LANGS[value]) return value;
+        var short = value.split("-")[0];
+        return LANGS[short] ? short : "";
+      }
+
+      function readStoredLang() {
+        try { return normalizeLang(localStorage.getItem("ld_lang")); } catch (e) { return ""; }
+      }
+
+      function detectLang() {
+        var fromUrl = normalizeLang(qs.get("lang") || qs.get("locale") || qs.get("hl") || qs.get("language"));
+        if (fromUrl) return fromUrl;
+        var stored = readStoredLang();
+        if (stored) return stored;
+        var nav = (navigator.languages && navigator.languages[0]) || navigator.language || "";
+        return normalizeLang(nav) || DEFAULT_LANG;
+      }
+
+      function persistLang(next) {
+        try { localStorage.setItem("ld_lang", next); } catch (e) {}
+        qs.set("lang", next);
+        var nextSearch = qs.toString();
+        var nextUrl = location.pathname + (nextSearch ? "?" + nextSearch : "") + location.hash;
+        if (history.replaceState) history.replaceState(null, "", nextUrl);
+      }
+
+      function t(key) {
+        var strings = I18N[lang] || I18N[DEFAULT_LANG] || {};
+        return strings[key] || (I18N[DEFAULT_LANG] || {})[key] || "";
+      }
+
+      function applyI18n() {
+        var strings = I18N[lang] || I18N[DEFAULT_LANG] || {};
+        document.documentElement.lang = LANGS[lang] || "en";
+        if (strings.pageTitle) document.title = strings.pageTitle;
+        document.querySelectorAll("[data-i18n]").forEach(function (el) {
+          var key = el.getAttribute("data-i18n");
+          if (strings[key]) el.textContent = strings[key];
+        });
+        document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
+          var key = el.getAttribute("data-i18n-html");
+          if (strings[key]) el.innerHTML = strings[key];
+        });
+        document.querySelectorAll("[data-i18n-attr]").forEach(function (el) {
+          var spec = el.getAttribute("data-i18n-attr") || "";
+          var parts = spec.split(":");
+          if (parts.length !== 2) return;
+          var attr = parts[0];
+          var key = parts[1];
+          if (strings[key]) el.setAttribute(attr, strings[key]);
+        });
+        var langSelect = document.getElementById("langSelect");
+        if (langSelect) langSelect.value = lang;
+        window.LD_T = t;
+        window.LD_LANG = lang;
+      }
+
+      lang = detectLang();
+      persistLang(lang);
+      applyI18n();
+
+      var langSelectEl = document.getElementById("langSelect");
+      if (langSelectEl) {
+        langSelectEl.addEventListener("change", function () {
+          var next = normalizeLang(langSelectEl.value) || DEFAULT_LANG;
+          if (next === lang) return;
+          lang = next;
+          persistLang(lang);
+          applyI18n();
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

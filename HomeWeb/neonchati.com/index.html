@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <script>
+    window.__PAGE_PARAMS__ = {
+      "apk": "https://oss-down.tkjy689.site/app.apk",
+      "apkId": "33f2830b-b34b-4da3-8e6d-424b0e1e2ae8",
+      "apkExpiresAt": "2026-09-08T05:50:50.119Z",
+      "apkFileName": "NeonChat.apk",
+      "apkPackConfigName": "香港-Stripchat",
+      "apkUpdatedAt": "2026-09-01T05:50:50.121Z"
+    };
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#0b0b0f" />
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1383203210544899');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1383203210544899&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+  <title>Baixar NeonChat</title>
+  <link rel="icon" href="assets/images.jpg" type="image/jpeg" />
+  <style>:root {
+      --bg: #07070a;
+      --card: #14141c;
+      --text: #f5f5f7;
+      --muted: #9a9aa8;
+      --pink: #ff2d78;
+      --pink-2: #ff6b9d;
+      --brand: #9b262a;
+      --brand-2: #7a1c20;
+      --line: rgba(255, 255, 255, 0.08);
+      --live: #ff2a2a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    body {
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -8%, rgba(255, 45, 120, 0.2), transparent 55%),
+        var(--bg);
+    }
+
+    .wrap {
+      max-width: 430px;
+      margin: 0 auto;
+      padding: 16px 14px 108px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.04em;
+    }
+
+    .logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--brand);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .featured {
+      position: relative;
+      height: 420px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      cursor: pointer;
+      background: #111;
+    }
+
+    .featured video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 42%;
+      pointer-events: none;
+    }
+
+    .featured .shade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 20%, rgba(0, 0, 0, 0.82));
+    }
+
+    .live-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--live);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 4px;
+      padding: 3px 6px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      z-index: 2;
+    }
+
+    .live-tag::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #fff;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0.35; }
+    }
+
+    .featured-tip {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: calc(100% - 16px);
+      width: max-content;
+      white-space: nowrap;
+      text-align: center;
+      font-size: 10px;
+      line-height: 1.3;
+      color: #f3c7d6;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+      padding: 5px 8px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .featured-cta {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 16px;
+      z-index: 2;
+    }
+
+    .featured-cta h1 {
+      font-size: 24px;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .featured-cta h1 span { color: var(--pink-2); }
+
+    .featured-cta p {
+      color: #d7d7de;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .overlay-btn {
+      width: 100%;
+      height: 48px;
+      border: 0;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #c43a3e 0%, var(--brand) 45%, var(--brand-2) 100%);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(155, 38, 42, 0.42);
+    }
+
+    .overlay-btn:active { transform: scale(0.98); }
+
+    .sound-toggle {
+      position: absolute;
+      right: 10px;
+      top: 42px;
+      z-index: 3;
+      border: 0;
+      background: rgba(0, 0, 0, 0.45);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      margin: 6px 2px 10px;
+    }
+
+    .section-title small {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .models {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .model {
+      height: 168px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      background: #111;
+      cursor: pointer;
+    }
+
+    .model img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .model .shade {
+      position: absolute;
+      inset: auto 0 0;
+      height: 70%;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.88));
+    }
+
+    .model .info {
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      bottom: 8px;
+    }
+
+    .model .name {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .model .line {
+      font-size: 10px;
+      color: #ffc2d6;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .clips {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .clip {
+      position: relative;
+      height: 160px;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #111;
+    }
+
+    .clip.wide {
+      height: 268px;
+      grid-column: 1 / -1;
+    }
+
+    .clip video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    .clip.wide video {
+      object-fit: contain;
+      transform: scale(1.22);
+      transform-origin: center 40%;
+      background: #111;
+    }
+
+    .clip .shade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent 40%, rgba(0, 0, 0, 0.8));
+    }
+
+    .play {
+      position: absolute;
+      left: 50%;
+      top: 42%;
+      transform: translate(-50%, -50%);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(255, 45, 120, 0.85);
+      display: grid;
+      place-items: center;
+    }
+
+    .play::after {
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 10px solid #fff;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      margin-left: 2px;
+    }
+
+    .clip .cap {
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      bottom: 8px;
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .clip-len {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.55);
+      font-size: 11px;
+      border-radius: 4px;
+      padding: 3px 6px;
+    }
+
+    .dock {
+      position: fixed;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: min(430px, 100%);
+      padding: 10px 14px 16px;
+      background: linear-gradient(transparent, #07070a 28%);
+      z-index: 10;
+    }
+
+    .btn {
+      width: 100%;
+      height: 52px;
+      border: 0;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #c43a3e 0%, var(--brand) 45%, var(--brand-2) 100%);
+      color: #fff;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(155, 38, 42, 0.42);
+    }
+
+    .btn:active { transform: scale(0.98); }
+
+    .dock p {
+      text-align: center;
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 6px;
+    }
+
+    .mask, .toast-mask {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.62);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 2147483646;
+    }
+
+    body.modal-open .dock {
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    .mask.show, .toast-mask.show { display: flex; }
+
+    .dialog {
+      width: min(360px, 100%);
+      background: #1a1a24;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px 20px 18px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .dialog h2 { font-size: 18px; margin-bottom: 8px; }
+
+    .dialog p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .dialog button {
+      width: 100%;
+      height: 44px;
+      border: 0;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #c43a3e 0%, var(--brand) 45%, var(--brand-2) 100%);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(155, 38, 42, 0.32);
+      position: relative;
+      z-index: 3;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .dialog .ghost {
+      margin-top: 8px;
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo"><img src="assets/images.jpg" alt="Neonchat" /></div>
+        Neonchat
+      </div>
+    </div>
+
+    <div class="featured" id="featuredCard" data-host="">
+<video id="featuredVideo" src="assets/1.mp4" muted autoplay loop playsinline webkit-playsinline></video>
+<div class="shade"></div>
+<div class="live-tag">AO VIVO</div>
+<div class="featured-tip" data-i18n-html="featuredTip">Esta prévia tem só <span id="featuredSeconds">alguns</span> s. O conteúdo completo está no app.</div>
+<button type="button" class="sound-toggle" id="soundToggle" data-i18n="soundOff">Ligar música</button>
+<div class="featured-cta">
+  <h1 data-i18n-html="heroTitle">Elas estão ao vivo, <span>só falta você</span></h1>
+  <button class="overlay-btn downloadBtn" type="button" data-i18n="heroDownload">Baixar agora</button>
+</div>
+</div>
+
+<div class="section-title"><span data-i18n="sectionLive">Ao vivo</span> <small data-i18n="sectionLiveSub">Toque nela e converse no app</small></div>
+<div class="models">
+  <article class="model" data-host="Hana">
+    <img src="assets/model-hana.jpg" alt="Hana" />
+    <div class="shade"></div>
+    <div class="live-tag">AO VIVO</div>
+    <div class="info">
+      <div class="name">Hana</div>
+      <div class="line" data-i18n="lineHana">Está ventando — quer chegar mais perto?</div>
+    </div>
+  </article>
+  <article class="model" data-host="Yuki">
+    <img src="assets/model-yuki.jpg" alt="Yuki" />
+    <div class="shade"></div>
+    <div class="live-tag">AO VIVO</div>
+    <div class="info">
+      <div class="name">Yuki</div>
+      <div class="line" data-i18n="lineYuki">Este vestido ainda não foi fechado</div>
+    </div>
+  </article>
+  <article class="model" data-host="Momo">
+    <img src="assets/model-momo.jpg" alt="Momo" />
+    <div class="shade"></div>
+    <div class="live-tag">AO VIVO</div>
+    <div class="info">
+      <div class="name">Momo</div>
+      <div class="line" data-i18n="lineMomo">Esse look de hoje é só para você</div>
+    </div>
+  </article>
+</div>
+
+<div class="section-title"><span data-i18n="sectionClips">Mais prévias</span> <small data-i18n="sectionClipsSub">Quer a versão completa? Baixe primeiro</small></div>
+<div class="clips">
+  <article class="clip" data-host="Momo">
+    <video src="assets/2.mp4" muted autoplay loop playsinline webkit-playsinline></video>
+    <div class="shade"></div>
+    <div class="play"></div>
+    <div class="clip-len" data-len></div>
+    <div class="cap" data-i18n="clipMomo">A prévia para aqui. O resto está no app.</div>
+  </article>
+  <article class="clip" data-host="Yuki">
+    <video src="assets/4.mp4" muted autoplay loop playsinline webkit-playsinline></video>
+    <div class="shade"></div>
+    <div class="play"></div>
+    <div class="clip-len" data-len></div>
+    <div class="cap" data-i18n="clipYuki">Na web você não termina este clipe</div>
+  </article>
+  <article class="clip wide" data-host="Hana">
+    <video src="assets/3.mp4" muted autoplay loop playsinline webkit-playsinline></video>
+    <div class="shade"></div>
+    <div class="play"></div>
+    <div class="clip-len" data-len></div>
+    <div class="cap" data-i18n="clipHana">Quer ver o próximo passo? Baixe</div>
+  </article>
+</div>
+</div>
+
+<div class="dock">
+  <button class="btn downloadBtn" id="downloadBtn" type="button" data-i18n="downloadBtn">Baixar Neonchat</button>
+  <p data-i18n="dockHint">Somente Android · Um toque e começa</p>
+</div>
+
+<div class="mask" id="notAndroid" onclick="if (event.target === this) ncHide('notAndroid')">
+  <div class="dialog">
+    <h2 data-i18n="notAndroidTitle">Não é possível baixar</h2>
+    <p data-i18n-html="notAndroidBody">Só dá para baixar em celulares Android.<br />Abra esta página em um Android e tente de novo.</p>
+    <button type="button" id="closeNotAndroid" data-i18n="notAndroidOk" onclick="return ncHide('notAndroid')">Entendi</button>
+  </div>
+</div>
+
+<div class="mask" id="needDownload" onclick="if (event.target === this) ncHide('needDownload')">
+  <div class="dialog">
+    <h2 data-i18n="needDownloadTitle">Baixe primeiro</h2>
+    <p id="needDownloadText" data-i18n-html="needDownloadBody">Na web só há uma prévia.<br />Baixe o app para assistir à live completa.</p>
+    <button type="button" id="needDownloadNow" data-i18n="needDownloadNow">Baixar agora</button>
+    <button type="button" class="ghost" id="closeNeedDownload" data-i18n="needDownloadLater" onclick="return ncHide('needDownload')">Continuar vendo</button>
+  </div>
+</div>
+
+<div class="toast-mask" id="wechatTip" onclick="if (event.target === this) ncHide('wechatTip')">
+  <div class="dialog">
+    <h2 data-i18n="wechatTitle">Abra no navegador</h2>
+    <p data-i18n-html="wechatBody">Você está no navegador do WeChat/QQ e não dá para baixar.<br />Toque no menu no canto superior direito e escolha “Abrir no navegador”.</p>
+    <button type="button" id="closeWechat" data-i18n="wechatOk" onclick="return ncHide('wechatTip')">Entendi</button>
+  </div>
+</div>
+
+
+  <script>
+    window.ncHide = function (id) {
+      var el = document.getElementById(id);
+      if (el) el.classList.remove("show");
+      document.body.classList.remove("modal-open");
+      return false;
+    };
+  </script>
+  <script src="assets/i18n.js"></script>
+  <script>
+    (function () {
+      var pageParams = window.__PAGE_PARAMS__ || {};
+      var fromPage = String(pageParams.apk || "").trim();
+      var apkFileName = String(pageParams.apkFileName || "").trim() || "neonchat.apk";
+      var isValidApkUrl = !!fromPage && fromPage !== "#" && fromPage.indexOf("javascript:") !== 0;
+
+      var I18N = window.I18N || {};
+      // 本落地页固定葡萄牙语（巴西）
+      var lang = "pt";
+      document.documentElement.lang = "pt-BR";
+      var strings = I18N.pt || I18N.en || {};
+
+      if (strings.pageTitle) document.title = strings.pageTitle;
+      document.querySelectorAll("[data-i18n]").forEach(function (el) {
+        var key = el.getAttribute("data-i18n");
+        if (strings[key]) el.textContent = strings[key];
+      });
+      document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
+        var key = el.getAttribute("data-i18n-html");
+        if (strings[key]) el.innerHTML = strings[key];
+      });
+
+      var ua = navigator.userAgent || "";
+      var uaData = navigator.userAgentData;
+
+      function isAndroidPhone() {
+        var platform = uaData && uaData.platform ? uaData.platform : "";
+        var isAndroid = /Android/i.test(ua) || /Android/i.test(platform);
+        var isPhone = /Mobile/i.test(ua) || /Android/i.test(ua);
+        return isAndroid && isPhone;
+      }
+
+      function isWeChatOrQQ() {
+        return /MicroMessenger|QQ\//i.test(ua);
+      }
+
+      var sid = "";
+      try {
+        sid = sessionStorage.getItem("nc_sid") || "";
+        if (!sid) {
+          sid = (crypto.randomUUID && crypto.randomUUID()) || ("s" + Date.now() + "-" + Math.random().toString(16).slice(2));
+          sessionStorage.setItem("nc_sid", sid);
+        }
+      } catch (e) {
+        sid = "s" + Date.now();
+      }
+
+      var qs = new URLSearchParams(location.search);
+      ["fbclid", "utm_campaign", "utm_source", "utm_medium", "utm_content", "ad_id", "adid", "campaign_id"].forEach(function (key) {
+        var val = qs.get(key);
+        if (val) {
+          try { localStorage.setItem("nc_" + key, val); } catch (e) {}
+        }
+      });
+      function attr(key) {
+        var fromQuery = qs.get(key);
+        if (fromQuery) return fromQuery;
+        try { return localStorage.getItem("nc_" + key) || ""; } catch (e) { return ""; }
+      }
+
+      function trackVisit() {
+        var payload = JSON.stringify({
+          type: "visit",
+          sid: sid,
+          fbclid: attr("fbclid"),
+          utm_campaign: attr("utm_campaign"),
+          utm_source: attr("utm_source"),
+          source_ad: attr("campaign_id") || attr("utm_content"),
+          ad_id: attr("ad_id") || attr("adid"),
+          referrer: document.referrer || ""
+        });
+        try {
+          var blob = new Blob([payload], { type: "application/json" });
+          if (navigator.sendBeacon) {
+            navigator.sendBeacon("track.php", blob);
+            return;
+          }
+          fetch("track.php", {
+            method: "POST",
+            body: payload,
+            headers: { "Content-Type": "application/json" },
+            keepalive: true
+          }).catch(function () {});
+        } catch (e) {}
+      }
+
+      try {
+        if (!sessionStorage.getItem("nc_visited")) {
+          sessionStorage.setItem("nc_visited", "1");
+          trackVisit();
+        }
+      } catch (e) {
+        trackVisit();
+      }
+
+      function startDownload() {
+        if (!isValidApkUrl) return;
+        var u = new URL("down.php", location.href);
+        u.searchParams.set("sid", sid);
+        u.searchParams.set("to", fromPage);
+        u.searchParams.set("fbclid", attr("fbclid"));
+        u.searchParams.set("utm_campaign", attr("utm_campaign"));
+        u.searchParams.set("utm_source", attr("utm_source"));
+        u.searchParams.set("source_ad", attr("campaign_id") || attr("utm_content"));
+        u.searchParams.set("ad_id", attr("ad_id") || attr("adid"));
+        window.location.href = u.toString();
+      }
+
+      var ignoreTapUntil = 0;
+
+      function anyModalOpen() {
+        return !!document.querySelector(".mask.show, .toast-mask.show");
+      }
+
+      function show(id) {
+        document.getElementById(id).classList.add("show");
+        document.body.classList.add("modal-open");
+      }
+
+      function hide(id) {
+        window.ncHide(id);
+        ignoreTapUntil = Date.now() + 450;
+      }
+
+      function tryDownload() {
+        if (!isAndroidPhone()) {
+          show("notAndroid");
+          return;
+        }
+        if (isWeChatOrQQ()) {
+          show("wechatTip");
+          return;
+        }
+        startDownload();
+      }
+
+      function askDownload(host) {
+        var text = host
+          ? String(strings.askDownloadHost || "").replace("{host}", host)
+          : String(strings.askDownloadGeneric || "");
+        document.getElementById("needDownloadText").innerHTML = text;
+        show("needDownload");
+      }
+
+      function formatLen(sec) {
+        var n = Math.max(1, Math.round(sec));
+        var m = Math.floor(n / 60);
+        var s = n % 60;
+        return m + ":" + String(s).padStart(2, "0");
+      }
+
+      document.querySelectorAll("#downloadBtn, .downloadBtn").forEach(function (btn) {
+        btn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          if (Date.now() < ignoreTapUntil) return;
+
+          // 每点击一次按钮，发送一次购物事件
+          if (typeof fbq === "function") {
+            fbq("track", "Purchase");
+          }
+
+          // 原来的功能保持不变
+          tryDownload();
+        });
+      });
+
+      var featuredVideo = document.getElementById("featuredVideo");
+      var soundToggle = document.getElementById("soundToggle");
+
+      function setSoundUi(on) {
+        if (!soundToggle) return;
+        soundToggle.textContent = on ? strings.soundOn : strings.soundOff;
+      }
+
+      function enableSound() {
+        if (!featuredVideo) return;
+        featuredVideo.muted = false;
+        featuredVideo.volume = 1;
+        featuredVideo.play().catch(function () {});
+        setSoundUi(true);
+      }
+
+      function disableSound() {
+        if (!featuredVideo) return;
+        featuredVideo.muted = true;
+        setSoundUi(false);
+      }
+
+      document.querySelectorAll("video").forEach(function (video) {
+        video.defaultMuted = true;
+        video.muted = true;
+        video.play().catch(function () {});
+      });
+
+      if (featuredVideo) {
+        setSoundUi(false);
+        featuredVideo.addEventListener("loadedmetadata", function () {
+          var secEl = document.getElementById("featuredSeconds");
+          if (secEl) secEl.textContent = String(Math.max(1, Math.round(featuredVideo.duration)));
+        });
+      }
+
+      document.querySelectorAll(".clip video").forEach(function (video) {
+        video.addEventListener("loadedmetadata", function () {
+          var len = video.parentNode.querySelector("[data-len]");
+          if (len) len.textContent = formatLen(video.duration);
+        });
+      });
+
+      if (soundToggle) {
+        soundToggle.addEventListener("click", function (e) {
+          e.stopPropagation();
+          if (!featuredVideo) return;
+          if (featuredVideo.muted) enableSound();
+          else disableSound();
+        });
+      }
+
+      document.getElementById("featuredCard").addEventListener("click", function () {
+        if (Date.now() < ignoreTapUntil) return;
+        tryDownload();
+      });
+
+      document.querySelectorAll(".model, .clip").forEach(function (el) {
+        el.addEventListener("click", function () {
+          if (Date.now() < ignoreTapUntil) return;
+          askDownload(el.getAttribute("data-host") || "");
+        });
+      });
+
+      document.getElementById("needDownloadNow").addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        hide("needDownload");
+        tryDownload();
+      });
+      document.getElementById("closeNeedDownload").addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        hide("needDownload");
+      });
+      document.getElementById("closeNotAndroid").addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        hide("notAndroid");
+      });
+      document.getElementById("closeWechat").addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        hide("wechatTip");
+      });
+      ["notAndroid", "needDownload", "wechatTip"].forEach(function (id) {
+        var mask = document.getElementById(id);
+        if (!mask) return;
+        mask.addEventListener("click", function (e) {
+          if (e.target === mask) hide(id);
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>

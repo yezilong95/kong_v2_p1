@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Milu 下载管理</title>
+  <style>
+    :root {
+      --bg: #07070a;
+      --card: #14141c;
+      --text: #f5f5f7;
+      --muted: #9a9aa8;
+      --pink: #ff2d78;
+      --pink-2: #ff6b9d;
+      --line: rgba(255, 255, 255, 0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(900px 420px at 10% -10%, rgba(255, 45, 120, 0.18), transparent 55%),
+        var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 24px 16px 48px; }
+    h1 { font-size: 22px; font-weight: 700; margin-bottom: 18px; }
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .kpi {
+      background: linear-gradient(180deg, #1a1a24, var(--card));
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px 18px;
+    }
+    .kpi span { display: block; color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+    .kpi b { font-size: 28px; letter-spacing: -0.03em; }
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .panel-h {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      flex-wrap: wrap;
+    }
+    .panel-h h2 { font-size: 16px; }
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    input, select, button { font: inherit; color: var(--text); }
+    input, select {
+      background: #0d0d12;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 8px 12px;
+      min-width: 180px;
+    }
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 8px 14px;
+      cursor: pointer;
+    }
+    .btn-pink { background: var(--pink); color: #fff; }
+    .btn-ghost { background: transparent; border: 1px solid var(--line); }
+    .btn-del { background: rgba(255, 45, 120, 0.14); color: var(--pink-2); }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      white-space: nowrap;
+    }
+    th { color: var(--muted); font-weight: 600; background: #101018; }
+    td.clip { max-width: 180px; overflow: hidden; text-overflow: ellipsis; }
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+    }
+    .tag-visit { background: rgba(255,255,255,.08); color: var(--muted); }
+    .tag-dl { background: rgba(255,45,120,.16); color: var(--pink-2); }
+    .empty { padding: 48px 16px; text-align: center; color: var(--muted); }
+    .err { color: #ff8aa8; margin-bottom: 12px; }
+    @media (max-width: 900px) {
+      .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .kpis .kpi:last-child { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Milu 下载管理</h1>
+    <p id="err" class="err" hidden></p>
+    <section class="kpis">
+      <article class="kpi"><span>今日访问</span><b id="visitToday">0</b></article>
+      <article class="kpi"><span>今日下载</span><b id="dlToday">0</b></article>
+      <article class="kpi"><span>今日下载转化率</span><b id="rateToday">0%</b></article>
+      <article class="kpi"><span>总访问</span><b id="visitAll">0</b></article>
+      <article class="kpi"><span>总下载</span><b id="dlAll">0</b></article>
+    </section>
+    <section class="panel">
+      <div class="panel-h">
+        <h2>访问 / 下载明细</h2>
+        <form class="filters" id="filterForm">
+          <input id="q" placeholder="IP, 地区, 设备, fb" />
+          <select id="kind">
+            <option value="all">全部</option>
+            <option value="visit">仅访问</option>
+            <option value="download">仅下载</option>
+            <option value="today">仅今日</option>
+          </select>
+          <button class="btn-pink" type="submit">筛选</button>
+          <button class="btn-ghost" id="resetBtn" type="button">重置</button>
+        </form>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>类型</th>
+              <th>IP</th>
+              <th>国家</th>
+              <th>城市</th>
+              <th>ISP</th>
+              <th>设备</th>
+              <th>系统</th>
+              <th>浏览器</th>
+              <th>fbclid</th>
+              <th>来源广告</th>
+              <th>UTM Campaign</th>
+              <th>Ad ID</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <p class="empty" id="empty" hidden>暂无数据</p>
+    </section>
+  </div>
+  <script>
+    var allRows = [];
+    var today = "";
+
+    function setText(id, v) { document.getElementById(id).textContent = v; }
+    function esc(s) {
+      return String(s == null ? "" : s)
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+    }
+
+    function applyFilter(rows) {
+      var q = document.getElementById("q").value.trim().toLowerCase();
+      var kind = document.getElementById("kind").value;
+      return rows.filter(function (r) {
+        if (kind === "visit" && r.type !== "visit") return false;
+        if (kind === "download" && r.type !== "download") return false;
+        if (kind === "today" && String(r.t || "").indexOf(today) !== 0) return false;
+        if (!q) return true;
+        var blob = [r.ip, r.country, r.city, r.isp, r.device, r.os, r.browser, r.fbclid, r.source_ad, r.utm_campaign, r.ad_id].join(" ").toLowerCase();
+        return blob.indexOf(q) !== -1;
+      });
+    }
+
+    function render() {
+      var rows = applyFilter(allRows);
+      var tb = document.getElementById("tbody");
+      document.getElementById("empty").hidden = rows.length > 0;
+      tb.innerHTML = rows.map(function (r) {
+        var tag = r.type === "download"
+          ? '<span class="tag tag-dl">下载</span>'
+          : '<span class="tag tag-visit">访问</span>';
+        return "<tr>" +
+          "<td>" + esc(r.t) + "</td>" +
+          "<td>" + tag + "</td>" +
+          "<td>" + esc(r.ip) + "</td>" +
+          "<td>" + esc(r.country) + "</td>" +
+          "<td>" + esc(r.city) + "</td>" +
+          "<td class='clip' title='" + esc(r.isp) + "'>" + esc(r.isp) + "</td>" +
+          "<td>" + esc(r.device) + "</td>" +
+          "<td>" + esc(r.os) + "</td>" +
+          "<td>" + esc(r.browser) + "</td>" +
+          "<td class='clip' title='" + esc(r.fbclid) + "'>" + esc(r.fbclid) + "</td>" +
+          "<td class='clip'>" + esc(r.source_ad) + "</td>" +
+          "<td class='clip'>" + esc(r.utm_campaign) + "</td>" +
+          "<td class='clip'>" + esc(r.ad_id) + "</td>" +
+          "<td><button class='btn-del' data-id='" + esc(r.id) + "' type='button'>删除</button></td>" +
+          "</tr>";
+      }).join("");
+    }
+
+    function load() {
+      return fetch("stats-api.php", { cache: "no-store" })
+        .then(function (res) {
+          if (!res.ok) throw new Error("接口 " + res.status);
+          return res.json();
+        })
+        .then(function (data) {
+          document.getElementById("err").hidden = true;
+          today = data.today || "";
+          var k = data.kpi || {};
+          setText("visitToday", k.visit_today || 0);
+          setText("dlToday", k.dl_today || 0);
+          setText("rateToday", k.rate_today || "0%");
+          setText("visitAll", k.visit_all || 0);
+          setText("dlAll", k.dl_all || 0);
+          allRows = data.rows || [];
+          render();
+        })
+        .catch(function (e) {
+          var el = document.getElementById("err");
+          el.hidden = false;
+          el.textContent = "加载失败：" + e.message;
+        });
+    }
+
+    document.getElementById("filterForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      render();
+    });
+    document.getElementById("resetBtn").addEventListener("click", function () {
+      document.getElementById("q").value = "";
+      document.getElementById("kind").value = "all";
+      render();
+    });
+    document.getElementById("tbody").addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-id]");
+      if (!btn) return;
+      if (!confirm("删除这条记录？")) return;
+      fetch("stats-api.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "delete", id: btn.getAttribute("data-id") })
+      }).then(function () { return load(); });
+    });
+
+    load();
+  </script>
+</body>
+</html>

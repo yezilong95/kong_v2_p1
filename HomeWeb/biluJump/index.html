@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Please open in browser" />
+  <meta name="theme-color" content="#2563eb" />
+  <title>Please Open in Browser</title>
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+<body>
+  <div class="bg-layer">
+    <img class="bg-image" src="./assets/browser-preview.avif" alt="" />
+    <div class="bg-overlay"></div>
+  </div>
+
+  <main class="container">
+    <section class="card">
+      <div class="image-wrapper">
+        <img class="preview-image" src="./assets/browser-preview.avif" alt="Preview" />
+      </div>
+      <h1 class="title">Please Open in Browser</h1>
+      <p class="description">
+        Your current environment cannot fully access this page. Please copy the link below and open it in Chrome or Safari.
+      </p>
+      <div class="link-box">
+        <span class="link-text" id="linkText">https://do-bilu.tkjy689.work</span>
+      </div>
+      <button type="button" class="copy-btn" id="copyBtn">Copy Link</button>
+      <a class="open-btn" id="openBtn" href="https://do-bilu.tkjy689.work">Try to Open</a>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status">Link copied to clipboard</div>
+  <script src="./js/config.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>

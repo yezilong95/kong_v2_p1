@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0b0f" />
+  <title>Milu Premium — HD en línea</title>
+  <meta name="description" content="Videos HD masivos. Descarga la APP oficial Milu." />
+  <link rel="stylesheet" href="./css/main.css" />
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1383203210544899');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1383203210544899&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+<div class="app">
+  <div class="announce" role="status">
+    <p>
+      Aviso: ¡Nueva URL de la página principal publicada, guárdala en favoritos para no perderte!
+      Registro VIP gratuito ya disponible, ¡recursos HD masivos!
+    </p>
+  </div>
+
+  <nav class="tabs" aria-label="Categorías">
+    <button type="button" class="tab is-active" data-tab="videos">Muchos videos gratis</button>
+    <button type="button" class="tab" data-tab="citas">Citas en línea</button>
+    <button type="button" class="tab" data-tab="servicio">Servicio a domicilio</button>
+  </nav>
+
+  <main class="main">
+    <section class="panel is-active" data-panel="videos">
+      <h2 class="section-title">Recomendaciones populares</h2>
+      <div class="grid" id="videoGrid"></div>
+      <button type="button" class="btn-load" id="btnLoadMore">Clic para cargar más</button>
+    </section>
+
+    <section class="panel" data-panel="citas">
+      <div class="empty-card">
+        <h3>Citas en línea</h3>
+        <p>Chatea y conoce gente cerca de ti. Abre la APP para empezar.</p>
+        <button type="button" class="btn-primary js-open-app">Abrir APP</button>
+      </div>
+    </section>
+
+    <section class="panel" data-panel="servicio">
+      <div class="empty-card">
+        <h3>Servicio a domicilio</h3>
+        <p>Servicios exclusivos VIP. Disponible solo en la APP oficial.</p>
+        <button type="button" class="btn-primary js-open-app">Descargar APP</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="dock">
+    <div class="dock-text">
+      <strong>Descargar APP oficial</strong>
+      <span>Videos HD masivos, mira gratis</span>
+    </div>
+    <button type="button" class="btn-dock js-open-app">Descargar ahora</button>
+  </div>
+</div>
+
+<div class="overlay" id="playOverlay" hidden>
+  <div class="player-fake">
+    <div class="player-status" id="playStatus">Reproduciendo...</div>
+    <div class="player-bar"><span id="playProgress"></span></div>
+    <div class="player-pct" id="playPct">Cargando 0%...</div>
+  </div>
+</div>
+
+<div class="modal" id="appModal" hidden>
+  <div class="modal-backdrop" data-close-modal></div>
+  <div class="modal-sheet" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button type="button" class="modal-close" data-close-modal aria-label="Cerrar">×</button>
+    <p class="modal-kicker">Aviso amistoso</p>
+    <h3 id="modalTitle">Exclusivo VIP</h3>
+    <p class="modal-lead">Descarga la APP dedicada para ver videos HD completos</p>
+    <ul class="modal-points">
+      <li>Prohibido menores de 18 • Recursos masivos gratis</li>
+      <li>Seguro y confiable • Certificación oficial • Descarga rápida</li>
+    </ul>
+    <p class="modal-warn" id="deviceHint">Este dispositivo no admite la reproducción</p>
+    <a class="btn-primary btn-block" id="btnDownload" href="#" rel="noopener">Descargar APP oficial</a>
+    <button type="button" class="btn-ghost btn-block" id="btnCopy">Copiar enlace y compartir a un Android</button>
+    <p class="modal-tip" id="copyTip" hidden>Enlace copiado, envíalo a un teléfono Android para abrir</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var u = new URL("track.php", location.href);
+  var q = new URLSearchParams(location.search);
+  ["fbclid", "utm_campaign", "utm_source", "ad_id"].forEach(function (key) {
+    var val = q.get(key);
+    if (val) u.searchParams.set(key, val);
+  });
+  var adId = q.get("adid");
+  if (adId && !u.searchParams.get("ad_id")) u.searchParams.set("ad_id", adId);
+  var sourceAd = q.get("campaign_id") || q.get("utm_content");
+  if (sourceAd) u.searchParams.set("source_ad", sourceAd);
+  u.searchParams.set("t", String(Date.now()));
+  var img = new Image(1, 1);
+  img.src = u.href;
+  window.__MILU_VISIT_SENT__ = true;
+})();
+</script>
+<script src="./js/config4.js"></script>
+<script src="./js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+:root {
+  --bg-overlay: rgba(0, 0, 0, 0.35);
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --card-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.08);
+  --text: #1a1a1a;
+  --text-muted: #666666;
+  --text-link: #555555;
+  --link-box-bg: #f5f5f7;
+  --link-box-border: #e8e8ed;
+  --btn-primary: #2563eb;
+  --btn-primary-hover: #1d4ed8;
+  --btn-primary-active: #1e40af;
+  --btn-primary-text: #ffffff;
+  --btn-secondary: #e5e7eb;
+  --btn-secondary-hover: #d1d5db;
+  --btn-secondary-active: #c0c4cc;
+  --btn-secondary-text: #374151;
+  --toast-bg: rgba(0, 0, 0, 0.78);
+  --toast-text: #ffffff;
+  --preview-sky: #7eb8d4;
+  --preview-horizon: #f4c27a;
+  --preview-ocean: #1f6f8b;
+  --preview-sand: #e8c9a0;
+}

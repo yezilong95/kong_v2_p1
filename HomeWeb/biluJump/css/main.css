@@ -1,0 +1,195 @@
+@import "./colors.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(5px);
+  transform: scale(1.04);
+}
+
+.bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--bg-overlay);
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 0 16px;
+}
+
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
+  padding: 32px 28px;
+  max-width: 360px;
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--card-shadow);
+  margin-top: 80px;
+}
+
+.image-wrapper {
+  margin-bottom: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  aspect-ratio: 16 / 9;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.description {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+
+.link-box {
+  background: var(--link-box-bg);
+  border: 1px solid var(--link-box-border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.link-text {
+  font-size: 12px;
+  color: var(--text-link);
+  word-break: break-all;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.copy-btn {
+  display: block;
+  width: 100%;
+  background: var(--btn-primary);
+  border: none;
+  color: var(--btn-primary-text);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 14px 16px;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+  margin-bottom: 12px;
+}
+
+.copy-btn:hover {
+  background: var(--btn-primary-hover);
+}
+
+.copy-btn:active {
+  background: var(--btn-primary-active);
+}
+
+.open-btn {
+  display: block;
+  width: 100%;
+  background: var(--btn-secondary);
+  color: var(--btn-secondary-text);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  text-align: center;
+  padding: 14px 16px;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+.open-btn:hover {
+  background: var(--btn-secondary-hover);
+}
+
+.open-btn:active {
+  background: var(--btn-secondary-active);
+}
+
+.toast {
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--toast-bg);
+  color: var(--toast-text);
+  padding: 12px 28px;
+  border-radius: 24px;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  .card {
+    padding: 28px 22px;
+    border-radius: 14px;
+    max-width: 100%;
+    margin-top: 60px;
+  }
+
+  .title {
+    font-size: 17px;
+  }
+}

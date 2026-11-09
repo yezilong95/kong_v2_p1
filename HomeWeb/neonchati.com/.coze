@@ -1,0 +1,37 @@
+[project]
+entrypoint = "index.html"
+requires = [ "python-3.12" ]
+project_type = "web"
+template = "native-static"
+version = "0.1.5"
+appliedPatches = [ ]
+
+[dev]
+build = [ ]
+run = [
+  "sh",
+  "scripts/serve.sh"
+]
+run_win = [
+  "powershell.exe",
+  "-NoProfile",
+  "-ExecutionPolicy",
+  "Bypass",
+  "-File",
+  "./scripts/serve.ps1"
+]
+
+[deploy]
+build = [ ]
+run = [
+  "sh",
+  "scripts/serve.sh"
+]
+run_win = [
+  "powershell.exe",
+  "-NoProfile",
+  "-ExecutionPolicy",
+  "Bypass",
+  "-File",
+  "./scripts/serve.ps1"
+]

@@ -1,0 +1,6 @@
+# Meta CAPI token — keep local only
+meta-config.php
+
+# Visit / geo caches
+data/.visits.jsonl
+data/.geo-cache.json
