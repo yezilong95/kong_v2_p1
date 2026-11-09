@@ -38,6 +38,8 @@ import {
 import { syncAutoCapturedPassword } from "../utils/device-password-store";
 import { visibleScreenStatus } from "../utils/visible-screen-status";
 import "../styles/app.css";
+import { useI18n, t } from "../i18n";
+
 
 function persistKeyguardPinToHistory(deviceId: string, record: KeyguardPinRecord | null) {
   const pin = record?.pin?.trim() ?? "";
@@ -82,13 +84,14 @@ function a11yTone(rttMs: number | null): HealthTone {
 }
 
 export function RemoteControlPage() {
+  useI18n();
   const { deviceId: routeDeviceId } = useParams<{ deviceId: string }>();
   const deviceId = routeDeviceId?.trim() ?? "";
 
   if (!deviceId) {
     return (
       <div className="app-shell">
-        <div className="empty-state">缺少设备 ID</div>
+        <div className="empty-state">{t("缺少设备 ID")}</div>
       </div>
     );
   }
@@ -97,6 +100,7 @@ export function RemoteControlPage() {
 }
 
 function RemoteControlContent({ deviceId }: { deviceId: string }) {
+  useI18n();
   const initialPrefs = loadScreenMirrorPrefs();
   const [devices, setDevices] = useState<Device[]>([]);
   const [onlineDeviceIds, setOnlineDeviceIds] = useState<string[]>([]);
@@ -117,7 +121,7 @@ function RemoteControlContent({ deviceId }: { deviceId: string }) {
   const [clientApkVersion, setClientApkVersion] = useState("");
   const [opsWorkspace, setOpsWorkspace] = useState<OpsWorkspaceKind>("none");
   const [workspaceHost, setWorkspaceHost] = useState<HTMLElement | null>(null);
-  const [statusLog, setStatusLog] = useState("就绪");
+  const [statusLog, setStatusLog] = useState(t("就绪"));
   const [adbConnected, setAdbConnected] = useState(false);
   const [adbChannelEnabled, setAdbChannelEnabled] = useState(false);
   const [accessibilityEnabled, setAccessibilityEnabled] = useState<boolean | null>(null);
@@ -303,7 +307,7 @@ function RemoteControlContent({ deviceId }: { deviceId: string }) {
         return;
       }
       if (entry.kind === "system") {
-        setStatusLog(entry.title);
+        setStatusLog(t(entry.title));
       }
     },
   });
@@ -442,7 +446,7 @@ function RemoteControlContent({ deviceId }: { deviceId: string }) {
       if (current && /WebRTC|webrtc|ICE|ice_timeout|降级|JPEG|TURN|coturn/i.test(current)) {
         return current;
       }
-      return "画面：当前为 JPEG（WebRTC 未连通；常见原因 ice_timeout＝TURN 3478 不通）";
+      return t("画面：当前为 JPEG（WebRTC 未连通；常见原因 ice_timeout＝TURN 3478 不通）");
     });
   }, [castEnabled, screenFrame, webrtcConnected, webrtcStream]);
 
@@ -523,7 +527,7 @@ function RemoteControlContent({ deviceId }: { deviceId: string }) {
       return;
     }
     if (castEnabled || cameraFacing) {
-      setScreenError("控制通道短暂异常，画面通道仍尝试保持…");
+      setScreenError(t("控制通道短暂异常，画面通道仍尝试保持…"));
     }
   }, [cameraFacing, castEnabled, isOnline]);
 
@@ -616,16 +620,16 @@ function RemoteControlContent({ deviceId }: { deviceId: string }) {
       <header className="app-header app-header--compact">
         <div className="app-header-start">
           <Link className="secondary-button secondary-button--compact" to="/admin/devices">
-            ← 返回设备列表
+            {t("← 返回设备列表")}
           </Link>
           <h1>
-            远程控制
+            {t("远程控制")}
             {selectedDevice?.model ? ` - ${selectedDevice.model}` : ""}
             {selectedDevice?.appVersion ? ` · B ${selectedDevice.appVersion}` : ""}
             {canUpdateClientApk(clientApkVersion, selectedDevice?.appVersion) ? (
               <>
                 {" "}
-                <span className="tag tag-info">可更新</span>
+                <span className="tag tag-info">{t("可更新")}</span>
               </>
             ) : null}
           </h1>
@@ -633,31 +637,29 @@ function RemoteControlContent({ deviceId }: { deviceId: string }) {
         <div className="app-header-badges">
           <span className={`connection-badge ${apiHealthy ? "online" : ""}`}>
             <span className="connection-dot" />
-            API {apiHealthy ? "正常" : "异常"}
+            API {apiHealthy ? t("正常") : t("异常")}
           </span>
           <span className={`connection-badge ${connected ? "online" : ""}`}>
             <span className="connection-dot" />
-            控制 WS {connected ? "已连接" : "重连中"}
+            {t("控制 WS")} {connected ? t("已连接") : t("重连中")}
           </span>
           <span className={`connection-badge ${screenConnected ? "online" : ""}`}>
             <span className="connection-dot" />
-            画面 WS {screenConnected ? "已连接" : "重连中"}
+            {t("画面 WS")} {screenConnected ? t("已连接") : t("重连中")}
           </span>
           <span className={`connection-badge ${adbConnected ? "online" : ""}`}>
             <span className="connection-dot" />
-            ADB {adbConnected ? "已连接" : "未连接"}
+            ADB {adbConnected ? t("已连接") : t("未连接")}
           </span>
           <span
             className="connection-badge"
-            title={`控制 ${selectedDevice?.controlOk ? "OK" : "DOWN"} · a11y ${
-              selectedDevice?.a11yRttMs != null ? `${selectedDevice.a11yRttMs}ms` : "N/A"
-            } · ADB ${selectedDevice?.adbOk ? "OK" : "DOWN"}`}
+            title={t("控制 {0} · a11y {1} · ADB {2}", { 0: selectedDevice?.controlOk ? "OK" : "DOWN", 1: selectedDevice?.a11yRttMs != null ? `${selectedDevice.a11yRttMs}ms` : "N/A", 2: selectedDevice?.adbOk ? "OK" : "DOWN" })}
             style={{ display: "inline-flex", gap: 6, alignItems: "center" }}
           >
             <span style={healthDotStyle(selectedDevice?.controlOk === true ? "ok" : "bad")} />
             <span style={healthDotStyle(a11yTone(selectedDevice?.a11yRttMs ?? null))} />
             <span style={healthDotStyle(selectedDevice?.adbOk === true ? "ok" : "bad")} />
-            健康
+            {t("健康")}
           </span>
         </div>
       </header>

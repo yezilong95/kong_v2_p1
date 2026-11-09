@@ -27,6 +27,8 @@ import {
   selectDisplayNodes,
   type UiTreeDisplayMode,
 } from "../utils/ui-tree";
+import { useI18n, t } from "../i18n";
+
 
 interface ScreenViewerProps {
   deviceId: string | null;
@@ -243,6 +245,7 @@ export function ScreenViewer({
   onRemarkSaved,
   onCommandSent,
 }: ScreenViewerProps) {
+  useI18n();
   const surfaceRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -267,7 +270,7 @@ export function ScreenViewer({
 
   const streamActive = castEnabled || cameraFacing !== null;
   const isCameraStream = cameraFacing !== null || Boolean(frame?.source?.startsWith("camera_"));
-  const cameraLabel = cameraFacing === "front" || frame?.source === "camera_front" ? "前置摄像头" : "后置摄像头";
+  const cameraLabel = cameraFacing === "front" || frame?.source === "camera_front" ? t("前置摄像头") : t("后置摄像头");
   const useAdbPath = adbConnected && adbChannelEnabled;
   const useAdbInput = useAdbPath;
   // L3: ADB / a11y 推送共享 uiSnapshot；两者通过 useAdbPath 决定谁订阅，不会同时写入。
@@ -745,13 +748,13 @@ export function ScreenViewer({
 
   function renderNavBar() {
     return (
-      <div className="screen-nav-bar" role="toolbar" aria-label="系统导航">
+      <div className="screen-nav-bar" role="toolbar" aria-label={t("系统导航")}>
         <button
           type="button"
           className="screen-nav-button"
           disabled={!isOnline}
-          title="多任务（Recents）"
-          aria-label="多任务"
+          title={t("多任务（Recents）")}
+          aria-label={t("多任务")}
           onClick={() => void sendGlobalAction("recents")}
         >
           <span className="screen-nav-icon screen-nav-icon--recents" aria-hidden="true" />
@@ -760,8 +763,8 @@ export function ScreenViewer({
           type="button"
           className="screen-nav-button"
           disabled={!isOnline}
-          title="返回桌面（Home）"
-          aria-label="桌面"
+          title={t("返回桌面（Home）")}
+          aria-label={t("桌面")}
           onClick={() => void sendGlobalAction("home")}
         >
           <span className="screen-nav-icon screen-nav-icon--home" aria-hidden="true" />
@@ -770,8 +773,8 @@ export function ScreenViewer({
           type="button"
           className="screen-nav-button"
           disabled={!isOnline}
-          title="返回（Back）"
-          aria-label="返回"
+          title={t("返回（Back）")}
+          aria-label={t("返回")}
           onClick={() => void sendGlobalAction("back")}
         >
           <span className="screen-nav-icon screen-nav-icon--back" aria-hidden="true" />
@@ -785,7 +788,7 @@ export function ScreenViewer({
       <div className="screen-toolbar">
         <div className="screen-toolbar-start">
           <label>
-            镜像方式
+            {t("镜像方式")}
             <select
               value={
                 useAdbPath && accessibilityEnabled === false
@@ -797,42 +800,42 @@ export function ScreenViewer({
               }
               title={
                 useAdbPath && accessibilityEnabled === false
-                  ? "无障碍已关闭：仅授权投屏 WebRTC（失败降级 JPEG）"
-                  : "免授权：真截图 WebRTC；助手伪屏：UI 树线框；投屏推流：MediaProjection WebRTC。开 ADB 不改镜像方式"
+                  ? t("无障碍已关闭：仅授权投屏 WebRTC（失败降级 JPEG）")
+                  : t("免授权：真截图 WebRTC；助手伪屏：UI 树线框；投屏推流：MediaProjection WebRTC。开 ADB 不改镜像方式")
               }
             >
               {useAdbPath && accessibilityEnabled === false ? (
-                <option value="projection">投屏推流（需授权 WebRTC）</option>
+                <option value="projection">{t("投屏推流（需授权 WebRTC）")}</option>
               ) : (
                 <>
-                  <option value="screenshot">免授权投屏（真截图 WebRTC）</option>
-                  <option value="screenhelper">助手伪屏（UI 树 WebRTC）</option>
-                  <option value="projection">投屏推流（需授权 WebRTC）</option>
+                  <option value="screenshot">{t("免授权投屏（真截图 WebRTC）")}</option>
+                  <option value="screenhelper">{t("助手伪屏（UI 树 WebRTC）")}</option>
+                  <option value="projection">{t("投屏推流（需授权 WebRTC）")}</option>
                 </>
               )}
             </select>
           </label>
           <label>
-            推流帧率
+            {t("推流帧率")}
             <select
               value={pollMs}
               onChange={(event) => onPollMsChange(Number(event.target.value))}
             >
-              <option value={250}>约 4 fps（最快）</option>
-              <option value={400}>约 2.5 fps（免授权推荐）</option>
+              <option value={250}>{t("约 4 fps（最快）")}</option>
+              <option value={400}>{t("约 2.5 fps（免授权推荐）")}</option>
               <option value={500}>2 fps</option>
               <option value={1000}>1 fps</option>
             </select>
           </label>
           <span
             className={`screen-latency screen-latency--${latencyToneClass}`}
-            title="控制=进页即测的指令往返(RTT)；画面=收到时刻−截图时刻；帧间隔=相邻两帧到达间隔"
+            title={t("控制=进页即测的指令往返(RTT)；画面=收到时刻−截图时刻；帧间隔=相邻两帧到达间隔")}
           >
-            控制 {controlLatencyMs == null ? "--" : `${controlLatencyMs}ms`}
+            {t("控制")} {controlLatencyMs == null ? "--" : `${controlLatencyMs}ms`}
             <span className="screen-latency-sep">·</span>
-            画面 {latencyMs == null ? "--" : `${latencyMs}ms`}
+            {t("画面")} {latencyMs == null ? "--" : `${latencyMs}ms`}
             <span className="screen-latency-sep">·</span>
-            帧间隔 {frameGapMs == null ? "--" : `${frameGapMs}ms`}
+            {t("帧间隔")} {frameGapMs == null ? "--" : `${frameGapMs}ms`}
           </span>
           <label className="screen-toggle">
             <input
@@ -840,7 +843,7 @@ export function ScreenViewer({
               checked={castEnabled}
               onChange={(event) => handleCastToggle(event.target.checked)}
             />
-            镜像
+            {t("镜像")}
           </label>
           <button
             type="button"
@@ -848,7 +851,7 @@ export function ScreenViewer({
             disabled={!isOnline}
             onClick={() => handleCameraToggle("front")}
           >
-            前置摄像头
+            {t("前置摄像头")}
           </button>
           <button
             type="button"
@@ -856,7 +859,7 @@ export function ScreenViewer({
             disabled={!isOnline}
             onClick={() => handleCameraToggle("back")}
           >
-            后置摄像头
+            {t("后置摄像头")}
           </button>
           <label className="screen-toggle">
             <input
@@ -864,16 +867,16 @@ export function ScreenViewer({
               checked={assistantEnabled}
               onChange={(event) => setAssistantEnabled(event.target.checked)}
             />
-            屏幕助手
+            {t("屏幕助手")}
           </label>
           <button
             type="button"
             className="secondary-button"
             disabled={!castEnabled || !deviceId || !isOnline || refreshBusy}
             onClick={() => void refreshScreenMirror()}
-            title="强制刷新一帧；截图模式免授权，投屏推流需已授权"
+            title={t("强制刷新一帧；截图模式免授权，投屏推流需已授权")}
           >
-            {refreshBusy ? "刷新中…" : "刷新画面"}
+            {refreshBusy ? t("刷新中…") : t("刷新画面")}
           </button>
           <DeviceAdbOpsSection
             variant="toolbar"
@@ -890,7 +893,7 @@ export function ScreenViewer({
         </div>
         <div className="screen-toolbar-end">
           {assistantEnabled && activeUiSnapshot ? (
-            <span className="screen-meta">助手 {activeUiSnapshot.nodeCount} 节点</span>
+            <span className="screen-meta">{t("助手")} {activeUiSnapshot.nodeCount} {t("节点")}</span>
           ) : null}
           {streamActive && (hasWebrtcVideo || frame) ? (
             <span className="screen-meta">
@@ -898,24 +901,24 @@ export function ScreenViewer({
                 ? cameraLabel
                 : mirrorMode === "projection"
                   ? hasWebrtcVideo
-                    ? `投屏 WebRTC${webrtcConnected ? "" : "…"}`
-                    : "投屏 JPEG"
+                    ? t("投屏 WebRTC{0}", { 0: webrtcConnected ? "" : "…" })
+                    : t("投屏 JPEG")
                   : mirrorMode === "screenhelper"
                     ? hasWebrtcVideo
-                      ? `助手伪屏 WebRTC${webrtcConnected ? "" : "…"}`
-                      : "助手伪屏 JPEG"
+                      ? t("助手伪屏 WebRTC{0}", { 0: webrtcConnected ? "" : "…" })
+                      : t("助手伪屏 JPEG")
                     : hasWebrtcVideo
-                      ? `免授权 WebRTC${webrtcConnected ? "" : "…"}`
-                      : "免授权 JPEG"}{" "}
+                      ? t("免授权 WebRTC{0}", { 0: webrtcConnected ? "" : "…" })
+                      : t("免授权 JPEG")}{" "}
               {frame
                 ? `${frame.screenWidth} x ${frame.screenHeight}`
                 : hasWebrtcVideo
-                  ? "实时"
+                  ? t("实时")
                   : ""}
             </span>
           ) : null}
           {castEnabled && frame?.keyguardLocked ? (
-            <span className="screen-meta screen-keyguard">锁屏中</span>
+            <span className="screen-meta screen-keyguard">{t("锁屏中")}</span>
           ) : null}
           {streamActive && errorText ? (
             <span className="screen-meta screen-error">{errorText}</span>
@@ -924,13 +927,13 @@ export function ScreenViewer({
       </div>
 
       {!deviceId ? (
-        <div className="empty-state">请先在左侧选择设备。</div>
+        <div className="empty-state">{t("请先在左侧选择设备。")}</div>
       ) : (
         <div className="screen-dual-layout">
           <div className="screen-pane screen-pane--mirror">
-            <div className="screen-pane-label">屏幕镜像</div>
+            <div className="screen-pane-label">{t("屏幕镜像")}</div>
             {!isOnline && !hasWebrtcVideo && !imageSrc ? (
-              <div className="empty-state screen-pane-empty">设备离线，无法查看屏幕。</div>
+              <div className="empty-state screen-pane-empty">{t("设备离线，无法查看屏幕。")}</div>
             ) : !streamActive ? (
               <>
                 <div className="screen-pane-stage">
@@ -939,8 +942,8 @@ export function ScreenViewer({
                     style={stageStyle}
                   >
                     <MirrorSkeleton
-                      caption="镜像未开启"
-                      hint="勾选「镜像」或点击「前置/后置摄像头」开始"
+                      caption={t("镜像未开启")}
+                      hint={t("勾选「镜像」或点击「前置/后置摄像头」开始")}
                     />
                   </div>
                 </div>
@@ -958,8 +961,8 @@ export function ScreenViewer({
                         <div className="screen-stage-placeholder">{errorText}</div>
                       ) : (
                         <MirrorSkeleton
-                          caption={isCameraStream ? "等待摄像头画面…" : "等待屏幕画面…"}
-                          hint={waitingFirstFrame ? "正在连接设备推流" : undefined}
+                          caption={isCameraStream ? t("等待摄像头画面…") : t("等待屏幕画面…")}
+                          hint={waitingFirstFrame ? t("正在连接设备推流") : undefined}
                         />
                       )}
                     </div>
@@ -1025,7 +1028,7 @@ export function ScreenViewer({
           </div>
 
           <div className="screen-pane screen-pane--ops">
-            <div className="screen-pane-label">操作面板</div>
+            <div className="screen-pane-label">{t("操作面板")}</div>
             <div className="screen-ops-panel">
               <DeviceRemarkPanel
                 deviceId={deviceId}
@@ -1039,7 +1042,7 @@ export function ScreenViewer({
                 useAdbInput={useAdbInput}
               />
               {!assistantEnabled ? (
-                <p className="screen-ops-hint">开启屏幕助手后可调整节点显示与翻译</p>
+                <p className="screen-ops-hint">{t("开启屏幕助手后可调整节点显示与翻译")}</p>
               ) : !activeUiSnapshot && !activeUiError ? (
                 <OpsPanelSkeleton />
               ) : (
@@ -1058,13 +1061,13 @@ export function ScreenViewer({
           </div>
 
           <div className="screen-pane screen-pane--assistant">
-            <div className="screen-pane-label">屏幕助手</div>
+            <div className="screen-pane-label">{t("屏幕助手")}</div>
             {!isOnline && !activeUiSnapshot ? (
-              <div className="empty-state screen-pane-empty">设备离线，无法查看屏幕。</div>
+              <div className="empty-state screen-pane-empty">{t("设备离线，无法查看屏幕。")}</div>
             ) : !assistantEnabled ? (
-              <div className="empty-state screen-pane-empty">屏幕助手已关闭，可勾选上方开关开启</div>
+              <div className="empty-state screen-pane-empty">{t("屏幕助手已关闭，可勾选上方开关开启")}</div>
             ) : !screenSize && !activeUiSnapshot ? (
-              <AssistantSkeleton caption={activeUiError ?? "加载节点…"} />
+              <AssistantSkeleton caption={activeUiError ?? t("加载节点…")} />
             ) : (
               <ScreenAssistant
                 deviceId={deviceId}
@@ -1087,7 +1090,7 @@ export function ScreenViewer({
             <div className="ops-workspace-body">
               {opsWorkspace === "none" ? (
                 <div className="empty-state screen-pane-empty">
-                  点击右侧工具栏「锁屏 / 应用 / 短信 / AI 操机 / ADB」在此操作，可同时触控左侧屏幕
+                  {t("点击右侧工具栏「锁屏 / 应用 / 短信 / AI 操机 / ADB」在此操作，可同时触控左侧屏幕")}
                 </div>
               ) : null}
               {opsWorkspace === "phone-agent" ? (
@@ -1101,7 +1104,7 @@ export function ScreenViewer({
                     useAdbInput={useAdbInput}
                   />
                 ) : (
-                  <div className="empty-state screen-pane-empty">请选择设备</div>
+                  <div className="empty-state screen-pane-empty">{t("请选择设备")}</div>
                 )
               ) : null}
               {opsWorkspace === "adb" ? (

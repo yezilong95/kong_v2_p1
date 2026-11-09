@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { fetchIceServers, type IceServerConfig } from "../api/client";
+import { t } from "../i18n";
+
 
 export type WebrtcSignalMessage = {
   type: "webrtc_offer" | "webrtc_answer" | "webrtc_ice" | "webrtc_hangup";
@@ -106,7 +108,7 @@ export function useScreenWebRtc(options: UseScreenWebRtcOptions) {
     pc.ontrack = (event) => {
       const stream = event.streams[0] ?? new MediaStream([event.track]);
       setRemoteStream(stream);
-      optionsRef.current.onStatus?.("WebRTC 画面已连接");
+      optionsRef.current.onStatus?.(t("WebRTC 画面已连接"));
     };
     pc.onicecandidate = (event) => {
       if (!event.candidate) {
@@ -133,7 +135,7 @@ export function useScreenWebRtc(options: UseScreenWebRtcOptions) {
       }
       if (state === "failed" || state === "closed" || state === "disconnected") {
         optionsRef.current.onStatus?.(
-          state === "failed" ? "WebRTC 连接失败，等待 JPEG 降级…" : `WebRTC：${state}`,
+          state === "failed" ? t("WebRTC 连接失败，等待 JPEG 降级…") : `WebRTC：${state}`,
         );
       }
       if (state === "failed" && usingRelayOnlyRef.current) {
@@ -145,7 +147,7 @@ export function useScreenWebRtc(options: UseScreenWebRtcOptions) {
           relayFallbackActiveRef.current = true;
           writeRelayFallback(true);
           optionsRef.current.onStatus?.(
-            `TURN relay 连续失败 ${relayFailStreakRef.current} 次，下一次改走 ALL`,
+            t("TURN relay 连续失败 {0} 次，下一次改走 ALL", { 0: relayFailStreakRef.current }),
           );
         }
       }
@@ -192,10 +194,10 @@ export function useScreenWebRtc(options: UseScreenWebRtcOptions) {
               type: "answer",
             },
           });
-          optionsRef.current.onStatus?.("WebRTC 应答已发送，等待媒体…");
+          optionsRef.current.onStatus?.(t("WebRTC 应答已发送，等待媒体…"));
         } catch (error) {
           const text = error instanceof Error ? error.message : "webrtc_answer_failed";
-          optionsRef.current.onStatus?.(`WebRTC 失败：${text}`);
+          optionsRef.current.onStatus?.(t("WebRTC 失败：{0}", { 0: text }));
           cleanup();
         }
         return;

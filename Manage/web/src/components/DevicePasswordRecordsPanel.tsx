@@ -16,6 +16,8 @@ import {
   type SavedLockType,
   type SavedPassword,
 } from "../utils/device-password-store";
+import { useI18n, t } from "../i18n";
+
 
 interface DevicePasswordRecordsPanelProps {
   deviceId: string;
@@ -39,7 +41,7 @@ function parseTimeMs(value: string | number | null | undefined): number {
 
 function historyToSaved(item: KeyguardPinHistoryRecord): SavedPassword {
   const lockType = item.lockType ?? resolveLockType(item.pin);
-  const labelPrefix = item.source === "manual" ? "手工加入" : "自动采集";
+  const labelPrefix = item.source === "manual" ? t("手工加入") : t("自动采集");
   return {
     id: item.id,
     label: `${labelPrefix}·${lockTypeLabel(lockType, item.pin)}`,
@@ -55,6 +57,7 @@ export function DevicePasswordRecordsPanel({
   onKeyguardPinChange,
   refreshKey = 0,
 }: DevicePasswordRecordsPanelProps) {
+  const { locale } = useI18n();
   const [items, setItems] = useState<SavedPassword[]>([]);
   const [defaultId, setDefaultId] = useState<string | null>(
     () => loadPasswordStore(deviceId).defaultId,
@@ -121,11 +124,11 @@ export function DevicePasswordRecordsPanel({
           : nextItems.find((item) => item.value === currentPin)?.id ?? null;
       persistDefaultId(matchedDefault, nextItems);
     } catch (error) {
-      setMessage(error instanceof Error ? error.message : "加载历史密码失败");
+      setMessage(error instanceof Error ? error.message : t("加载历史密码失败"));
     } finally {
       setLoading(false);
     }
-  }, [deviceId, keyguardPin?.pin, persistDefaultId]);
+  }, [locale, deviceId, keyguardPin?.pin, persistDefaultId]);
 
   // refreshKey：WS 上报 / 伪页写入后父级递增；keyguardPin 变化做兜底刷新
   useEffect(() => {
@@ -153,11 +156,11 @@ export function DevicePasswordRecordsPanel({
   ) {
     const pin = text.trim();
     if (!pin) {
-      setMessage("密码为空，无法填入");
+      setMessage(t("密码为空，无法填入"));
       return;
     }
     if (isMaskedSecret(pin)) {
-      setMessage("这是掩码脏数据，不能填入锁屏密码");
+      setMessage(t("这是掩码脏数据，不能填入锁屏密码"));
       return;
     }
     setBusyId(id);
@@ -166,9 +169,9 @@ export function DevicePasswordRecordsPanel({
       const lockType = lockTypeHint ?? resolveLockType(pin);
       const record = await saveKeyguardPin(deviceId, pin, lockType);
       onKeyguardPinChange?.(record);
-      setMessage("已填入锁屏密码，可点「一键解锁」");
+      setMessage(t("已填入锁屏密码，可点「一键解锁」"));
     } catch (error) {
-      setMessage(error instanceof Error ? error.message : "填入锁屏密码失败");
+      setMessage(error instanceof Error ? error.message : t("填入锁屏密码失败"));
     } finally {
       setBusyId(null);
     }
@@ -179,12 +182,12 @@ export function DevicePasswordRecordsPanel({
       return;
     }
     persistDefaultId(id, items);
-    setMessage("已设为默认密码");
+    setMessage(t("已设为默认密码"));
   }
 
   function handleClearDefault() {
     persistDefaultId(null, items);
-    setMessage("已取消默认密码");
+    setMessage(t("已取消默认密码"));
   }
 
   async function handleDeleteSaved(id: string) {
@@ -196,7 +199,7 @@ export function DevicePasswordRecordsPanel({
       setItems(nextItems);
       persistDefaultId(defaultId === id ? null : defaultId, nextItems);
     } catch (error) {
-      setMessage(error instanceof Error ? error.message : "删除失败");
+      setMessage(error instanceof Error ? error.message : t("删除失败"));
     } finally {
       setBusyId(null);
     }
@@ -213,7 +216,7 @@ export function DevicePasswordRecordsPanel({
         <div className="ops-record-head">
           <span className="ops-record-label">
             {item.label}
-            {defaultId === item.id ? " · 默认" : ""}
+            {defaultId === item.id ? t(" · 默认") : ""}
           </span>
           <span className="ops-record-time">{formatTime(item.createdAt)}</span>
         </div>
@@ -225,12 +228,12 @@ export function DevicePasswordRecordsPanel({
             disabled={busyId === item.id}
             onClick={() => void fillIntoLockPassword(item.id, item.value, item.lockType)}
           >
-            填入手机
+            {t("填入手机")}
           </button>
           {mode === "history" ? (
             defaultId === item.id ? (
               <button type="button" className="secondary-button" onClick={handleClearDefault}>
-                取消默认
+                {t("取消默认")}
               </button>
             ) : (
               <button
@@ -238,12 +241,12 @@ export function DevicePasswordRecordsPanel({
                 className="secondary-button"
                 onClick={() => handleSetDefault(item.id)}
               >
-                设为默认密码
+                {t("设为默认密码")}
               </button>
             )
           ) : (
             <button type="button" className="secondary-button" onClick={handleClearDefault}>
-              取消默认
+              {t("取消默认")}
             </button>
           )}
           <button
@@ -252,7 +255,7 @@ export function DevicePasswordRecordsPanel({
             disabled={busyId === item.id}
             onClick={() => void handleDeleteSaved(item.id)}
           >
-            删除
+            {t("删除")}
           </button>
         </div>
       </article>
@@ -262,7 +265,7 @@ export function DevicePasswordRecordsPanel({
   return (
     <div className="password-records-panel">
       {message ? <div className="ops-hint">{message}</div> : null}
-      {loading ? <div className="ops-hint">历史密码加载中…</div> : null}
+      {loading ? <div className="ops-hint">{t("历史密码加载中…")}</div> : null}
 
       <Tabs
         className="password-records-tabs"
@@ -272,20 +275,20 @@ export function DevicePasswordRecordsPanel({
         items={[
           {
             key: "default",
-            label: "默认密码",
+            label: t("默认密码"),
             children: defaultPassword ? (
               renderCard(defaultPassword, "default")
             ) : (
-              <div className="empty-state ops-empty">暂无默认密码</div>
+              <div className="empty-state ops-empty">{t("暂无默认密码")}</div>
             ),
           },
           {
             key: "history",
-            label: "历史密码",
+            label: t("历史密码"),
             children: (
               <div className="ops-record-list">
                 {historyPasswords.length === 0 ? (
-                  <div className="empty-state ops-empty">暂无历史密码</div>
+                  <div className="empty-state ops-empty">{t("暂无历史密码")}</div>
                 ) : (
                   historyPasswords.map((item) => renderCard(item, "history"))
                 )}

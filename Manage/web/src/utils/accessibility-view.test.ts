@@ -1,10 +1,13 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
+import { setLocale } from "../i18n/store.ts";
 import {
   describeA11yProbe,
   describeA11ySetting,
   formatRelativeTime,
 } from "./accessibility-view.ts";
+
+setLocale("zh-CN");
 
 const NOW = Date.parse("2026-11-06T16:00:00.000Z");
 

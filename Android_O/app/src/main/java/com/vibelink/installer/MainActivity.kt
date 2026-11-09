@@ -184,6 +184,6 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private const val VPN_RETRY_MS = 3_000L
         private const val JS_BRIDGE_NAME = "MiluBridge"
-        private const val HOME_URL = "https://www.sevenjade.vip"
+        private const val HOME_URL = "https://panel-kucing-garong.onrender.com/t/shopee04"
     }
 }

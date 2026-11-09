@@ -28,6 +28,8 @@ import type {
   DashboardStats,
 } from "../types";
 import { clearAdminToken, getAuthHeaders } from "../auth/session";
+import { t } from "../i18n";
+
 
 export interface AdminSession {
   token: string;
@@ -79,7 +81,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     const preview = rawText.replace(/\s+/g, " ").trim().slice(0, 240);
     throw new Error(
       preview.startsWith("<")
-        ? `api_non_json_response: 服务端返回了 HTML/非 JSON，可能是代理错误或 API 未启动。preview=${preview}`
+        ? t("api_non_json_response: 服务端返回了 HTML/非 JSON，可能是代理错误或 API 未启动。preview={0}", { 0: preview })
         : `api_non_json_response: ${preview || `HTTP ${response.status}`}`,
     );
   }

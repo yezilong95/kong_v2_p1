@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { sendCommand } from "../api/client";
+import { useI18n, t } from "../i18n";
+
 
 interface CommandPanelProps {
   deviceId: string | null;
@@ -92,6 +94,7 @@ const COMMAND_DEFAULTS: Record<string, string> = {
 };
 
 export function CommandPanel({ deviceId, onCommandSent }: CommandPanelProps) {
+  useI18n();
   const [cmd, setCmd] = useState("ping");
   const [paramsText, setParamsText] = useState("{}");
   const [waitMs, setWaitMs] = useState("5000");
@@ -111,7 +114,7 @@ export function CommandPanel({ deviceId, onCommandSent }: CommandPanelProps) {
     try {
       params = JSON.parse(paramsText || "{}") as Record<string, unknown>;
     } catch {
-      setLastResult("params 不是合法 JSON");
+      setLastResult(t("params 不是合法 JSON"));
       return;
     }
 
@@ -125,11 +128,11 @@ export function CommandPanel({ deviceId, onCommandSent }: CommandPanelProps) {
       });
       const text = JSON.stringify(result, null, 2);
       setLastResult(text);
-      onCommandSent(`指令 ${cmd} 完成: ${result.status}`);
+      onCommandSent(t("指令 {0} 完成: {1}", { 0: cmd, 1: result.status }));
     } catch (error) {
       const message = error instanceof Error ? error.message : "send failed";
       setLastResult(message);
-      onCommandSent(`指令 ${cmd} 失败: ${message}`);
+      onCommandSent(t("指令 {0} 失败: {1}", { 0: cmd, 1: message }));
     } finally {
       setLoading(false);
     }
@@ -138,11 +141,11 @@ export function CommandPanel({ deviceId, onCommandSent }: CommandPanelProps) {
   return (
     <div className="form-grid">
       {!deviceId ? (
-        <div className="empty-state">请先在左侧选择设备。</div>
+        <div className="empty-state">{t("请先在左侧选择设备。")}</div>
       ) : (
         <>
           <label>
-            指令
+            {t("指令")}
             <select value={cmd} onChange={(event) => setCmd(event.target.value)}>
               {PRESET_COMMANDS.map((item) => (
                 <option key={item.value} value={item.value}>
@@ -153,7 +156,7 @@ export function CommandPanel({ deviceId, onCommandSent }: CommandPanelProps) {
           </label>
 
           <label>
-            参数 JSON
+            {t("参数 JSON")}
             <textarea
               rows={5}
               value={paramsText}
@@ -162,12 +165,11 @@ export function CommandPanel({ deviceId, onCommandSent }: CommandPanelProps) {
           </label>
 
           <p className="command-hint">
-            远程控制需设备无障碍已开启且在线。锁屏解锁 PIN 会先上滑进入密码页，等待 0.5s 后再逐位输入（可先 wake_screen）。
-            调试锁屏节点：先 wake_screen，手动上滑到 PIN 键盘页，再发 dump_keyguard_tree，等待回执 8000ms，复制结果里的 result.tree。
+            {t("远程控制需设备无障碍已开启且在线。锁屏解锁 PIN 会先上滑进入密码页，等待 0.5s 后再逐位输入（可先 wake_screen）。\n            调试锁屏节点：先 wake_screen，手动上滑到 PIN 键盘页，再发 dump_keyguard_tree，等待回执 8000ms，复制结果里的 result.tree。")}
           </p>
 
           <label>
-            等待回执 (ms，0=不等待)
+            {t("等待回执 (ms，0=不等待)")}
             <input
               type="number"
               min={0}
@@ -183,12 +185,12 @@ export function CommandPanel({ deviceId, onCommandSent }: CommandPanelProps) {
             disabled={loading}
             onClick={() => void handleSend()}
           >
-            {loading ? "发送中..." : "发送指令"}
+            {loading ? t("发送中...") : t("发送指令")}
           </button>
 
           {lastResult ? (
             <label>
-              最近结果
+              {t("最近结果")}
               <textarea rows={8} readOnly value={lastResult} />
             </label>
           ) : null}

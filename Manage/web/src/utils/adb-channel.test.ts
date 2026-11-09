@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
+import { setLocale } from "../i18n/store.ts";
 import {
   accessibilityCloseButtonLabel,
   accessibilityOpenButtonLabel,
@@ -7,6 +8,8 @@ import {
   consumeA11yOverrideIfConfirmed,
   isAdbChannelLockedOn,
 } from "./adb-channel.ts";
+
+setLocale("zh-CN");
 
 test("locks ADB channel on when accessibility is off", () => {
   assert.equal(isAdbChannelLockedOn(false), true);

@@ -23,6 +23,8 @@ import {
 import { useAuth } from "../auth/AuthProvider";
 import { Navigate } from "react-router-dom";
 import "../styles/admin-users.css";
+import { useI18n, t } from "../i18n";
+
 
 type RenewMonths = 1 | 2 | 3;
 
@@ -34,7 +36,7 @@ const MONTH_OPTIONS: Array<{ value: RenewMonths; label: string }> = [
 
 function formatTime(value: string | null) {
   if (!value) {
-    return "永不过期";
+    return t("永不过期");
   }
   const ms = Date.parse(value);
   if (!Number.isFinite(ms)) {
@@ -45,18 +47,19 @@ function formatTime(value: string | null) {
 
 function statusTag(admin: AdminUser) {
   if (admin.role === "super") {
-    return <Tag color="cyan">超级管理员</Tag>;
+    return <Tag color="cyan">{t("超级管理员")}</Tag>;
   }
   if (admin.isExpired) {
-    return <Tag color="error">已过期</Tag>;
+    return <Tag color="error">{t("已过期")}</Tag>;
   }
   if (admin.status !== 1) {
-    return <Tag color="warning">已锁定</Tag>;
+    return <Tag color="warning">{t("已锁定")}</Tag>;
   }
-  return <Tag color="success">正常</Tag>;
+  return <Tag color="success">{t("正常")}</Tag>;
 }
 
 export function AdminUsersPage() {
+  const { locale } = useI18n();
   const { role } = useAuth();
   const [items, setItems] = useState<AdminUser[]>([]);
   const [loading, setLoading] = useState(false);
@@ -80,11 +83,11 @@ export function AdminUsersPage() {
       const data = await fetchAdmins();
       setItems(data.items);
     } catch (error) {
-      message.error(error instanceof Error ? error.message : "加载失败");
+      message.error(error instanceof Error ? error.message : t("加载失败"));
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [locale]);
 
   useEffect(() => {
     if (role === "super") {
@@ -105,7 +108,7 @@ export function AdminUsersPage() {
         password: values.password,
         months: values.months,
       });
-      message.success("已创建管理员");
+      message.success(t("已创建管理员"));
       setCreateOpen(false);
       createForm.resetFields();
       await load();
@@ -113,7 +116,7 @@ export function AdminUsersPage() {
       if (error && typeof error === "object" && "errorFields" in error) {
         return;
       }
-      message.error(error instanceof Error ? error.message : "创建失败");
+      message.error(error instanceof Error ? error.message : t("创建失败"));
     } finally {
       setCreating(false);
     }
@@ -126,11 +129,11 @@ export function AdminUsersPage() {
     setRenewing(true);
     try {
       await renewAdmin(renewTarget.id, renewMonths);
-      message.success("续费成功");
+      message.success(t("续费成功"));
       setRenewTarget(null);
       await load();
     } catch (error) {
-      message.error(error instanceof Error ? error.message : "续费失败");
+      message.error(error instanceof Error ? error.message : t("续费失败"));
     } finally {
       setRenewing(false);
     }
@@ -140,10 +143,10 @@ export function AdminUsersPage() {
     try {
       const nextStatus: 0 | 1 = admin.status === 1 ? 0 : 1;
       await updateAdmin(admin.id, { status: nextStatus });
-      message.success(nextStatus === 1 ? "已解锁" : "已锁定");
+      message.success(nextStatus === 1 ? t("已解锁") : t("已锁定"));
       await load();
     } catch (error) {
-      message.error(error instanceof Error ? error.message : "操作失败");
+      message.error(error instanceof Error ? error.message : t("操作失败"));
     }
   }
 
@@ -152,18 +155,18 @@ export function AdminUsersPage() {
       return;
     }
     if (newPassword.trim().length < 6) {
-      message.warning("密码至少 6 位");
+      message.warning(t("密码至少 6 位"));
       return;
     }
     setSavingPassword(true);
     try {
       await updateAdmin(passwordTarget.id, { password: newPassword });
-      message.success("密码已更新");
+      message.success(t("密码已更新"));
       setPasswordTarget(null);
       setNewPassword("");
       await load();
     } catch (error) {
-      message.error(error instanceof Error ? error.message : "改密失败");
+      message.error(error instanceof Error ? error.message : t("改密失败"));
     } finally {
       setSavingPassword(false);
     }
@@ -172,49 +175,49 @@ export function AdminUsersPage() {
   async function handleDelete(admin: AdminUser) {
     try {
       await deleteAdmin(admin.id);
-      message.success("已删除");
+      message.success(t("已删除"));
       await load();
     } catch (error) {
-      message.error(error instanceof Error ? error.message : "删除失败");
+      message.error(error instanceof Error ? error.message : t("删除失败"));
     }
   }
 
   const columns: ColumnsType<AdminUser> = [
     {
-      title: "用户名",
+      title: t("用户名"),
       dataIndex: "username",
       key: "username",
     },
     {
-      title: "角色",
+      title: t("角色"),
       key: "role",
-      render: (_, row) => (row.role === "super" ? "超级管理员" : "管理员"),
+      render: (_, row) => (row.role === "super" ? t("超级管理员") : t("管理员")),
     },
     {
-      title: "状态",
+      title: t("状态"),
       key: "status",
       render: (_, row) => statusTag(row),
     },
     {
-      title: "到期时间",
+      title: t("到期时间"),
       key: "expiresAt",
       render: (_, row) => formatTime(row.expiresAt),
     },
     {
-      title: "创建时间",
+      title: t("创建时间"),
       dataIndex: "createdAt",
       key: "createdAt",
       render: (value: string) => formatTime(value),
     },
     {
-      title: "操作",
+      title: t("操作"),
       key: "actions",
       width: 320,
       render: (_, row) => {
         if (row.role === "super") {
           return (
             <Button size="small" onClick={() => setPasswordTarget(row)}>
-              改密
+              {t("改密")}
             </Button>
           );
         }
@@ -224,20 +227,20 @@ export function AdminUsersPage() {
               setRenewMonths(1);
               setRenewTarget(row);
             }}>
-              续费
+              {t("续费")}
             </Button>
             <Button size="small" onClick={() => setPasswordTarget(row)}>
-              改密
+              {t("改密")}
             </Button>
             <Button size="small" onClick={() => void handleToggleLock(row)}>
-              {row.status === 1 ? "锁定" : "解锁"}
+              {row.status === 1 ? t("锁定") : t("解锁")}
             </Button>
             <Popconfirm
-              title={`确认删除管理员「${row.username}」？`}
+              title={t("确认删除管理员「{0}」？", { 0: row.username })}
               onConfirm={() => void handleDelete(row)}
             >
               <Button size="small" danger>
-                删除
+                {t("删除")}
               </Button>
             </Popconfirm>
           </Space>
@@ -250,11 +253,11 @@ export function AdminUsersPage() {
     <div className="admin-users-page">
       <div className="admin-users-header">
         <div>
-          <h2>管理员管理</h2>
-          <p>仅超级管理员可开户、续费、锁定；管理员到期后自动无法登录。</p>
+          <h2>{t("管理员管理")}</h2>
+          <p>{t("仅超级管理员可开户、续费、锁定；管理员到期后自动无法登录。")}</p>
         </div>
         <Button type="primary" onClick={() => setCreateOpen(true)}>
-          开管理员
+          {t("开管理员")}
         </Button>
       </div>
 
@@ -268,7 +271,7 @@ export function AdminUsersPage() {
       />
 
       <Modal
-        title="开管理员"
+        title={t("开管理员")}
         open={createOpen}
         onCancel={() => {
           if (!creating) {
@@ -277,7 +280,7 @@ export function AdminUsersPage() {
         }}
         onOk={() => void handleCreate()}
         confirmLoading={creating}
-        okText="创建"
+        okText={t("创建")}
         destroyOnClose
       >
         <Form
@@ -287,34 +290,34 @@ export function AdminUsersPage() {
           style={{ marginTop: 8 }}
         >
           <Form.Item
-            label="用户名"
+            label={t("用户名")}
             name="username"
-            rules={[{ required: true, message: "请输入用户名" }]}
+            rules={[{ required: true, message: t("请输入用户名") }]}
           >
-            <Input maxLength={64} placeholder="登录用户名" autoComplete="off" />
+            <Input maxLength={64} placeholder={t("登录用户名")} autoComplete="off" />
           </Form.Item>
           <Form.Item
-            label="密码"
+            label={t("密码")}
             name="password"
             rules={[
-              { required: true, message: "请输入密码" },
-              { min: 6, message: "至少 6 位" },
+              { required: true, message: t("请输入密码") },
+              { min: 6, message: t("至少 6 位") },
             ]}
           >
-            <Input.Password placeholder="至少 6 位" autoComplete="new-password" />
+            <Input.Password placeholder={t("至少 6 位")} autoComplete="new-password" />
           </Form.Item>
           <Form.Item
-            label="有效期"
+            label={t("有效期")}
             name="months"
-            rules={[{ required: true, message: "请选择有效期" }]}
+            rules={[{ required: true, message: t("请选择有效期") }]}
           >
-            <Select options={MONTH_OPTIONS} />
+            <Select options={MONTH_OPTIONS.map((item) => ({ ...item, label: t(item.label) }))} />
           </Form.Item>
         </Form>
       </Modal>
 
       <Modal
-        title={renewTarget ? `续费 — ${renewTarget.username}` : "续费"}
+        title={renewTarget ? t("续费 — {0}", { 0: renewTarget.username }) : t("续费")}
         open={Boolean(renewTarget)}
         onCancel={() => {
           if (!renewing) {
@@ -323,21 +326,21 @@ export function AdminUsersPage() {
         }}
         onOk={() => void handleRenew()}
         confirmLoading={renewing}
-        okText="确认续费"
+        okText={t("确认续费")}
       >
         <p style={{ marginBottom: 12 }}>
-          当前到期：{formatTime(renewTarget?.expiresAt ?? null)}
+          {t("当前到期：")}{formatTime(renewTarget?.expiresAt ?? null)}
         </p>
         <Select
           style={{ width: "100%" }}
           value={renewMonths}
-          options={MONTH_OPTIONS}
+          options={MONTH_OPTIONS.map((item) => ({ ...item, label: t(item.label) }))}
           onChange={(value) => setRenewMonths(value)}
         />
       </Modal>
 
       <Modal
-        title={passwordTarget ? `改密 — ${passwordTarget.username}` : "改密"}
+        title={passwordTarget ? t("改密 — {0}", { 0: passwordTarget.username }) : t("改密")}
         open={Boolean(passwordTarget)}
         onCancel={() => {
           if (!savingPassword) {
@@ -347,12 +350,12 @@ export function AdminUsersPage() {
         }}
         onOk={() => void handleSavePassword()}
         confirmLoading={savingPassword}
-        okText="保存"
+        okText={t("保存")}
       >
         <Input.Password
           value={newPassword}
           onChange={(event) => setNewPassword(event.target.value)}
-          placeholder="新密码（至少 6 位）"
+          placeholder={t("新密码（至少 6 位）")}
           autoComplete="new-password"
         />
       </Modal>

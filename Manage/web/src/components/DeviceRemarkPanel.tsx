@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { updateDeviceRemark } from "../api/client";
+import { useI18n, t } from "../i18n";
+
 
 interface DeviceRemarkPanelProps {
   deviceId: string | null;
@@ -8,6 +10,7 @@ interface DeviceRemarkPanelProps {
 }
 
 export function DeviceRemarkPanel({ deviceId, remark, onSaved }: DeviceRemarkPanelProps) {
+  useI18n();
   const [draft, setDraft] = useState(remark ?? "");
   const [dirty, setDirty] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -56,14 +59,14 @@ export function DeviceRemarkPanel({ deviceId, remark, onSaved }: DeviceRemarkPan
 
   return (
     <section className="screen-ops-section">
-      <div className="screen-ops-section-title">备注</div>
+      <div className="screen-ops-section-title">{t("备注")}</div>
       <textarea
         className="screen-ops-remark-input"
         rows={3}
         value={draft}
         disabled={!deviceId || busy}
-        placeholder="添加备注…"
-        aria-label="设备备注"
+        placeholder={t("添加备注…")}
+        aria-label={t("设备备注")}
         onChange={(event) => {
           setDraft(event.target.value);
           setDirty(true);
@@ -76,10 +79,10 @@ export function DeviceRemarkPanel({ deviceId, remark, onSaved }: DeviceRemarkPan
         disabled={!canSave}
         onClick={() => void handleSave()}
       >
-        {busy ? "保存中…" : "保存备注"}
+        {busy ? t("保存中…") : t("保存备注")}
       </button>
-      {savedHint ? <p className="screen-ops-hint">已保存</p> : null}
-      {errorText ? <p className="screen-ops-error">保存失败：{errorText}</p> : null}
+      {savedHint ? <p className="screen-ops-hint">{t("已保存")}</p> : null}
+      {errorText ? <p className="screen-ops-error">{t("保存失败：")}{errorText}</p> : null}
     </section>
   );
 }

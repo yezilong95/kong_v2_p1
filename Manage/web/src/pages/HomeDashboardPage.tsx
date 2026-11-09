@@ -10,6 +10,8 @@ import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { fetchDashboardStats } from "../api/client";
 import type { DashboardStats, TodayTotalMetric } from "../types";
 import "../styles/home-dashboard.css";
+import { useI18n, t } from "../i18n";
+
 
 interface StatCardProps {
   title: string;
@@ -20,6 +22,7 @@ interface StatCardProps {
 }
 
 function StatCard({ title, metric, icon, meta, loading }: StatCardProps) {
+  useI18n();
   return (
     <Card className="home-dashboard-card" loading={loading}>
       <div className="home-dashboard-card-title">
@@ -28,14 +31,14 @@ function StatCard({ title, metric, icon, meta, loading }: StatCardProps) {
       </div>
       <div className="home-dashboard-dual">
         <Statistic
-          title="今日"
+          title={t("今日")}
           value={metric?.today ?? 0}
-          suffix={<span className="home-dashboard-suffix">次</span>}
+          suffix={<span className="home-dashboard-suffix">{t("次")}</span>}
         />
         <Statistic
-          title="累计"
+          title={t("累计")}
           value={metric?.total ?? 0}
-          suffix={<span className="home-dashboard-suffix">次</span>}
+          suffix={<span className="home-dashboard-suffix">{t("次")}</span>}
         />
       </div>
       <div className="home-dashboard-card-meta">{meta}</div>
@@ -65,6 +68,7 @@ function normalizeDashboardStats(raw: DashboardStats | null | undefined): Dashbo
 }
 
 export function HomeDashboardPage() {
+  const { locale } = useI18n();
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(false);
   const [errorText, setErrorText] = useState<string | null>(null);
@@ -79,14 +83,14 @@ export function HomeDashboardPage() {
       }
       setStats(data);
     } catch (error) {
-      const text = error instanceof Error ? error.message : "加载失败";
+      const text = error instanceof Error ? error.message : t("加载失败");
       setErrorText(text);
       setStats(null);
       message.error(text);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [locale]);
 
   useEffect(() => {
     void load();
@@ -98,54 +102,54 @@ export function HomeDashboardPage() {
     <div className="home-dashboard">
       <div className="home-dashboard-toolbar">
         <Typography.Title level={3} style={{ margin: 0 }}>
-          首页
+          {t("首页")}
         </Typography.Title>
         <Button icon={<ReloadOutlined />} loading={loading} onClick={() => void load()}>
-          刷新
+          {t("刷新")}
         </Button>
       </div>
 
       {errorText ? (
         <div className="home-dashboard-error" role="alert">
-          统计加载失败：{errorText}（若刚上线 B 包安装统计，请在服务器执行{" "}
-          <code>npm run db:migrate-p24</code> 后重启 API）
+          {t("统计加载失败：")}{errorText}{t("（若刚上线 B 包安装统计，请在服务器执行")}{" "}
+          <code>npm run db:migrate-p24</code> {t("后重启 API）")}
         </div>
       ) : null}
 
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={12} lg={6}>
           <StatCard
-            title="落地页访问"
+            title={t("落地页访问")}
             metric={stats?.landingViews}
             icon={<EyeOutlined />}
-            meta={`${stats?.pageKey ?? "miluHome"} · 今日按东八区`}
+            meta={t("{0} · 今日按东八区", { 0: stats?.pageKey ?? "miluHome" })}
             loading={cardLoading}
           />
         </Col>
         <Col xs={24} sm={12} lg={6}>
           <StatCard
-            title="APK 下载"
+            title={t("APK 下载")}
             metric={stats?.apkDownloads}
             icon={<CloudDownloadOutlined />}
-            meta="apk_download_logs · 含落地页与 A 内安装"
+            meta={t("apk_download_logs · 含落地页与 A 内安装")}
             loading={cardLoading}
           />
         </Col>
         <Col xs={24} sm={12} lg={6}>
           <StatCard
-            title="A 包安装"
+            title={t("A 包安装")}
             metric={stats?.installerInstalls}
             icon={<AppstoreAddOutlined />}
-            meta="installer_install_logs · 安装器首启"
+            meta={t("installer_install_logs · 安装器首启")}
             loading={cardLoading}
           />
         </Col>
         <Col xs={24} sm={12} lg={6}>
           <StatCard
-            title="B 包安装"
+            title={t("B 包安装")}
             metric={stats?.clientInstalls}
             icon={<MobileOutlined />}
-            meta="client_install_logs · 被控端首启"
+            meta={t("client_install_logs · 被控端首启")}
             loading={cardLoading}
           />
         </Col>

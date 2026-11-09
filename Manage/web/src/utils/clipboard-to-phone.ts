@@ -1,3 +1,4 @@
+import { t } from "../i18n";
 export async function readComputerClipboardText(): Promise<string> {
   if (navigator.clipboard?.readText) {
     try {
@@ -7,6 +8,6 @@ export async function readComputerClipboardText(): Promise<string> {
     }
   }
 
-  const manual = window.prompt("无法读取系统剪贴板，请在此粘贴要发送到手机输入框的内容：");
+  const manual = window.prompt(t("无法读取系统剪贴板，请在此粘贴要发送到手机输入框的内容："));
   return manual ?? "";
 }

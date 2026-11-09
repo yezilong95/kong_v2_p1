@@ -1,5 +1,7 @@
 import type { UiTreeNode } from "../types";
 import { filterNodesByPrimaryPackage, selectDisplayNodes } from "./ui-tree";
+import { t } from "../i18n";
+
 
 export interface CompactUiNode {
   i: number;
@@ -53,39 +55,39 @@ export function formatPhoneAgentAction(plan: {
   const { action, params } = plan;
   if (action === "click") {
     if (params.nodeIndex != null) {
-      return `点击节点 #${params.nodeIndex}`;
+      return t("点击节点 #{0}", { 0: params.nodeIndex });
     }
-    return `点击 (${params.x}, ${params.y})`;
+    return t("点击 ({0}, {1})", { 0: params.x, 1: params.y });
   }
   if (action === "swipe") {
-    return `滑动 (${params.x1},${params.y1}) → (${params.x2},${params.y2})`;
+    return t("滑动 ({0},{1}) → ({2},{3})", { 0: params.x1, 1: params.y1, 2: params.x2, 3: params.y2 });
   }
   if (action === "input_text") {
     const text = String(params.text ?? "");
     const masked = text.length > 8 ? `${text.slice(0, 4)}…${text.slice(-2)}` : text;
-    return `输入「${masked}」`;
+    return t("输入「{0}」", { 0: masked });
   }
   if (action === "open_app") {
-    return `打开应用 ${params.packageName}`;
+    return t("打开应用 {0}", { 0: params.packageName });
   }
   if (action === "global_action") {
     const nav = String(params.action ?? "");
-    if (nav === "back") return "返回";
-    if (nav === "home") return "主页";
-    if (nav === "recents") return "多任务";
-    return `系统键 ${nav}`;
+    if (nav === "back") return t("返回");
+    if (nav === "home") return t("主页");
+    if (nav === "recents") return t("多任务");
+    return t("系统键 {0}", { 0: nav });
   }
   if (action === "wake_screen") {
-    return "唤醒屏幕";
+    return t("唤醒屏幕");
   }
   if (action === "wait") {
-    return `等待 ${params.ms}ms`;
+    return t("等待 {0}ms", { 0: params.ms });
   }
   if (action === "done") {
-    return `完成：${params.summary ?? ""}`;
+    return t("完成：{0}", { 0: params.summary ?? "" });
   }
   if (action === "failed") {
-    return `失败：${params.reason ?? ""}`;
+    return t("失败：{0}", { 0: params.reason ?? "" });
   }
   return action;
 }

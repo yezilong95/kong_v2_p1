@@ -1,4 +1,6 @@
 import type { Device } from "../types";
+import { useI18n, t } from "../i18n";
+
 
 interface DeviceListProps {
   devices: Device[];
@@ -13,8 +15,9 @@ export function DeviceList({
   selectedDeviceId,
   onSelect,
 }: DeviceListProps) {
+  useI18n();
   if (devices.length === 0) {
-    return <div className="empty-state">暂无设备，请先启动 Android 客户端。</div>;
+    return <div className="empty-state">{t("暂无设备，请先启动 Android 客户端。")}</div>;
   }
 
   return (
@@ -31,7 +34,7 @@ export function DeviceList({
               <div className="device-item-title">
                 <strong>{device.model ?? "Unknown Device"}</strong>
                 <span className={`device-status ${online ? "online" : "offline"}`}>
-                  {online ? "在线" : "离线"}
+                  {online ? t("在线") : t("离线")}
                 </span>
               </div>
               <div className="device-meta">{device.deviceId}</div>

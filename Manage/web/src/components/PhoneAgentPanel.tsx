@@ -15,6 +15,8 @@ import {
   resolveNodeCenter,
   type CompactUiNode,
 } from "../utils/phone-agent";
+import { useI18n, t } from "../i18n";
+
 
 const { TextArea } = Input;
 const MAX_STEPS = 40;
@@ -53,16 +55,16 @@ function sleep(ms: number) {
 
 function mapAiError(message: string): string {
   if (message === "ai_disabled") {
-    return "AI 未启用，请先在「AI 配置」中开启";
+    return t("AI 未启用，请先在「AI 配置」中开启");
   }
   if (message === "ai_api_key_missing") {
-    return "未配置 API Key";
+    return t("未配置 API Key");
   }
     if (message === "ui_nodes_empty") {
-      return "UI 树为空，请先开启屏幕助手并等待节点";
+      return t("UI 树为空，请先开启屏幕助手并等待节点");
   }
   if (message === "goal_required") {
-    return "请输入目标";
+    return t("请输入目标");
   }
   return message;
 }
@@ -91,6 +93,7 @@ export function PhoneAgentPanel({
   screenHeight,
   useAdbInput = false,
 }: PhoneAgentPanelProps) {
+  useI18n();
   const [goal, setGoal] = useState("");
   const [aiReady, setAiReady] = useState<boolean | null>(null);
   const [planBusy, setPlanBusy] = useState(false);
@@ -177,13 +180,13 @@ export function PhoneAgentPanel({
     if (action === "wait") {
       const ms = Number(params.ms ?? 1000);
       await sleep(Math.min(3000, Math.max(300, ms)));
-      return { ok: true, message: `已等待 ${ms}ms` };
+      return { ok: true, message: t("已等待 {0}ms", { 0: ms }) };
     }
 
     if (action === "done" || action === "failed") {
       return {
         ok: action === "done",
-        message: action === "done" ? String(params.summary ?? "完成") : String(params.reason ?? "失败"),
+        message: action === "done" ? String(params.summary ?? t("完成")) : String(params.reason ?? t("失败")),
       };
     }
 
@@ -194,7 +197,7 @@ export function PhoneAgentPanel({
       if (nodeIndex > 0) {
         const node = compactNodes.find((item) => item.i === nodeIndex);
         if (!node) {
-          throw new Error(`节点 #${nodeIndex} 不存在`);
+          throw new Error(t("节点 #{0} 不存在", { 0: nodeIndex }));
         }
         const center = resolveNodeCenter(node);
         x = center.x;
@@ -213,7 +216,7 @@ export function PhoneAgentPanel({
           throw new Error(result.errorMessage ?? "click_failed");
         }
       }
-      return { ok: true, message: `点击 (${x}, ${y})` };
+      return { ok: true, message: t("点击 ({0}, {1})", { 0: x, 1: y }) };
     }
 
     if (action === "swipe") {
@@ -262,7 +265,7 @@ export function PhoneAgentPanel({
           throw new Error(result.errorMessage ?? "input_text_failed");
         }
       }
-      return { ok: true, message: "已输入文本" };
+      return { ok: true, message: t("已输入文本") };
     }
 
     if (action === "open_app") {
@@ -275,7 +278,7 @@ export function PhoneAgentPanel({
       if (result.status !== "success") {
         throw new Error(result.errorMessage ?? "open_app_failed");
       }
-      return { ok: true, message: `已打开 ${params.packageName}` };
+      return { ok: true, message: t("已打开 {0}", { 0: params.packageName }) };
     }
 
     if (action === "global_action") {
@@ -310,7 +313,7 @@ export function PhoneAgentPanel({
       if (result.status !== "success") {
         throw new Error(result.errorMessage ?? "wake_screen_failed");
       }
-      return { ok: true, message: "已唤醒屏幕" };
+      return { ok: true, message: t("已唤醒屏幕") };
     }
 
     throw new Error(`unsupported_action:${action}`);
@@ -318,11 +321,11 @@ export function PhoneAgentPanel({
 
   async function handlePlanStep() {
     if (!goal.trim()) {
-      showAlert("warning", "请输入目标");
+      showAlert("warning", t("请输入目标"));
       return;
     }
     if (!isOnline) {
-      showAlert("warning", "设备离线");
+      showAlert("warning", t("设备离线"));
       return;
     }
 
@@ -340,7 +343,7 @@ export function PhoneAgentPanel({
       }
 
       setPending({ plan, compactNodes });
-      showAlert("info", `已规划第 ${stepCount + 1} 步，请确认后执行`);
+      showAlert("info", t("已规划第 {0} 步，请确认后执行", { 0: stepCount + 1 }));
     } catch (error) {
       const message = error instanceof Error ? error.message : "phone_agent_plan_failed";
       showAlert("error", mapAiError(message));
@@ -374,7 +377,7 @@ export function PhoneAgentPanel({
         return;
       }
 
-      showAlert("success", `第 ${nextStep.stepIndex} 步已执行：${outcome.message}`);
+      showAlert("success", t("第 {0} 步已执行：{1}", { 0: nextStep.stepIndex, 1: outcome.message }));
     } catch (error) {
       const message = error instanceof Error ? error.message : "execute_failed";
       showAlert("error", message);
@@ -385,16 +388,16 @@ export function PhoneAgentPanel({
 
   function handleStopAuto() {
     stopRequestedRef.current = true;
-    showAlert("warning", "正在停止自动执行…");
+    showAlert("warning", t("正在停止自动执行…"));
   }
 
   async function handleAutoRun() {
     if (!goal.trim()) {
-      showAlert("warning", "请输入目标");
+      showAlert("warning", t("请输入目标"));
       return;
     }
     if (!isOnline) {
-      showAlert("warning", "设备离线");
+      showAlert("warning", t("设备离线"));
       return;
     }
 
@@ -409,7 +412,7 @@ export function PhoneAgentPanel({
     try {
       while (!stopRequestedRef.current && currentHistory.length < MAX_STEPS) {
         const stepIndex = currentHistory.length + 1;
-        showAlert("info", `自动执行：规划第 ${stepIndex} 步…`);
+        showAlert("info", t("自动执行：规划第 {0} 步…", { 0: stepIndex }));
 
         const { plan, compactNodes } = await planNextStep(currentHistory);
 
@@ -419,13 +422,13 @@ export function PhoneAgentPanel({
           setFinished(true);
           showAlert(
             plan.action === "done" ? "success" : "warning",
-            `自动结束：${formatPhoneAgentAction(plan)}`,
+            t("自动结束：{0}", { 0: formatPhoneAgentAction(plan) }),
           );
           return;
         }
 
         setPending({ plan, compactNodes });
-        showAlert("info", `自动执行第 ${stepIndex} 步：${formatPhoneAgentAction(plan)}`);
+        showAlert("info", t("自动执行第 {0} 步：{1}", { 0: stepIndex, 1: formatPhoneAgentAction(plan) }));
 
         if (stopRequestedRef.current) {
           break;
@@ -446,13 +449,13 @@ export function PhoneAgentPanel({
         setPending(null);
 
         if (stopRequestedRef.current) {
-          showAlert("warning", `已停止，已完成 ${currentHistory.length} 步`);
+          showAlert("warning", t("已停止，已完成 {0} 步", { 0: currentHistory.length }));
           return;
         }
 
         if (currentHistory.length >= MAX_STEPS) {
           setFinished(true);
-          showAlert("warning", `已达最大步数 ${MAX_STEPS}，自动停止`);
+          showAlert("warning", t("已达最大步数 {0}，自动停止", { 0: MAX_STEPS }));
           return;
         }
 
@@ -460,7 +463,7 @@ export function PhoneAgentPanel({
       }
 
       if (stopRequestedRef.current) {
-        showAlert("warning", `已停止，已完成 ${currentHistory.length} 步`);
+        showAlert("warning", t("已停止，已完成 {0} 步", { 0: currentHistory.length }));
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : "auto_run_failed";
@@ -495,18 +498,18 @@ export function PhoneAgentPanel({
         <Alert
           type="warning"
           showIcon
-          message="AI 未就绪"
-          description="请先在左侧菜单「AI 配置」中启用并填写 API Key"
+          message={t("AI 未就绪")}
+          description={t("请先在左侧菜单「AI 配置」中启用并填写 API Key")}
           style={{ marginBottom: 8 }}
         />
       ) : null}
 
       <label className="phone-agent-field">
-        <span className="phone-agent-label">目标（自然语言）</span>
+        <span className="phone-agent-label">{t("目标（自然语言）")}</span>
         <TextArea
           value={goal}
           onChange={(event) => setGoal(event.target.value)}
-          placeholder="例如：打开设置并进入 WLAN；或写多步：先回桌面，再打开设置"
+          placeholder={t("例如：打开设置并进入 WLAN；或写多步：先回桌面，再打开设置")}
           rows={3}
           disabled={busy || finished}
           maxLength={500}
@@ -514,11 +517,11 @@ export function PhoneAgentPanel({
       </label>
 
       <label className="phone-agent-field phone-agent-field--inline">
-        <span className="phone-agent-label">步间等待</span>
+        <span className="phone-agent-label">{t("步间等待")}</span>
         <Select
           value={stepIntervalMs}
           disabled={busy}
-          options={STEP_INTERVAL_OPTIONS}
+          options={STEP_INTERVAL_OPTIONS.map((item) => ({ ...item, label: t(item.label) }))}
           onChange={setStepIntervalMs}
           style={{ width: "100%" }}
         />
@@ -527,21 +530,21 @@ export function PhoneAgentPanel({
       <div className="phone-agent-actions">
         {autoRunning ? (
           <Button danger type="primary" onClick={handleStopAuto}>
-            停止自动
+            {t("停止自动")}
           </Button>
         ) : (
           <Button type="primary" disabled={!canAutoRun} onClick={() => void handleAutoRun()}>
-            自动执行
+            {t("自动执行")}
           </Button>
         )}
         <Button disabled={!canPlan || !goal.trim()} loading={planBusy} onClick={() => void handlePlanStep()}>
-          规划下一步
+          {t("规划下一步")}
         </Button>
         <Button disabled={!pending || busy} loading={executeBusy} onClick={() => void handleExecutePending()}>
-          执行本步
+          {t("执行本步")}
         </Button>
         <Button disabled={busy} onClick={handleReset}>
-          重置
+          {t("重置")}
         </Button>
       </div>
 
@@ -551,22 +554,22 @@ export function PhoneAgentPanel({
 
       {pending ? (
         <div className="phone-agent-pending">
-          <div className="phone-agent-pending-title">{autoRunning ? "执行中" : "待执行"}</div>
+          <div className="phone-agent-pending-title">{autoRunning ? t("执行中") : t("待执行")}</div>
           <div className="phone-agent-pending-action">
             <Tag color="blue">{pending.plan.action}</Tag>
             {pendingLabel}
           </div>
           <div className="phone-agent-pending-reason">{pending.plan.reason}</div>
           <div className="phone-agent-pending-meta">
-            置信度 {(pending.plan.confidence * 100).toFixed(0)}%
+            {t("置信度")} {(pending.plan.confidence * 100).toFixed(0)}%
           </div>
         </div>
       ) : null}
 
       <div className="phone-agent-log">
-        <div className="phone-agent-log-title">步骤日志 ({stepCount})</div>
+        <div className="phone-agent-log-title">{t("步骤日志 (")}{stepCount})</div>
         {history.length === 0 ? (
-          <div className="phone-agent-log-empty">输入目标后点「自动执行」，或用手动「规划/执行」</div>
+          <div className="phone-agent-log-empty">{t("输入目标后点「自动执行」，或用手动「规划/执行」")}</div>
         ) : (
           <ul className="phone-agent-log-list">
             {history.map((item) => (
@@ -585,8 +588,7 @@ export function PhoneAgentPanel({
       </div>
 
       <div className="phone-agent-hint">
-        L2：自动执行会循环「规划→执行」直至完成或停止（最多 {MAX_STEPS} 步）。L1：仍可单步确认。
-        屏 {screenWidth}×{screenHeight}
+        {t("L2：自动执行会循环「规划→执行」直至完成或停止（最多")} {MAX_STEPS} {t("步）。L1：仍可单步确认。\n        屏")} {screenWidth}×{screenHeight}
         {snapshot?.packageName ? ` · ${snapshot.packageName}` : ""}
       </div>
     </div>

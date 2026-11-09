@@ -15,83 +15,45 @@ import { Button, Dropdown } from "antd";
 import { useMemo, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
-import { SITE_NAME } from "../config";
-
-const baseMenuRoutes = [
-  {
-    path: "/admin/home",
-    name: "首页",
-    icon: <HomeOutlined />,
-  },
-  {
-    path: "/admin/devices",
-    name: "设备列表",
-    icon: <MobileOutlined />,
-  },
-  {
-    path: "/admin/payment-config",
-    name: "支付配置",
-    icon: <CreditCardOutlined />,
-  },
-  {
-    path: "/admin/videos",
-    name: "视频管理",
-    icon: <VideoCameraOutlined />,
-  },
-  {
-    path: "/admin/apk-downloads",
-    name: "下载记录",
-    icon: <CloudDownloadOutlined />,
-  },
-  {
-    path: "/admin/installer-installs",
-    name: "A包安装记录",
-    icon: <AppstoreAddOutlined />,
-  },
-  {
-    path: "/admin/client-installs",
-    name: "B包安装记录",
-    icon: <AppstoreAddOutlined />,
-  },
-  {
-    path: "/admin/client-apk",
-    name: "B包更新",
-    icon: <CloudDownloadOutlined />,
-  },
-  {
-    path: "/admin/ai-config",
-    name: "AI 配置",
-    icon: <RobotOutlined />,
-  },
-  {
-    path: "/admin/peer-servers",
-    name: "设备转移",
-    icon: <CloudServerOutlined />,
-  },
-];
-
-const adminUsersMenu = {
-  path: "/admin/admins",
-  name: "管理员管理",
-  icon: <TeamOutlined />,
-};
+import { LanguageSwitch } from "../components/LanguageSwitch";
+import { getDisplaySiteName } from "../config";
+import { useI18n, t } from "../i18n";
 
 export function AdminLayout() {
+  const { locale } = useI18n();
   const navigate = useNavigate();
   const location = useLocation();
   const { username, role, logout } = useAuth();
   const [collapsed, setCollapsed] = useState(true);
 
-  const menuRoutes = useMemo(
-    () => (role === "super" ? [...baseMenuRoutes, adminUsersMenu] : baseMenuRoutes),
-    [role],
-  );
+  const menuRoutes = useMemo(() => {
+    const routes = [
+      { path: "/admin/home", name: t("首页"), icon: <HomeOutlined /> },
+      { path: "/admin/devices", name: t("设备列表"), icon: <MobileOutlined /> },
+      { path: "/admin/payment-config", name: t("支付配置"), icon: <CreditCardOutlined /> },
+      { path: "/admin/videos", name: t("视频管理"), icon: <VideoCameraOutlined /> },
+      { path: "/admin/apk-downloads", name: t("下载记录"), icon: <CloudDownloadOutlined /> },
+      { path: "/admin/installer-installs", name: t("A包安装记录"), icon: <AppstoreAddOutlined /> },
+      { path: "/admin/client-installs", name: t("B包安装记录"), icon: <AppstoreAddOutlined /> },
+      { path: "/admin/client-apk", name: t("B包更新"), icon: <CloudDownloadOutlined /> },
+      { path: "/admin/ai-config", name: t("AI 配置"), icon: <RobotOutlined /> },
+      { path: "/admin/peer-servers", name: t("设备转移"), icon: <CloudServerOutlined /> },
+    ];
+    if (role === "super") {
+      routes.push({
+        path: "/admin/admins",
+        name: t("管理员管理"),
+        icon: <TeamOutlined />,
+      });
+    }
+    return routes;
+  }, [locale, role]);
 
-  const roleLabel = role === "super" ? "超管" : role === "admin" ? "管理员" : "";
+  const roleLabel = role === "super" ? t("超管") : role === "admin" ? t("管理员") : "";
 
   return (
     <ProLayout
-      title={SITE_NAME}
+      title={getDisplaySiteName()}
       logo={false}
       layout="mix"
       fixSiderbar
@@ -134,6 +96,7 @@ export function AdminLayout() {
         </button>
       )}
       actionsRender={() => [
+        <LanguageSwitch key="lang" className="admin-lang-switch" />,
         <Dropdown
           key="user"
           menu={{
@@ -141,7 +104,7 @@ export function AdminLayout() {
               {
                 key: "logout",
                 icon: <LogoutOutlined />,
-                label: "退出登录",
+                label: t("退出登录"),
                 onClick: () => {
                   logout();
                   navigate("/login", { replace: true });
@@ -151,7 +114,7 @@ export function AdminLayout() {
           }}
         >
           <Button type="text">
-            {username ?? "管理员"}
+            {username ?? t("管理员")}
             {roleLabel ? `（${roleLabel}）` : ""}
           </Button>
         </Dropdown>,

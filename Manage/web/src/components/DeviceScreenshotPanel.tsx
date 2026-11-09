@@ -2,6 +2,8 @@ import { Button, Modal, message } from "antd";
 import { useState } from "react";
 import { sendCommand } from "../api/client";
 import { remoteDockModalProps } from "../ui/remoteModalDock";
+import { useI18n, t } from "../i18n";
+
 
 interface DeviceScreenshotPanelProps {
   deviceId: string | null;
@@ -11,21 +13,21 @@ interface DeviceScreenshotPanelProps {
 function mapCaptureError(text: string) {
   switch (text) {
     case "screen_capture_unsupported":
-      return "系统版本过低，需要 Android 11+";
+      return t("系统版本过低，需要 Android 11+");
     case "accessibility_service_not_connected":
-      return "无障碍未连接";
+      return t("无障碍未连接");
     case "gesture_priority":
-      return "手势进行中，请稍后重试";
+      return t("手势进行中，请稍后重试");
     case "capture_in_progress":
-      return "屏幕正忙，请稍后重试";
+      return t("屏幕正忙，请稍后重试");
     case "device_offline":
-      return "设备离线";
+      return t("设备离线");
     case "wait_timeout":
-      return "截图超时，请重试";
+      return t("截图超时，请重试");
     case "empty_screenshot":
-      return "未收到截图数据";
+      return t("未收到截图数据");
     default:
-      return text || "截图失败";
+      return text || t("截图失败");
   }
 }
 
@@ -40,6 +42,7 @@ function downloadJpeg(base64: string, filename: string) {
 }
 
 export function DeviceScreenshotPanel({ deviceId, isOnline }: DeviceScreenshotPanelProps) {
+  useI18n();
   const [busy, setBusy] = useState(false);
   const [open, setOpen] = useState(false);
   const [previewSrc, setPreviewSrc] = useState<string | null>(null);
@@ -94,19 +97,19 @@ export function DeviceScreenshotPanel({ deviceId, isOnline }: DeviceScreenshotPa
 
   return (
     <section className="screen-ops-section">
-      <div className="screen-ops-section-title">截图</div>
+      <div className="screen-ops-section-title">{t("截图")}</div>
       <button
         type="button"
         className="screen-ops-translate-btn"
         disabled={!deviceId || !isOnline || busy}
         onClick={() => void handleCapture()}
       >
-        {busy ? "截图中…" : "截取当前屏幕"}
+        {busy ? t("截图中…") : t("截取当前屏幕")}
       </button>
-      <p className="screen-ops-hint">截图仅回传到后台，不会写入设备相册。</p>
+      <p className="screen-ops-hint">{t("截图仅回传到后台，不会写入设备相册。")}</p>
       {errorText ? <p className="screen-ops-error">{errorText}</p> : null}
       <Modal
-        title="截图预览"
+        title={t("截图预览")}
         open={open}
         onCancel={handleClose}
         destroyOnClose
@@ -114,10 +117,10 @@ export function DeviceScreenshotPanel({ deviceId, isOnline }: DeviceScreenshotPa
         {...remoteDockModalProps}
         footer={[
           <Button key="close" onClick={handleClose}>
-            关闭
+            {t("关闭")}
           </Button>,
           <Button key="download" type="primary" onClick={handleDownload}>
-            下载
+            {t("下载")}
           </Button>,
         ]}
       >

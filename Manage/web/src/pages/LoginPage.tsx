@@ -3,8 +3,11 @@ import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { loginAdmin } from "../api/client";
 import { useAuth } from "../auth/AuthProvider";
 import { setAdminToken } from "../auth/session";
-import { SITE_NAME } from "../config";
+import { LanguageSwitch } from "../components/LanguageSwitch";
+import { getDisplaySiteName } from "../config";
 import "../styles/login.css";
+import { useI18n, t } from "../i18n";
+
 
 const REMEMBER_KEY = "admin_login_remember_username";
 const SCAN_BARS = Array.from({ length: 16 }, (_, i) => i);
@@ -19,6 +22,7 @@ function formatClock(date: Date) {
 }
 
 export function LoginPage() {
+  useI18n();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { authReady, isAuthed, refreshSession } = useAuth();
@@ -81,15 +85,15 @@ export function LoginPage() {
     } catch (error) {
       const message = error instanceof Error ? error.message : "login_failed";
       if (message === "invalid_credentials") {
-        setErrorText("用户名或密码错误");
+        setErrorText(t("用户名或密码错误"));
       } else if (message === "login_blacklisted") {
-        setErrorText("账号被锁定");
+        setErrorText(t("账号被锁定"));
       } else if (message === "account_expired") {
-        setErrorText("账号已到期，请联系超级管理员续费");
+        setErrorText(t("账号已到期，请联系超级管理员续费"));
       } else if (message === "account_locked") {
-        setErrorText("账号已锁定，请联系超级管理员");
+        setErrorText(t("账号已锁定，请联系超级管理员"));
       } else if (message === "kicked") {
-        setErrorText("账号已在其他设备登录");
+        setErrorText(t("账号已在其他设备登录"));
       } else {
         setErrorText(message);
       }
@@ -99,11 +103,14 @@ export function LoginPage() {
   }
 
   if (!authReady) {
-    return <div className="app-loading">加载中…</div>;
+    return <div className="app-loading">{t("加载中…")}</div>;
   }
 
   return (
     <div className="login-page">
+      <div className="login-lang">
+        <LanguageSwitch />
+      </div>
       <div className="login-hex" aria-hidden="true" />
 
       <div className="login-page-corners" aria-hidden="true" />
@@ -111,9 +118,9 @@ export function LoginPage() {
       <aside className="login-hud login-hud--tl" aria-hidden="true">
         <div className="login-radar" />
         <div className="login-hud-meta">
-          <span>系统控制</span>
-          <span>网络模式</span>
-          <span>安全链路</span>
+          <span>{t("系统控制")}</span>
+          <span>{t("网络模式")}</span>
+          <span>{t("安全链路")}</span>
           <span className="login-hud-coord">X: -027 Y: +014</span>
         </div>
       </aside>
@@ -125,7 +132,7 @@ export function LoginPage() {
 
       <aside className="login-hud login-hud--bl" aria-hidden="true">
         <div className="login-meter">
-          <div className="login-meter-title">扫描模式</div>
+          <div className="login-meter-title">{t("扫描模式")}</div>
           <div className="login-bars login-bars--scan">
             {SCAN_BARS.map((i) => (
               <i key={i} style={{ animationDelay: `${(i % 8) * 0.09}s` }} />
@@ -138,7 +145,7 @@ export function LoginPage() {
 
       <aside className="login-hud login-hud--br" aria-hidden="true">
         <div className="login-meter login-meter--rtl">
-          <div className="login-meter-title">信号强度</div>
+          <div className="login-meter-title">{t("信号强度")}</div>
           <div className="login-bars login-bars--signal">
             {SIGNAL_BARS.map((i) => (
               <i key={i} style={{ animationDelay: `${(i % 7) * 0.11}s` }} />
@@ -163,10 +170,10 @@ export function LoginPage() {
             </svg>
           </div>
           <div className="login-title-row">
-            <h1>{SITE_NAME}</h1>
+            <h1>{getDisplaySiteName()}</h1>
             <span className="login-ver">V1.0</span>
           </div>
-          <p className="login-subtitle">远程控制系统</p>
+          <p className="login-subtitle">{t("远程控制系统")}</p>
           <p className="login-secure">
             <span className="login-secure-dot" />
             Secure Connection
@@ -174,7 +181,7 @@ export function LoginPage() {
         </div>
 
         <label className="login-field">
-          <span>用户名</span>
+          <span>{t("用户名")}</span>
           <div className="login-input-wrap">
             <span className="login-input-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -186,14 +193,14 @@ export function LoginPage() {
               autoComplete="username"
               disabled={loading}
               onChange={(event) => setUsername(event.target.value)}
-              placeholder="请输入用户名"
+              placeholder={t("请输入用户名")}
               value={username}
             />
           </div>
         </label>
 
         <label className="login-field">
-          <span>登录密码</span>
+          <span>{t("登录密码")}</span>
           <div className="login-input-wrap">
             <span className="login-input-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -210,7 +217,7 @@ export function LoginPage() {
               value={password}
             />
             <button
-              aria-label={showPassword ? "隐藏密码" : "显示密码"}
+              aria-label={showPassword ? t("隐藏密码") : t("显示密码")}
               className="login-eye"
               disabled={loading}
               onClick={() => setShowPassword((v) => !v)}
@@ -243,7 +250,7 @@ export function LoginPage() {
               onChange={(event) => setRememberId(event.target.checked)}
               type="checkbox"
             />
-            <span>记住 ID</span>
+            <span>{t("记住 ID")}</span>
           </label>
           <label className="login-check">
             <input
@@ -252,25 +259,25 @@ export function LoginPage() {
               onChange={(event) => setAutoConnect(event.target.checked)}
               type="checkbox"
             />
-            <span>自动连接</span>
+            <span>{t("自动连接")}</span>
           </label>
         </div>
 
         {errorText ? <div className="login-error">{errorText}</div> : null}
 
         <button className="login-submit" disabled={loading || !password.trim()} type="submit">
-          {loading ? "连接中…" : "初始化连接"}
+          {loading ? t("连接中…") : t("初始化连接")}
         </button>
 
-        <p className="login-help">没有账号？联系管理员获取访问权限</p>
+        <p className="login-help">{t("没有账号？联系管理员获取访问权限")}</p>
 
         <footer className="login-status">
           <span className="login-status-online">
             <i />
-            系统在线
+            {t("系统在线")}
           </span>
           <span className="login-status-build">{buildId}</span>
-          <span className="login-status-warn">禁止未经授权访问</span>
+          <span className="login-status-warn">{t("禁止未经授权访问")}</span>
         </footer>
       </form>
     </div>

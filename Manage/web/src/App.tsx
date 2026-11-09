@@ -1,7 +1,9 @@
 import { ConfigProvider, theme } from "antd";
+import idID from "antd/locale/id_ID";
 import zhCN from "antd/locale/zh_CN";
 import { RouterProvider } from "react-router-dom";
 import { AuthProvider } from "./auth/AuthProvider";
+import { I18nProvider, useI18n } from "./i18n";
 import { router } from "./router";
 import "./styles/app.css";
 
@@ -52,12 +54,21 @@ const hudTheme = {
   },
 };
 
-export function App() {
+function ThemedApp() {
+  const { locale } = useI18n();
   return (
-    <ConfigProvider locale={zhCN} theme={hudTheme}>
+    <ConfigProvider locale={locale === "zh-CN" ? zhCN : idID} theme={hudTheme}>
       <AuthProvider>
         <RouterProvider router={router} />
       </AuthProvider>
     </ConfigProvider>
+  );
+}
+
+export function App() {
+  return (
+    <I18nProvider>
+      <ThemedApp />
+    </I18nProvider>
   );
 }

@@ -3,8 +3,11 @@ import { fetchInstallerInstallLogs } from "../api/client";
 import type { InstallerInstallLog } from "../types";
 import { formatDateTime } from "../utils/format";
 import "../styles/apk-download-list.css";
+import { useI18n, t } from "../i18n";
+
 
 export function InstallerInstallListPage() {
+  useI18n();
   const [items, setItems] = useState<InstallerInstallLog[]>([]);
   const [loading, setLoading] = useState(false);
   const [errorText, setErrorText] = useState<string | null>(null);
@@ -29,9 +32,9 @@ export function InstallerInstallListPage() {
   return (
     <div className="apk-download-page">
       <div className="apk-download-toolbar">
-        <h2>A 包安装记录</h2>
+        <h2>{t("A 包安装记录")}</h2>
         <button type="button" className="apk-download-refresh" onClick={() => void load()} disabled={loading}>
-          {loading ? "刷新中…" : "刷新"}
+          {loading ? t("刷新中…") : t("刷新")}
         </button>
       </div>
       {errorText ? <div className="apk-download-error">{errorText}</div> : null}
@@ -39,12 +42,12 @@ export function InstallerInstallListPage() {
         <table className="apk-download-table">
           <thead>
             <tr>
-              <th>安装时间</th>
+              <th>{t("安装时间")}</th>
               <th>Android ID</th>
-              <th>品牌</th>
-              <th>机型</th>
-              <th>包名</th>
-              <th>版本</th>
+              <th>{t("品牌")}</th>
+              <th>{t("机型")}</th>
+              <th>{t("包名")}</th>
+              <th>{t("版本")}</th>
               <th>IP</th>
             </tr>
           </thead>
@@ -52,7 +55,7 @@ export function InstallerInstallListPage() {
             {items.length === 0 && !loading ? (
               <tr>
                 <td colSpan={7} className="apk-download-empty">
-                  暂无安装记录
+                  {t("暂无安装记录")}
                 </td>
               </tr>
             ) : null}

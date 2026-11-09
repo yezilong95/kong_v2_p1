@@ -1,3 +1,4 @@
+import { t } from "../i18n";
 export type SavedLockType = "pin" | "password" | "pattern";
 
 export interface SavedPassword {
@@ -114,12 +115,12 @@ export function isPatternCells(value: string): boolean {
 export function lockTypeLabel(lockType: SavedLockType, value: string): string {
   if (lockType === "pattern") {
     const count = value.split(/[-,]/).filter(Boolean).length;
-    return `图形·${count}点`;
+    return t("图形·{0}点", { 0: count });
   }
   if (lockType === "password") {
-    return `混合密码·${value.length}位`;
+    return t("混合密码·{0}位", { 0: value.length });
   }
-  return `${value.length}位 PIN`;
+  return t("{0}位 PIN", { 0: value.length });
 }
 
 export type AddPasswordOutcome = "added" | "already_exists";
@@ -260,7 +261,7 @@ export function syncAutoCapturedPassword(
   const { store, outcome, itemId } = addPasswordToHistory(deviceId, {
     id: eventId,
     value: pin,
-    label: `自动采集·${lockTypeLabel(lockType, pin)}`,
+    label: t("自动采集·{0}", { 0: lockTypeLabel(lockType, pin) }),
     lockType,
     createdAt: capturedAtMs,
   });

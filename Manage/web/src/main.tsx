@@ -1,9 +1,9 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
-import { SITE_NAME } from "./config";
+import { getDisplaySiteName } from "./config";
 
-document.title = SITE_NAME;
+document.title = getDisplaySiteName();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

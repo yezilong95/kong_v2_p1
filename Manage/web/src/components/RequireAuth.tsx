@@ -1,12 +1,15 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
+import { useI18n, t } from "../i18n";
+
 
 export function RequireAuth({ children }: { children: React.ReactNode }) {
+  useI18n();
   const { authReady, isAuthed } = useAuth();
   const location = useLocation();
 
   if (!authReady) {
-    return <div className="app-loading">加载中…</div>;
+    return <div className="app-loading">{t("加载中…")}</div>;
   }
 
   if (!isAuthed) {

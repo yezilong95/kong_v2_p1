@@ -1,5 +1,7 @@
 import { useCallback, useRef, useState } from "react";
 import { sendAdbInput, sendCommand } from "../api/client";
+import { useI18n, t } from "../i18n";
+
 
 interface AssistantVirtualKeyboardProps {
   deviceId: string;
@@ -105,6 +107,7 @@ export function AssistantVirtualKeyboard({
   isOnline,
   useAdbInput = false,
 }: AssistantVirtualKeyboardProps) {
+  useI18n();
   const [open, setOpen] = useState(false);
   const [shiftOn, setShiftOn] = useState(false);
   const [symbolMode, setSymbolMode] = useState(false);
@@ -242,12 +245,12 @@ export function AssistantVirtualKeyboard({
           disabled={!isOnline}
           onClick={handleToggle}
         >
-          {open ? "收起" : "模拟键盘"}
+          {open ? t("收起") : t("模拟键盘")}
         </button>
         {open ? (
           <>
             <span className="assistant-keyboard-draft" title={draft}>
-              {draft || "（空）"}
+              {draft || t("（空）")}
             </span>
             <button
               type="button"
@@ -255,7 +258,7 @@ export function AssistantVirtualKeyboard({
               disabled={!isOnline}
               onClick={() => setDraft("")}
             >
-              清空
+              {t("清空")}
             </button>
           </>
         ) : null}

@@ -8,7 +8,6 @@ import type {
   KeyguardPinRecord,
   LogEntry,
 } from "../types";
-
 interface UseAdminWebSocketOptions {
   onSnapshot?: (devices: Device[], onlineDeviceIds: string[]) => void;
   onLog?: (entry: LogEntry) => void;

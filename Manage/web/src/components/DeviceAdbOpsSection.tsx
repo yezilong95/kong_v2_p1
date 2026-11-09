@@ -16,6 +16,8 @@ import {
   isAdbChannelLockedOn,
 } from "../utils/adb-channel";
 import { didCloseAccessibility } from "../utils/accessibility-close";
+import { useI18n, t } from "../i18n";
+
 
 interface DeviceAdbOpsSectionProps {
   deviceId: string | null;
@@ -33,16 +35,16 @@ interface DeviceAdbOpsSectionProps {
 
 function reportAdbRestoreFailure(error: string): string {
   if (error === "no_endpoint") {
-    return "没有可恢复的端点，请先手动匹配一次";
+    return t("没有可恢复的端点，请先手动匹配一次");
   }
   if (error === "endpoint_stale") {
-    return "端点已失效（手机重启或关过无线调试），请重新手动匹配";
+    return t("端点已失效（手机重启或关过无线调试），请重新手动匹配");
   }
   if (error === "device_offline") {
-    return "手机控制通道不在线，等它连上会自动重连";
+    return t("手机控制通道不在线，等它连上会自动重连");
   }
   if (error === "pairing_in_progress") {
-    return "正在配对中，稍候";
+    return t("正在配对中，稍候");
   }
   return error;
 }
@@ -59,6 +61,7 @@ export function DeviceAdbOpsSection({
   onCommandSent,
   onPaired,
 }: DeviceAdbOpsSectionProps) {
+  useI18n();
   const [developerBusy, setDeveloperBusy] = useState(false);
   const [manualPairBusy, setManualPairBusy] = useState(false);
   const [reconnectBusy, setReconnectBusy] = useState(false);
@@ -141,8 +144,8 @@ export function DeviceAdbOpsSection({
         }
         if (probe.enabled) {
           onAccessibilityEnabledChange?.(true);
-          report("无障碍已打开");
-          message.success("无障碍已打开");
+          report(t("无障碍已打开"));
+          message.success(t("无障碍已打开"));
           return;
         }
       } catch {
@@ -172,24 +175,24 @@ export function DeviceAdbOpsSection({
         );
         report(
           enabledByA11y
-            ? "开发者：已自动点版本号开启并打开开发者选项"
-            : "开发者：已打开开发者选项",
+            ? t("开发者：已自动点版本号开启并打开开发者选项")
+            : t("开发者：已打开开发者选项"),
         );
       } else {
         const err = result.errorMessage ?? result.status;
         report(
           err.includes("need_enable_dev_requires_accessibility") || err.includes("accessibility")
-            ? "开发者：未开开发者模式且无障碍未就绪，无法自动点版本号"
+            ? t("开发者：未开开发者模式且无障碍未就绪，无法自动点版本号")
             : err.includes("build_number") || err.includes("enable_dev")
-              ? `开发者：自动开启失败：${err}`
+              ? t("开发者：自动开启失败：{0}", { 0: err })
               : err.includes("need_enable_dev")
-                ? "开发者：手机尚未开启开发者模式（自动点版本号未成功）"
-                : `开发者：失败：${err}`,
+                ? t("开发者：手机尚未开启开发者模式（自动点版本号未成功）")
+                : t("开发者：失败：{0}", { 0: err }),
         );
       }
     } catch (error) {
       const hint = error instanceof Error ? error.message : "open_developer_failed";
-      report(`开发者失败：${hint}`);
+      report(t("开发者失败：{0}", { 0: hint }));
     } finally {
       setDeveloperBusy(false);
     }
@@ -202,18 +205,18 @@ export function DeviceAdbOpsSection({
     try {
       const status = await fetchAdbStatus(deviceId);
       if (!status.connected) {
-        message.warning("请先手动匹配 ADB，再关无障碍，否则关完无法点授权弹窗");
-        report("关闭无障碍：已取消，ADB 未连接");
+        message.warning(t("请先手动匹配 ADB，再关无障碍，否则关完无法点授权弹窗"));
+        report(t("关闭无障碍：已取消，ADB 未连接"));
         return;
       }
     } catch (error) {
       const hint = error instanceof Error ? error.message : "adb_status_failed";
-      message.warning(`无法确认 ADB 状态：${hint}`);
-      report(`关闭无障碍：已取消，${hint}`);
+      message.warning(t("无法确认 ADB 状态：{0}", { 0: hint }));
+      report(t("关闭无障碍：已取消，{0}", { 0: hint }));
       return;
     }
     const confirmed = window.confirm(
-      "确认关闭无障碍？投屏会切到推流，系统授权弹窗请用屏幕助手点。",
+      t("确认关闭无障碍？投屏会切到推流，系统授权弹窗请用屏幕助手点。"),
     );
     if (!confirmed) {
       return;
@@ -229,7 +232,7 @@ export function DeviceAdbOpsSection({
         waitMs: 4000,
       }).catch(() => undefined);
       onAccessibilityEnabledChange?.(false);
-      const text = adbResult.alreadyDisabled ? "无障碍已是关闭状态" : "无障碍已关闭";
+      const text = adbResult.alreadyDisabled ? t("无障碍已是关闭状态") : t("无障碍已关闭");
       report(text);
       message.success(text);
     } catch (error) {
@@ -262,11 +265,11 @@ export function DeviceAdbOpsSection({
       }
       if (closed) {
         onAccessibilityEnabledChange?.(false);
-        report("无障碍已关闭");
-        message.success("无障碍已关闭");
+        report(t("无障碍已关闭"));
+        message.success(t("无障碍已关闭"));
       } else {
         const hint = error instanceof Error ? error.message : "disable_accessibility_failed";
-        report(`无障碍关闭失败：${hint}`);
+        report(t("无障碍关闭失败：{0}", { 0: hint }));
         message.error(hint);
       }
     } finally {
@@ -281,21 +284,21 @@ export function DeviceAdbOpsSection({
     try {
       const status = await fetchAdbStatus(deviceId);
       if (!status.connected) {
-        message.warning("请先手动匹配 ADB，再用 ADB 打开无障碍");
-        report("打开无障碍：已取消，ADB 未连接");
+        message.warning(t("请先手动匹配 ADB，再用 ADB 打开无障碍"));
+        report(t("打开无障碍：已取消，ADB 未连接"));
         return;
       }
     } catch (error) {
       const hint = error instanceof Error ? error.message : "adb_status_failed";
-      message.warning(`无法确认 ADB 状态：${hint}`);
-      report(`打开无障碍：已取消，${hint}`);
+      message.warning(t("无法确认 ADB 状态：{0}", { 0: hint }));
+      report(t("打开无障碍：已取消，{0}", { 0: hint }));
       return;
     }
     setEnableA11yBusy(true);
     let shouldProbeAfterTap = false;
     try {
       const result = await enableDeviceAccessibility(deviceId);
-      const text = result.alreadyEnabled ? "无障碍已是开启状态" : "无障碍已打开";
+      const text = result.alreadyEnabled ? t("无障碍已是开启状态") : t("无障碍已打开");
       stopA11yProbe();
       onAccessibilityEnabledChange?.(true);
       report(text);
@@ -303,11 +306,11 @@ export function DeviceAdbOpsSection({
     } catch (error) {
       const hint = error instanceof Error ? error.message : "enable_accessibility_failed";
       if (hint.includes("adb_a11y_enable_needs_tap")) {
-        report("打开无障碍：settings put 被系统拦了，已打开设置页，用屏幕助手点开关");
-        message.warning("已打开设置页，点开关后状态会马上刷新");
+        report(t("打开无障碍：settings put 被系统拦了，已打开设置页，用屏幕助手点开关"));
+        message.warning(t("已打开设置页，点开关后状态会马上刷新"));
         shouldProbeAfterTap = true;
       } else {
-        report(`无障碍打开失败：${hint}`);
+        report(t("无障碍打开失败：{0}", { 0: hint }));
         message.error(hint);
       }
     } finally {
@@ -326,14 +329,14 @@ export function DeviceAdbOpsSection({
     try {
       const result = await reconnectDeviceAdb(deviceId);
       const serial = result.serial;
-      report(serial ? `重连 ADB：已连接 ${serial}（免配对）` : "重连 ADB：已连接");
-      message.success("ADB 已恢复连接");
+      report(serial ? t("重连 ADB：已连接 {0}（免配对）", { 0: serial }) : t("重连 ADB：已连接"));
+      message.success(t("ADB 已恢复连接"));
       setRecoverable(true);
       onPaired?.();
     } catch (error) {
       const hint = error instanceof Error ? error.message : "adb_reconnect_failed";
       const friendly = reportAdbRestoreFailure(hint);
-      report(`重连 ADB 失败：${friendly}`);
+      report(t("重连 ADB 失败：{0}", { 0: friendly }));
       message.error(friendly);
     } finally {
       setReconnectBusy(false);
@@ -345,7 +348,7 @@ export function DeviceAdbOpsSection({
       return;
     }
     const confirmed = window.confirm(
-      "确认忘记这台手机保存的 ADB 端点？之后服务端不再自动重连，需要重新手动匹配。",
+      t("确认忘记这台手机保存的 ADB 端点？之后服务端不再自动重连，需要重新手动匹配。"),
     );
     if (!confirmed) {
       return;
@@ -355,11 +358,11 @@ export function DeviceAdbOpsSection({
       await forgetDeviceAdb(deviceId);
       setRecoverable(false);
       setPhoneEndpoint(null);
-      report("已忘记 ADB 端点，之后需重新手动匹配");
-      message.success("已忘记端点");
+      report(t("已忘记 ADB 端点，之后需重新手动匹配"));
+      message.success(t("已忘记端点"));
     } catch (error) {
       const hint = error instanceof Error ? error.message : "adb_forget_failed";
-      report(`忘记端点失败：${hint}`);
+      report(t("忘记端点失败：{0}", { 0: hint }));
       message.error(hint);
     } finally {
       setReconnectBusy(false);
@@ -374,41 +377,41 @@ export function DeviceAdbOpsSection({
     try {
       const result = await pairDeviceAdb(deviceId, { mode: "manual" });
       if (result.status === "connected") {
-        report(`手动匹配 ADB：已连接 本地 ${result.connectLocalPort ?? "?"}（serverside adb）`);
+        report(t("手动匹配 ADB：已连接 本地 {0}（serverside adb）", { 0: result.connectLocalPort ?? "?" }));
         setRecoverable(true);
         // 配对顺手授予的能力权限：WRITE_SECURE_SETTINGS 到手后，客户端才能
         // 自己把掉了的无障碍写回来。失败不影响配对，但要让人看见。
         const grants = result.grants;
         if (grants) {
           if (grants.secureSettingsGranted) {
-            report("已授予 WRITE_SECURE_SETTINGS，客户端可自愈无障碍");
+            report(t("已授予 WRITE_SECURE_SETTINGS，客户端可自愈无障碍"));
           } else {
             const detail = grants.results
               .map((item) => `${item.permission.split(".").pop()}=${item.detail}`)
               .join(", ");
-            report(`能力权限未授予（${grants.packageName}）：${detail}`);
+            report(t("能力权限未授予（{0}）：{1}", { 0: grants.packageName, 1: detail }));
           }
         } else {
-          report("未能解析客户端包名，跳过能力权限授予");
+          report(t("未能解析客户端包名，跳过能力权限授予"));
         }
-        message.success("ADB 已连接");
+        message.success(t("ADB 已连接"));
         onPaired?.();
       } else {
         const err = result.error ?? result.status;
         const hint =
           err === "not_on_wireless_page"
-            ? "请先人手打开「无线调试」页（开关已开），再点手动匹配"
+            ? t("请先人手打开「无线调试」页（开关已开），再点手动匹配")
             : err;
-        report(`手动匹配 ADB：失败：${hint}`);
+        report(t("手动匹配 ADB：失败：{0}", { 0: hint }));
         message.error(hint);
       }
     } catch (error) {
       const hint = error instanceof Error ? error.message : "adb_pair_failed";
       const friendly =
         hint.includes("not_on_wireless_page")
-          ? "请先人手打开「无线调试」页（开关已开），再点手动匹配"
+          ? t("请先人手打开「无线调试」页（开关已开），再点手动匹配")
           : hint;
-      report(`手动匹配 ADB 失败：${friendly}`);
+      report(t("手动匹配 ADB 失败：{0}", { 0: friendly }));
       message.error(friendly);
     } finally {
       setManualPairBusy(false);
@@ -422,10 +425,10 @@ export function DeviceAdbOpsSection({
           className="screen-toggle"
           title={
             !adbConnected
-              ? "请先在右侧「ADB」里手动匹配"
+              ? t("请先在右侧「ADB」里手动匹配")
               : channelLockedOn
-                ? "无障碍已关闭，必须走 ADB 通道"
-                : "打开后走 ADB 点击/节点（镜像方式不变）；无障碍关闭时仅授权投屏 WebRTC"
+                ? t("无障碍已关闭，必须走 ADB 通道")
+                : t("打开后走 ADB 点击/节点（镜像方式不变）；无障碍关闭时仅授权投屏 WebRTC")
           }
         >
           <input
@@ -434,13 +437,13 @@ export function DeviceAdbOpsSection({
             disabled={!adbConnected || channelLockedOn}
             onChange={(event) => {
               if (!event.target.checked && isAdbChannelLockedOn(accessibilityEnabled)) {
-                message.warning("无障碍已关闭，不能关闭 ADB 通道");
+                message.warning(t("无障碍已关闭，不能关闭 ADB 通道"));
                 return;
               }
               onAdbChannelChange?.(event.target.checked);
             }}
           />
-          ADB 通道
+          {t("ADB 通道")}
         </label>
         <button
           type="button"
@@ -449,8 +452,8 @@ export function DeviceAdbOpsSection({
           onClick={() => void sendDisableAccessibility()}
           title={
             accessibilityEnabled === false
-              ? "当前无障碍已关闭"
-              : "关闭本机无障碍服务（先匹配 ADB）"
+              ? t("当前无障碍已关闭")
+              : t("关闭本机无障碍服务（先匹配 ADB）")
           }
         >
           {accessibilityCloseButtonLabel(accessibilityEnabled, disableA11yBusy)}
@@ -462,8 +465,8 @@ export function DeviceAdbOpsSection({
           onClick={() => void sendEnableAccessibility()}
           title={
             accessibilityEnabled === true
-              ? "当前无障碍已开启"
-              : "通过 ADB 重新打开本机无障碍服务"
+              ? t("当前无障碍已开启")
+              : t("通过 ADB 重新打开本机无障碍服务")
           }
         >
           {accessibilityOpenButtonLabel(accessibilityEnabled, enableA11yBusy)}
@@ -474,25 +477,25 @@ export function DeviceAdbOpsSection({
 
   return (
     <section className="screen-ops-section ops-workspace-panel ops-workspace-panel--adb">
-      <div className="screen-ops-section-title">ADB 操作</div>
+      <div className="screen-ops-section-title">{t("ADB 操作")}</div>
       <div className="screen-ops-action-stack">
         <button
           type="button"
           className="screen-ops-translate-btn"
           disabled={!deviceId || !isOnline || developerBusy}
           onClick={() => void sendOpenDeveloperOptions()}
-          title="打开手机开发者选项（会话内临时放行 Guard）"
+          title={t("打开手机开发者选项（会话内临时放行 Guard）")}
         >
-          {developerBusy ? "打开中…" : "开发者"}
+          {developerBusy ? t("打开中…") : t("开发者")}
         </button>
         <button
           type="button"
           className="screen-ops-translate-btn"
           disabled={!deviceId || !isOnline || manualPairBusy}
           onClick={() => void runManualPair()}
-          title="请先人手打开「无线调试」页（开关已开），再点此刮码配对"
+          title={t("请先人手打开「无线调试」页（开关已开），再点此刮码配对")}
         >
-          {manualPairBusy ? "匹配中…" : "手动匹配 ADB"}
+          {manualPairBusy ? t("匹配中…") : t("手动匹配 ADB")}
         </button>
         {recoverable && !adbConnected ? (
           <button
@@ -502,11 +505,11 @@ export function DeviceAdbOpsSection({
             onClick={() => void runReconnect()}
             title={
               phoneEndpoint
-                ? `免配对重连已保存的端点 ${phoneEndpoint}`
-                : "用已保存的手机 IP + 端口免配对重连"
+                ? t("免配对重连已保存的端点 {0}", { 0: phoneEndpoint })
+                : t("用已保存的手机 IP + 端口免配对重连")
             }
           >
-            {reconnectBusy ? "重连中…" : "重连 ADB"}
+            {reconnectBusy ? t("重连中…") : t("重连 ADB")}
           </button>
         ) : null}
         {recoverable ? (
@@ -515,16 +518,16 @@ export function DeviceAdbOpsSection({
             className="screen-ops-translate-btn"
             disabled={!deviceId || reconnectBusy}
             onClick={() => void runForgetEndpoint()}
-            title="忘掉已保存的端点，之后不再自动重连"
+            title={t("忘掉已保存的端点，之后不再自动重连")}
           >
-            忘记端点
+            {t("忘记端点")}
           </button>
         ) : null}
       </div>
       <p className="screen-ops-hint">
         {recoverable && !adbConnected
-          ? `已保存端点 ${phoneEndpoint ?? ""}，服务端会自动重连；也可以点「重连 ADB」立刻试一次。`
-          : "点开右侧「ADB」会开约 5 分钟运维会话（期内进开发者/无线调试不踢；手机本地点进仍踢）。到期再点 ADB 续期。请先人手停在无线调试页，再点「手动匹配 ADB」。"}
+          ? t("已保存端点 {0}，服务端会自动重连；也可以点「重连 ADB」立刻试一次。", { 0: phoneEndpoint ?? "" })
+          : t("点开右侧「ADB」会开约 5 分钟运维会话（期内进开发者/无线调试不踢；手机本地点进仍踢）。到期再点 ADB 续期。请先人手停在无线调试页，再点「手动匹配 ADB」。")}
       </p>
     </section>
   );

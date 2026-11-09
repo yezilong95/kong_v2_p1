@@ -1,3 +1,14 @@
+.login-lang {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  z-index: 6;
+}
+
+.login-lang .lang-switch {
+  min-width: 172px;
+}
+
 .login-page {
   --login-cyan: #00e5ff;
   --login-cyan-dim: rgba(0, 229, 255, 0.45);

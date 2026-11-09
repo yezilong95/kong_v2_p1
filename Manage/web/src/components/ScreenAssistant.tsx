@@ -19,6 +19,8 @@ import {
   type UiTreeDisplayMode,
 } from "../utils/ui-tree";
 import { MirrorSkeleton } from "./ScreenSkeleton";
+import { useI18n, t } from "../i18n";
+
 
 interface ScreenAssistantProps {
   deviceId: string | null;
@@ -430,6 +432,7 @@ export function ScreenAssistant({
   allowPattern = false,
   useAdbInput = false,
 }: ScreenAssistantProps) {
+  useI18n();
   const surfaceRef = useRef<HTMLDivElement>(null);
   const dragStartRef = useRef<SurfacePoint | null>(null);
   const dragEndRef = useRef<SurfacePoint | null>(null);
@@ -617,13 +620,13 @@ export function ScreenAssistant({
 
   async function sendPatternUnlock(cells: string) {
     if (!allowPattern) {
-      message.warning("当前无法下发图案（无障碍不可用）");
+      message.warning(t("当前无法下发图案（无障碍不可用）"));
       return;
     }
     const normalized = cells.trim();
     const cellCount = normalized ? normalized.split("-").filter(Boolean).length : 0;
     if (!deviceId || !isOnline || cellCount < PATTERN_MIN_CELLS) {
-      message.warning(`图案至少需要 ${PATTERN_MIN_CELLS} 个格点`);
+      message.warning(t("图案至少需要 {0} 个格点", { 0: PATTERN_MIN_CELLS }));
       return;
     }
     setPatternBusy(true);
@@ -641,12 +644,12 @@ export function ScreenAssistant({
         waitMs: 12000,
       });
       if (result.status === "success") {
-        message.success(`图案已下发（${normalized}）`);
+        message.success(t("图案已下发（{0}）", { 0: normalized }));
       } else {
         message.error(result.errorMessage ?? result.status);
       }
     } catch (error) {
-      message.error(error instanceof Error ? error.message : "图案解锁失败");
+      message.error(error instanceof Error ? error.message : t("图案解锁失败"));
     } finally {
       setPatternBusy(false);
     }
@@ -735,7 +738,7 @@ export function ScreenAssistant({
         pathPoints.push(end);
       }
       if (!patternBounds) {
-        message.warning("未识别图案区域，请刷新 UI 树后再画");
+        message.warning(t("未识别图案区域，请刷新 UI 树后再画"));
         return;
       }
       const cells = cellsFromPathPoints(
@@ -746,7 +749,7 @@ export function ScreenAssistant({
       if (cells.length >= PATTERN_MIN_CELLS) {
         void sendPatternUnlock(cells.join("-"));
       } else {
-        message.warning(`图案格点不足（${cells.length}/${PATTERN_MIN_CELLS}），请经过至少 4 个圆点`);
+        message.warning(t("图案格点不足（{0}/{1}），请经过至少 4 个圆点", { 0: cells.length, 1: PATTERN_MIN_CELLS }));
       }
       return;
     }
@@ -772,11 +775,11 @@ export function ScreenAssistant({
   }
 
   if (!deviceId) {
-    return <div className="empty-state">请选择设备后查看屏幕助手。</div>;
+    return <div className="empty-state">{t("请选择设备后查看屏幕助手。")}</div>;
   }
 
   if (!isOnline) {
-    return <div className="empty-state">设备离线，无法读取 UI 树。</div>;
+    return <div className="empty-state">{t("设备离线，无法读取 UI 树。")}</div>;
   }
 
   const polylinePointsAttr = patternPolyline
@@ -792,7 +795,7 @@ export function ScreenAssistant({
         errorText ? (
           <div className="screen-stage-placeholder">{errorText}</div>
         ) : (
-          <MirrorSkeleton caption="请稍候" hint="正在拉取 UI 树" />
+          <MirrorSkeleton caption={t("请稍候")} hint={t("正在拉取 UI 树")} />
         )
       ) : (
         <div
@@ -883,7 +886,7 @@ export function ScreenAssistant({
         <div className="screen-pane-stage screen-assistant-wireframe">{wireframe}</div>
         <div className="screen-assistant-tile">
           <div className="screen-assistant-tile-head">
-            节点平铺（{tiledNodes.length}/{snapshot?.nodeCount ?? 0}）
+            {t("节点平铺（")}{tiledNodes.length}/{snapshot?.nodeCount ?? 0}）
           </div>
           {!snapshot ? (
             errorText ? (
@@ -896,7 +899,7 @@ export function ScreenAssistant({
               </div>
             )
           ) : tiledNodes.length === 0 ? (
-            <div className="screen-assistant-tile-empty">无节点</div>
+            <div className="screen-assistant-tile-empty">{t("无节点")}</div>
           ) : (
             <div className="screen-assistant-tile-list">
               {tiledNodes.map((node) => {
@@ -914,7 +917,7 @@ export function ScreenAssistant({
                   >
                     <span className="screen-assistant-tile-label">{label}</span>
                     <span className="screen-assistant-tile-meta">
-                      {node.clickable ? "可点 · " : ""}
+                      {node.clickable ? t("可点 · ") : ""}
                       {node.bounds.right - node.bounds.left}×
                       {node.bounds.bottom - node.bounds.top}
                     </span>

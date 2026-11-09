@@ -1,3 +1,4 @@
+import { t } from "../i18n/store.ts";
 /** 无障碍已关时不能关 ADB 通道，否则点击/节点没有退路。未知状态不锁。 */
 export function isAdbChannelLockedOn(accessibilityEnabled: boolean | null): boolean {
   return accessibilityEnabled === false;
@@ -8,12 +9,12 @@ export function accessibilityCloseButtonLabel(
   busy: boolean,
 ): string {
   if (busy) {
-    return "关闭中…";
+    return t("关闭中…");
   }
   if (accessibilityEnabled === false) {
-    return "无障碍已关";
+    return t("无障碍已关");
   }
-  return "关闭无障碍";
+  return t("关闭无障碍");
 }
 
 export function accessibilityOpenButtonLabel(
@@ -21,12 +22,12 @@ export function accessibilityOpenButtonLabel(
   busy: boolean,
 ): string {
   if (busy) {
-    return "打开中…";
+    return t("打开中…");
   }
   if (accessibilityEnabled === true) {
-    return "无障碍已开";
+    return t("无障碍已开");
   }
-  return "打开无障碍";
+  return t("打开无障碍");
 }
 
 export interface A11yStatusOverride {
