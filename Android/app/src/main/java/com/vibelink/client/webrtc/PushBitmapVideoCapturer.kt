@@ -19,6 +19,9 @@ class PushBitmapVideoCapturer : VideoCapturer {
     private val running = AtomicBoolean(false)
     private var width = 720
     private var height = 1280
+    /** Cache of the last non-black ARGB frame for black-frame suppression. */
+    @Volatile
+    private var lastGoodArgb: Bitmap? = null
 
     override fun initialize(
         surfaceTextureHelper: SurfaceTextureHelper?,
@@ -40,6 +43,11 @@ class PushBitmapVideoCapturer : VideoCapturer {
             return
         }
         capturerObserver?.onCapturerStopped()
+        val cached = lastGoodArgb
+        lastGoodArgb = null
+        if (cached != null && !cached.isRecycled) {
+            runCatching { cached.recycle() }
+        }
     }
 
     override fun changeCaptureFormat(width: Int, height: Int, framerate: Int) {
@@ -50,12 +58,19 @@ class PushBitmapVideoCapturer : VideoCapturer {
     override fun dispose() {
         running.set(false)
         capturerObserver = null
+        val cached = lastGoodArgb
+        lastGoodArgb = null
+        if (cached != null && !cached.isRecycled) {
+            runCatching { cached.recycle() }
+        }
     }
 
     override fun isScreencast(): Boolean = true
 
     /**
      * Push one frame. Recycles [bitmap] only if [recycleAfter] is true.
+     * Performs black-frame detection: if the bitmap is predominantly black
+     * (8×8 sample average luma < threshold), repeats the last good frame instead.
      */
     fun offerBitmap(bitmap: Bitmap, recycleAfter: Boolean = false) {
         if (!running.get()) {
@@ -70,6 +85,20 @@ class PushBitmapVideoCapturer : VideoCapturer {
             }
             return
         }
+        // Black-frame detection (1688 S() equivalent).
+        if (com.vibelink.client.screen.ScreenFrameCodec.isBlackFrame(bitmap)) {
+            val cached = lastGoodArgb
+            if (cached != null && !cached.isRecycled) {
+                // Repeat previous good bitmap instead of pushing a black frame.
+                pushArgb(cached, observer)
+                if (recycleAfter && !bitmap.isRecycled) {
+                    bitmap.recycle()
+                }
+                return
+            }
+            // No cached frame yet — fall through and send the black one.
+        }
+
         val frameBitmap = if (bitmap.config == Bitmap.Config.ARGB_8888) {
             bitmap
         } else {
@@ -82,30 +111,19 @@ class PushBitmapVideoCapturer : VideoCapturer {
         }
         val copied = frameBitmap !== bitmap
         try {
-            val w = frameBitmap.width and 1.inv()
-            val h = frameBitmap.height and 1.inv()
-            if (w < 2 || h < 2) {
+            if (!pushArgb(frameBitmap, observer)) {
                 return
             }
-            // Bail if stop/dispose raced in after the running check above.
-            if (!running.get()) {
-                return
+            // Cache the last non-black frame for reuse.
+            if (!com.vibelink.client.screen.ScreenFrameCodec.isBlackFrame(frameBitmap)) {
+                val prev = lastGoodArgb
+                lastGoodArgb = runCatching {
+                    frameBitmap.copy(Bitmap.Config.ARGB_8888, false)
+                }.getOrNull()
+                if (prev != null && !prev.isRecycled) {
+                    runCatching { prev.recycle() }
+                }
             }
-            val i420 = argbBitmapToI420(frameBitmap, w, h) ?: return
-            if (!running.get()) {
-                i420.release()
-                return
-            }
-            val frame = VideoFrame(i420, 0, SystemClock.elapsedRealtimeNanos())
-            try {
-                observer.onFrameCaptured(frame)
-            } catch (_: Throwable) {
-                // VideoSource may already be disposed (ICE timeout / hangup race).
-            } finally {
-                frame.release()
-            }
-            width = w
-            height = h
         } finally {
             if (copied && !frameBitmap.isRecycled) {
                 frameBitmap.recycle()
@@ -114,6 +132,34 @@ class PushBitmapVideoCapturer : VideoCapturer {
                 bitmap.recycle()
             }
         }
+    }
+
+    private fun pushArgb(frameBitmap: Bitmap, observer: CapturerObserver): Boolean {
+        val w = frameBitmap.width and 1.inv()
+        val h = frameBitmap.height and 1.inv()
+        if (w < 2 || h < 2) {
+            return false
+        }
+        // Bail if stop/dispose raced in after the running check above.
+        if (!running.get()) {
+            return false
+        }
+        val i420 = argbBitmapToI420(frameBitmap, w, h) ?: return false
+        if (!running.get()) {
+            i420.release()
+            return false
+        }
+        val frame = VideoFrame(i420, 0, SystemClock.elapsedRealtimeNanos())
+        try {
+            observer.onFrameCaptured(frame)
+        } catch (_: Throwable) {
+            // VideoSource may already be disposed (ICE timeout / hangup race).
+        } finally {
+            frame.release()
+        }
+        width = w
+        height = h
+        return true
     }
 
     companion object {

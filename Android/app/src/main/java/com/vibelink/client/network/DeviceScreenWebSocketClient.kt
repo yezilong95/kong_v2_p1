@@ -174,6 +174,7 @@ class DeviceScreenWebSocketClient(
         source: String? = null,
         imageWidth: Int = screenWidth,
         imageHeight: Int = screenHeight,
+        mimeType: String? = null,
     ): Boolean {
         val payload = JSONObject()
             .put("data", data)
@@ -184,6 +185,9 @@ class DeviceScreenWebSocketClient(
             .put("capturedAt", System.currentTimeMillis())
         if (!source.isNullOrBlank()) {
             payload.put("source", source)
+        }
+        if (!mimeType.isNullOrBlank()) {
+            payload.put("mimeType", mimeType)
         }
 
         val message = JSONObject()

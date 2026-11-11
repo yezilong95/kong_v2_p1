@@ -19,6 +19,7 @@ import type { OpsWorkspaceKind } from "../types/ops-workspace";
 import { opsWorkspaceLabel } from "../types/ops-workspace";
 import type { ScreenFrame, UiTreeSnapshot } from "../types";
 import type { MirrorMode } from "../utils/screen-mirror-prefs";
+import { baseMirrorMode, mirrorTransport, mirrorQuality, resolveMirrorModeForCast } from "../utils/screen-mirror-prefs";
 import {
   filterHumanUsefulNodes,
   filterNodesByPrimaryPackage,
@@ -64,6 +65,15 @@ interface ScreenViewerProps {
   remark?: string | null;
   onRemarkSaved?: (remark: string | null) => void;
   onCommandSent?: (message: string) => void;
+  /** 把延迟指标上报到顶栏展示 */
+  onLatencyReport?: (latency: ScreenLatencyReport) => void;
+}
+
+export interface ScreenLatencyReport {
+  controlLatencyMs: number | null;
+  latencyMs: number | null;
+  frameGapMs: number | null;
+  tone: "ok" | "warn" | "bad" | "idle";
 }
 
 interface RenderedImageRect {
@@ -244,6 +254,7 @@ export function ScreenViewer({
   remark = null,
   onRemarkSaved,
   onCommandSent,
+  onLatencyReport,
 }: ScreenViewerProps) {
   useI18n();
   const surfaceRef = useRef<HTMLDivElement>(null);
@@ -255,7 +266,7 @@ export function ScreenViewer({
   const [isDragging, setIsDragging] = useState(false);
   const [swipePreview, setSwipePreview] = useState<SwipePreview | null>(null);
   const [refreshBusy, setRefreshBusy] = useState(false);
-  const [assistantEnabled, setAssistantEnabled] = useState(true);
+  const [assistantEnabled, setAssistantEnabled] = useState(false);
   const [uiTreeDisplayMode, setUiTreeDisplayMode] = useState<UiTreeDisplayMode>("compact");
   const [translateEnabled, setTranslateEnabled] = useState(false);
   const [controlLatencyMs, setControlLatencyMs] = useState<number | null>(null);
@@ -280,6 +291,16 @@ export function ScreenViewer({
     controlLatencyMs ?? latencyMs ?? frameGapMs,
     streamActive ? pollMs : CONTROL_PING_MS,
   );
+
+  // 把延迟指标上报到顶栏（RemoteControlPage）展示
+  useEffect(() => {
+    onLatencyReport?.({
+      controlLatencyMs,
+      latencyMs,
+      frameGapMs,
+      tone: latencyToneClass,
+    });
+  }, [controlLatencyMs, latencyMs, frameGapMs, latencyToneClass, onLatencyReport]);
   // Prefer JPEG once frames arrive if WebRTC never reaches connected (cross-NAT fallback).
   const hasWebrtcVideo = Boolean(webrtcStream) && (webrtcConnected || !frame);
 
@@ -790,27 +811,37 @@ export function ScreenViewer({
           <label>
             {t("镜像方式")}
             <select
-              value={
-                useAdbPath && accessibilityEnabled === false
-                  ? "projection"
-                  : mirrorMode
-              }
+              value={resolveMirrorModeForCast(
+                useAdbPath,
+                mirrorMode,
+                accessibilityEnabled,
+              )}
               onChange={(event) =>
                 onMirrorModeChange(event.target.value as MirrorMode)
               }
               title={
                 useAdbPath && accessibilityEnabled === false
-                  ? t("无障碍已关闭：仅授权投屏 WebRTC（失败降级 JPEG）")
-                  : t("免授权：真截图 WebRTC；助手伪屏：UI 树线框；投屏推流：MediaProjection WebRTC。开 ADB 不改镜像方式")
+                  ? t("无障碍已关闭：仅授权投屏（中继 / 普通 / 高清）")
+                  : t("中继：走 TURN 服务器中转视频轨；普通：1688 同款低码率帧推流；高清：短边 400、质量 40，清晰但不吃满带宽")
               }
             >
               {useAdbPath && accessibilityEnabled === false ? (
-                <option value="projection">{t("投屏推流（需授权 WebRTC）")}</option>
+                <>
+                  <option value="projection_ws">{t("投屏推流 · 普通（需授权）")}</option>
+                  <option value="projection_ws_hd">{t("投屏推流 · 高清（需授权）")}</option>
+                  <option value="projection">{t("投屏推流 · 中继（需授权）")}</option>
+                </>
               ) : (
                 <>
-                  <option value="screenshot">{t("免授权投屏（真截图 WebRTC）")}</option>
-                  <option value="screenhelper">{t("助手伪屏（UI 树 WebRTC）")}</option>
-                  <option value="projection">{t("投屏推流（需授权 WebRTC）")}</option>
+                  <option value="screenshot_ws">{t("免授权投屏 · 普通")}</option>
+                  <option value="screenhelper_ws">{t("助手伪屏 · 普通")}</option>
+                  <option value="projection_ws">{t("投屏推流 · 普通（需授权）")}</option>
+                  <option value="screenshot_ws_hd">{t("免授权投屏 · 高清")}</option>
+                  <option value="screenhelper_ws_hd">{t("助手伪屏 · 高清")}</option>
+                  <option value="projection_ws_hd">{t("投屏推流 · 高清（需授权）")}</option>
+                  <option value="screenshot">{t("免授权投屏 · 中继")}</option>
+                  <option value="screenhelper">{t("助手伪屏 · 中继")}</option>
+                  <option value="projection">{t("投屏推流 · 中继（需授权）")}</option>
                 </>
               )}
             </select>
@@ -827,21 +858,18 @@ export function ScreenViewer({
               <option value={1000}>1 fps</option>
             </select>
           </label>
-          <span
-            className={`screen-latency screen-latency--${latencyToneClass}`}
-            title={t("控制=进页即测的指令往返(RTT)；画面=收到时刻−截图时刻；帧间隔=相邻两帧到达间隔")}
-          >
-            {t("控制")} {controlLatencyMs == null ? "--" : `${controlLatencyMs}ms`}
-            <span className="screen-latency-sep">·</span>
-            {t("画面")} {latencyMs == null ? "--" : `${latencyMs}ms`}
-            <span className="screen-latency-sep">·</span>
-            {t("帧间隔")} {frameGapMs == null ? "--" : `${frameGapMs}ms`}
-          </span>
           <label className="screen-toggle">
             <input
               type="checkbox"
-              checked={castEnabled}
-              onChange={(event) => handleCastToggle(event.target.checked)}
+              checked={castEnabled || cameraFacing !== null}
+              disabled={!isOnline}
+              onChange={() => {
+                if (cameraFacing) {
+                  onCameraFacingChange(null);
+                } else {
+                  handleCastToggle(!castEnabled);
+                }
+              }}
             />
             {t("镜像")}
           </label>
@@ -865,7 +893,8 @@ export function ScreenViewer({
             <input
               type="checkbox"
               checked={assistantEnabled}
-              onChange={(event) => setAssistantEnabled(event.target.checked)}
+              disabled={!isOnline}
+              onChange={() => setAssistantEnabled(!assistantEnabled)}
             />
             {t("屏幕助手")}
           </label>
@@ -899,17 +928,23 @@ export function ScreenViewer({
             <span className="screen-meta">
               {isCameraStream
                 ? cameraLabel
-                : mirrorMode === "projection"
-                  ? hasWebrtcVideo
-                    ? t("投屏 WebRTC{0}", { 0: webrtcConnected ? "" : "…" })
-                    : t("投屏 JPEG")
-                  : mirrorMode === "screenhelper"
-                    ? hasWebrtcVideo
-                      ? t("助手伪屏 WebRTC{0}", { 0: webrtcConnected ? "" : "…" })
-                      : t("助手伪屏 JPEG")
-                    : hasWebrtcVideo
-                      ? t("免授权 WebRTC{0}", { 0: webrtcConnected ? "" : "…" })
-                      : t("免授权 JPEG")}{" "}
+                : (() => {
+                    const base = baseMirrorMode(mirrorMode);
+                    const transport = mirrorTransport(mirrorMode);
+                    const label =
+                      base === "projection"
+                        ? t("投屏")
+                        : base === "screenhelper"
+                          ? t("助手伪屏")
+                          : t("免授权");
+                    if (transport === "websocket") {
+                      const q = mirrorQuality(mirrorMode) === "hd" ? t("高清") : t("普通");
+                      return `${label} ${q}`;
+                    }
+                    return hasWebrtcVideo
+                      ? `${label} ${t("中继")}${webrtcConnected ? "" : "…"}`
+                      : `${label} JPEG`;
+                  })()}{" "}
               {frame
                 ? `${frame.screenWidth} x ${frame.screenHeight}`
                 : hasWebrtcVideo
@@ -943,7 +978,7 @@ export function ScreenViewer({
                   >
                     <MirrorSkeleton
                       caption={t("镜像未开启")}
-                      hint={t("勾选「镜像」或点击「前置/后置摄像头」开始")}
+                      hint={t("勾选上方「镜像」或点击「前置/后置摄像头」")}
                     />
                   </div>
                 </div>
@@ -1065,9 +1100,9 @@ export function ScreenViewer({
             {!isOnline && !activeUiSnapshot ? (
               <div className="empty-state screen-pane-empty">{t("设备离线，无法查看屏幕。")}</div>
             ) : !assistantEnabled ? (
-              <div className="empty-state screen-pane-empty">{t("屏幕助手已关闭，可勾选上方开关开启")}</div>
-            ) : !screenSize && !activeUiSnapshot ? (
-              <AssistantSkeleton caption={activeUiError ?? t("加载节点…")} />
+              <AssistantSkeleton />
+            ) : !activeUiSnapshot && !activeUiError ? (
+              <AssistantSkeleton caption={t("加载节点…")} />
             ) : (
               <ScreenAssistant
                 deviceId={deviceId}

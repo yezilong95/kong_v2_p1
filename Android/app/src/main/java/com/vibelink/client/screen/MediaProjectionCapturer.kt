@@ -39,6 +39,9 @@ class MediaProjectionCapturer(
     private var latestResult: ScreenCaptureBridge.CaptureResult? = null
 
     @Volatile
+    private var latestBitmap: Bitmap? = null
+
+    @Volatile
     private var screenWidth = 0
 
     @Volatile
@@ -138,6 +141,42 @@ class MediaProjectionCapturer(
         return ScreenCaptureBridge.CaptureResult(false, error = "no_frame")
     }
 
+    /**
+     * 返回最近一帧的 Bitmap 副本（ARGB_8888）。调用者负责 recycle。
+     * WebSocket WEBP 推流路径使用：拿到 Bitmap → 黑帧检测 → WEBP 压缩。
+     */
+    data class BitmapFrame(
+        val ok: Boolean,
+        val bitmap: Bitmap? = null,
+        val screenWidth: Int = 0,
+        val screenHeight: Int = 0,
+        val error: String? = null,
+    )
+
+    fun captureOnceBitmap(): BitmapFrame {
+        if (!running.get()) {
+            if (!start()) {
+                return BitmapFrame(false, error = "projection_not_ready")
+            }
+        }
+        val timeoutAt = SystemClock.elapsedRealtime() + FRAME_WAIT_MS
+        while (SystemClock.elapsedRealtime() < timeoutAt) {
+            val generation = latestGeneration.get()
+            val current = latestBitmap
+            if (current != null && !current.isRecycled && generation != lastConsumedGeneration) {
+                lastConsumedGeneration = generation
+                val copy = runCatching { current.copy(Bitmap.Config.ARGB_8888, false) }.getOrNull()
+                return if (copy != null) {
+                    BitmapFrame(true, copy, screenWidth, screenHeight)
+                } else {
+                    BitmapFrame(false, error = "bitmap_copy_failed")
+                }
+            }
+            SystemClock.sleep(20L)
+        }
+        return BitmapFrame(false, error = "no_frame")
+    }
+
     private fun consumeAvailableImage(reader: ImageReader) {
         var image: Image? = null
         try {
@@ -156,6 +195,12 @@ class MediaProjectionCapturer(
             val scaled = scaleBitmap(bitmap)
             if (scaled !== bitmap) {
                 bitmap.recycle()
+            }
+            // Keep a Bitmap copy for WEBP path (captureOnceBitmap).
+            val prev = latestBitmap
+            latestBitmap = runCatching { scaled.copy(Bitmap.Config.ARGB_8888, false) }.getOrNull()
+            if (prev != null && !prev.isRecycled) {
+                runCatching { prev.recycle() }
             }
             val jpeg = bitmapToJpegBase64(scaled)
             val imageWidth = scaled.width
@@ -219,6 +264,11 @@ class MediaProjectionCapturer(
         virtualDisplay = null
         imageReader = null
         latestResult = null
+        val bmp = latestBitmap
+        latestBitmap = null
+        if (bmp != null && !bmp.isRecycled) {
+            runCatching { bmp.recycle() }
+        }
         lastConsumedGeneration = -1
         latestGeneration.set(0)
         captureThread?.quitSafely()

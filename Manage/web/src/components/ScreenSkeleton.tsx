@@ -38,16 +38,18 @@ export function MirrorSkeleton({
           <span key={index} className="screen-skeleton-bone screen-skeleton-bone--card" />
         ))}
       </div>
-      <div className="screen-skeleton-caption">
-        <span>{caption}</span>
-        {hint ? <span className="screen-skeleton-hint">{hint}</span> : null}
-      </div>
+      {caption ? (
+        <div className="screen-skeleton-caption">
+          <span>{caption}</span>
+          {hint ? <span className="screen-skeleton-hint">{hint}</span> : null}
+        </div>
+      ) : null}
     </div>
   );
 }
 
 /** Wireframe + tile list shimmer for assistant pane */
-export function AssistantSkeleton({ caption = t("加载节点…") }: { caption?: string }) {
+export function AssistantSkeleton({ caption }: { caption?: string }) {
   useI18n();
   return (
     <div className="screen-assistant-wrap screen-skeleton-assistant" aria-busy="true">

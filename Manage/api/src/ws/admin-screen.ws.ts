@@ -22,6 +22,8 @@ interface AdminSubscribeScreenMessage {
   fps?: number;
   intervalMs?: number;
   mode?: "screenshot" | "projection" | "adb_screenshot" | "screenhelper";
+  transport?: "webrtc" | "websocket" | "jpeg";
+  quality?: "standard" | "hd";
 }
 
 interface AdminUnsubscribeScreenMessage {
@@ -164,12 +166,16 @@ export async function registerAdminScreenWsRoutes(app: FastifyInstance) {
                 ? "screenhelper"
                 : "screenshot";
           const iceServers = getIceServers();
-          // projection / screenshot / screenhelper all prefer WebRTC; device falls back to JPEG.
-          const transport = "webrtc";
+          // 前端指定传输方式：webrtc / websocket。默认 webrtc（设备侧 ICE 失败自动降级 JPEG）。
+          const transport =
+            message.transport === "websocket" ? "websocket" : "webrtc";
+          // 画质档位：standard = 1688 同款低码率；hd = 短边 400 / WEBP q40。
+          const quality = message.quality === "hd" ? "hd" : "standard";
           const started = sendDeviceScreenCommand(deviceId, "start_screen", {
             fps,
             mode,
             transport,
+            quality,
             iceServers,
           });
           if (!started) {

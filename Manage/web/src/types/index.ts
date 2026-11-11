@@ -328,7 +328,7 @@ export interface ScreenFrame {
   imageHeight: number;
   capturedAt: number;
   source?: "screen" | "camera_front" | "camera_back" | "adb_screenshot" | "screenshot" | "screenhelper";
-  mimeType?: "image/jpeg" | "image/png";
+  mimeType?: "image/jpeg" | "image/png" | "image/webp";
   objectUrl?: string;
   seq?: number;
   keyguardLocked?: boolean;

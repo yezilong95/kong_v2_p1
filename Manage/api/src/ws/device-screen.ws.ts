@@ -78,6 +78,7 @@ export async function registerDeviceScreenWsRoutes(app: FastifyInstance) {
             imageWidth: payload?.imageWidth,
             imageHeight: payload?.imageHeight,
             source: payload?.source,
+            mimeType: payload?.mimeType,
             capturedAt: payload?.capturedAt ?? Date.now(),
           },
           Date.now(),

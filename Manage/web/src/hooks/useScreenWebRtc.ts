@@ -18,6 +18,8 @@ interface UseScreenWebRtcOptions {
 
 const RELAY_FAIL_FALLBACK_THRESHOLD = 2;
 const RELAY_FALLBACK_STORAGE_KEY = "screen_webrtc_relay_fallback";
+/** 与设备端 PREFER_RELAY_ONLY 保持一致：false = 默认 ALL（host/srflx/relay 全试）。 */
+const PREFER_RELAY_ONLY = false;
 
 function readRelayFallback(): boolean {
   try {
@@ -92,7 +94,7 @@ export function useScreenWebRtc(options: UseScreenWebRtcOptions) {
     if (!iceServersRef.current) {
       iceServersRef.current = await fetchIceServers();
     }
-    const useRelayOnly = !relayFallbackActiveRef.current;
+    const useRelayOnly = PREFER_RELAY_ONLY && !relayFallbackActiveRef.current;
     usingRelayOnlyRef.current = useRelayOnly;
     const pc = new RTCPeerConnection({
       iceServers: iceServersRef.current.map((server) => ({
@@ -100,8 +102,8 @@ export function useScreenWebRtc(options: UseScreenWebRtcOptions) {
         username: server.username,
         credential: server.credential,
       })),
-      // 默认强制走 TURN relay，避免 UDP NAT 映射被回收导致 20s 后 DISCONNECTED。
-      // 连续 ICE 失败达到阈值后降级为 "all"，sessionStorage 内保留直至关闭标签。
+      // 默认 "all"：直连能通就不绕 TURN，显著减少 TURN 抖动造成的长时间黑屏。
+      // PREFER_RELAY_ONLY=true 可回滚到旧的强制 relay 行为。
       iceTransportPolicy: useRelayOnly ? "relay" : "all",
     });
     // Do not pre-add transceiver: remote offer already defines m-lines.

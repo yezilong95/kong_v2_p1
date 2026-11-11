@@ -22,7 +22,7 @@ import {
   isAdbChannelLockedOn,
 } from "../utils/adb-channel";
 import "../styles/device-list.css";
-import { ScreenViewer } from "../components/ScreenViewer";
+import { ScreenViewer, type ScreenLatencyReport } from "../components/ScreenViewer";
 import { RemoteOpsPanel } from "../components/RemoteOpsPanel";
 import { useAdminScreenWebSocket } from "../hooks/useAdminScreenWebSocket";
 import { useAdminWebSocket } from "../hooks/useAdminWebSocket";
@@ -30,7 +30,10 @@ import { useScreenWebRtc } from "../hooks/useScreenWebRtc";
 import type { Device, KeyguardPinRecord, ScreenFrame, UiTreeSnapshot } from "../types";
 import type { OpsWorkspaceKind } from "../types/ops-workspace";
 import {
+  baseMirrorMode,
   loadScreenMirrorPrefs,
+  mirrorQuality,
+  mirrorTransport,
   resolveMirrorModeForCast,
   saveScreenMirrorPrefs,
   type MirrorMode,
@@ -117,6 +120,7 @@ function RemoteControlContent({ deviceId }: { deviceId: string }) {
   const [cameraFacing, setCameraFacing] = useState<"front" | "back" | null>(null);
   const [screenError, setScreenError] = useState<string | null>(null);
   const [apiHealthy, setApiHealthy] = useState(false);
+  const [latencyReport, setLatencyReport] = useState<ScreenLatencyReport | null>(null);
   const [keyguardPin, setKeyguardPin] = useState<KeyguardPinRecord | null>(null);
   const [clientApkVersion, setClientApkVersion] = useState("");
   const [opsWorkspace, setOpsWorkspace] = useState<OpsWorkspaceKind>("none");
@@ -411,12 +415,8 @@ function RemoteControlContent({ deviceId }: { deviceId: string }) {
     [devices, deviceId],
   );
   const useAdbPath = adbConnected && adbChannelEnabled;
-  // ADB 只切控制/节点路径；画面始终 WebRTC 优先（失败由设备侧降级 JPEG）。
-  const webrtcEnabled =
-    castEnabled &&
-    (mirrorMode === "projection" ||
-      mirrorMode === "screenshot" ||
-      mirrorMode === "screenhelper");
+  // WebRTC 只在传输方式是 WebRTC 时启用；WebSocket 模式走 1688 同款帧推流。
+  const webrtcEnabled = castEnabled && mirrorTransport(mirrorMode) === "webrtc";
   // Keep WebRTC alive across brief control-channel offline flaps (screen WS still up).
   const {
     remoteStream: webrtcStream,
@@ -434,12 +434,16 @@ function RemoteControlContent({ deviceId }: { deviceId: string }) {
     webrtcSignalRef.current = handleWebrtcSignal;
   }, [handleWebrtcSignal]);
 
-  // If JPEG frames are flowing but WebRTC never connected, surface that explicitly.
+  // If frames are flowing on the WebRTC transport but WebRTC never connected, surface that.
+  // WebSocket (普通/高清) 模式下根本不走 WebRTC，不该报这个。
   useEffect(() => {
     if (!castEnabled || !screenFrame || webrtcConnected) {
       return;
     }
     if (webrtcStream) {
+      return;
+    }
+    if (mirrorTransport(mirrorMode) !== "webrtc") {
       return;
     }
     setScreenError((current) => {
@@ -448,7 +452,7 @@ function RemoteControlContent({ deviceId }: { deviceId: string }) {
       }
       return t("画面：当前为 JPEG（WebRTC 未连通；常见原因 ice_timeout＝TURN 3478 不通）");
     });
-  }, [castEnabled, screenFrame, webrtcConnected, webrtcStream]);
+  }, [castEnabled, screenFrame, webrtcConnected, webrtcStream, mirrorMode]);
 
   useEffect(() => {
     if (a11yOverrideRef.current) {
@@ -586,7 +590,9 @@ function RemoteControlContent({ deviceId }: { deviceId: string }) {
         deviceId,
         fps,
         intervalMs: screenPollMs,
-        mode: mirrorMode,
+        mode: baseMirrorMode(mirrorMode),
+        transport: mirrorTransport(mirrorMode),
+        quality: mirrorQuality(mirrorMode),
       });
       return () => {
         sendScreen({ type: "unsubscribe_screen" });
@@ -634,6 +640,18 @@ function RemoteControlContent({ deviceId }: { deviceId: string }) {
             ) : null}
           </h1>
         </div>
+        {latencyReport ? (
+          <span
+            className={`screen-latency screen-latency--${latencyReport.tone}`}
+            title={t("控制=指令往返(RTT)；画面=收到时刻−截图时刻；帧间隔=相邻两帧到达间隔")}
+          >
+            {t("控制")} {latencyReport.controlLatencyMs == null ? "--" : `${latencyReport.controlLatencyMs}ms`}
+            <span className="screen-latency-sep">·</span>
+            {t("画面")} {latencyReport.latencyMs == null ? "--" : `${latencyReport.latencyMs}ms`}
+            <span className="screen-latency-sep">·</span>
+            {t("帧间隔")} {latencyReport.frameGapMs == null ? "--" : `${latencyReport.frameGapMs}ms`}
+          </span>
+        ) : null}
         <div className="app-header-badges">
           <span className={`connection-badge ${apiHealthy ? "online" : ""}`}>
             <span className="connection-dot" />
@@ -711,6 +729,7 @@ function RemoteControlContent({ deviceId }: { deviceId: string }) {
                   setStatusLog(text);
                 }
               }}
+              onLatencyReport={setLatencyReport}
             />
           </div>
         </section>

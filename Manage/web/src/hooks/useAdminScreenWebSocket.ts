@@ -134,6 +134,9 @@ export function useAdminScreenWebSocket(options: UseAdminScreenWebSocketOptions)
         if (message.type === "screen_frame") {
           const payload = message.payload ?? {};
           const source = payload.source as ScreenFrame["source"] | undefined;
+          const rawMime = typeof payload.mimeType === "string" ? payload.mimeType : "";
+          const mimeType: ScreenFrame["mimeType"] =
+            rawMime === "image/webp" || rawMime === "image/png" ? rawMime : "image/jpeg";
           lastSeqRef.current = null;
           optionsRef.current.onScreenStatus?.(t("画面接收中…"));
           optionsRef.current.onScreenFrame?.({
@@ -145,7 +148,7 @@ export function useAdminScreenWebSocket(options: UseAdminScreenWebSocketOptions)
             imageHeight: Number(payload.imageHeight ?? payload.screenHeight ?? 0),
             capturedAt: Number(payload.capturedAt ?? message.timestamp),
             source,
-            mimeType: "image/jpeg",
+            mimeType,
           });
           return;
         }

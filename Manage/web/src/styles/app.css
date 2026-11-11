@@ -256,6 +256,11 @@ textarea {
   gap: 5px;
 }
 
+.app-shell--remote .app-header--compact .screen-latency {
+  font-size: 11px;
+  gap: 4px;
+}
+
 .app-shell--remote .secondary-button--compact {
   padding: 4px 10px;
   font-size: 12px;

@@ -173,12 +173,13 @@ class ScreenWebRtcSession(
         val egl = WebRtcEngine.egl(appContext)
 
         val iceServers = parseIceServers(iceServersJson)
-        val useRelayOnly = !relayFallbackActive.get()
+        val useRelayOnly = PREFER_RELAY_ONLY && !relayFallbackActive.get()
         val rtcConfig = PeerConnection.RTCConfiguration(iceServers).apply {
             sdpSemantics = PeerConnection.SdpSemantics.UNIFIED_PLAN
             continualGatheringPolicy = PeerConnection.ContinualGatheringPolicy.GATHER_CONTINUALLY
-            // 默认强制 TURN relay：UDP NAT 映射常被路由器 20-30s 回收，走 relay 维持稳定长连。
-            // 连续 ICE 失败达到阈值后翻为 ALL（见 failOnce），本进程生命周期内保持降级。
+            // 默认 ALL：host/srflx/relay 全试，直连能通就不必绕 TURN，减少 TURN 抖动导致的
+            // 长时间黑屏。TURN 仍在 iceServers 里，NAT 打不通时自动落到 relay。
+            // PREFER_RELAY_ONLY=true 可回滚到旧的「强制 relay」策略。
             iceTransportsType = if (useRelayOnly) {
                 PeerConnection.IceTransportsType.RELAY
             } else {
@@ -360,10 +361,13 @@ class ScreenWebRtcSession(
         private const val VIDEO_TRACK_ID = "screen_video"
         private const val STREAM_ID = "screen_stream"
         private const val TARGET_WIDTH = 720
-        /** Cross-NAT without TURN often hangs in checking; force JPEG/fallback. */
-        private const val ICE_CONNECT_TIMEOUT_MS = 12_000L
+        /** Cross-NAT without TURN often hangs in checking; force fallback faster. */
+        private const val ICE_CONNECT_TIMEOUT_MS = 8_000L
 
-        /** 连续 ICE 失败达到此阈值后，当前进程后续所有 session 从 RELAY 降级为 ALL。 */
+        /** true = 旧行为（强制 TURN relay）；false = 默认 ALL（host/srflx/relay 全试）。 */
+        private const val PREFER_RELAY_ONLY = false
+
+        /** 连续 ICE 失败达到此阈值后，当前进程后续所有 session 从 relay 降级为 ALL。 */
         private const val RELAY_FAIL_FALLBACK_THRESHOLD = 2
 
         /** 进程级的 relay-only 降级开关；一旦翻 true，直到进程重启都不再尝试 relay-only。 */
