@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import com.vibelink.client.network.DeviceAuthRejection
 import com.vibelink.client.prefs.DirectBoot
 import org.json.JSONObject
 import java.util.concurrent.ConcurrentHashMap
@@ -45,6 +46,18 @@ object AdbRelayController {
     private val ioExecutor = Executors.newCachedThreadPool()
 
     private val mainHandler = Handler(Looper.getMainLooper())
+
+    /**
+     * token 被服务端拒绝（4401 invalid_token）时的回调，由宿主去清凭据重注册。
+     *
+     * 中继自己没法做这件事：它不持有 DevicePrefs，也不知道当前端点的注册接口。
+     */
+    @Volatile
+    private var authRejectedListener: (() -> Unit)? = null
+
+    fun setAuthRejectedListener(listener: (() -> Unit)?) {
+        authRejectedListener = listener
+    }
 
     /** 是否应该保持中继在线。只有 start() 置 true，stop() 置 false。 */
     @Volatile
@@ -185,11 +198,11 @@ object AdbRelayController {
             deviceToken = deviceToken ?: "",
             wsAdbBaseUrl = wsAdbBaseUrl ?: "",
             onBinary = { bytes -> onFrame(bytes) },
-            onClosed = {
+            onClosed = { code, reason ->
                 // 旧实例的迟到回调不能影响新连接：服务器重启时先断后连，
                 // 不加这层会把自己刚建好的 WS 又当成断线处理一遍。
                 if (generation == clientGeneration.get()) {
-                    onRelayClosed()
+                    onRelayClosed(code, reason)
                 }
             },
         )
@@ -198,10 +211,20 @@ object AdbRelayController {
     }
 
     /** WS 掉了：清掉已死的 TCP 流，然后按退避重连。 */
-    private fun onRelayClosed() {
+    private fun onRelayClosed(code: Int, reason: String) {
         stopBridges()
         client = null
         if (!desired) {
+            return
+        }
+        if (DeviceAuthRejection.isInvalidToken(code, reason)) {
+            // token 被服务端否掉，按退避重连多少次都是同一个 4401。
+            // 交给宿主去清凭据重注册，这里只停掉重连、保留 desired 标记，
+            // 好让新 token 绑进来之后还能自动接回去。
+            Log.w(TAG, "relay rejected token code=$code reason=$reason")
+            mainHandler.removeCallbacks(reconnectRunnable)
+            reconnectAttempt = 0
+            authRejectedListener?.invoke()
             return
         }
         Log.i(TAG, "relay closed, scheduling reconnect attempt=${reconnectAttempt + 1}")

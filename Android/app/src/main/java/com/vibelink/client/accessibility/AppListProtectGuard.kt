@@ -65,14 +65,32 @@ object AppListProtectGuard {
      * 1.5s 足够吃掉这种重复，又远短于人手操作节奏。
      */
     private const val DANGEROUS_KICK_COOLDOWN_MS = 1_500L
-    /** 运维期免弹回默认时长：点一次 ADB 按钮 / 开机后 5 分钟内不踢。 */
+    /**
+     * 运维期免弹回默认时长：点一次 ADB 按钮 / 打开开发者选项 / 远程重启后 5 分钟内不踢。
+     *
+     * 注意这条**不再用于开机**：开机宽限的结束条件是「无障碍真的就绪」，
+     * 见 [isKickPaused] 与 [isA11yReady]。
+     */
     const val KICK_PAUSE_DEFAULT_MS = 5 * 60_000L
 
     /**
-     * 开机宽限期。`elapsedRealtime` 从开机时刻起算，所以这个值本身就是
-     * 「距开机多久」——重启后前 5 分钟整体让路。
+     * 开机宽限的硬上限。`elapsedRealtime` 从开机时刻起算，所以这个值本身就是
+     * 「距开机多久」——最多等到开机后 5 分钟，到点无条件恢复保护。
+     *
+     * 正常情况下这个上限用不满：宽限的真正结束条件是「无障碍真的能用了」
+     * （见 [isA11yReady]）。这里只是兜底，防止某个 ROM 上活动窗口一直取不到，
+     * 保护被永久判成「没就绪」而整段哑火。
      */
     private const val BOOT_GRACE_MS = 5 * 60_000L
+
+    /**
+     * 就绪探测的最小间隔。
+     *
+     * `rootInActiveWindow` 要跨进程拿节点，比读窗口列表重得多；而轮询路径 200ms 一次
+     * （[POWER_POLL_INTERVAL_MS]），不节流会在开机阶段把 binder 打满。
+     * 500ms 意味着最多晚半个轮询周期解除宽限，实测无感。
+     */
+    private const val READY_PROBE_INTERVAL_MS = 500L
     private const val CONTENT_SECTION_SCAN_DEBOUNCE_MS = 50L
     private const val TOOLBAR_CACHE_MS = 150L
     private const val ROOT_SCAN_MAX_NODES = 80
@@ -717,6 +735,20 @@ object AppListProtectGuard {
     private var kickPauseUntil = 0L
 
     /**
+     * 无障碍已确认为「真的能用」的时刻（`elapsedRealtime`）。
+     *
+     * 0 表示本次进程还没确认过。一旦置位就不再复位：开机宽限问的是
+     * 「开机那段混沌期过去了没有」，而不是「此刻服务是否健康」。
+     * 后者归 [AccessibilityHealth] 判，复位这里会让宽限期被反复重开。
+     */
+    @Volatile
+    private var a11yReadyAt = 0L
+
+    /** 上次探测 [isA11yReady] 的时刻，用于节流跨进程的 `rootInActiveWindow`。 */
+    @Volatile
+    private var lastReadyProbeAt = 0L
+
+    /**
      * 上次踢关机面板的时刻。
      *
      * 关机面板展开动画期间会从多个子窗口连着发事件（每个 windowId 都不同），
@@ -758,8 +790,10 @@ object AppListProtectGuard {
     /**
      * 让整段保护暂时失效，从此刻开始算 [durationMs]。
      *
-     * 点 ADB 按钮、以及开机后一小段时间里，用户/运维就是要停在开发者选项、无线调试、
-     * 应用详情这些页面上，这时候弹回桌面等于把操作打断。
+     * 点 ADB 按钮、打开开发者选项、无线调试、远程重启时，用户/运维就是要停在这些页面上，
+     * 这时候弹回桌面等于把操作打断。
+     *
+     * 开机不走这条路：那里的放行条件是「无障碍真的就绪」，见 [isKickPaused]。
      */
     fun pauseKicks(durationMs: Long = KICK_PAUSE_DEFAULT_MS) {
         val bounded = durationMs.coerceIn(0L, 30 * 60_000L)
@@ -783,18 +817,56 @@ object AppListProtectGuard {
      *
      * 两个来源：
      * 1. 显式 [pauseKicks]：点 ADB 按钮 / 打开开发者选项 / 远程重启，各开 5 分钟。
-     * 2. 开机后的前 5 分钟。
+     * 2. 开机后无障碍还没真正可用（见 [isA11yReady]）：此时节点扫描拿不到东西，
+     *    判定结论必然是错的。以「就绪」为结束条件，而不是无条件等满 5 分钟。
+     *
+     * [BOOT_GRACE_MS] 只作为硬上限兜底：万一某个 ROM 上活动窗口一直取不到，
+     * 不能让保护被永久判成「没就绪」而整段哑火。
      *
      * 这里刻意不看 [com.vibelink.client.adb.AdbSession]：那个标记跟着 ADB 中继落盘并自动恢复，
      * 中继常驻时它一直是 active，整段保护会永久哑火。免弹回要跟「人此刻在操作」绑定，
      * 而不是跟「后台还有一条通道」绑定。
      */
-    private fun isKickPaused(): Boolean {
+    private fun isKickPaused(service: AccessibilityService? = null): Boolean {
         val now = SystemClock.elapsedRealtime()
         if (now < kickPauseUntil) {
             return true
         }
-        return now < BOOT_GRACE_MS
+        if (now >= BOOT_GRACE_MS) {
+            return false
+        }
+        val target = service ?: watchedService ?: return true
+        return !isA11yReady(target, now)
+    }
+
+    /**
+     * 无障碍是否已经真的能用。
+     *
+     * 「绑上了」不等于「能用」：ColorOS 上实测 `onServiceConnected` 之后仍有一段时间
+     * `rootInActiveWindow` 返回 null（系统还在建窗口树），这时任何节点扫描都拿不到东西，
+     * 判定结论只会是错的。
+     *
+     * 所以要求两个条件同时成立：服务已连接，且能读到活动窗口的根节点。
+     * 一旦确认就锁存 [a11yReadyAt]，不再复查——这里回答的是「开机那段混沌期过去了没有」，
+     * 不是「此刻服务是否健康」，后者归 [AccessibilityHealth] 管。
+     */
+    private fun isA11yReady(service: AccessibilityService, now: Long): Boolean {
+        if (a11yReadyAt != 0L) {
+            return true
+        }
+        if (!AccessibilityStateHolder.isConnected) {
+            return false
+        }
+        // rootInActiveWindow 是跨进程调用，开机阶段每 200ms 探一次太重。
+        if (now - lastReadyProbeAt < READY_PROBE_INTERVAL_MS) {
+            return false
+        }
+        lastReadyProbeAt = now
+        val root = runCatching { service.rootInActiveWindow }.getOrNull() ?: return false
+        runCatching { root.recycle() }
+        a11yReadyAt = now
+        Log.i(TAG, "a11y ready at uptime=${now}ms, boot grace ends")
+        return true
     }
 
     /** 「修改系统设置」授权页放行。屏幕常亮、自动旋转、亮度最低都会发 open_write_settings。 */
@@ -904,9 +976,9 @@ object AppListProtectGuard {
             return
         }
 
-        // 运维免弹回：点 ADB 按钮、开机后几分钟内，用户就是要停在这些页面上操作。
+        // 运维免弹回：点 ADB 按钮、打开开发者选项、远程重启时，用户就是要停在这些页面上操作。
         // 放在所有页面判定之后，保证「设置首页」之类的放行不被覆盖。
-        if (isKickPaused()) {
+        if (isKickPaused(service)) {
             Log.d(TAG, "skip kick paused pkg=$packageName cls=$className")
             return
         }
@@ -1646,7 +1718,7 @@ object AppListProtectGuard {
         now: Long,
         source: String,
     ): Boolean {
-        if (isKickPaused()) {
+        if (isKickPaused(service)) {
             Log.d(TAG, "power dialog seen, kick paused ($source)")
             return true
         }
@@ -1777,7 +1849,7 @@ object AppListProtectGuard {
         if (titleText.isEmpty() || !matchesDangerousSettingsText(titleText)) {
             return
         }
-        if (isKickPaused()) {
+        if (isKickPaused(service)) {
             Log.d(TAG, "dangerous page seen, kick paused title=[$titleText]")
             return
         }

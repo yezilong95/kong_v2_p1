@@ -2,6 +2,7 @@ package com.vibelink.client.network
 
 import android.net.Uri
 import com.vibelink.client.BuildConfig
+import com.vibelink.client.prefs.DevicePrefs
 import com.vibelink.client.prefs.ServerPrefs
 import org.json.JSONObject
 
@@ -45,10 +46,26 @@ object ServerEndpointStore {
         return null
     }
 
-    fun applySwitch(prefs: ServerPrefs, next: ServerEndpoints): String? {
+    /**
+     * 切换服务器端点。
+     *
+     * 传了 [devicePrefs] 时，若 `apiBaseUrl` 发生变化就把本地凭据一并清掉：
+     * `deviceId`/`deviceToken` 是**按库签发**的，换一台服务器它们就必然对不上，
+     * 留着只会拿旧 token 去连新库、被 4401 踢回来（见 DeviceAuthRejection）。
+     * 清掉后下一次 ensureRegistered 会走全新注册，代价只是一次 register 请求。
+     *
+     * 只比 `apiBaseUrl`：它标识的是哪一套库。ws 地址变了而库没变的场景
+     * （同库换网关）凭据仍然有效，不该多付一次注册。
+     */
+    fun applySwitch(
+        prefs: ServerPrefs,
+        next: ServerEndpoints,
+        devicePrefs: DevicePrefs? = null,
+    ): String? {
         val normalized = next.normalized()
         validate(normalized)?.let { return it }
         val current = current(prefs)
+        val apiChanged = current.apiBaseUrl != normalized.apiBaseUrl
         prefs.prevApiBaseUrl = current.apiBaseUrl
         prefs.prevWsBaseUrl = current.wsBaseUrl
         prefs.prevWsScreenBaseUrl = current.wsScreenBaseUrl
@@ -57,16 +74,23 @@ object ServerEndpointStore {
         prefs.wsScreenBaseUrl = normalized.wsScreenBaseUrl
         prefs.switchAtMs = System.currentTimeMillis()
         prefs.rollbackPending = false
+        if (apiChanged) {
+            devicePrefs?.clearCredentials()
+        }
         return null
     }
 
-    fun rollback(prefs: ServerPrefs): Boolean {
+    /**
+     * 回滚到上一个端点。语义同 [applySwitch]：只要库换了，本地凭据就不再成立。
+     */
+    fun rollback(prefs: ServerPrefs, devicePrefs: DevicePrefs? = null): Boolean {
         val prevApi = prefs.prevApiBaseUrl
         val prevWs = prefs.prevWsBaseUrl
         val prevScreen = prefs.prevWsScreenBaseUrl
         if (prevApi.isNullOrBlank() || prevWs.isNullOrBlank() || prevScreen.isNullOrBlank()) {
             return false
         }
+        val apiChanged = current(prefs).apiBaseUrl != prevApi.trim().trimEnd('/')
         prefs.apiBaseUrl = prevApi
         prefs.wsBaseUrl = prevWs
         prefs.wsScreenBaseUrl = prevScreen
@@ -75,6 +99,9 @@ object ServerEndpointStore {
         prefs.prevWsScreenBaseUrl = null
         prefs.switchAtMs = 0L
         prefs.rollbackPending = true
+        if (apiChanged) {
+            devicePrefs?.clearCredentials()
+        }
         return true
     }
 

@@ -15,6 +15,7 @@ import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
+import android.os.SystemClock
 import android.provider.Settings
 import android.util.Base64
 import androidx.core.content.ContextCompat
@@ -36,6 +37,7 @@ import com.vibelink.client.device.DeviceInfoCollector
 import com.vibelink.client.device.DeviceStateHelper
 import com.vibelink.client.install.ApkUpdateHelper
 import com.vibelink.client.network.ApiClient
+import com.vibelink.client.network.DeviceAuthRejection
 import com.vibelink.client.network.DeviceScreenWebSocketClient
 import com.vibelink.client.network.DeviceWebSocketClient
 import com.vibelink.client.network.ServerEndpointStore
@@ -139,6 +141,22 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
     private var lastControlEnsureAtMs: Long = 0L
     private var lastScreenshotFailReportAtMs: Long = 0L
 
+    // ---- 凭据失效自愈 ----
+    /**
+     * 正在执行的「清凭据 → 重新注册」任务。
+     *
+     * 三个通道几乎同时收到 4401 是常态（服务端在同一轮里挨个踢），
+     * 用同一个 job 把它们合并成一次注册，否则会并发注册出多条新记录。
+     */
+    private var credentialResetJob: Job? = null
+
+    /** 串行化「检查是否已有重置任务」这一步，避免三个通道同时进来各起一个。 */
+    private val credentialResetLock = Any()
+
+    /** 上次完成凭据重置的时刻，用来挡住「刚注册的 token 又被拒」这种死循环。 */
+    @Volatile
+    private var lastCredentialResetAtMs = 0L
+
     // ---- L1-1: 重命令单实例互斥 ----
     private val heavyCommandInflight = java.util.concurrent.ConcurrentHashMap<String, AtomicBoolean>()
 
@@ -168,6 +186,11 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
             stopWebRtcSession()
             stopSnapshotStream(keepCapturer = true)
             stopCameraStream()
+            if (DeviceAuthRejection.isInvalidToken(code, reason)) {
+                // 认证被拒时补一条画面通道没有任何意义，统一走凭据重置。
+                handleInvalidToken("screen")
+                return
+            }
             // 画面断了只补画面；勿整段 scheduleReconnect，避免误断控制通道刷上下线
             if (webSocketClient?.isConnected() == true) {
                 scheduleScreenReconnect()
@@ -448,6 +471,8 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
         smsReader = SmsReader(this)
         // 中继重连和「进程重启后恢复」都要用到 Context，先绑上
         AdbRelayController.bindContext(this)
+        // token 被服务端否掉时，中继自己救不回来，必须交给本服务的凭据重置流程
+        AdbRelayController.setAuthRejectedListener { handleInvalidToken("adb") }
         createNotificationChannel()
         promoteToForegroundSafely()
         ServiceWatchdog.scheduleNextCheck(this)
@@ -652,7 +677,73 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
         android.util.Log.w(TAG, "control WS disconnected code=$code reason=$reason")
         KeepAliveWakeLock.releaseAfterGrace("ws_disconnected code=$code")
         broadcastStatus(getString(R.string.status_disconnected))
+        if (DeviceAuthRejection.isInvalidToken(code, reason)) {
+            handleInvalidToken("control")
+            return
+        }
         scheduleReconnect()
+    }
+
+    /**
+     * 服务端认不出本地 deviceToken 时的自愈：清凭据 → 强制重新注册 → 用新凭据重连。
+     *
+     * 触发场景是凭据与当前端点不匹配：换过服务器、库那边删过行、或者手工改过 token。
+     * 这时拿旧 token 重连多少次都会被同一个 4401 打回，重连逻辑本身没有救。
+     *
+     * 三个通道（控制 / 画面 / ADB）都会收到同一个 4401，用一个 job 合并处理。
+     */
+    private fun handleInvalidToken(channel: String) {
+        if (isDirectBootMode) {
+            // 直接启动阶段读不到 CE 存储、注册请求也需要用户已解锁，等解锁后下一轮再说。
+            android.util.Log.w(TAG, "invalid token on $channel ignored in direct boot")
+            scheduleReconnect()
+            return
+        }
+        synchronized(credentialResetLock) {
+            if (credentialResetJob?.isActive == true) {
+                android.util.Log.i(TAG, "invalid token on $channel merged into running reset")
+                return
+            }
+            val now = SystemClock.elapsedRealtime()
+            if (now - lastCredentialResetAtMs < CREDENTIAL_RESET_MIN_GAP_MS) {
+                // 刚重置过又被打回：多半是服务端此刻在抖动，退避重连比再注册一次更稳。
+                android.util.Log.w(TAG, "invalid token on $channel too soon after last reset, backing off")
+                ControlReconnectAlarm.schedule(applicationContext)
+                scheduleReconnect()
+                return
+            }
+            lastCredentialResetAtMs = now
+            android.util.Log.w(
+                TAG,
+                "invalid token on $channel, dropping credentials deviceId=${devicePrefs.deviceId}",
+            )
+            broadcastStatus(getString(R.string.status_registering))
+            // 取消正在进行的重连，否则它会在新凭据写入前用旧 token 再连一次。
+            reconnectJob?.cancel()
+            reconnectJob = null
+            screenReconnectJob?.cancel()
+            screenReconnectJob = null
+            ControlReconnectAlarm.cancel(applicationContext)
+            AdbRelayController.unbind()
+            AdbSession.end()
+            screenWebSocketClient?.disconnect(suppressListener = true)
+            webSocketClient?.disconnect(suppressListener = true)
+            screenWebSocketClient = null
+            webSocketClient = null
+            devicePrefs.clearCredentials()
+            // 换服务器后也是主动重连，清掉建连限流，别被当成一次网络抖动挡掉。
+            lastControlConnectAtMs = 0L
+            lastScreenConnectAtMs = 0L
+            credentialResetJob = serviceScope.launch {
+                runCatching {
+                    ensureRegistered(force = true)
+                    connectWebSocket()
+                }.onFailure { error ->
+                    android.util.Log.e(TAG, "re-register after invalid token failed", error)
+                    scheduleReconnect()
+                }
+            }
+        }
     }
 
     override fun onMessage(text: String) {
@@ -923,8 +1014,8 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
         }
     }
 
-    private suspend fun ensureRegistered() {
-        if (devicePrefs.hasCredentials()) {
+    private suspend fun ensureRegistered(force: Boolean = false) {
+        if (!force && devicePrefs.hasCredentials()) {
             android.util.Log.i(TAG, "already registered deviceId=${devicePrefs.deviceId}")
             broadcastDeviceId(devicePrefs.deviceId.orEmpty())
             return
@@ -1179,7 +1270,7 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
             )
             return
         }
-        val error = ServerEndpointStore.applySwitch(serverPrefs, next)
+        val error = ServerEndpointStore.applySwitch(serverPrefs, next, devicePrefs)
         if (error != null) {
             webSocketClient?.sendCommandResult(
                 commandId = commandId,
@@ -1212,11 +1303,17 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
         // 换服务器是用户/后台主动要求的重连，清掉建连限流，否则会被当成一次抖动挡掉
         lastControlConnectAtMs = 0L
         lastScreenConnectAtMs = 0L
-        runCatching { connectWebSocket() }
-            .onFailure { error ->
+        // 端点已经变了，先把凭据补齐再连：切换时凭据可能刚被清掉（见 handleSwitchServer），
+        // 回滚时同样如此——回滚回的旧端点有自己的 token，手里这份新的对它也不成立。
+        serviceScope.launch {
+            runCatching {
+                ensureRegistered()
+                connectWebSocket()
+            }.onFailure { error ->
                 android.util.Log.e(TAG, "switch_server reconnect failed", error)
                 scheduleReconnect()
             }
+        }
     }
 
     private fun scheduleSwitchRollback() {
@@ -1227,7 +1324,7 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
                 ServerEndpointStore.clearPrev(serverPrefs)
                 return@launch
             }
-            if (!ServerEndpointStore.rollback(serverPrefs)) {
+            if (!ServerEndpointStore.rollback(serverPrefs, devicePrefs)) {
                 android.util.Log.w(TAG, "switch_server rollback skipped: no prev urls")
                 return@launch
             }
@@ -2472,6 +2569,14 @@ class ConnectionService : Service(), DeviceWebSocketClient.Listener {
         private const val CHANNEL_ID_SILENT_LEGACY = "connection_service_silent"
         private const val NOTIFICATION_ID = 1002
         private const val RECONNECT_DELAY_MS = 5_000L
+        /**
+         * 两次凭据重置之间的最小间隔。
+         *
+         * 正常情况下重置一次就恢复。若刚注册的新 token 又被 4401 打回，说明服务端此刻
+         * 是真在抖动（或端点配置本身有问题），继续注册只会把库刷出一堆新行，
+         * 所以退避重连、等下一轮再说。
+         */
+        private const val CREDENTIAL_RESET_MIN_GAP_MS = 60_000L
         private const val CONTROL_ENSURE_THROTTLE_MS = 5_000L
         private const val CONTROL_CONNECT_MIN_GAP_MS = 2_000L
         private const val SCREEN_CONNECT_MIN_GAP_MS = 2_000L

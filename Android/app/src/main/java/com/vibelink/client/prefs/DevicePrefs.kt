@@ -32,6 +32,17 @@ class DevicePrefs(context: Context) {
         return !deviceId.isNullOrBlank() && !deviceToken.isNullOrBlank()
     }
 
+    /**
+     * 丢弃本地凭据，下次 [hasCredentials] 必为 false，从而触发一次全新的 registerDevice。
+     *
+     * 两处（DPS + CE）都要清：读取时是 DPS 优先、CE 兜底，只清一处等于没清。
+     * 用 commit 而非 apply，避免紧接着的 registerDevice 走的是异步窗口里的旧值。
+     */
+    fun clearCredentials() {
+        dpsPrefs.edit().remove(KEY_DEVICE_ID).remove(KEY_DEVICE_TOKEN).commit()
+        cePrefsOrNull()?.edit()?.remove(KEY_DEVICE_ID)?.remove(KEY_DEVICE_TOKEN)?.commit()
+    }
+
     fun migrateCredentialEncryptedToDeviceProtected() {
         val ce = cePrefsOrNull() ?: return
         val ceId = ce.getString(KEY_DEVICE_ID, null)

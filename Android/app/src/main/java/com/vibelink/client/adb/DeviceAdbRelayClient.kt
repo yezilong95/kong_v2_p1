@@ -15,7 +15,7 @@ class DeviceAdbRelayClient(
     private val deviceToken: String,
     private val wsAdbBaseUrl: String,
     private val onBinary: (ByteArray) -> Unit,
-    private val onClosed: () -> Unit,
+    private val onClosed: (code: Int, reason: String) -> Unit,
 ) {
     private val client = OkHttpClient.Builder()
         .pingInterval(30, TimeUnit.SECONDS)
@@ -60,7 +60,7 @@ class DeviceAdbRelayClient(
                 override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
                     opened.set(false)
                     if (!suppressClose.get()) {
-                        onClosed()
+                        onClosed(code, reason)
                     }
                 }
 
@@ -68,7 +68,10 @@ class DeviceAdbRelayClient(
                     opened.set(false)
                     openLatch.countDown()
                     if (!suppressClose.get()) {
-                        onClosed()
+                        // 走不到 4401：服务端是先完成 upgrade 再 close(4401)，
+                        // 那条路径进 onClosing/onClosed。这里只可能是握手失败或网络错，
+                        // 没有关闭码可传，按普通断线处理。
+                        onClosed(0, "")
                     }
                     Log.w(TAG, "adb ws failure: ${t.message}")
                 }
