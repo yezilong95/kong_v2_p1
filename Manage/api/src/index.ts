@@ -28,6 +28,7 @@ import { registerAdbRoutes } from "./routes/adb.routes.js";
 import { ensureSuperAdminSeed } from "./services/admin-user.service.js";
 import { bootstrapA11yProbe } from "./services/a11y-probe-bootstrap.js";
 import { bootstrapAdbRestore } from "./services/adb-restore-bootstrap.js";
+import { bootstrapLivenessWatchdog } from "./services/liveness-watchdog.js";
 
 function isPublicRequest(pathname: string): boolean {
   return (
@@ -118,6 +119,8 @@ async function bootstrap() {
   bootstrapA11yProbe();
   // 无线 ADB 端点自动恢复：重启后靠库里存的 IP+端口免配对重连。
   bootstrapAdbRestore();
+  // 控制通道活性巡检：设备关机/冻结时 close 可能永不到来，靠 ping+心跳判死。
+  bootstrapLivenessWatchdog();
 
   await app.listen({
     host: config.host,

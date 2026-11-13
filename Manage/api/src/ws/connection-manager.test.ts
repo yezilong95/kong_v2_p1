@@ -129,3 +129,136 @@ test("a11y RTT updates do not disturb the a11y connection triple", () => {
   assert.equal(health.a11yServiceConnected, true);
   assert.equal(health.a11yReportedAt, 3_000);
 });
+
+/**
+ * 通道活性：设备关机时 TCP 停在半开态，内核不吐 FIN，`close` 一次都不来。
+ * 只能靠主动 ping + 应用层心跳判定，否则界面会一直显示「在线」，
+ * 最长要等 nginx `proxy_read_timeout`（1 小时）才自愈。
+ */
+
+type FakeSocket = {
+  readyState: number;
+  OPEN: number;
+  pingCount: number;
+  terminated: boolean;
+  close: () => void;
+  ping: () => void;
+  terminate: () => void;
+};
+
+function fakeSocket(): FakeSocket {
+  return {
+    readyState: 1,
+    OPEN: 1,
+    pingCount: 0,
+    terminated: false,
+    close() {},
+    ping() {
+      this.pingCount += 1;
+    },
+    terminate() {
+      this.terminated = true;
+    },
+  };
+}
+
+function connect(id: string) {
+  const socket = fakeSocket();
+  connectionManager.addDevice(id, socket as never);
+  return socket;
+}
+
+test("a fresh connection is not judged dead on the first sweep", () => {
+  const id = fresh();
+  connect(id);
+
+  const dead = connectionManager.sweepLiveness(Date.now());
+  assert.equal(
+    dead.some((entry) => entry.deviceId === id),
+    false,
+    "刚连上的设备不能被第一轮扫描误杀",
+  );
+});
+
+test("no pong for the timeout window is judged dead", () => {
+  const id = fresh();
+  const socket = connect(id);
+  const start = Date.now();
+
+  // 两轮扫描：心跳保持新鲜（进程还在），但 pong 一直不回 —— 典型半开 TCP
+  connectionManager.markAppHeartbeat(id, start + 30_000);
+  assert.deepEqual(
+    connectionManager.sweepLiveness(start + 30_000).filter((entry) => entry.deviceId === id),
+    [],
+  );
+  connectionManager.markAppHeartbeat(id, start + 90_000);
+
+  const dead = connectionManager.sweepLiveness(start + 90_000);
+  assert.deepEqual(
+    dead.filter((entry) => entry.deviceId === id),
+    [{ deviceId: id, reason: "ws_pong_timeout" }],
+  );
+  assert.equal(socket.pingCount > 0, true, "扫描应该主动发过 ping");
+});
+
+test("a fresh pong keeps the connection alive", () => {
+  const id = fresh();
+  connect(id);
+  const start = Date.now();
+
+  connectionManager.markPong(id, start + 30_000);
+  connectionManager.markAppHeartbeat(id, start + 30_000);
+  connectionManager.sweepLiveness(start + 30_000);
+
+  connectionManager.markPong(id, start + 60_000);
+  connectionManager.markAppHeartbeat(id, start + 60_000);
+  const dead = connectionManager.sweepLiveness(start + 60_000);
+  assert.equal(dead.some((entry) => entry.deviceId === id), false);
+});
+
+test("a frozen app is judged dead even while pong keeps coming", () => {
+  const id = fresh();
+  connect(id);
+  const start = Date.now();
+
+  // Hiber 冻住进程：内核照样回 pong，但 JSON 心跳停了。
+  // 这类设备收不到任何指令，按离线算。
+  connectionManager.markAppHeartbeat(id, start);
+  connectionManager.markPong(id, start + 90_000);
+  const dead = connectionManager.sweepLiveness(start + 90_000);
+  assert.deepEqual(
+    dead.filter((entry) => entry.deviceId === id),
+    [{ deviceId: id, reason: "heartbeat_stale" }],
+  );
+});
+
+test("a client that never sends JSON heartbeats is not killed for it", () => {
+  const id = fresh();
+  connect(id);
+  const start = Date.now();
+
+  // 老客户端只回 pong、不发心跳：不能按心跳停更判死，否则会无限重连
+  connectionManager.markPong(id, start + 90_000);
+  const dead = connectionManager.sweepLiveness(start + 90_000);
+  assert.equal(dead.some((entry) => entry.deviceId === id), false);
+});
+
+test("removeDevice clears the liveness entry so the map cannot grow forever", () => {
+  const id = fresh();
+  const socket = connect(id);
+  connectionManager.removeDevice(id, socket as never);
+
+  // 条目清掉后，即便时间戳非常旧也不该再被判死
+  const dead = connectionManager.sweepLiveness(Date.now() + 10 * 60_000);
+  assert.equal(dead.some((entry) => entry.deviceId === id), false);
+});
+
+test("a late pong cannot resurrect a device that is already gone", () => {
+  const id = fresh();
+  const socket = connect(id);
+  connectionManager.removeDevice(id, socket as never);
+
+  // close 之后才到的 pong 不应该重新建出活性条目
+  connectionManager.markPong(id, Date.now());
+  assert.equal(connectionManager.isDeviceConnected(id), false);
+});

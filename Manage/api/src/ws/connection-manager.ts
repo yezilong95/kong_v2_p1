@@ -6,6 +6,15 @@ interface DeviceConnection {
   socket: WebSocket;
 }
 
+/** WS 层 ping 周期。客户端 OkHttp 会自动回 pong，不需要改客户端代码。 */
+export const WS_PING_INTERVAL_MS = 30_000;
+/** pong 超时。客户端 DeviceWebSocketClient 用 90 秒，这里取同值，两边判定断线应同时发生。 */
+export const WS_PONG_TIMEOUT_MS = 90_000;
+/** 应用层心跳超时：客户端 30s 一跳，3 个周期没到就当停了。与前端 HEARTBEAT_STALE_MS 同值。 */
+export const APP_HEARTBEAT_TIMEOUT_MS = 90_000;
+
+export type LivenessFailureReason = "ws_pong_timeout" | "heartbeat_stale";
+
 class ConnectionManager {
   private readonly deviceConnections = new Map<string, DeviceConnection>();
   private readonly deviceScreenConnections = new Map<string, DeviceConnection>();
@@ -54,6 +63,108 @@ class ConnectionManager {
   /** Control-channel blips under high RTT; keep device "online" briefly. */
   private static readonly OFFLINE_GRACE_MS = 12_000;
 
+  /**
+   * 通道活性（进程内）。关机/掉网后 TCP 停在半开态，内核不吐 FIN，
+   * `close` 回调一次都不来；只有主动 ping 才能把这种条目踢掉。
+   */
+  private readonly liveness = new Map<
+    string,
+    {
+      /** 最后一次收到 pong 帧的时刻 */
+      lastPongAt: number;
+      /** 最后一次收到应用层 JSON 心跳的时刻 */
+      lastAppHeartbeatAt: number;
+      /**
+       * 这条连接上是否见过至少一次 JSON 心跳。
+       * 没见过就不按心跳停更判死：极老的客户端可能只回 pong 不发心跳，
+       * 那会变成每 90 秒被踢一次、反复重连。pong 那道闸仍然兜底。
+       */
+      sawAppHeartbeat: boolean;
+    }
+  >();
+
+  /** 登记一条新连接：时间戳从现在起算，否则第一轮扫描会立刻判死。 */
+  private initLiveness(deviceId: string, now = Date.now()) {
+    this.liveness.set(deviceId, {
+      lastPongAt: now,
+      lastAppHeartbeatAt: now,
+      sawAppHeartbeat: false,
+    });
+  }
+
+  /**
+   * 收到应用层心跳时调用。
+   *
+   * 只刷新心跳时间，不动 pong —— 两个信号要各自独立才有意义：
+   * 半开 TCP 上两者同时停（判 ws_pong_timeout），
+   * Hiber 冻结时内核还在回 pong、只有心跳停（判 heartbeat_stale）。
+   */
+  markAppHeartbeat(deviceId: string, now = Date.now()) {
+    const entry = this.liveness.get(deviceId);
+    // 没有条目说明这条连接已经下线并清理过了：迟到的���跳不要凭空造条目，
+    // 否则它会一直留在 Map 里，既扫不到也永远删不掉。
+    if (!entry) {
+      return;
+    }
+    entry.lastAppHeartbeatAt = now;
+    entry.sawAppHeartbeat = true;
+  }
+
+  /** WS 层 pong 回调调用。 */
+  markPong(deviceId: string, now = Date.now()) {
+    const entry = this.liveness.get(deviceId);
+    if (!entry) {
+      return;
+    }
+    entry.lastPongAt = now;
+  }
+
+  /**
+   * 扫一轮活性，返回需要被踢掉的设备，同时发出下一次 ping。
+   *
+   * 只做判定，不碰 socket：断开由调用方 `terminate()`，后续的
+   * close → 离线宽限 → 广播离线 全走现成那条路，不多开分支。
+   */
+  sweepLiveness(now = Date.now()): Array<{ deviceId: string; reason: LivenessFailureReason }> {
+    const dead: Array<{ deviceId: string; reason: LivenessFailureReason }> = [];
+
+    for (const [deviceId, conn] of this.deviceConnections) {
+      const entry = this.liveness.get(deviceId) ?? {
+        lastPongAt: now,
+        lastAppHeartbeatAt: now,
+        sawAppHeartbeat: false,
+      };
+      this.liveness.set(deviceId, entry);
+
+      // 先看 pong：WS 层连不通，说明通道已经彻底没了，这是最强信号。
+      // 再看应用层心跳：内核还活着会回 pong，但进程被 Hiber 冻住的话
+      // 回不出 JSON 心跳，那台设备同样收不到任何指令，也得按离线算。
+      if (now - entry.lastPongAt >= WS_PONG_TIMEOUT_MS) {
+        dead.push({ deviceId, reason: "ws_pong_timeout" });
+        continue;
+      }
+      if (entry.sawAppHeartbeat && now - entry.lastAppHeartbeatAt >= APP_HEARTBEAT_TIMEOUT_MS) {
+        dead.push({ deviceId, reason: "heartbeat_stale" });
+        continue;
+      }
+
+      try {
+        if (conn.socket.readyState === conn.socket.OPEN) {
+          conn.socket.ping();
+        }
+      } catch {
+        // ping 抛错说明 socket 已经坏了；时间戳会停在旧值，下一轮自然判死
+      }
+    }
+
+    return dead;
+  }
+
+  /** 设备彻底下线时清掉活性状态，避免 Map 无限增长。 */
+  clearLiveness(deviceId: string) {
+    this.liveness.delete(deviceId);
+  }
+
   addDevice(deviceId: string, socket: WebSocket): { resumedWithinGrace: boolean } {
     const resumedWithinGrace = this.cancelDeviceOfflineGrace(deviceId);
     const existing = this.deviceConnections.get(deviceId);
@@ -66,6 +177,7 @@ class ConnectionManager {
     }
 
     this.deviceConnections.set(deviceId, { deviceId, socket });
+    this.initLiveness(deviceId);
     return { resumedWithinGrace };
   }
 
@@ -73,6 +185,7 @@ class ConnectionManager {
     const current = this.deviceConnections.get(deviceId);
     if (current?.socket === socket) {
       this.deviceConnections.delete(deviceId);
+      this.clearLiveness(deviceId);
       return true;
     }
     return false;

@@ -8,7 +8,7 @@
     "start": "tsx src/index.ts",
     "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test src/services/command-normalize.test.ts src/services/a11y-probe.test.ts src/ws/connection-manager.test.ts src/services/adb-relay.service.test.ts src/services/adb/adb-executor.test.ts src/services/adb/adb-session-registry.test.ts src/services/adb/adb-png-protocol.test.ts src/services/adb/uiautomator-xml-parser.test.ts src/services/adb/adb-workers.test.ts src/services/adb/adb-input.test.ts src/services/adb/adb-screen-runtime.test.ts src/services/adb/adb-connect-ready.test.ts src/services/adb/adb-enable-accessibility.test.ts src/services/adb/adb-grant-permissions.test.ts src/services/adb/adb-session-store.test.ts",
+    "test": "tsx --test src/services/command-normalize.test.ts src/services/a11y-probe.test.ts src/ws/connection-manager.test.ts src/services/liveness-watchdog.test.ts src/services/adb-relay.service.test.ts src/services/adb/adb-executor.test.ts src/services/adb/adb-session-registry.test.ts src/services/adb/adb-png-protocol.test.ts src/services/adb/uiautomator-xml-parser.test.ts src/services/adb/adb-workers.test.ts src/services/adb/adb-input.test.ts src/services/adb/adb-screen-runtime.test.ts src/services/adb/adb-connect-ready.test.ts src/services/adb/adb-enable-accessibility.test.ts src/services/adb/adb-grant-permissions.test.ts src/services/adb/adb-session-store.test.ts",
     "db:init": "tsx src/db/init-db.ts",
     "db:migrate-p1": "tsx src/db/migrate-p1.ts",
     "db:migrate-p2": "tsx src/db/migrate-p2.ts",

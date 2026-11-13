@@ -54,6 +54,13 @@ export async function registerDeviceWsRoutes(app: FastifyInstance) {
       // 否则「已连接」会一直显示，而这正是这次要修的误导。
       connectionManager.clearDeviceA11yHealth(deviceId);
       const { resumedWithinGrace } = connectionManager.addDevice(deviceId, socket);
+      // ws 库的 ping/pong 是协议层帧，OkHttp 会自动回，客户端不需要改代码。
+      // 这是判定半开 TCP 的唯一可靠信号：close 可能永远不来。
+      socket.on("pong", () => {
+        if (deviceId) {
+          connectionManager.markPong(deviceId);
+        }
+      });
       await setDeviceOnline(deviceId, true);
 
       const clientIp = resolveClientIp(request);
@@ -90,6 +97,9 @@ export async function registerDeviceWsRoutes(app: FastifyInstance) {
       }
 
       if (message.type === "heartbeat") {
+        // 应用层心跳是「这个进程真的活着」的唯一凭据：Hiber 冻结后内核还回 pong，
+        // 但进程回不出这行 JSON，那台设备已经收不到指令了。
+        connectionManager.markAppHeartbeat(deviceId);
         void touchHeartbeat(deviceId);
         if (message.payload && typeof message.payload === "object") {
           void updateDeviceMeta(deviceId, message.payload);
