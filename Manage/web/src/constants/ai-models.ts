@@ -79,6 +79,16 @@ export const AI_MODEL_GROUPS: AiModelGroup[] = [
         label: "【控手机】xAI · Grok 4.6 (识图+工具)",
       },
       {
+        id: "phone-xai-grok-4.5",
+        apiModel: "grok-4.5",
+        label: "【控手机】xAI · Grok 4.5 (识图+工具)",
+      },
+      {
+        id: "phone-xai-grok-4.3",
+        apiModel: "grok-4.3",
+        label: "【控手机】xAI · Grok 4.3 (识图+工具)",
+      },
+      {
         id: "phone-openai-gpt-4o-mini",
         apiModel: "gpt-4o-mini",
         label: "【控手机】OpenAI · GPT-4o mini",
@@ -167,6 +177,16 @@ export const AI_MODEL_GROUPS: AiModelGroup[] = [
         id: "chat-xai-grok-4.6",
         apiModel: "grok-4.6",
         label: "xAI · Grok 4.6",
+      },
+      {
+        id: "chat-xai-grok-4.5",
+        apiModel: "grok-4.5",
+        label: "xAI · Grok 4.5",
+      },
+      {
+        id: "chat-xai-grok-4.3",
+        apiModel: "grok-4.3",
+        label: "xAI · Grok 4.3",
       },
       {
         id: "chat-moonshot-kimi",
